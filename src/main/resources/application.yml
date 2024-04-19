@@ -1,0 +1,6 @@
+dark-chat:
+  websocketPort: 9090
+  bossThreadSize: 1
+  workThreadSize: 8
+  heartBeatTime: 3000
+

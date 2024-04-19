@@ -1,0 +1,96 @@
+syntax="proto3";
+
+package chat_msg;
+option java_package = "com.howcode.darkchat.msg";
+
+enum MsgCommand{
+  //登录
+  USER_LOGIN_CMD = 0;
+  USER_LOGIN_ACK = 1;
+  //心跳
+  HEART_BEAT_CMD = 2;
+  HEART_BEAT_ACK = 3;
+  //加入房间
+  JOIN_ROOM_CMD = 4;
+  JOIN_ROOM_ACK = 5;
+  //离开房间
+  LEAVE_ROOM_CMD = 6;
+  LEAVE_ROOM_ACK = 7;
+  //发送消息
+  SEND_MSG_CMD = 8;
+  SEND_MSG_ACK = 9;
+  //消息广播
+  BROADCAST_MSG_ACK = 10;
+}
+
+//用户登录
+message UserLoginCmd{
+  string userName = 1;
+  string userAvatar = 2;
+}
+//用户登录响应
+message UserLoginAck{
+  int32 userId = 1;
+  string userName = 2;
+  string userAvatar = 3;
+}
+
+//心跳
+message HeartBeatCmd{
+  int32 userId = 1;
+}
+message HeartBeatAck{
+  int32 userId = 1;
+}
+
+//加入房间
+message JoinRoomCmd{
+  int32 userId = 1;
+  int32 roomId = 2;
+}
+message JoinRoomAck{
+  int32 userId = 1;
+  int32 roomId = 2;
+}
+
+//离开房间
+message LeaveRoomCmd{
+  int32 userId = 1;
+  int32 roomId = 2;
+}
+message LeaveRoomAck{
+  int32 userId = 1;
+  int32 roomId = 2;
+}
+
+//发送消息
+message SendMsgCmd{
+  int32 userId = 1;
+  int32 roomId = 2;
+  MsgType msgType = 3;
+  string msg = 4;
+}
+//发送消息响应 是否成功
+message SendMsgAck{
+  int32 userId = 1;
+  int32 roomId = 2;
+  bool success = 3;
+}
+
+//定义消息类型
+enum MsgType{
+  TEXT = 0;
+  IMAGE = 1;
+  //录音
+  VOICE = 2;
+  //视频
+  VIDEO = 3;
+}
+
+//消息广播
+message BroadcastMsgAck{
+  int32 userId = 1;
+  int32 roomId = 2;
+  MsgType msgType = 3;
+  string msg = 4;
+}
