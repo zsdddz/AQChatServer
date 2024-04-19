@@ -1,7 +1,7 @@
 # HasChat_Api_JAVA
 
 #### 介绍
-HasChat项目Java后端
+DartChat项目Java后端
 #### 软件架构
 软件架构说明<br/>
 JDK 1.8 <br/>
