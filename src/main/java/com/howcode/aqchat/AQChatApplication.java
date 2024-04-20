@@ -10,9 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2024-04-16 21:17
  */
 @SpringBootApplication
-public class DarkChatApplication {
+public class AQChatApplication {
     public static void main(String[] args) {
-        SpringApplication springApplication = new SpringApplication(DarkChatApplication.class);
+        SpringApplication springApplication = new SpringApplication(AQChatApplication.class);
         springApplication.setWebApplicationType(WebApplicationType.NONE);
         springApplication.run(args);
     }
