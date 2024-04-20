@@ -13,14 +13,18 @@ enum MsgCommand{
   //加入房间
   JOIN_ROOM_CMD = 4;
   JOIN_ROOM_ACK = 5;
+  //新建房间
+  CREATE_ROOM_CMD = 6;
+  CREATE_ROOM_ACK = 7;
   //离开房间
-  LEAVE_ROOM_CMD = 6;
-  LEAVE_ROOM_ACK = 7;
+  LEAVE_ROOM_CMD = 8;
+  LEAVE_ROOM_ACK = 9;
   //发送消息
-  SEND_MSG_CMD = 8;
-  SEND_MSG_ACK = 9;
+  SEND_MSG_CMD = 10;
+  SEND_MSG_ACK = 11;
   //消息广播
-  BROADCAST_MSG_ACK = 10;
+  BROADCAST_MSG_ACK = 12;
+
 }
 
 //用户登录
@@ -52,7 +56,18 @@ message JoinRoomAck{
   int32 userId = 1;
   int32 roomId = 2;
 }
-
+//新建房间
+message CreateRoomCmd{
+  int32 userId = 1;
+  string roomNo = 2;
+  string roomName = 3;
+}
+message CreateRoomAck{
+  int32 userId = 1;
+  int32 roomId = 2;
+  string roomNo = 3;
+  string roomName = 4;
+}
 //离开房间
 message LeaveRoomCmd{
   int32 userId = 1;
