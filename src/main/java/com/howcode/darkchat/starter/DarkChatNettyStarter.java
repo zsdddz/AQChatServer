@@ -14,12 +14,12 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
+import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.SpringBootConfiguration;
 
-import javax.annotation.Resource;
 
 /**
  * @Author: ZhangWeinan
@@ -33,6 +33,12 @@ public class DarkChatNettyStarter implements InitializingBean {
 
     @Resource
     private DarkChatConfig darkChatConfig;
+    @Resource
+    private MessageDecoder messageDecoder;
+    @Resource
+    private MessageEncoder messageEncoder;
+    @Resource
+    private DarkChatCommandHandler darkChatCommandHandler;
 
     private void startImApplication() throws InterruptedException {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup(darkChatConfig.getBossThreadSize());
@@ -47,9 +53,9 @@ public class DarkChatNettyStarter implements InitializingBean {
                         ch.pipeline().addLast(new ChunkedWriteHandler());
                         ch.pipeline().addLast(new HttpObjectAggregator(65535));
                         ch.pipeline().addLast(new WebSocketServerProtocolHandler("/ws"));
-                        ch.pipeline().addLast(new MessageDecoder());
-                        ch.pipeline().addLast(new MessageEncoder());
-                        ch.pipeline().addLast(new DarkChatCommandHandler());
+                        ch.pipeline().addLast(messageDecoder);
+                        ch.pipeline().addLast(messageEncoder);
+                        ch.pipeline().addLast(darkChatCommandHandler);
                     }
                 });
         Runtime.getRuntime().addShutdownHook(new Thread(()->{

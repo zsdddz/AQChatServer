@@ -33,12 +33,6 @@ public class MessageRecognizer implements InitializingBean {
     private final Map<Class<?>,Integer> msgClazzAndMsgCommandMap = new HashMap<>();
 
     /**
-     * 私有化类默认构造器
-     */
-    private MessageRecognizer() {
-    }
-
-    /**
      * 初始化
      */
     public void init() {
