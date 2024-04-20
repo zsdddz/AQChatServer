@@ -1,6 +1,9 @@
 package com.howcode.darkchat.starter;
 
+import com.howcode.darkchat.codec.MessageDecoder;
+import com.howcode.darkchat.codec.MessageEncoder;
 import com.howcode.darkchat.config.DarkChatConfig;
+import com.howcode.darkchat.handler.DarkChatCommandHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -44,6 +47,9 @@ public class DarkChatNettyStarter implements InitializingBean {
                         ch.pipeline().addLast(new ChunkedWriteHandler());
                         ch.pipeline().addLast(new HttpObjectAggregator(65535));
                         ch.pipeline().addLast(new WebSocketServerProtocolHandler("/ws"));
+                        ch.pipeline().addLast(new MessageDecoder());
+                        ch.pipeline().addLast(new MessageEncoder());
+                        ch.pipeline().addLast(new DarkChatCommandHandler());
                     }
                 });
         Runtime.getRuntime().addShutdownHook(new Thread(()->{
