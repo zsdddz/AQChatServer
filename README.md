@@ -1,7 +1,7 @@
-# dart_chat_server
+# AQChat_server
 
 #### 介绍
-DartChat项目Java后端
+AQChat
 #### 软件架构
 软件架构说明<br/>
 JDK17 <br/>
