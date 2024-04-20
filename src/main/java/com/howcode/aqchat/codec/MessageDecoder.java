@@ -2,7 +2,7 @@ package com.howcode.aqchat.codec;
 
 
 import com.google.protobuf.Message;
-import com.howcode.aqchat.msg.MessageRecognizer;
+import com.howcode.aqchat.message.MessageRecognizer;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;

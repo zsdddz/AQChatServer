@@ -1,4 +1,4 @@
-package com.howcode.aqchat.msg;
+package com.howcode.aqchat.message;
 
 import com.google.protobuf.GeneratedMessageV3;
 import com.google.protobuf.Message;
@@ -37,7 +37,7 @@ public class MessageRecognizer implements InitializingBean {
      */
     public void init() {
         // 获取所有的内部类
-        Class<?>[] innerClazzArray = DarkChatMsgProtocol.class.getDeclaredClasses();
+        Class<?>[] innerClazzArray = AQChatMsgProtocol.class.getDeclaredClasses();
         for (Class<?> innerClazz : innerClazzArray) {
             if (!GeneratedMessageV3.class.isAssignableFrom(innerClazz)) {
                 // 如果不是消息,
@@ -47,7 +47,7 @@ public class MessageRecognizer implements InitializingBean {
             String clazzName = innerClazz.getSimpleName();
             clazzName = clazzName.toLowerCase();
             // 接下来遍历 MsgCode 枚举
-            for (DarkChatMsgProtocol.MsgCommand msgCommand : DarkChatMsgProtocol.MsgCommand.values()) {
+            for (AQChatMsgProtocol.MsgCommand msgCommand : AQChatMsgProtocol.MsgCommand.values()) {
                 String strMsgCode = msgCommand.name();
                 strMsgCode = strMsgCode.replaceAll("_", "");
                 strMsgCode = strMsgCode.toLowerCase();

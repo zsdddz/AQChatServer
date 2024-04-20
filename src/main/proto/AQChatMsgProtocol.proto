@@ -1,7 +1,7 @@
 syntax="proto3";
 
 package chat_msg;
-option java_package = "com.howcode.darkchat.msg";
+option java_package = "com.howcode.aqchat.message";
 
 enum MsgCommand{
   //登录
