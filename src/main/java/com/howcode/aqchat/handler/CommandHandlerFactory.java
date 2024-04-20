@@ -2,15 +2,17 @@ package com.howcode.aqchat.handler;
 
 import com.google.protobuf.GeneratedMessageV3;
 import com.howcode.aqchat.constant.DarkChatConstant;
-import com.howcode.aqchat.utils.PackageUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -30,8 +32,7 @@ public class CommandHandlerFactory implements InitializingBean {
         // 获取包名称
         String packageName = CommandHandlerFactory.class.getPackage().getName();
         // 获取所有的 ICmdHandler 子类
-        Set<Class<?>> clazzSet = PackageUtil.listSubClazz(packageName + DarkChatConstant.MessageHandlerConstant.HANDLER_IMPLEMENTATION_PACKAGE_NAME, true, ICmdHandler.class);
-
+        Set<Class<?>> clazzSet = listSubClazz(packageName + DarkChatConstant.MessageHandlerConstant.HANDLER_IMPLEMENTATION_PACKAGE_NAME);
         for (Class<?> cmdHandlerClazz : clazzSet) {
             if (null == cmdHandlerClazz || 0 != (cmdHandlerClazz.getModifiers() & Modifier.ABSTRACT)) {
                 // 如果是抽象类,
@@ -90,5 +91,21 @@ public class CommandHandlerFactory implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         init();
+    }
+
+    private Set<Class<?>> listSubClazz(String packageName) {
+        ApplicationContext context = new AnnotationConfigApplicationContext(packageName);
+
+        // 获取指定包下所有由 Spring 管理的 bean
+        Map<String, Object> beans = context.getBeansWithAnnotation(Component.class);
+
+        Set<Class<?>> resultSet = new HashSet<>();
+        beans.forEach((beanName, bean) -> {
+            Class<?> clazz = bean.getClass();
+            if (ICmdHandler.class.isAssignableFrom(clazz)) {
+                resultSet.add(clazz);
+            }
+        });
+        return resultSet;
     }
 }
