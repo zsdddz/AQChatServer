@@ -60,7 +60,7 @@ public class MessageRecognizer implements InitializingBean {
                     // 目的是返回默认实例
                     Object returnObj = innerClazz.getDeclaredMethod("getDefaultInstance").invoke(innerClazz);
 
-                    LOGGER.info("关联 {} <==> {}", innerClazz.getName(), msgCommand.getNumber());
+                    LOGGER.info("recognizer Initialization relation::class:{} =>command:{}", innerClazz.getName(), msgCommand.getNumber());
                     // 关联消息编号与消息体
                     msgCommandAndMsgBodyMap.put(msgCommand.getNumber(), (GeneratedMessageV3) returnObj);
                     // 关联消息类与消息编号
