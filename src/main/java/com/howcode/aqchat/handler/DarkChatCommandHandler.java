@@ -1,4 +1,4 @@
-package com.howcode.darkchat.handler;
+package com.howcode.aqchat.handler;
 
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;

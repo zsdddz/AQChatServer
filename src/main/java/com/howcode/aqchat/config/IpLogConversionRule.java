@@ -1,4 +1,4 @@
-package com.howcode.darkchat.config;
+package com.howcode.aqchat.config;
 
 import ch.qos.logback.core.PropertyDefinerBase;
 

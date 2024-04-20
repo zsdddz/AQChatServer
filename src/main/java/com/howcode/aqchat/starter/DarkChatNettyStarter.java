@@ -1,9 +1,9 @@
-package com.howcode.darkchat.starter;
+package com.howcode.aqchat.starter;
 
-import com.howcode.darkchat.codec.MessageDecoder;
-import com.howcode.darkchat.codec.MessageEncoder;
-import com.howcode.darkchat.config.DarkChatConfig;
-import com.howcode.darkchat.handler.DarkChatCommandHandler;
+import com.howcode.aqchat.codec.MessageDecoder;
+import com.howcode.aqchat.codec.MessageEncoder;
+import com.howcode.aqchat.config.DarkChatConfig;
+import com.howcode.aqchat.handler.DarkChatCommandHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;

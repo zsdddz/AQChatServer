@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <springProperty name="APP_NAME" scope="context" source="spring.application.name" defaultValue="undefined"/>
-    <define name="index" class="com.howcode.darkchat.config.IpLogConversionRule"/>
+    <define name="index" class="com.howcode.aqchat.config.IpLogConversionRule"/>
     <property name="LOG_HOME" value="/tmp/logs/${APP_NAME}/${index}"/>
     <property name="LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss.SSS} -%5p] %-40.40logger{39} :%msg%n"/>
 

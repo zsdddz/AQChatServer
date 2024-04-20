@@ -1,4 +1,4 @@
-package com.howcode.darkchat;
+package com.howcode.aqchat;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;

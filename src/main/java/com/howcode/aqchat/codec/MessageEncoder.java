@@ -1,4 +1,4 @@
-package com.howcode.darkchat.codec;
+package com.howcode.aqchat.codec;
 
 import com.google.protobuf.GeneratedMessageV3;
 import io.netty.channel.ChannelHandler;

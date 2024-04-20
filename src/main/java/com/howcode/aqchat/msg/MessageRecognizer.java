@@ -1,4 +1,4 @@
-package com.howcode.darkchat.msg;
+package com.howcode.aqchat.msg;
 
 import com.google.protobuf.GeneratedMessageV3;
 import com.google.protobuf.Message;

@@ -1,8 +1,8 @@
-package com.howcode.darkchat.codec;
+package com.howcode.aqchat.codec;
 
 
 import com.google.protobuf.Message;
-import com.howcode.darkchat.msg.MessageRecognizer;
+import com.howcode.aqchat.msg.MessageRecognizer;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
