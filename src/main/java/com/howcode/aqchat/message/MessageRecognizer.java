@@ -94,7 +94,7 @@ public class MessageRecognizer implements InitializingBean {
      * @param msgClazz 消息类型
      * @return 消息指令
      */
-    public int getMsgCommandByMsg(Class<?> msgClazz) {
+    public int getMsgCommandByMsgClazz(Class<?> msgClazz) {
         if (msgClazz == null) {
             return -1;
         }
