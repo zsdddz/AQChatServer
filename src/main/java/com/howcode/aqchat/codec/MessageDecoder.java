@@ -32,17 +32,18 @@ public class MessageDecoder extends MessageToMessageDecoder<BinaryWebSocketFrame
 
     @Override
     protected void decode(ChannelHandlerContext channelHandlerContext, BinaryWebSocketFrame msg, List<Object> list) throws Exception {
+        LOGGER.info("MessageDecoder");
         ByteBuf byteBuf = msg.content();
         if (byteBuf.readableBytes() < 4) {
             return;
         }
         byteBuf.markReaderIndex();
         short msgLength = byteBuf.readShort();
+        short command = byteBuf.readShort();
         if (byteBuf.readableBytes() < msgLength) {
             byteBuf.resetReaderIndex();
             return;
         }
-        short command = byteBuf.readShort();
         Message.Builder builder = recognizer.getMsgBuilderByMsgCommand(command);
         if (builder == null) {
             LOGGER.error("无法识别的消息, command = {}", command);
