@@ -72,7 +72,7 @@ public class AQChatNettyStarter implements InitializingBean {
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         Thread thread = new Thread(() -> {
             try {
                 startImApplication();
