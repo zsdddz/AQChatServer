@@ -4,3 +4,6 @@ dark-chat:
   workThreadSize: 8
   heartBeatTime: 3000
 
+spring:
+  application:
+    name: Aq-Chat
