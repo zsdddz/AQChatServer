@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
-@EnableConfigurationProperties(AQChatConfig.class)
 @ConfigurationProperties(prefix = "aq-chat")
 public class AQChatConfig {
     private int webSocketPort;
