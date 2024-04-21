@@ -2,6 +2,7 @@ package com.howcode.aqchat.handler.impl;
 
 import com.howcode.aqchat.handler.ICmdHandler;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
+import com.howcode.aqchat.utils.IdProvider;
 import io.netty.channel.ChannelHandlerContext;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class UserLoginCmdHandler implements ICmdHandler<AQChatMsgProtocol.UserLoginCmd> {
+
+
     @Override
     public void handle(ChannelHandlerContext ctx, AQChatMsgProtocol.UserLoginCmd cmd) {
         if (null == ctx || null == cmd) {
@@ -27,7 +30,7 @@ public class UserLoginCmdHandler implements ICmdHandler<AQChatMsgProtocol.UserLo
         final long currTime = System.currentTimeMillis();
 
         AQChatMsgProtocol.UserLoginAck.Builder builder = AQChatMsgProtocol.UserLoginAck.newBuilder();
-        AQChatMsgProtocol.UserLoginAck userLoginAck = builder.setUserId(1)
+        AQChatMsgProtocol.UserLoginAck userLoginAck = builder.setUserId(IdProvider.nextId())
                 .setUserName(userName)
                 .setUserAvatar(userAvatar)
                 .build();

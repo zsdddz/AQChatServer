@@ -24,6 +24,8 @@ enum MsgCommand{
   SEND_MSG_ACK = 11;
   //消息广播
   BROADCAST_MSG_ACK = 12;
+  //异常消息
+  EXCEPTION_MSG = 13;
 
 }
 
@@ -34,60 +36,60 @@ message UserLoginCmd{
 }
 //用户登录响应
 message UserLoginAck{
-  int32 userId = 1;
+  string userId = 1;
   string userName = 2;
   string userAvatar = 3;
 }
 
 //心跳
 message HeartBeatCmd{
-  int32 userId = 1;
+  string userId = 1;
 }
 message HeartBeatAck{
-  int32 userId = 1;
+  string userId = 1;
 }
 
 //加入房间
 message JoinRoomCmd{
-  int32 userId = 1;
-  int32 roomId = 2;
+  string userId = 1;
+  int32 roomNo = 2;
 }
 message JoinRoomAck{
-  int32 userId = 1;
-  int32 roomId = 2;
+  string userId = 1;
+  int32 roomNo = 2;
 }
 //新建房间
 message CreateRoomCmd{
-  int32 userId = 1;
+  string userId = 1;
   string roomNo = 2;
   string roomName = 3;
 }
 message CreateRoomAck{
-  int32 userId = 1;
+  string userId = 1;
   int32 roomId = 2;
   string roomNo = 3;
   string roomName = 4;
 }
 //离开房间
 message LeaveRoomCmd{
-  int32 userId = 1;
+  string userId = 1;
   int32 roomId = 2;
 }
 message LeaveRoomAck{
-  int32 userId = 1;
+  string userId = 1;
   int32 roomId = 2;
 }
 
 //发送消息
 message SendMsgCmd{
-  int32 userId = 1;
+  string userId = 1;
   int32 roomId = 2;
   MsgType msgType = 3;
   string msg = 4;
 }
 //发送消息响应 是否成功
 message SendMsgAck{
-  int32 userId = 1;
+  string userId = 1;
   int32 roomId = 2;
   bool success = 3;
 }
@@ -104,8 +106,14 @@ enum MsgType{
 
 //消息广播
 message BroadcastMsgAck{
-  int32 userId = 1;
+  string userId = 1;
   int32 roomId = 2;
   MsgType msgType = 3;
   string msg = 4;
+}
+
+//异常消息
+message ExceptionMsg{
+  int32 code = 1;
+  string msg = 2;
 }
