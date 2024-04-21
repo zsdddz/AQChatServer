@@ -1,4 +1,4 @@
-dark-chat:
+aq-chat:
   websocketPort: 9090
   bossThreadSize: 1
   workThreadSize: 8
@@ -6,7 +6,7 @@ dark-chat:
 
 spring:
   application:
-    name: Aq-Chat
+    name: AQChat
   data:
     redis:
       database: 0

@@ -2,7 +2,7 @@ package com.howcode.aqchat.starter;
 
 import com.howcode.aqchat.codec.MessageDecoder;
 import com.howcode.aqchat.codec.MessageEncoder;
-import com.howcode.aqchat.config.DarkChatConfig;
+import com.howcode.aqchat.config.AQChatConfig;
 import com.howcode.aqchat.handler.AQChatCommandHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -32,7 +32,7 @@ public class AQChatNettyStarter implements InitializingBean {
     private static final Logger LOGGER = LoggerFactory.getLogger(NioServerSocketChannel.class);
 
     @Resource
-    private DarkChatConfig darkChatConfig;
+    private AQChatConfig aqChatConfig;
     @Resource
     private MessageDecoder messageDecoder;
     @Resource
@@ -41,8 +41,8 @@ public class AQChatNettyStarter implements InitializingBean {
     private AQChatCommandHandler aqChatCommandHandler;
 
     private void startImApplication() throws InterruptedException {
-        NioEventLoopGroup bossGroup = new NioEventLoopGroup(darkChatConfig.getBossThreadSize());
-        NioEventLoopGroup workGroup = new NioEventLoopGroup(darkChatConfig.getWorkThreadSize());
+        NioEventLoopGroup bossGroup = new NioEventLoopGroup(aqChatConfig.getBossThreadSize());
+        NioEventLoopGroup workGroup = new NioEventLoopGroup(aqChatConfig.getWorkThreadSize());
         ServerBootstrap bootstrap = new ServerBootstrap();
         bootstrap.group(bossGroup, workGroup)
                 .channel(NioServerSocketChannel.class)
@@ -65,8 +65,8 @@ public class AQChatNettyStarter implements InitializingBean {
             LOGGER.info("Netty服务关闭完成");
         }));
 
-        ChannelFuture channelFuture = bootstrap.bind(darkChatConfig.getWebSocketPort()).sync();
-        LOGGER.info("Netty服务启动成功，监听端口：{}", darkChatConfig.getWebSocketPort());
+        ChannelFuture channelFuture = bootstrap.bind(aqChatConfig.getWebSocketPort()).sync();
+        LOGGER.info("Netty服务启动成功，监听端口：{}", aqChatConfig.getWebSocketPort());
         //阻塞线程，直到channel关闭
         channelFuture.channel().closeFuture();
     }

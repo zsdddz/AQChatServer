@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
-@EnableConfigurationProperties(DarkChatConfig.class)
-@ConfigurationProperties(prefix = "dark-chat")
-public class DarkChatConfig {
+@EnableConfigurationProperties(AQChatConfig.class)
+@ConfigurationProperties(prefix = "aq-chat")
+public class AQChatConfig {
     private int webSocketPort;
     private int bossThreadSize;
     private int workThreadSize;
