@@ -51,38 +51,32 @@ message HeartBeatAck{
 
 //加入房间
 message JoinRoomCmd{
-  string userId = 1;
   int32 roomNo = 2;
 }
 message JoinRoomAck{
-  string userId = 1;
+  int32 roomId = 1;
   int32 roomNo = 2;
 }
 //新建房间
 message CreateRoomCmd{
-  string userId = 1;
   string roomNo = 2;
   string roomName = 3;
 }
 message CreateRoomAck{
-  string userId = 1;
   int32 roomId = 2;
   string roomNo = 3;
   string roomName = 4;
 }
 //离开房间
 message LeaveRoomCmd{
-  string userId = 1;
   int32 roomId = 2;
 }
 message LeaveRoomAck{
-  string userId = 1;
   int32 roomId = 2;
 }
 
 //发送消息
 message SendMsgCmd{
-  string userId = 1;
   int32 roomId = 2;
   MsgType msgType = 3;
   string msg = 4;
@@ -106,10 +100,17 @@ enum MsgType{
 
 //消息广播
 message BroadcastMsgAck{
-  string userId = 1;
+  User user = 1;
   int32 roomId = 2;
   MsgType msgType = 3;
   string msg = 4;
+
+  //发送者信息
+  message User{
+    string userId = 1;
+    string userName = 2;
+    string userAvatar = 3;
+  }
 }
 
 //异常消息
