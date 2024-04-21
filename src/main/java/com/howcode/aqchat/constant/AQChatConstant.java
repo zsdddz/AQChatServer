@@ -21,4 +21,20 @@ public class AQChatConstant {
          */
         String HANDLER_METHOD_NAME = "handle";
     }
+
+    public interface AQBusinessPrefix{
+        /**
+         * 用户Id前缀
+         */
+        String AQ_USER_PREFIX = "aq";
+
+        /**
+         * 心跳时间
+         */
+        String HEART_BEAT_TIME = "heartBeatTime";
+    }
+
+    public interface AQRedisKeyPrefix {
+        String AQ_USER_PREFIX = "aqchat:userId:";
+    }
 }

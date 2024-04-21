@@ -4,6 +4,7 @@ import com.howcode.aqchat.codec.MessageDecoder;
 import com.howcode.aqchat.codec.MessageEncoder;
 import com.howcode.aqchat.config.AQChatConfig;
 import com.howcode.aqchat.handler.AQChatCommandHandler;
+import com.howcode.aqchat.handler.HearBeatHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -14,6 +15,7 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
+import io.netty.handler.timeout.IdleStateHandler;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +41,8 @@ public class AQChatNettyStarter implements InitializingBean {
     private MessageEncoder messageEncoder;
     @Resource
     private AQChatCommandHandler aqChatCommandHandler;
+    @Resource
+    private HearBeatHandler hearBeatHandler;
 
     private void startImApplication() throws InterruptedException {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup(aqChatConfig.getBossThreadSize());
@@ -53,6 +57,8 @@ public class AQChatNettyStarter implements InitializingBean {
                         ch.pipeline().addLast(new ChunkedWriteHandler());
                         ch.pipeline().addLast(new HttpObjectAggregator(65535));
                         ch.pipeline().addLast(new WebSocketServerProtocolHandler("/ws"));
+                        ch.pipeline().addLast(new IdleStateHandler(0,0,10));
+                        ch.pipeline().addLast(hearBeatHandler);
                         ch.pipeline().addLast(messageDecoder);
                         ch.pipeline().addLast(messageEncoder);
                         ch.pipeline().addLast(aqChatCommandHandler);

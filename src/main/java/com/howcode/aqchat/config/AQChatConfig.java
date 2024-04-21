@@ -17,5 +17,5 @@ public class AQChatConfig {
     private int webSocketPort;
     private int bossThreadSize;
     private int workThreadSize;
-    private int heartBeatTime;
+    private Long heartBeatTime;
 }
