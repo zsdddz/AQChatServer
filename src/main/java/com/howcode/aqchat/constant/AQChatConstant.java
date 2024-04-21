@@ -5,7 +5,7 @@ package com.howcode.aqchat.constant;
  * @Description:
  * @date 2024-04-20 16:26
  */
-public class DarkChatConstant {
+public class AQChatConstant {
 
     public interface MessageHandlerConstant {
         /**

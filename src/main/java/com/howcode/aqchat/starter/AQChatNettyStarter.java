@@ -3,7 +3,7 @@ package com.howcode.aqchat.starter;
 import com.howcode.aqchat.codec.MessageDecoder;
 import com.howcode.aqchat.codec.MessageEncoder;
 import com.howcode.aqchat.config.DarkChatConfig;
-import com.howcode.aqchat.handler.DarkChatCommandHandler;
+import com.howcode.aqchat.handler.AQChatCommandHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -27,7 +27,7 @@ import org.springframework.boot.SpringBootConfiguration;
  * @date 2024-04-19 18:58
  */
 @SpringBootConfiguration
-public class DarkChatNettyStarter implements InitializingBean {
+public class AQChatNettyStarter implements InitializingBean {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NioServerSocketChannel.class);
 
@@ -38,7 +38,7 @@ public class DarkChatNettyStarter implements InitializingBean {
     @Resource
     private MessageEncoder messageEncoder;
     @Resource
-    private DarkChatCommandHandler darkChatCommandHandler;
+    private AQChatCommandHandler aqChatCommandHandler;
 
     private void startImApplication() throws InterruptedException {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup(darkChatConfig.getBossThreadSize());
@@ -55,7 +55,7 @@ public class DarkChatNettyStarter implements InitializingBean {
                         ch.pipeline().addLast(new WebSocketServerProtocolHandler("/ws"));
                         ch.pipeline().addLast(messageDecoder);
                         ch.pipeline().addLast(messageEncoder);
-                        ch.pipeline().addLast(darkChatCommandHandler);
+                        ch.pipeline().addLast(aqChatCommandHandler);
                     }
                 });
         Runtime.getRuntime().addShutdownHook(new Thread(()->{

@@ -16,16 +16,25 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ChannelHandler.Sharable
-public class DarkChatCommandHandler extends SimpleChannelInboundHandler<Object> {
+public class AQChatCommandHandler extends SimpleChannelInboundHandler<Object> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DarkChatCommandHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AQChatCommandHandler.class);
 
     @Resource
     CommandHandlerFactory commandHandlerFactory;
 
+    /**
+     * 异常或者正常断线 都会触发该方法
+     *
+     * @param ctx
+     * @throws Exception
+     */
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        super.channelActive(ctx);
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        super.channelInactive(ctx);
+        //关闭连接
+
+
     }
 
 

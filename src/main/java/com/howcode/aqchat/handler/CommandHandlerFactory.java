@@ -1,7 +1,7 @@
 package com.howcode.aqchat.handler;
 
 import com.google.protobuf.GeneratedMessageV3;
-import com.howcode.aqchat.constant.DarkChatConstant;
+import com.howcode.aqchat.constant.AQChatConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -32,7 +32,7 @@ public class CommandHandlerFactory implements InitializingBean {
         // 获取包名称
         String packageName = CommandHandlerFactory.class.getPackage().getName();
         // 获取所有的 ICmdHandler 子类
-        Set<Class<?>> clazzSet = listSubClazz(packageName + DarkChatConstant.MessageHandlerConstant.HANDLER_IMPLEMENTATION_PACKAGE_NAME);
+        Set<Class<?>> clazzSet = listSubClazz(packageName + AQChatConstant.MessageHandlerConstant.HANDLER_IMPLEMENTATION_PACKAGE_NAME);
         for (Class<?> cmdHandlerClazz : clazzSet) {
             if (null == cmdHandlerClazz || 0 != (cmdHandlerClazz.getModifiers() & Modifier.ABSTRACT)) {
                 // 如果是抽象类,
@@ -45,7 +45,7 @@ public class CommandHandlerFactory implements InitializingBean {
             Class<?> cmdClazz = null;
 
             for (Method currMethod : methodArray) {
-                if (!currMethod.getName().equals(DarkChatConstant.MessageHandlerConstant.HANDLER_METHOD_NAME)) {
+                if (!currMethod.getName().equals(AQChatConstant.MessageHandlerConstant.HANDLER_METHOD_NAME)) {
                     // 如果不是 handle 方法,
                     continue;
                 }
@@ -95,10 +95,7 @@ public class CommandHandlerFactory implements InitializingBean {
 
     private Set<Class<?>> listSubClazz(String packageName) {
         ApplicationContext context = new AnnotationConfigApplicationContext(packageName);
-
-        // 获取指定包下所有由 Spring 管理的 bean
         Map<String, Object> beans = context.getBeansWithAnnotation(Component.class);
-
         Set<Class<?>> resultSet = new HashSet<>();
         beans.forEach((beanName, bean) -> {
             Class<?> clazz = bean.getClass();
