@@ -18,6 +18,7 @@
         <jdbc.version>8.0.31</jdbc.version>
         <protobuf.version>3.24.0</protobuf.version>
         <lombok.version>1.18.30</lombok.version>
+        <redisson.version>3.23.5</redisson.version>
     </properties>
 
     <parent>
@@ -37,6 +38,17 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
 <!--        <dependency>-->

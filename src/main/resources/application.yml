@@ -7,3 +7,17 @@ dark-chat:
 spring:
   application:
     name: Aq-Chat
+  data:
+    redis:
+      database: 0
+      host: 127.0.0.1
+      port: 6379
+      password:
+      timeout: 5000
+      lettuce:
+        pool:
+          max-active: 32
+          max-wait: -1
+          max-idle: 16
+          min-idle: 8
+
