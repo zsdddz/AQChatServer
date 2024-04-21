@@ -2,6 +2,7 @@ package com.howcode.aqchat.handler;
 
 import com.google.protobuf.GeneratedMessageV3;
 import com.howcode.aqchat.constant.AQChatConstant;
+import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -27,6 +28,9 @@ public class CommandHandlerFactory implements InitializingBean {
     private static final Logger LOGGER = LoggerFactory.getLogger(CommandHandlerFactory.class);
 
     private final Map<Class<?>, ICmdHandler<? extends GeneratedMessageV3>> commandHandlerMap = new HashMap<>();
+
+    @Resource
+    private ApplicationContext applicationContext;
 
     private void init() {
         // 获取包名称
@@ -67,11 +71,9 @@ public class CommandHandlerFactory implements InitializingBean {
             }
 
             try {
-                // 创建指令处理器
-                ICmdHandler<?> newHandler = (ICmdHandler<?>) cmdHandlerClazz.newInstance();
-
+                // 从spring容器中获取实例
+                ICmdHandler<?> newHandler = (ICmdHandler<?>) applicationContext.getBean(cmdHandlerClazz);
                 LOGGER.info("factory adds a correspondence::command:{} =>handler:{}", cmdClazz.getName(), cmdHandlerClazz.getName());
-
                 commandHandlerMap.put(cmdClazz, newHandler);
             } catch (Exception ex) {
                 // 记录错误日志

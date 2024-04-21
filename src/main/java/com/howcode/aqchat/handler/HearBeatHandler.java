@@ -43,15 +43,12 @@ public class HearBeatHandler extends ChannelInboundHandlerAdapter implements Ini
             } else if (event.state() == IdleState.WRITER_IDLE) {
                 Logger.info("进入写空闲");
             } else if (event.state() == IdleState.ALL_IDLE) {
-                Long lastReadTime = (Long) ctx.channel()
-                        .attr(AttributeKey.valueOf(AQChatConstant.AQBusinessPrefix.HEART_BEAT_TIME)).get();
+                Long lastReadTime = (Long) ctx.channel().attr(AttributeKey.valueOf(AQChatConstant.AQBusinessConstant.HEART_BEAT_TIME)).get();
                 long now = System.currentTimeMillis();
-
                 if (lastReadTime != null && now - lastReadTime > heartBeatTime) {
                     // 下线
-
+                    Logger.info("心跳超时，关闭连接");
                 }
-
             }
         }
     }
