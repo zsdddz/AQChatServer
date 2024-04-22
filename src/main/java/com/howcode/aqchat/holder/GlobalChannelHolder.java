@@ -24,7 +24,7 @@ public class GlobalChannelHolder {
         CHANNELS.put(userId, nioSocketChannel);
     }
 
-    public NioSocketChannel get(String userId) {
+    public NioSocketChannel getUserChannel(String userId) {
         return CHANNELS.get(userId);
     }
 
@@ -37,5 +37,16 @@ public class GlobalChannelHolder {
      */
     public String getRoomId(String userId) {
         return messageBroadcaster.getUserRoom(userId);
+    }
+
+    /**
+     * 退出
+     * @param userId
+     * @return
+     */
+    public NioSocketChannel logout(String userId){
+        NioSocketChannel nioSocketChannel = getUserChannel(userId);
+        messageBroadcaster.leaveRoom(userId,nioSocketChannel);
+        return remove(userId);
     }
 }

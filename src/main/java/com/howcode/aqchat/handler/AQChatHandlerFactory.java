@@ -23,9 +23,9 @@ import java.util.Set;
  * @date 2024-04-20 16:15
  */
 @Component
-public class CommandHandlerFactory implements InitializingBean {
+public class AQChatHandlerFactory implements InitializingBean {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CommandHandlerFactory.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AQChatHandlerFactory.class);
 
     private final Map<Class<?>, ICmdHandler<? extends GeneratedMessageV3>> commandHandlerMap = new HashMap<>();
 
@@ -34,7 +34,7 @@ public class CommandHandlerFactory implements InitializingBean {
 
     private void init() {
         // 获取包名称
-        String packageName = CommandHandlerFactory.class.getPackage().getName();
+        String packageName = AQChatHandlerFactory.class.getPackage().getName();
         // 获取所有的 ICmdHandler 子类
         Set<Class<?>> clazzSet = listSubClazz(packageName + AQChatConstant.MessageHandlerConstant.HANDLER_IMPLEMENTATION_PACKAGE_NAME);
         for (Class<?> cmdHandlerClazz : clazzSet) {

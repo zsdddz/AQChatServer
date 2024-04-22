@@ -41,9 +41,17 @@ public class AQChatConstant {
          * 服务器回复客户端心跳标志
          */
         String HEART_BEAT_ACK = "AQChat-Ack";
+
+        /**
+         * 用户信息缓存时长 单位秒 24小时
+         */
+        long USER_INFO_CACHE_TIME = 60 * 60 * 24;
     }
 
     public interface AQRedisKeyPrefix {
-        String AQ_USER_PREFIX = "aqchat:userId:";
+        /**
+         * 用户登录信息前缀
+         */
+        String AQ_USER_LOGIN_INFO_PREFIX = "AQChat:userLoginInfo:";
     }
 }

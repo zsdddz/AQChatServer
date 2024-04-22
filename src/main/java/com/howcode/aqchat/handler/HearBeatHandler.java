@@ -2,6 +2,10 @@ package com.howcode.aqchat.handler;
 
 import com.howcode.aqchat.config.AQChatConfig;
 import com.howcode.aqchat.constant.AQChatConstant;
+import com.howcode.aqchat.holder.IUserHolder;
+import com.howcode.aqchat.message.AQChatMsgProtocol;
+import com.howcode.aqchat.holder.GlobalChannelHolder;
+import com.howcode.aqchat.model.UserLoginInfoDto;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -30,6 +34,12 @@ public class HearBeatHandler extends ChannelInboundHandlerAdapter implements Ini
     @Resource
     private AQChatConfig aqChatConfig;
 
+    @Resource
+    private GlobalChannelHolder channelHolder;
+
+    @Resource
+    private IUserHolder userHolder;
+
     private void init() {
         heartBeatTime = aqChatConfig.getHeartBeatTime();
     }
@@ -43,7 +53,19 @@ public class HearBeatHandler extends ChannelInboundHandlerAdapter implements Ini
                 long now = System.currentTimeMillis();
                 if (lastReadTime != null && now - lastReadTime > heartBeatTime) {
                     // 下线
-                    Logger.info("心跳超时，关闭连接");
+                    Logger.info("心跳超时，发送离线消息");
+                    //获取用户id
+                    String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQChatConstant.AQBusinessConstant.USER_ID)).get();
+                    //构建离线消息
+                    AQChatMsgProtocol.OfflineMsg.Builder builder = AQChatMsgProtocol.OfflineMsg.newBuilder();
+                    AQChatMsgProtocol.User.Builder userBuilder = AQChatMsgProtocol.User.newBuilder();
+                    userBuilder.setUserId(userId);
+                    UserLoginInfoDto userLoginInfo = userHolder.getUserLoginInfo(userId);
+                    userBuilder.setUserAvatar(userLoginInfo.getUserAvatar());
+                    userBuilder.setUserName(userLoginInfo.getUserName());
+                    builder.setUser(userBuilder.build());
+                    builder.setRoomId(channelHolder.getRoomId(userId));
+                    ctx.writeAndFlush(builder.build());
                 }
             }
         }

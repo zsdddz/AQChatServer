@@ -56,7 +56,7 @@ message JoinRoomCmd{
   int32 roomNo = 2;
 }
 message JoinRoomAck{
-  int32 roomId = 1;
+  string roomId = 1;
   int32 roomNo = 2;
   string roomName = 3;
 }
@@ -66,28 +66,28 @@ message CreateRoomCmd{
   string roomName = 2;
 }
 message CreateRoomAck{
-  int32 roomId = 1;
+  string roomId = 1;
   string roomNo = 2;
   string roomName = 3;
 }
 //离开房间
 message LeaveRoomCmd{
-  int32 roomId = 2;
+  string roomId = 2;
 }
 message LeaveRoomAck{
-  int32 roomId = 2;
+  string roomId = 2;
 }
 
 //发送消息
 message SendMsgCmd{
-  int32 roomId = 2;
+  string roomId = 2;
   MsgType msgType = 3;
   string msg = 4;
 }
 //发送消息响应 是否成功
 message SendMsgAck{
   string userId = 1;
-  int32 roomId = 2;
+  string roomId = 2;
   bool success = 3;
 }
 
@@ -104,7 +104,7 @@ enum MsgType{
 //消息广播
 message BroadcastMsgAck{
   User user = 1;
-  int32 roomId = 2;
+  string roomId = 2;
   MsgType msgType = 3;
   string msg = 4;
 }
@@ -125,5 +125,5 @@ message ExceptionMsg{
 //掉线消息
 message OfflineMsg{
   User user = 1;
-  int32 roomId = 2;
+  string roomId = 2;
 }
