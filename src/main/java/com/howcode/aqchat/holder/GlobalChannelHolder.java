@@ -1,4 +1,4 @@
-package com.howcode.aqchat.utils;
+package com.howcode.aqchat.holder;
 
 import com.howcode.aqchat.message.MessageBroadcaster;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -30,5 +30,12 @@ public class GlobalChannelHolder {
 
     public NioSocketChannel remove(String userId) {
         return CHANNELS.remove(userId);
+    }
+
+    /**
+     * 获取用户所在房间
+     */
+    public String getRoomId(String userId) {
+        return messageBroadcaster.getUserRoom(userId);
     }
 }
