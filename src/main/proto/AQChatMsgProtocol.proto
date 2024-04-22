@@ -26,6 +26,8 @@ enum MsgCommand{
   BROADCAST_MSG_ACK = 12;
   //异常消息
   EXCEPTION_MSG = 13;
+  //掉线消息
+  OFFLINE_MSG = 14;
 
 }
 
@@ -43,10 +45,10 @@ message UserLoginAck{
 
 //心跳
 message HeartBeatCmd{
-  string userId = 1;
+  string ping = 1;
 }
 message HeartBeatAck{
-  string userId = 1;
+  string pong = 1;
 }
 
 //加入房间
@@ -56,16 +58,17 @@ message JoinRoomCmd{
 message JoinRoomAck{
   int32 roomId = 1;
   int32 roomNo = 2;
+  string roomName = 3;
 }
 //新建房间
 message CreateRoomCmd{
-  string roomNo = 2;
-  string roomName = 3;
+  string roomNo = 1;
+  string roomName = 2;
 }
 message CreateRoomAck{
-  int32 roomId = 2;
-  string roomNo = 3;
-  string roomName = 4;
+  int32 roomId = 1;
+  string roomNo = 2;
+  string roomName = 3;
 }
 //离开房间
 message LeaveRoomCmd{
@@ -104,17 +107,23 @@ message BroadcastMsgAck{
   int32 roomId = 2;
   MsgType msgType = 3;
   string msg = 4;
-
-  //发送者信息
-  message User{
-    string userId = 1;
-    string userName = 2;
-    string userAvatar = 3;
-  }
+}
+//发送者信息
+message User{
+  string userId = 1;
+  string userName = 2;
+  string userAvatar = 3;
 }
 
 //异常消息
 message ExceptionMsg{
   int32 code = 1;
   string msg = 2;
+}
+
+
+//掉线消息
+message OfflineMsg{
+  User user = 1;
+  int32 roomId = 2;
 }

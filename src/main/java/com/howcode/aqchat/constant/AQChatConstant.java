@@ -37,6 +37,10 @@ public class AQChatConstant {
          * userId
          */
         String USER_ID = "userId";
+        /**
+         * 服务器回复客户端心跳标志
+         */
+        String HEART_BEAT_ACK = "AQChat-Ack";
     }
 
     public interface AQRedisKeyPrefix {

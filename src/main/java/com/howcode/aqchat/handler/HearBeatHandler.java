@@ -30,7 +30,7 @@ public class HearBeatHandler extends ChannelInboundHandlerAdapter implements Ini
     @Resource
     private AQChatConfig aqChatConfig;
 
-    private void init(){
+    private void init() {
         heartBeatTime = aqChatConfig.getHeartBeatTime();
     }
 
@@ -38,11 +38,7 @@ public class HearBeatHandler extends ChannelInboundHandlerAdapter implements Ini
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         if (evt instanceof IdleStateEvent event) {
-            if (event.state() == IdleState.READER_IDLE) {
-                Logger.info("读空闲");
-            } else if (event.state() == IdleState.WRITER_IDLE) {
-                Logger.info("进入写空闲");
-            } else if (event.state() == IdleState.ALL_IDLE) {
+            if (event.state() == IdleState.ALL_IDLE) {
                 Long lastReadTime = (Long) ctx.channel().attr(AttributeKey.valueOf(AQChatConstant.AQBusinessConstant.HEART_BEAT_TIME)).get();
                 long now = System.currentTimeMillis();
                 if (lastReadTime != null && now - lastReadTime > heartBeatTime) {

@@ -38,6 +38,6 @@ public class HeartBeatCmdHandler implements ICmdHandler<AQChatMsgProtocol.HeartB
             return;
         }
         //返回心跳响应
-        ctx.writeAndFlush(AQChatMsgProtocol.HeartBeatAck.newBuilder().setUserId(userId).build());
+        ctx.writeAndFlush(AQChatMsgProtocol.HeartBeatAck.newBuilder().setPong(AQChatConstant.AQBusinessConstant.HEART_BEAT_ACK).build());
     }
 }
