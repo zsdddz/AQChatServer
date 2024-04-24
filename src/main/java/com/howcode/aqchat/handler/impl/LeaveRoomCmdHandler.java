@@ -50,9 +50,10 @@ public class LeaveRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.LeaveR
             ctx.writeAndFlush(exceptionMsg);
             return;
         }
-
         globalChannelHolder.leaveRoom(userId,ctx.channel());
 
+        //判断房间是否为空 如果为空则解散房间
+        globalChannelHolder.isOrNoDissolveTheRoom(roomId,roomInfoDto.getRoomNo());
         //返回离开房间成功
         AQChatMsgProtocol.LeaveRoomAck.Builder builder = AQChatMsgProtocol.LeaveRoomAck.newBuilder();
         builder.setRoomId(roomId);

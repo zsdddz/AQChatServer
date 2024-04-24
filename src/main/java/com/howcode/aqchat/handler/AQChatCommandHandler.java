@@ -31,7 +31,7 @@ public class AQChatCommandHandler extends SimpleChannelInboundHandler<Object> {
     @Resource
     private IUserHolder userHolder;
     @Resource
-    private GlobalChannelHolder channelHolder;
+    private GlobalChannelHolder globalChannelHolder;
 
     /**
      * 异常或者正常断线 都会触发该方法
@@ -47,7 +47,9 @@ public class AQChatCommandHandler extends SimpleChannelInboundHandler<Object> {
         String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQChatConstant.AQBusinessConstant.USER_ID)).get();
         userHolder.removeUserLoginInfo(userId);
         //移除用户连接以及用户所在房间
-        NioSocketChannel logout = channelHolder.logout(userId);
+        NioSocketChannel logout = globalChannelHolder.logout(userId);
+        //获取当前用户所在房间信息  并判断是否需要解散房间
+        globalChannelHolder.dissolveTheRoom4Logout(userId);
         logout.close();
         ctx.close();
     }

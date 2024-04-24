@@ -1,6 +1,9 @@
 package com.howcode.aqchat.holder;
 
+import com.howcode.aqchat.constant.AQChatConstant;
 import com.howcode.aqchat.message.MessageBroadcaster;
+import com.howcode.aqchat.model.RoomInfoDto;
+import com.howcode.aqchat.utils.RedisCacheHelper;
 import io.netty.channel.Channel;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
@@ -23,6 +26,9 @@ public class GlobalChannelHolder {
 
     @Resource
     private MessageBroadcaster messageBroadcaster;
+
+    @Resource
+    private RedisCacheHelper redisCacheHelper;
 
     public void put(String userId, NioSocketChannel nioSocketChannel) {
         CHANNELS.put(userId, nioSocketChannel);
@@ -72,5 +78,26 @@ public class GlobalChannelHolder {
 
     public void leaveRoom(String userId, Channel channel) {
         messageBroadcaster.leaveRoom(userId, (NioSocketChannel) channel);
+    }
+
+    public void isOrNoDissolveTheRoom(String roomId, Integer roomNo) {
+        ChannelGroup channelGroup = messageBroadcaster.getChannelGroup(roomId);
+        if (null == channelGroup || channelGroup.isEmpty()) {
+            redisCacheHelper.deleteObject(AQChatConstant.AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo);
+            redisCacheHelper.deleteObject(AQChatConstant.AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId);
+        }
+    }
+
+    public void dissolveTheRoom4Logout(String userId) {
+        String roomId = getRoomId(userId);
+        if (null == roomId) {
+            return;
+        }
+        //获取房间信息
+        RoomInfoDto roomInfoDto = redisCacheHelper.getCacheObject(AQChatConstant.AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, RoomInfoDto.class);
+        if (null == roomInfoDto) {
+            return;
+        }
+        isOrNoDissolveTheRoom(roomId, roomInfoDto.getRoomNo());
     }
 }
