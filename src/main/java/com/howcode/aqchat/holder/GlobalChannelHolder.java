@@ -69,4 +69,8 @@ public class GlobalChannelHolder {
     public void joinRoom(String roomId, String userId, Channel channel) {
         messageBroadcaster.joinRoom(roomId, userId, (NioSocketChannel) channel);
     }
+
+    public void leaveRoom(String userId, Channel channel) {
+        messageBroadcaster.leaveRoom(userId, (NioSocketChannel) channel);
+    }
 }
