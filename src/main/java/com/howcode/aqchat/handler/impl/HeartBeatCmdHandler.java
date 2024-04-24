@@ -1,14 +1,11 @@
 package com.howcode.aqchat.handler.impl;
 
 import com.howcode.aqchat.constant.AQChatConstant;
-import com.howcode.aqchat.enums.ExceptionEnum;
+import com.howcode.aqchat.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.handler.ICmdHandler;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
-import com.howcode.aqchat.message.BaseMessageProcessor;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.AttributeKey;
-import jakarta.annotation.Resource;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
@@ -32,8 +29,8 @@ public class HeartBeatCmdHandler implements ICmdHandler<AQChatMsgProtocol.HeartB
         if (null == userId) {
             //未登录  构建异常消息
             AQChatMsgProtocol.ExceptionMsg exceptionMsg = AQChatMsgProtocol.ExceptionMsg.newBuilder()
-                    .setCode(ExceptionEnum.USER_NOT_LOGIN.getCode())
-                    .setMsg(ExceptionEnum.USER_NOT_LOGIN.getMessage()).build();
+                    .setCode(AQChatExceptionEnum.USER_NOT_LOGIN.getCode())
+                    .setMsg(AQChatExceptionEnum.USER_NOT_LOGIN.getMessage()).build();
             ctx.writeAndFlush(exceptionMsg);
             return;
         }
