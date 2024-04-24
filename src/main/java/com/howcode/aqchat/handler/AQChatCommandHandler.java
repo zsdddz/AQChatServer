@@ -41,15 +41,13 @@ public class AQChatCommandHandler extends SimpleChannelInboundHandler<Object> {
      */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        LOGGER.info("客户端断开连接，channel关闭");
         super.channelInactive(ctx);
         //获取用户id
         String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQChatConstant.AQBusinessConstant.USER_ID)).get();
+        LOGGER.info("用户{}断开连接",userId);
         userHolder.removeUserLoginInfo(userId);
         //移除用户连接以及用户所在房间
         NioSocketChannel logout = globalChannelHolder.logout(userId);
-        //获取当前用户所在房间信息  并判断是否需要解散房间
-        globalChannelHolder.dissolveTheRoom4Logout(userId);
         logout.close();
         ctx.close();
     }

@@ -12,6 +12,8 @@ import com.howcode.aqchat.utils.RedisCacheHelper;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class CreateRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.CreateRoomCmd> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreateRoomCmdHandler.class);
 
     @Resource
     @Lazy
@@ -60,6 +63,7 @@ public class CreateRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.Creat
         //将创建者加入房间
         String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQChatConstant.AQBusinessConstant.USER_ID)).get();
         globalChannelHolder.joinRoom(roomInfoDto.getRoomId(),userId,ctx.channel());
+        LOGGER.info("用户{}创建房间{}成功",userId,roomInfoDto.getRoomId());
         //返回创建房间成功消息
         AQChatMsgProtocol.CreateRoomAck createRoomAck = AQChatMsgProtocol.CreateRoomAck.newBuilder()
                 .setRoomId(roomInfoDto.getRoomId())

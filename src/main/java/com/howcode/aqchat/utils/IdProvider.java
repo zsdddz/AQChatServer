@@ -3,7 +3,6 @@ package com.howcode.aqchat.utils;
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;
 import com.howcode.aqchat.constant.AQChatConstant;
-import org.springframework.stereotype.Component;
 
 /**
  * @Author: ZhangWeinan

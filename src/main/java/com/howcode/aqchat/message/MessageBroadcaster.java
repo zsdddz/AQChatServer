@@ -66,19 +66,20 @@ public class MessageBroadcaster {
     /**
      * 离开房间
      */
-    public void leaveRoom(String userId,NioSocketChannel channel) {
+    public String leaveRoom(String userId,NioSocketChannel channel) {
         if (null == userId || null == channel) {
-            return;
+            return null;
         }
         String roomId = userRoomMap.remove(userId);
         if (null == roomId) {
-            return;
+            return null;
         }
         ChannelGroup channelGroup = channelGroupMap.get(roomId);
         if (null == channelGroup) {
-            return;
+            return null;
         }
         channelGroup.remove(channel);
+        return roomId;
     }
 
     /**
