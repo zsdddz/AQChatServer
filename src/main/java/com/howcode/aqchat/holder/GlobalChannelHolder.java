@@ -1,7 +1,11 @@
 package com.howcode.aqchat.holder;
 
 import com.howcode.aqchat.message.MessageBroadcaster;
+import io.netty.channel.Channel;
+import io.netty.channel.group.ChannelGroup;
+import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.util.concurrent.GlobalEventExecutor;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
@@ -41,12 +45,28 @@ public class GlobalChannelHolder {
 
     /**
      * 退出
+     *
      * @param userId
      * @return
      */
-    public NioSocketChannel logout(String userId){
+    public NioSocketChannel logout(String userId) {
         NioSocketChannel nioSocketChannel = getUserChannel(userId);
-        messageBroadcaster.leaveRoom(userId,nioSocketChannel);
+        messageBroadcaster.leaveRoom(userId, nioSocketChannel);
         return remove(userId);
+    }
+
+    /**
+     * 创建房间
+     *
+     * @param roomId
+     * @return
+     */
+    public void createChannelGroup(String roomId) {
+        ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+        messageBroadcaster.addChannelGroup(roomId, channelGroup);
+    }
+
+    public void joinRoom(String roomId, String userId, Channel channel) {
+        messageBroadcaster.joinRoom(roomId, userId, (NioSocketChannel) channel);
     }
 }

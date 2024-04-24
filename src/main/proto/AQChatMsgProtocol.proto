@@ -62,12 +62,12 @@ message JoinRoomAck{
 }
 //新建房间
 message CreateRoomCmd{
-  string roomNo = 1;
+  int32 roomNo = 1;
   string roomName = 2;
 }
 message CreateRoomAck{
   string roomId = 1;
-  string roomNo = 2;
+  int32 roomNo = 2;
   string roomName = 3;
 }
 //离开房间

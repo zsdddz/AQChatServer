@@ -47,18 +47,28 @@ public class MessageBroadcaster {
     /**
      * 加入房间
      */
-    public boolean joinRoom(String roomId, String userId, NioSocketChannel channel) {
+    public void joinRoom(String roomId, String userId, NioSocketChannel channel) {
+        if (null == roomId || null == userId || null == channel) {
+            return;
+        }
+        //判断用户是否已经在房间内
+        if (null != userRoomMap.get(userId)) {
+            return;
+        }
         userRoomMap.put(userId, roomId);
         ChannelGroup channelGroup = channelGroupMap.get(roomId);
         if (null == channelGroup) {
-            return false;
+            return;
         }
-        return channelGroup.add(channel);
+        channelGroup.add(channel);
     }
     /**
      * 离开房间
      */
     public void leaveRoom(String userId,NioSocketChannel channel) {
+        if (null == userId || null == channel) {
+            return;
+        }
         String roomId = userRoomMap.remove(userId);
         if (null == roomId) {
             return;

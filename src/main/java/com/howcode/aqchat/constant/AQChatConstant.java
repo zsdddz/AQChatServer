@@ -26,7 +26,11 @@ public class AQChatConstant {
         /**
          * 用户Id前缀
          */
-        String AQ_USER_PREFIX = "aq";
+        String AQ_USER_PREFIX = "aquser_";
+        /**
+         * 房间Id前缀
+         */
+        String AQ_ROOM_PREFIX = "aqroom_";
 
         /**
          * 心跳时间
@@ -53,5 +57,14 @@ public class AQChatConstant {
          * 用户登录信息前缀
          */
         String AQ_USER_LOGIN_INFO_PREFIX = "AQChat:userLoginInfo:";
+
+        /**
+         * 房间号缓存前缀
+         */
+        String AQ_ROOM_NO_PREFIX = "AQChat:room:roomNo:";
+        /**
+         * 房间缓存前缀
+         */
+        String AQ_ROOM_PREFIX = "AQChat:room:room:";
     }
 }

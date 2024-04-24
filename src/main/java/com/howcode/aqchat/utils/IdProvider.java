@@ -14,7 +14,19 @@ import org.springframework.stereotype.Component;
 public class IdProvider {
     private static final Snowflake snowflake = IdUtil.getSnowflake(1, 1);
 
+    /**
+     * 生成房间id
+     * @return
+     */
     public static String generateUserId() {
         return AQChatConstant.AQBusinessConstant.AQ_USER_PREFIX + snowflake.nextId();
+    }
+
+    /**
+     * 生成房间id
+     * @return
+     */
+    public static String generateRoomId() {
+        return AQChatConstant.AQBusinessConstant.AQ_ROOM_PREFIX + snowflake.nextId();
     }
 }
