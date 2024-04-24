@@ -1,4 +1,4 @@
-# AQChat_server
+# AQChatServer
 
 ### 介绍
 AQChat一个极速、便捷的匿名在线即时聊天室项目，后端基于Netty和ProtoBuf实现的匿名即时聊天室，支持文本、图片、文件、视频的发送和接收。
