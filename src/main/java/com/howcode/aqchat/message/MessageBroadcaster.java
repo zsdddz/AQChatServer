@@ -1,6 +1,7 @@
 package com.howcode.aqchat.message;
 
 import com.google.protobuf.GeneratedMessageV3;
+import com.howcode.aqchat.model.UserLoginInfoDto;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import org.springframework.stereotype.Component;
@@ -91,5 +92,23 @@ public class MessageBroadcaster {
             return;
         }
         channelGroup.writeAndFlush(msg);
+    }
+
+    public void sendMsgToRoom(UserLoginInfoDto userInfo, AQChatMsgProtocol.SendMsgCmd cmd) {
+        String roomId = userRoomMap.get(userInfo.getUserId());
+        if (null == roomId) {
+            return;
+        }
+        AQChatMsgProtocol.User.Builder userBuilder = AQChatMsgProtocol.User.newBuilder();
+        userBuilder.setUserId(userInfo.getUserId());
+        userBuilder.setUserName(userInfo.getUserName());
+        userBuilder.setUserAvatar(userInfo.getUserAvatar());
+        AQChatMsgProtocol.BroadcastMsgAck sendMsgCmd = AQChatMsgProtocol.BroadcastMsgAck.newBuilder()
+                .setRoomId(roomId)
+                .setUser(userBuilder.build())
+                .setMsgType(cmd.getMsgType())
+                .setMsg(cmd.getMsg())
+                .build();
+        broadcast(roomId, sendMsgCmd);
     }
 }
