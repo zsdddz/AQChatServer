@@ -127,6 +127,50 @@ public final class AQChatMsgProtocol {
      * <code>GET_STS_ACK = 16;</code>
      */
     GET_STS_ACK(16),
+    /**
+     * <pre>
+     *退出登录
+     * </pre>
+     *
+     * <code>USER_LOGOUT_CMD = 17;</code>
+     */
+    USER_LOGOUT_CMD(17),
+    /**
+     * <code>USER_LOGOUT_ACK = 18;</code>
+     */
+    USER_LOGOUT_ACK(18),
+    /**
+     * <pre>
+     *朋友离线
+     * </pre>
+     *
+     * <code>FRIEND_OFFLINE_ACK = 19;</code>
+     */
+    FRIEND_OFFLINE_ACK(19),
+    /**
+     * <pre>
+     *同步聊天室聊天记录
+     * </pre>
+     *
+     * <code>SYNC_CHAT_RECORD_CMD = 20;</code>
+     */
+    SYNC_CHAT_RECORD_CMD(20),
+    /**
+     * <code>SYNC_CHAT_RECORD_ACK = 21;</code>
+     */
+    SYNC_CHAT_RECORD_ACK(21),
+    /**
+     * <pre>
+     *根据userId恢复用户连接信息
+     * </pre>
+     *
+     * <code>RECOVER_USER_CMD = 22;</code>
+     */
+    RECOVER_USER_CMD(22),
+    /**
+     * <code>RECOVER_USER_ACK = 23;</code>
+     */
+    RECOVER_USER_ACK(23),
     UNRECOGNIZED(-1),
     ;
 
@@ -238,11 +282,55 @@ public final class AQChatMsgProtocol {
      * <code>GET_STS_ACK = 16;</code>
      */
     public static final int GET_STS_ACK_VALUE = 16;
+    /**
+     * <pre>
+     *退出登录
+     * </pre>
+     *
+     * <code>USER_LOGOUT_CMD = 17;</code>
+     */
+    public static final int USER_LOGOUT_CMD_VALUE = 17;
+    /**
+     * <code>USER_LOGOUT_ACK = 18;</code>
+     */
+    public static final int USER_LOGOUT_ACK_VALUE = 18;
+    /**
+     * <pre>
+     *朋友离线
+     * </pre>
+     *
+     * <code>FRIEND_OFFLINE_ACK = 19;</code>
+     */
+    public static final int FRIEND_OFFLINE_ACK_VALUE = 19;
+    /**
+     * <pre>
+     *同步聊天室聊天记录
+     * </pre>
+     *
+     * <code>SYNC_CHAT_RECORD_CMD = 20;</code>
+     */
+    public static final int SYNC_CHAT_RECORD_CMD_VALUE = 20;
+    /**
+     * <code>SYNC_CHAT_RECORD_ACK = 21;</code>
+     */
+    public static final int SYNC_CHAT_RECORD_ACK_VALUE = 21;
+    /**
+     * <pre>
+     *根据userId恢复用户连接信息
+     * </pre>
+     *
+     * <code>RECOVER_USER_CMD = 22;</code>
+     */
+    public static final int RECOVER_USER_CMD_VALUE = 22;
+    /**
+     * <code>RECOVER_USER_ACK = 23;</code>
+     */
+    public static final int RECOVER_USER_ACK_VALUE = 23;
 
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new IllegalArgumentException(
+        throw new java.lang.IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -253,7 +341,7 @@ public final class AQChatMsgProtocol {
      * @return The enum associated with the given numeric wire value.
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @Deprecated
+    @java.lang.Deprecated
     public static MsgCommand valueOf(int value) {
       return forNumber(value);
     }
@@ -281,6 +369,13 @@ public final class AQChatMsgProtocol {
         case 14: return OFFLINE_MSG;
         case 15: return GET_STS_CMD;
         case 16: return GET_STS_ACK;
+        case 17: return USER_LOGOUT_CMD;
+        case 18: return USER_LOGOUT_ACK;
+        case 19: return FRIEND_OFFLINE_ACK;
+        case 20: return SYNC_CHAT_RECORD_CMD;
+        case 21: return SYNC_CHAT_RECORD_ACK;
+        case 22: return RECOVER_USER_CMD;
+        case 23: return RECOVER_USER_ACK;
         default: return null;
       }
     }
@@ -300,7 +395,7 @@ public final class AQChatMsgProtocol {
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
       if (this == UNRECOGNIZED) {
-        throw new IllegalStateException(
+        throw new java.lang.IllegalStateException(
             "Can't get the descriptor of an unrecognized enum value.");
       }
       return getDescriptor().getValues().get(ordinal());
@@ -14059,6 +14154,5964 @@ public final class AQChatMsgProtocol {
 
   }
 
+  public interface UserLogoutCmdOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:chat_msg.UserLogoutCmd)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string userId = 1;</code>
+     * @return The userId.
+     */
+    java.lang.String getUserId();
+    /**
+     * <code>string userId = 1;</code>
+     * @return The bytes for userId.
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+  }
+  /**
+   * <pre>
+   *退出登录
+   * </pre>
+   *
+   * Protobuf type {@code chat_msg.UserLogoutCmd}
+   */
+  public static final class UserLogoutCmd extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:chat_msg.UserLogoutCmd)
+      UserLogoutCmdOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use UserLogoutCmd.newBuilder() to construct.
+    private UserLogoutCmd(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private UserLogoutCmd() {
+      userId_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new UserLogoutCmd();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private UserLogoutCmd(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              userId_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_UserLogoutCmd_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_UserLogoutCmd_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd.class, com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd.Builder.class);
+    }
+
+    public static final int USERID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object userId_;
+    /**
+     * <code>string userId = 1;</code>
+     * @return The userId.
+     */
+    @java.lang.Override
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        userId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string userId = 1;</code>
+     * @return The bytes for userId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, userId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, userId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd)) {
+        return super.equals(obj);
+      }
+      com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd other = (com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd) obj;
+
+      if (!getUserId()
+          .equals(other.getUserId())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + USERID_FIELD_NUMBER;
+      hash = (53 * hash) + getUserId().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *退出登录
+     * </pre>
+     *
+     * Protobuf type {@code chat_msg.UserLogoutCmd}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:chat_msg.UserLogoutCmd)
+        com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmdOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_UserLogoutCmd_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_UserLogoutCmd_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd.class, com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd.Builder.class);
+      }
+
+      // Construct using com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        userId_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_UserLogoutCmd_descriptor;
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd getDefaultInstanceForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd build() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd buildPartial() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd result = new com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd(this);
+        result.userId_ = userId_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd) {
+          return mergeFrom((com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd other) {
+        if (other == com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd.getDefaultInstance()) return this;
+        if (!other.getUserId().isEmpty()) {
+          userId_ = other.userId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object userId_ = "";
+      /**
+       * <code>string userId = 1;</code>
+       * @return The userId.
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          userId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @return The bytes for userId.
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @param value The userId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUserId() {
+        
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @param value The bytes for userId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:chat_msg.UserLogoutCmd)
+    }
+
+    // @@protoc_insertion_point(class_scope:chat_msg.UserLogoutCmd)
+    private static final com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd();
+    }
+
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<UserLogoutCmd>
+        PARSER = new com.google.protobuf.AbstractParser<UserLogoutCmd>() {
+      @java.lang.Override
+      public UserLogoutCmd parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new UserLogoutCmd(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<UserLogoutCmd> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<UserLogoutCmd> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutCmd getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface UserLogoutAckOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:chat_msg.UserLogoutAck)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string userId = 1;</code>
+     * @return The userId.
+     */
+    java.lang.String getUserId();
+    /**
+     * <code>string userId = 1;</code>
+     * @return The bytes for userId.
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+  }
+  /**
+   * Protobuf type {@code chat_msg.UserLogoutAck}
+   */
+  public static final class UserLogoutAck extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:chat_msg.UserLogoutAck)
+      UserLogoutAckOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use UserLogoutAck.newBuilder() to construct.
+    private UserLogoutAck(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private UserLogoutAck() {
+      userId_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new UserLogoutAck();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private UserLogoutAck(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              userId_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_UserLogoutAck_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_UserLogoutAck_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck.Builder.class);
+    }
+
+    public static final int USERID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object userId_;
+    /**
+     * <code>string userId = 1;</code>
+     * @return The userId.
+     */
+    @java.lang.Override
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        userId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string userId = 1;</code>
+     * @return The bytes for userId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, userId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, userId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck)) {
+        return super.equals(obj);
+      }
+      com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck other = (com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck) obj;
+
+      if (!getUserId()
+          .equals(other.getUserId())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + USERID_FIELD_NUMBER;
+      hash = (53 * hash) + getUserId().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code chat_msg.UserLogoutAck}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:chat_msg.UserLogoutAck)
+        com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAckOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_UserLogoutAck_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_UserLogoutAck_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck.Builder.class);
+      }
+
+      // Construct using com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        userId_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_UserLogoutAck_descriptor;
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck getDefaultInstanceForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck build() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck buildPartial() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck result = new com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck(this);
+        result.userId_ = userId_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck) {
+          return mergeFrom((com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck other) {
+        if (other == com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck.getDefaultInstance()) return this;
+        if (!other.getUserId().isEmpty()) {
+          userId_ = other.userId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object userId_ = "";
+      /**
+       * <code>string userId = 1;</code>
+       * @return The userId.
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          userId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @return The bytes for userId.
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @param value The userId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUserId() {
+        
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @param value The bytes for userId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:chat_msg.UserLogoutAck)
+    }
+
+    // @@protoc_insertion_point(class_scope:chat_msg.UserLogoutAck)
+    private static final com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck();
+    }
+
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<UserLogoutAck>
+        PARSER = new com.google.protobuf.AbstractParser<UserLogoutAck>() {
+      @java.lang.Override
+      public UserLogoutAck parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new UserLogoutAck(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<UserLogoutAck> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<UserLogoutAck> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.howcode.aqchat.message.AQChatMsgProtocol.UserLogoutAck getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface FriendOfflineAckOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:chat_msg.FriendOfflineAck)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string userId = 1;</code>
+     * @return The userId.
+     */
+    java.lang.String getUserId();
+    /**
+     * <code>string userId = 1;</code>
+     * @return The bytes for userId.
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+  }
+  /**
+   * <pre>
+   *朋友离线
+   * </pre>
+   *
+   * Protobuf type {@code chat_msg.FriendOfflineAck}
+   */
+  public static final class FriendOfflineAck extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:chat_msg.FriendOfflineAck)
+      FriendOfflineAckOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use FriendOfflineAck.newBuilder() to construct.
+    private FriendOfflineAck(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private FriendOfflineAck() {
+      userId_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new FriendOfflineAck();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private FriendOfflineAck(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              userId_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_FriendOfflineAck_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_FriendOfflineAck_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck.Builder.class);
+    }
+
+    public static final int USERID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object userId_;
+    /**
+     * <code>string userId = 1;</code>
+     * @return The userId.
+     */
+    @java.lang.Override
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        userId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string userId = 1;</code>
+     * @return The bytes for userId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, userId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, userId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck)) {
+        return super.equals(obj);
+      }
+      com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck other = (com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck) obj;
+
+      if (!getUserId()
+          .equals(other.getUserId())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + USERID_FIELD_NUMBER;
+      hash = (53 * hash) + getUserId().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *朋友离线
+     * </pre>
+     *
+     * Protobuf type {@code chat_msg.FriendOfflineAck}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:chat_msg.FriendOfflineAck)
+        com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAckOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_FriendOfflineAck_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_FriendOfflineAck_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck.Builder.class);
+      }
+
+      // Construct using com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        userId_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_FriendOfflineAck_descriptor;
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck getDefaultInstanceForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck build() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck buildPartial() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck result = new com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck(this);
+        result.userId_ = userId_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck) {
+          return mergeFrom((com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck other) {
+        if (other == com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck.getDefaultInstance()) return this;
+        if (!other.getUserId().isEmpty()) {
+          userId_ = other.userId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object userId_ = "";
+      /**
+       * <code>string userId = 1;</code>
+       * @return The userId.
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          userId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @return The bytes for userId.
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @param value The userId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUserId() {
+        
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @param value The bytes for userId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:chat_msg.FriendOfflineAck)
+    }
+
+    // @@protoc_insertion_point(class_scope:chat_msg.FriendOfflineAck)
+    private static final com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck();
+    }
+
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<FriendOfflineAck>
+        PARSER = new com.google.protobuf.AbstractParser<FriendOfflineAck>() {
+      @java.lang.Override
+      public FriendOfflineAck parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new FriendOfflineAck(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<FriendOfflineAck> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FriendOfflineAck> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface SyncChatRecordCmdOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:chat_msg.SyncChatRecordCmd)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string roomId = 1;</code>
+     * @return The roomId.
+     */
+    java.lang.String getRoomId();
+    /**
+     * <code>string roomId = 1;</code>
+     * @return The bytes for roomId.
+     */
+    com.google.protobuf.ByteString
+        getRoomIdBytes();
+  }
+  /**
+   * <pre>
+   *同步聊天室聊天记录
+   * </pre>
+   *
+   * Protobuf type {@code chat_msg.SyncChatRecordCmd}
+   */
+  public static final class SyncChatRecordCmd extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:chat_msg.SyncChatRecordCmd)
+      SyncChatRecordCmdOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use SyncChatRecordCmd.newBuilder() to construct.
+    private SyncChatRecordCmd(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private SyncChatRecordCmd() {
+      roomId_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new SyncChatRecordCmd();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private SyncChatRecordCmd(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              roomId_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_SyncChatRecordCmd_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_SyncChatRecordCmd_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd.class, com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd.Builder.class);
+    }
+
+    public static final int ROOMID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object roomId_;
+    /**
+     * <code>string roomId = 1;</code>
+     * @return The roomId.
+     */
+    @java.lang.Override
+    public java.lang.String getRoomId() {
+      java.lang.Object ref = roomId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        roomId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string roomId = 1;</code>
+     * @return The bytes for roomId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getRoomIdBytes() {
+      java.lang.Object ref = roomId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        roomId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, roomId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, roomId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd)) {
+        return super.equals(obj);
+      }
+      com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd other = (com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd) obj;
+
+      if (!getRoomId()
+          .equals(other.getRoomId())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ROOMID_FIELD_NUMBER;
+      hash = (53 * hash) + getRoomId().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *同步聊天室聊天记录
+     * </pre>
+     *
+     * Protobuf type {@code chat_msg.SyncChatRecordCmd}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:chat_msg.SyncChatRecordCmd)
+        com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmdOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_SyncChatRecordCmd_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_SyncChatRecordCmd_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd.class, com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd.Builder.class);
+      }
+
+      // Construct using com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        roomId_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_SyncChatRecordCmd_descriptor;
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd getDefaultInstanceForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd build() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd buildPartial() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd result = new com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd(this);
+        result.roomId_ = roomId_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd) {
+          return mergeFrom((com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd other) {
+        if (other == com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd.getDefaultInstance()) return this;
+        if (!other.getRoomId().isEmpty()) {
+          roomId_ = other.roomId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object roomId_ = "";
+      /**
+       * <code>string roomId = 1;</code>
+       * @return The roomId.
+       */
+      public java.lang.String getRoomId() {
+        java.lang.Object ref = roomId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          roomId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string roomId = 1;</code>
+       * @return The bytes for roomId.
+       */
+      public com.google.protobuf.ByteString
+          getRoomIdBytes() {
+        java.lang.Object ref = roomId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          roomId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string roomId = 1;</code>
+       * @param value The roomId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRoomId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        roomId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string roomId = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearRoomId() {
+        
+        roomId_ = getDefaultInstance().getRoomId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string roomId = 1;</code>
+       * @param value The bytes for roomId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRoomIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        roomId_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:chat_msg.SyncChatRecordCmd)
+    }
+
+    // @@protoc_insertion_point(class_scope:chat_msg.SyncChatRecordCmd)
+    private static final com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd();
+    }
+
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<SyncChatRecordCmd>
+        PARSER = new com.google.protobuf.AbstractParser<SyncChatRecordCmd>() {
+      @java.lang.Override
+      public SyncChatRecordCmd parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new SyncChatRecordCmd(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<SyncChatRecordCmd> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SyncChatRecordCmd> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordCmd getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface SyncChatRecordAckOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:chat_msg.SyncChatRecordAck)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     */
+    java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord> 
+        getChatRecordsList();
+    /**
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     */
+    com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord getChatRecords(int index);
+    /**
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     */
+    int getChatRecordsCount();
+    /**
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     */
+    java.util.List<? extends com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecordOrBuilder> 
+        getChatRecordsOrBuilderList();
+    /**
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     */
+    com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecordOrBuilder getChatRecordsOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code chat_msg.SyncChatRecordAck}
+   */
+  public static final class SyncChatRecordAck extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:chat_msg.SyncChatRecordAck)
+      SyncChatRecordAckOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use SyncChatRecordAck.newBuilder() to construct.
+    private SyncChatRecordAck(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private SyncChatRecordAck() {
+      chatRecords_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new SyncChatRecordAck();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private SyncChatRecordAck(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                chatRecords_ = new java.util.ArrayList<com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              chatRecords_.add(
+                  input.readMessage(com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          chatRecords_ = java.util.Collections.unmodifiableList(chatRecords_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_SyncChatRecordAck_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_SyncChatRecordAck_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck.Builder.class);
+    }
+
+    public static final int CHATRECORDS_FIELD_NUMBER = 1;
+    private java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord> chatRecords_;
+    /**
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     */
+    @java.lang.Override
+    public java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord> getChatRecordsList() {
+      return chatRecords_;
+    }
+    /**
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecordOrBuilder> 
+        getChatRecordsOrBuilderList() {
+      return chatRecords_;
+    }
+    /**
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     */
+    @java.lang.Override
+    public int getChatRecordsCount() {
+      return chatRecords_.size();
+    }
+    /**
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     */
+    @java.lang.Override
+    public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord getChatRecords(int index) {
+      return chatRecords_.get(index);
+    }
+    /**
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     */
+    @java.lang.Override
+    public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecordOrBuilder getChatRecordsOrBuilder(
+        int index) {
+      return chatRecords_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < chatRecords_.size(); i++) {
+        output.writeMessage(1, chatRecords_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < chatRecords_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, chatRecords_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck)) {
+        return super.equals(obj);
+      }
+      com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck other = (com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck) obj;
+
+      if (!getChatRecordsList()
+          .equals(other.getChatRecordsList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (getChatRecordsCount() > 0) {
+        hash = (37 * hash) + CHATRECORDS_FIELD_NUMBER;
+        hash = (53 * hash) + getChatRecordsList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code chat_msg.SyncChatRecordAck}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:chat_msg.SyncChatRecordAck)
+        com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAckOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_SyncChatRecordAck_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_SyncChatRecordAck_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck.Builder.class);
+      }
+
+      // Construct using com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getChatRecordsFieldBuilder();
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (chatRecordsBuilder_ == null) {
+          chatRecords_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          chatRecordsBuilder_.clear();
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_SyncChatRecordAck_descriptor;
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck getDefaultInstanceForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck build() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck buildPartial() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck result = new com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck(this);
+        int from_bitField0_ = bitField0_;
+        if (chatRecordsBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) != 0)) {
+            chatRecords_ = java.util.Collections.unmodifiableList(chatRecords_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.chatRecords_ = chatRecords_;
+        } else {
+          result.chatRecords_ = chatRecordsBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck) {
+          return mergeFrom((com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck other) {
+        if (other == com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck.getDefaultInstance()) return this;
+        if (chatRecordsBuilder_ == null) {
+          if (!other.chatRecords_.isEmpty()) {
+            if (chatRecords_.isEmpty()) {
+              chatRecords_ = other.chatRecords_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureChatRecordsIsMutable();
+              chatRecords_.addAll(other.chatRecords_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.chatRecords_.isEmpty()) {
+            if (chatRecordsBuilder_.isEmpty()) {
+              chatRecordsBuilder_.dispose();
+              chatRecordsBuilder_ = null;
+              chatRecords_ = other.chatRecords_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              chatRecordsBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getChatRecordsFieldBuilder() : null;
+            } else {
+              chatRecordsBuilder_.addAllMessages(other.chatRecords_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord> chatRecords_ =
+        java.util.Collections.emptyList();
+      private void ensureChatRecordsIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          chatRecords_ = new java.util.ArrayList<com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord>(chatRecords_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecordOrBuilder> chatRecordsBuilder_;
+
+      /**
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       */
+      public java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord> getChatRecordsList() {
+        if (chatRecordsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(chatRecords_);
+        } else {
+          return chatRecordsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       */
+      public int getChatRecordsCount() {
+        if (chatRecordsBuilder_ == null) {
+          return chatRecords_.size();
+        } else {
+          return chatRecordsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       */
+      public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord getChatRecords(int index) {
+        if (chatRecordsBuilder_ == null) {
+          return chatRecords_.get(index);
+        } else {
+          return chatRecordsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       */
+      public Builder setChatRecords(
+          int index, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord value) {
+        if (chatRecordsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureChatRecordsIsMutable();
+          chatRecords_.set(index, value);
+          onChanged();
+        } else {
+          chatRecordsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       */
+      public Builder setChatRecords(
+          int index, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder builderForValue) {
+        if (chatRecordsBuilder_ == null) {
+          ensureChatRecordsIsMutable();
+          chatRecords_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          chatRecordsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       */
+      public Builder addChatRecords(com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord value) {
+        if (chatRecordsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureChatRecordsIsMutable();
+          chatRecords_.add(value);
+          onChanged();
+        } else {
+          chatRecordsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       */
+      public Builder addChatRecords(
+          int index, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord value) {
+        if (chatRecordsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureChatRecordsIsMutable();
+          chatRecords_.add(index, value);
+          onChanged();
+        } else {
+          chatRecordsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       */
+      public Builder addChatRecords(
+          com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder builderForValue) {
+        if (chatRecordsBuilder_ == null) {
+          ensureChatRecordsIsMutable();
+          chatRecords_.add(builderForValue.build());
+          onChanged();
+        } else {
+          chatRecordsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       */
+      public Builder addChatRecords(
+          int index, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder builderForValue) {
+        if (chatRecordsBuilder_ == null) {
+          ensureChatRecordsIsMutable();
+          chatRecords_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          chatRecordsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       */
+      public Builder addAllChatRecords(
+          java.lang.Iterable<? extends com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord> values) {
+        if (chatRecordsBuilder_ == null) {
+          ensureChatRecordsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, chatRecords_);
+          onChanged();
+        } else {
+          chatRecordsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       */
+      public Builder clearChatRecords() {
+        if (chatRecordsBuilder_ == null) {
+          chatRecords_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          chatRecordsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       */
+      public Builder removeChatRecords(int index) {
+        if (chatRecordsBuilder_ == null) {
+          ensureChatRecordsIsMutable();
+          chatRecords_.remove(index);
+          onChanged();
+        } else {
+          chatRecordsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       */
+      public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder getChatRecordsBuilder(
+          int index) {
+        return getChatRecordsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       */
+      public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecordOrBuilder getChatRecordsOrBuilder(
+          int index) {
+        if (chatRecordsBuilder_ == null) {
+          return chatRecords_.get(index);  } else {
+          return chatRecordsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       */
+      public java.util.List<? extends com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecordOrBuilder> 
+           getChatRecordsOrBuilderList() {
+        if (chatRecordsBuilder_ != null) {
+          return chatRecordsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(chatRecords_);
+        }
+      }
+      /**
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       */
+      public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder addChatRecordsBuilder() {
+        return getChatRecordsFieldBuilder().addBuilder(
+            com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       */
+      public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder addChatRecordsBuilder(
+          int index) {
+        return getChatRecordsFieldBuilder().addBuilder(
+            index, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       */
+      public java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder> 
+           getChatRecordsBuilderList() {
+        return getChatRecordsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecordOrBuilder> 
+          getChatRecordsFieldBuilder() {
+        if (chatRecordsBuilder_ == null) {
+          chatRecordsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecordOrBuilder>(
+                  chatRecords_,
+                  ((bitField0_ & 0x00000001) != 0),
+                  getParentForChildren(),
+                  isClean());
+          chatRecords_ = null;
+        }
+        return chatRecordsBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:chat_msg.SyncChatRecordAck)
+    }
+
+    // @@protoc_insertion_point(class_scope:chat_msg.SyncChatRecordAck)
+    private static final com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck();
+    }
+
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<SyncChatRecordAck>
+        PARSER = new com.google.protobuf.AbstractParser<SyncChatRecordAck>() {
+      @java.lang.Override
+      public SyncChatRecordAck parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new SyncChatRecordAck(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<SyncChatRecordAck> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SyncChatRecordAck> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ChatRecordOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:chat_msg.ChatRecord)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string userId = 1;</code>
+     * @return The userId.
+     */
+    java.lang.String getUserId();
+    /**
+     * <code>string userId = 1;</code>
+     * @return The bytes for userId.
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+
+    /**
+     * <code>string userName = 2;</code>
+     * @return The userName.
+     */
+    java.lang.String getUserName();
+    /**
+     * <code>string userName = 2;</code>
+     * @return The bytes for userName.
+     */
+    com.google.protobuf.ByteString
+        getUserNameBytes();
+
+    /**
+     * <code>string userAvatar = 3;</code>
+     * @return The userAvatar.
+     */
+    java.lang.String getUserAvatar();
+    /**
+     * <code>string userAvatar = 3;</code>
+     * @return The bytes for userAvatar.
+     */
+    com.google.protobuf.ByteString
+        getUserAvatarBytes();
+
+    /**
+     * <code>.chat_msg.MsgType msgType = 4;</code>
+     * @return The enum numeric value on the wire for msgType.
+     */
+    int getMsgTypeValue();
+    /**
+     * <code>.chat_msg.MsgType msgType = 4;</code>
+     * @return The msgType.
+     */
+    com.howcode.aqchat.message.AQChatMsgProtocol.MsgType getMsgType();
+
+    /**
+     * <code>string message = 5;</code>
+     * @return The message.
+     */
+    java.lang.String getMessage();
+    /**
+     * <code>string message = 5;</code>
+     * @return The bytes for message.
+     */
+    com.google.protobuf.ByteString
+        getMessageBytes();
+
+    /**
+     * <code>string createTime = 6;</code>
+     * @return The createTime.
+     */
+    java.lang.String getCreateTime();
+    /**
+     * <code>string createTime = 6;</code>
+     * @return The bytes for createTime.
+     */
+    com.google.protobuf.ByteString
+        getCreateTimeBytes();
+  }
+  /**
+   * Protobuf type {@code chat_msg.ChatRecord}
+   */
+  public static final class ChatRecord extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:chat_msg.ChatRecord)
+      ChatRecordOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ChatRecord.newBuilder() to construct.
+    private ChatRecord(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ChatRecord() {
+      userId_ = "";
+      userName_ = "";
+      userAvatar_ = "";
+      msgType_ = 0;
+      message_ = "";
+      createTime_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ChatRecord();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ChatRecord(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              userId_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              userName_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              userAvatar_ = s;
+              break;
+            }
+            case 32: {
+              int rawValue = input.readEnum();
+
+              msgType_ = rawValue;
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              message_ = s;
+              break;
+            }
+            case 50: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              createTime_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_ChatRecord_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_ChatRecord_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.class, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder.class);
+    }
+
+    public static final int USERID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object userId_;
+    /**
+     * <code>string userId = 1;</code>
+     * @return The userId.
+     */
+    @java.lang.Override
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        userId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string userId = 1;</code>
+     * @return The bytes for userId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int USERNAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object userName_;
+    /**
+     * <code>string userName = 2;</code>
+     * @return The userName.
+     */
+    @java.lang.Override
+    public java.lang.String getUserName() {
+      java.lang.Object ref = userName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        userName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string userName = 2;</code>
+     * @return The bytes for userName.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getUserNameBytes() {
+      java.lang.Object ref = userName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int USERAVATAR_FIELD_NUMBER = 3;
+    private volatile java.lang.Object userAvatar_;
+    /**
+     * <code>string userAvatar = 3;</code>
+     * @return The userAvatar.
+     */
+    @java.lang.Override
+    public java.lang.String getUserAvatar() {
+      java.lang.Object ref = userAvatar_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        userAvatar_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string userAvatar = 3;</code>
+     * @return The bytes for userAvatar.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getUserAvatarBytes() {
+      java.lang.Object ref = userAvatar_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userAvatar_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int MSGTYPE_FIELD_NUMBER = 4;
+    private int msgType_;
+    /**
+     * <code>.chat_msg.MsgType msgType = 4;</code>
+     * @return The enum numeric value on the wire for msgType.
+     */
+    @java.lang.Override public int getMsgTypeValue() {
+      return msgType_;
+    }
+    /**
+     * <code>.chat_msg.MsgType msgType = 4;</code>
+     * @return The msgType.
+     */
+    @java.lang.Override public com.howcode.aqchat.message.AQChatMsgProtocol.MsgType getMsgType() {
+      @SuppressWarnings("deprecation")
+      com.howcode.aqchat.message.AQChatMsgProtocol.MsgType result = com.howcode.aqchat.message.AQChatMsgProtocol.MsgType.valueOf(msgType_);
+      return result == null ? com.howcode.aqchat.message.AQChatMsgProtocol.MsgType.UNRECOGNIZED : result;
+    }
+
+    public static final int MESSAGE_FIELD_NUMBER = 5;
+    private volatile java.lang.Object message_;
+    /**
+     * <code>string message = 5;</code>
+     * @return The message.
+     */
+    @java.lang.Override
+    public java.lang.String getMessage() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        message_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string message = 5;</code>
+     * @return The bytes for message.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getMessageBytes() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        message_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CREATETIME_FIELD_NUMBER = 6;
+    private volatile java.lang.Object createTime_;
+    /**
+     * <code>string createTime = 6;</code>
+     * @return The createTime.
+     */
+    @java.lang.Override
+    public java.lang.String getCreateTime() {
+      java.lang.Object ref = createTime_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        createTime_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string createTime = 6;</code>
+     * @return The bytes for createTime.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getCreateTimeBytes() {
+      java.lang.Object ref = createTime_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        createTime_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, userId_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userName_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, userName_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userAvatar_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, userAvatar_);
+      }
+      if (msgType_ != com.howcode.aqchat.message.AQChatMsgProtocol.MsgType.TEXT.getNumber()) {
+        output.writeEnum(4, msgType_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, message_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(createTime_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, createTime_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, userId_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userName_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, userName_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userAvatar_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, userAvatar_);
+      }
+      if (msgType_ != com.howcode.aqchat.message.AQChatMsgProtocol.MsgType.TEXT.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, msgType_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, message_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(createTime_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, createTime_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord)) {
+        return super.equals(obj);
+      }
+      com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord other = (com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord) obj;
+
+      if (!getUserId()
+          .equals(other.getUserId())) return false;
+      if (!getUserName()
+          .equals(other.getUserName())) return false;
+      if (!getUserAvatar()
+          .equals(other.getUserAvatar())) return false;
+      if (msgType_ != other.msgType_) return false;
+      if (!getMessage()
+          .equals(other.getMessage())) return false;
+      if (!getCreateTime()
+          .equals(other.getCreateTime())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + USERID_FIELD_NUMBER;
+      hash = (53 * hash) + getUserId().hashCode();
+      hash = (37 * hash) + USERNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getUserName().hashCode();
+      hash = (37 * hash) + USERAVATAR_FIELD_NUMBER;
+      hash = (53 * hash) + getUserAvatar().hashCode();
+      hash = (37 * hash) + MSGTYPE_FIELD_NUMBER;
+      hash = (53 * hash) + msgType_;
+      hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
+      hash = (53 * hash) + getMessage().hashCode();
+      hash = (37 * hash) + CREATETIME_FIELD_NUMBER;
+      hash = (53 * hash) + getCreateTime().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code chat_msg.ChatRecord}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:chat_msg.ChatRecord)
+        com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecordOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_ChatRecord_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_ChatRecord_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.class, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder.class);
+      }
+
+      // Construct using com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        userId_ = "";
+
+        userName_ = "";
+
+        userAvatar_ = "";
+
+        msgType_ = 0;
+
+        message_ = "";
+
+        createTime_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_ChatRecord_descriptor;
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord getDefaultInstanceForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord build() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord buildPartial() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord result = new com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord(this);
+        result.userId_ = userId_;
+        result.userName_ = userName_;
+        result.userAvatar_ = userAvatar_;
+        result.msgType_ = msgType_;
+        result.message_ = message_;
+        result.createTime_ = createTime_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord) {
+          return mergeFrom((com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord other) {
+        if (other == com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.getDefaultInstance()) return this;
+        if (!other.getUserId().isEmpty()) {
+          userId_ = other.userId_;
+          onChanged();
+        }
+        if (!other.getUserName().isEmpty()) {
+          userName_ = other.userName_;
+          onChanged();
+        }
+        if (!other.getUserAvatar().isEmpty()) {
+          userAvatar_ = other.userAvatar_;
+          onChanged();
+        }
+        if (other.msgType_ != 0) {
+          setMsgTypeValue(other.getMsgTypeValue());
+        }
+        if (!other.getMessage().isEmpty()) {
+          message_ = other.message_;
+          onChanged();
+        }
+        if (!other.getCreateTime().isEmpty()) {
+          createTime_ = other.createTime_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object userId_ = "";
+      /**
+       * <code>string userId = 1;</code>
+       * @return The userId.
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          userId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @return The bytes for userId.
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @param value The userId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUserId() {
+        
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @param value The bytes for userId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object userName_ = "";
+      /**
+       * <code>string userName = 2;</code>
+       * @return The userName.
+       */
+      public java.lang.String getUserName() {
+        java.lang.Object ref = userName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          userName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string userName = 2;</code>
+       * @return The bytes for userName.
+       */
+      public com.google.protobuf.ByteString
+          getUserNameBytes() {
+        java.lang.Object ref = userName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string userName = 2;</code>
+       * @param value The userName to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        userName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userName = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUserName() {
+        
+        userName_ = getDefaultInstance().getUserName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userName = 2;</code>
+       * @param value The bytes for userName to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        userName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object userAvatar_ = "";
+      /**
+       * <code>string userAvatar = 3;</code>
+       * @return The userAvatar.
+       */
+      public java.lang.String getUserAvatar() {
+        java.lang.Object ref = userAvatar_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          userAvatar_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string userAvatar = 3;</code>
+       * @return The bytes for userAvatar.
+       */
+      public com.google.protobuf.ByteString
+          getUserAvatarBytes() {
+        java.lang.Object ref = userAvatar_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userAvatar_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string userAvatar = 3;</code>
+       * @param value The userAvatar to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserAvatar(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        userAvatar_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userAvatar = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUserAvatar() {
+        
+        userAvatar_ = getDefaultInstance().getUserAvatar();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userAvatar = 3;</code>
+       * @param value The bytes for userAvatar to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserAvatarBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        userAvatar_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int msgType_ = 0;
+      /**
+       * <code>.chat_msg.MsgType msgType = 4;</code>
+       * @return The enum numeric value on the wire for msgType.
+       */
+      @java.lang.Override public int getMsgTypeValue() {
+        return msgType_;
+      }
+      /**
+       * <code>.chat_msg.MsgType msgType = 4;</code>
+       * @param value The enum numeric value on the wire for msgType to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMsgTypeValue(int value) {
+        
+        msgType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.chat_msg.MsgType msgType = 4;</code>
+       * @return The msgType.
+       */
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.MsgType getMsgType() {
+        @SuppressWarnings("deprecation")
+        com.howcode.aqchat.message.AQChatMsgProtocol.MsgType result = com.howcode.aqchat.message.AQChatMsgProtocol.MsgType.valueOf(msgType_);
+        return result == null ? com.howcode.aqchat.message.AQChatMsgProtocol.MsgType.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.chat_msg.MsgType msgType = 4;</code>
+       * @param value The msgType to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMsgType(com.howcode.aqchat.message.AQChatMsgProtocol.MsgType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        msgType_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.chat_msg.MsgType msgType = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMsgType() {
+        
+        msgType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object message_ = "";
+      /**
+       * <code>string message = 5;</code>
+       * @return The message.
+       */
+      public java.lang.String getMessage() {
+        java.lang.Object ref = message_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          message_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string message = 5;</code>
+       * @return The bytes for message.
+       */
+      public com.google.protobuf.ByteString
+          getMessageBytes() {
+        java.lang.Object ref = message_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          message_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string message = 5;</code>
+       * @param value The message to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMessage(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        message_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string message = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMessage() {
+        
+        message_ = getDefaultInstance().getMessage();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string message = 5;</code>
+       * @param value The bytes for message to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMessageBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        message_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object createTime_ = "";
+      /**
+       * <code>string createTime = 6;</code>
+       * @return The createTime.
+       */
+      public java.lang.String getCreateTime() {
+        java.lang.Object ref = createTime_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          createTime_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string createTime = 6;</code>
+       * @return The bytes for createTime.
+       */
+      public com.google.protobuf.ByteString
+          getCreateTimeBytes() {
+        java.lang.Object ref = createTime_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          createTime_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string createTime = 6;</code>
+       * @param value The createTime to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCreateTime(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string createTime = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCreateTime() {
+        
+        createTime_ = getDefaultInstance().getCreateTime();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string createTime = 6;</code>
+       * @param value The bytes for createTime to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCreateTimeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:chat_msg.ChatRecord)
+    }
+
+    // @@protoc_insertion_point(class_scope:chat_msg.ChatRecord)
+    private static final com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord();
+    }
+
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ChatRecord>
+        PARSER = new com.google.protobuf.AbstractParser<ChatRecord>() {
+      @java.lang.Override
+      public ChatRecord parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ChatRecord(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ChatRecord> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ChatRecord> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface RecoverUserCmdOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:chat_msg.RecoverUserCmd)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string userId = 1;</code>
+     * @return The userId.
+     */
+    java.lang.String getUserId();
+    /**
+     * <code>string userId = 1;</code>
+     * @return The bytes for userId.
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+  }
+  /**
+   * <pre>
+   *根据userId恢复用户连接信息
+   * </pre>
+   *
+   * Protobuf type {@code chat_msg.RecoverUserCmd}
+   */
+  public static final class RecoverUserCmd extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:chat_msg.RecoverUserCmd)
+      RecoverUserCmdOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use RecoverUserCmd.newBuilder() to construct.
+    private RecoverUserCmd(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private RecoverUserCmd() {
+      userId_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new RecoverUserCmd();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RecoverUserCmd(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              userId_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_RecoverUserCmd_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_RecoverUserCmd_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd.class, com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd.Builder.class);
+    }
+
+    public static final int USERID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object userId_;
+    /**
+     * <code>string userId = 1;</code>
+     * @return The userId.
+     */
+    @java.lang.Override
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        userId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string userId = 1;</code>
+     * @return The bytes for userId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, userId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, userId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd)) {
+        return super.equals(obj);
+      }
+      com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd other = (com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd) obj;
+
+      if (!getUserId()
+          .equals(other.getUserId())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + USERID_FIELD_NUMBER;
+      hash = (53 * hash) + getUserId().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *根据userId恢复用户连接信息
+     * </pre>
+     *
+     * Protobuf type {@code chat_msg.RecoverUserCmd}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:chat_msg.RecoverUserCmd)
+        com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmdOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_RecoverUserCmd_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_RecoverUserCmd_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd.class, com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd.Builder.class);
+      }
+
+      // Construct using com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        userId_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_RecoverUserCmd_descriptor;
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd getDefaultInstanceForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd build() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd buildPartial() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd result = new com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd(this);
+        result.userId_ = userId_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd) {
+          return mergeFrom((com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd other) {
+        if (other == com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd.getDefaultInstance()) return this;
+        if (!other.getUserId().isEmpty()) {
+          userId_ = other.userId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object userId_ = "";
+      /**
+       * <code>string userId = 1;</code>
+       * @return The userId.
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          userId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @return The bytes for userId.
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @param value The userId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUserId() {
+        
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @param value The bytes for userId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:chat_msg.RecoverUserCmd)
+    }
+
+    // @@protoc_insertion_point(class_scope:chat_msg.RecoverUserCmd)
+    private static final com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd();
+    }
+
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<RecoverUserCmd>
+        PARSER = new com.google.protobuf.AbstractParser<RecoverUserCmd>() {
+      @java.lang.Override
+      public RecoverUserCmd parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RecoverUserCmd(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<RecoverUserCmd> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RecoverUserCmd> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserCmd getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface RecoverUserAckOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:chat_msg.RecoverUserAck)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string userId = 1;</code>
+     * @return The userId.
+     */
+    java.lang.String getUserId();
+    /**
+     * <code>string userId = 1;</code>
+     * @return The bytes for userId.
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+
+    /**
+     * <code>string userName = 2;</code>
+     * @return The userName.
+     */
+    java.lang.String getUserName();
+    /**
+     * <code>string userName = 2;</code>
+     * @return The bytes for userName.
+     */
+    com.google.protobuf.ByteString
+        getUserNameBytes();
+
+    /**
+     * <code>string userAvatar = 3;</code>
+     * @return The userAvatar.
+     */
+    java.lang.String getUserAvatar();
+    /**
+     * <code>string userAvatar = 3;</code>
+     * @return The bytes for userAvatar.
+     */
+    com.google.protobuf.ByteString
+        getUserAvatarBytes();
+
+    /**
+     * <code>string roomId = 4;</code>
+     * @return The roomId.
+     */
+    java.lang.String getRoomId();
+    /**
+     * <code>string roomId = 4;</code>
+     * @return The bytes for roomId.
+     */
+    com.google.protobuf.ByteString
+        getRoomIdBytes();
+  }
+  /**
+   * Protobuf type {@code chat_msg.RecoverUserAck}
+   */
+  public static final class RecoverUserAck extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:chat_msg.RecoverUserAck)
+      RecoverUserAckOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use RecoverUserAck.newBuilder() to construct.
+    private RecoverUserAck(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private RecoverUserAck() {
+      userId_ = "";
+      userName_ = "";
+      userAvatar_ = "";
+      roomId_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new RecoverUserAck();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RecoverUserAck(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              userId_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              userName_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              userAvatar_ = s;
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              roomId_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_RecoverUserAck_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_RecoverUserAck_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck.Builder.class);
+    }
+
+    public static final int USERID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object userId_;
+    /**
+     * <code>string userId = 1;</code>
+     * @return The userId.
+     */
+    @java.lang.Override
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        userId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string userId = 1;</code>
+     * @return The bytes for userId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int USERNAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object userName_;
+    /**
+     * <code>string userName = 2;</code>
+     * @return The userName.
+     */
+    @java.lang.Override
+    public java.lang.String getUserName() {
+      java.lang.Object ref = userName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        userName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string userName = 2;</code>
+     * @return The bytes for userName.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getUserNameBytes() {
+      java.lang.Object ref = userName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int USERAVATAR_FIELD_NUMBER = 3;
+    private volatile java.lang.Object userAvatar_;
+    /**
+     * <code>string userAvatar = 3;</code>
+     * @return The userAvatar.
+     */
+    @java.lang.Override
+    public java.lang.String getUserAvatar() {
+      java.lang.Object ref = userAvatar_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        userAvatar_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string userAvatar = 3;</code>
+     * @return The bytes for userAvatar.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getUserAvatarBytes() {
+      java.lang.Object ref = userAvatar_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userAvatar_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ROOMID_FIELD_NUMBER = 4;
+    private volatile java.lang.Object roomId_;
+    /**
+     * <code>string roomId = 4;</code>
+     * @return The roomId.
+     */
+    @java.lang.Override
+    public java.lang.String getRoomId() {
+      java.lang.Object ref = roomId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        roomId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string roomId = 4;</code>
+     * @return The bytes for roomId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getRoomIdBytes() {
+      java.lang.Object ref = roomId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        roomId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, userId_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userName_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, userName_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userAvatar_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, userAvatar_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, roomId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, userId_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userName_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, userName_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userAvatar_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, userAvatar_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, roomId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck)) {
+        return super.equals(obj);
+      }
+      com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck other = (com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck) obj;
+
+      if (!getUserId()
+          .equals(other.getUserId())) return false;
+      if (!getUserName()
+          .equals(other.getUserName())) return false;
+      if (!getUserAvatar()
+          .equals(other.getUserAvatar())) return false;
+      if (!getRoomId()
+          .equals(other.getRoomId())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + USERID_FIELD_NUMBER;
+      hash = (53 * hash) + getUserId().hashCode();
+      hash = (37 * hash) + USERNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getUserName().hashCode();
+      hash = (37 * hash) + USERAVATAR_FIELD_NUMBER;
+      hash = (53 * hash) + getUserAvatar().hashCode();
+      hash = (37 * hash) + ROOMID_FIELD_NUMBER;
+      hash = (53 * hash) + getRoomId().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code chat_msg.RecoverUserAck}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:chat_msg.RecoverUserAck)
+        com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAckOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_RecoverUserAck_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_RecoverUserAck_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck.Builder.class);
+      }
+
+      // Construct using com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        userId_ = "";
+
+        userName_ = "";
+
+        userAvatar_ = "";
+
+        roomId_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_RecoverUserAck_descriptor;
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck getDefaultInstanceForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck build() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck buildPartial() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck result = new com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck(this);
+        result.userId_ = userId_;
+        result.userName_ = userName_;
+        result.userAvatar_ = userAvatar_;
+        result.roomId_ = roomId_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck) {
+          return mergeFrom((com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck other) {
+        if (other == com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck.getDefaultInstance()) return this;
+        if (!other.getUserId().isEmpty()) {
+          userId_ = other.userId_;
+          onChanged();
+        }
+        if (!other.getUserName().isEmpty()) {
+          userName_ = other.userName_;
+          onChanged();
+        }
+        if (!other.getUserAvatar().isEmpty()) {
+          userAvatar_ = other.userAvatar_;
+          onChanged();
+        }
+        if (!other.getRoomId().isEmpty()) {
+          roomId_ = other.roomId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object userId_ = "";
+      /**
+       * <code>string userId = 1;</code>
+       * @return The userId.
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          userId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @return The bytes for userId.
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @param value The userId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUserId() {
+        
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userId = 1;</code>
+       * @param value The bytes for userId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object userName_ = "";
+      /**
+       * <code>string userName = 2;</code>
+       * @return The userName.
+       */
+      public java.lang.String getUserName() {
+        java.lang.Object ref = userName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          userName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string userName = 2;</code>
+       * @return The bytes for userName.
+       */
+      public com.google.protobuf.ByteString
+          getUserNameBytes() {
+        java.lang.Object ref = userName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string userName = 2;</code>
+       * @param value The userName to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        userName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userName = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUserName() {
+        
+        userName_ = getDefaultInstance().getUserName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userName = 2;</code>
+       * @param value The bytes for userName to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        userName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object userAvatar_ = "";
+      /**
+       * <code>string userAvatar = 3;</code>
+       * @return The userAvatar.
+       */
+      public java.lang.String getUserAvatar() {
+        java.lang.Object ref = userAvatar_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          userAvatar_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string userAvatar = 3;</code>
+       * @return The bytes for userAvatar.
+       */
+      public com.google.protobuf.ByteString
+          getUserAvatarBytes() {
+        java.lang.Object ref = userAvatar_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userAvatar_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string userAvatar = 3;</code>
+       * @param value The userAvatar to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserAvatar(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        userAvatar_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userAvatar = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUserAvatar() {
+        
+        userAvatar_ = getDefaultInstance().getUserAvatar();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userAvatar = 3;</code>
+       * @param value The bytes for userAvatar to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserAvatarBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        userAvatar_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object roomId_ = "";
+      /**
+       * <code>string roomId = 4;</code>
+       * @return The roomId.
+       */
+      public java.lang.String getRoomId() {
+        java.lang.Object ref = roomId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          roomId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string roomId = 4;</code>
+       * @return The bytes for roomId.
+       */
+      public com.google.protobuf.ByteString
+          getRoomIdBytes() {
+        java.lang.Object ref = roomId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          roomId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string roomId = 4;</code>
+       * @param value The roomId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRoomId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        roomId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string roomId = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearRoomId() {
+        
+        roomId_ = getDefaultInstance().getRoomId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string roomId = 4;</code>
+       * @param value The bytes for roomId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRoomIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        roomId_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:chat_msg.RecoverUserAck)
+    }
+
+    // @@protoc_insertion_point(class_scope:chat_msg.RecoverUserAck)
+    private static final com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck();
+    }
+
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<RecoverUserAck>
+        PARSER = new com.google.protobuf.AbstractParser<RecoverUserAck>() {
+      @java.lang.Override
+      public RecoverUserAck parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RecoverUserAck(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<RecoverUserAck> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RecoverUserAck> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.howcode.aqchat.message.AQChatMsgProtocol.RecoverUserAck getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chat_msg_UserLoginCmd_descriptor;
   private static final 
@@ -14149,6 +20202,46 @@ public final class AQChatMsgProtocol {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chat_msg_GetStsAck_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chat_msg_UserLogoutCmd_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chat_msg_UserLogoutCmd_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chat_msg_UserLogoutAck_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chat_msg_UserLogoutAck_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chat_msg_FriendOfflineAck_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chat_msg_FriendOfflineAck_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chat_msg_SyncChatRecordCmd_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chat_msg_SyncChatRecordCmd_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chat_msg_SyncChatRecordAck_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chat_msg_SyncChatRecordAck_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chat_msg_ChatRecord_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chat_msg_ChatRecord_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chat_msg_RecoverUserCmd_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chat_msg_RecoverUserCmd_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_chat_msg_RecoverUserAck_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_chat_msg_RecoverUserAck_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -14186,17 +20279,33 @@ public final class AQChatMsgProtocol {
       "(\t\022\027\n\017accessKeySecret\030\002 \001(\t\022\025\n\rsecurityT" +
       "oken\030\003 \001(\t\022\016\n\006region\030\004 \001(\t\022\016\n\006bucket\030\005 \001" +
       "(\t\022\022\n\nuploadPath\030\006 \001(\t\022\020\n\010endpoint\030\007 \001(\t" +
-      "*\325\002\n\nMsgCommand\022\022\n\016USER_LOGIN_CMD\020\000\022\022\n\016U" +
-      "SER_LOGIN_ACK\020\001\022\022\n\016HEART_BEAT_CMD\020\002\022\022\n\016H" +
-      "EART_BEAT_ACK\020\003\022\021\n\rJOIN_ROOM_CMD\020\004\022\021\n\rJO" +
-      "IN_ROOM_ACK\020\005\022\023\n\017CREATE_ROOM_CMD\020\006\022\023\n\017CR" +
-      "EATE_ROOM_ACK\020\007\022\022\n\016LEAVE_ROOM_CMD\020\010\022\022\n\016L" +
-      "EAVE_ROOM_ACK\020\t\022\020\n\014SEND_MSG_CMD\020\n\022\020\n\014SEN" +
-      "D_MSG_ACK\020\013\022\025\n\021BROADCAST_MSG_ACK\020\014\022\021\n\rEX" +
-      "CEPTION_MSG\020\r\022\017\n\013OFFLINE_MSG\020\016\022\017\n\013GET_ST" +
-      "S_CMD\020\017\022\017\n\013GET_STS_ACK\020\020*4\n\007MsgType\022\010\n\004T" +
-      "EXT\020\000\022\t\n\005IMAGE\020\001\022\t\n\005VOICE\020\002\022\t\n\005VIDEO\020\003B\034" +
-      "\n\032com.howcode.aqchat.messageb\006proto3"
+      "\"\037\n\rUserLogoutCmd\022\016\n\006userId\030\001 \001(\t\"\037\n\rUse" +
+      "rLogoutAck\022\016\n\006userId\030\001 \001(\t\"\"\n\020FriendOffl" +
+      "ineAck\022\016\n\006userId\030\001 \001(\t\"#\n\021SyncChatRecord" +
+      "Cmd\022\016\n\006roomId\030\001 \001(\t\">\n\021SyncChatRecordAck" +
+      "\022)\n\013chatRecords\030\001 \003(\0132\024.chat_msg.ChatRec" +
+      "ord\"\213\001\n\nChatRecord\022\016\n\006userId\030\001 \001(\t\022\020\n\010us" +
+      "erName\030\002 \001(\t\022\022\n\nuserAvatar\030\003 \001(\t\022\"\n\007msgT" +
+      "ype\030\004 \001(\0162\021.chat_msg.MsgType\022\017\n\007message\030" +
+      "\005 \001(\t\022\022\n\ncreateTime\030\006 \001(\t\" \n\016RecoverUser" +
+      "Cmd\022\016\n\006userId\030\001 \001(\t\"V\n\016RecoverUserAck\022\016\n" +
+      "\006userId\030\001 \001(\t\022\020\n\010userName\030\002 \001(\t\022\022\n\nuserA" +
+      "vatar\030\003 \001(\t\022\016\n\006roomId\030\004 \001(\t*\367\003\n\nMsgComma" +
+      "nd\022\022\n\016USER_LOGIN_CMD\020\000\022\022\n\016USER_LOGIN_ACK" +
+      "\020\001\022\022\n\016HEART_BEAT_CMD\020\002\022\022\n\016HEART_BEAT_ACK" +
+      "\020\003\022\021\n\rJOIN_ROOM_CMD\020\004\022\021\n\rJOIN_ROOM_ACK\020\005" +
+      "\022\023\n\017CREATE_ROOM_CMD\020\006\022\023\n\017CREATE_ROOM_ACK" +
+      "\020\007\022\022\n\016LEAVE_ROOM_CMD\020\010\022\022\n\016LEAVE_ROOM_ACK" +
+      "\020\t\022\020\n\014SEND_MSG_CMD\020\n\022\020\n\014SEND_MSG_ACK\020\013\022\025" +
+      "\n\021BROADCAST_MSG_ACK\020\014\022\021\n\rEXCEPTION_MSG\020\r" +
+      "\022\017\n\013OFFLINE_MSG\020\016\022\017\n\013GET_STS_CMD\020\017\022\017\n\013GE" +
+      "T_STS_ACK\020\020\022\023\n\017USER_LOGOUT_CMD\020\021\022\023\n\017USER" +
+      "_LOGOUT_ACK\020\022\022\026\n\022FRIEND_OFFLINE_ACK\020\023\022\030\n" +
+      "\024SYNC_CHAT_RECORD_CMD\020\024\022\030\n\024SYNC_CHAT_REC" +
+      "ORD_ACK\020\025\022\024\n\020RECOVER_USER_CMD\020\026\022\024\n\020RECOV" +
+      "ER_USER_ACK\020\027*4\n\007MsgType\022\010\n\004TEXT\020\000\022\t\n\005IM" +
+      "AGE\020\001\022\t\n\005VOICE\020\002\022\t\n\005VIDEO\020\003B\034\n\032com.howco" +
+      "de.aqchat.messageb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -14310,6 +20419,54 @@ public final class AQChatMsgProtocol {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chat_msg_GetStsAck_descriptor,
         new java.lang.String[] { "AccessKeyId", "AccessKeySecret", "SecurityToken", "Region", "Bucket", "UploadPath", "Endpoint", });
+    internal_static_chat_msg_UserLogoutCmd_descriptor =
+      getDescriptor().getMessageTypes().get(18);
+    internal_static_chat_msg_UserLogoutCmd_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chat_msg_UserLogoutCmd_descriptor,
+        new java.lang.String[] { "UserId", });
+    internal_static_chat_msg_UserLogoutAck_descriptor =
+      getDescriptor().getMessageTypes().get(19);
+    internal_static_chat_msg_UserLogoutAck_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chat_msg_UserLogoutAck_descriptor,
+        new java.lang.String[] { "UserId", });
+    internal_static_chat_msg_FriendOfflineAck_descriptor =
+      getDescriptor().getMessageTypes().get(20);
+    internal_static_chat_msg_FriendOfflineAck_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chat_msg_FriendOfflineAck_descriptor,
+        new java.lang.String[] { "UserId", });
+    internal_static_chat_msg_SyncChatRecordCmd_descriptor =
+      getDescriptor().getMessageTypes().get(21);
+    internal_static_chat_msg_SyncChatRecordCmd_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chat_msg_SyncChatRecordCmd_descriptor,
+        new java.lang.String[] { "RoomId", });
+    internal_static_chat_msg_SyncChatRecordAck_descriptor =
+      getDescriptor().getMessageTypes().get(22);
+    internal_static_chat_msg_SyncChatRecordAck_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chat_msg_SyncChatRecordAck_descriptor,
+        new java.lang.String[] { "ChatRecords", });
+    internal_static_chat_msg_ChatRecord_descriptor =
+      getDescriptor().getMessageTypes().get(23);
+    internal_static_chat_msg_ChatRecord_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chat_msg_ChatRecord_descriptor,
+        new java.lang.String[] { "UserId", "UserName", "UserAvatar", "MsgType", "Message", "CreateTime", });
+    internal_static_chat_msg_RecoverUserCmd_descriptor =
+      getDescriptor().getMessageTypes().get(24);
+    internal_static_chat_msg_RecoverUserCmd_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chat_msg_RecoverUserCmd_descriptor,
+        new java.lang.String[] { "UserId", });
+    internal_static_chat_msg_RecoverUserAck_descriptor =
+      getDescriptor().getMessageTypes().get(25);
+    internal_static_chat_msg_RecoverUserAck_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_chat_msg_RecoverUserAck_descriptor,
+        new java.lang.String[] { "UserId", "UserName", "UserAvatar", "RoomId", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

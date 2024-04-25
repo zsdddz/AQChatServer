@@ -32,6 +32,18 @@ enum MsgCommand{
   GET_STS_CMD = 15;
   GET_STS_ACK = 16;
 
+  //退出登录
+  USER_LOGOUT_CMD = 17;
+  USER_LOGOUT_ACK = 18;
+  //朋友离线
+  FRIEND_OFFLINE_ACK = 19;
+  //同步聊天室聊天记录
+  SYNC_CHAT_RECORD_CMD = 20;
+  SYNC_CHAT_RECORD_ACK = 21;
+  //根据userId恢复用户连接信息
+  RECOVER_USER_CMD = 22;
+  RECOVER_USER_ACK = 23;
+
 }
 
 //用户登录
@@ -142,4 +154,43 @@ message GetStsAck{
   string bucket = 5;
   string uploadPath = 6;
   string endpoint = 7;
+}
+
+//退出登录
+message UserLogoutCmd{
+  string userId = 1;
+}
+message UserLogoutAck{
+  string userId = 1;
+}
+
+//朋友离线
+message FriendOfflineAck{
+  string userId = 1;
+}
+
+//同步聊天室聊天记录
+message SyncChatRecordCmd{
+  string roomId = 1;
+}
+message SyncChatRecordAck{
+  repeated ChatRecord chatRecords = 1;
+}
+message ChatRecord{
+  string userId = 1;
+  string userName = 2;
+  string userAvatar = 3;
+  MsgType msgType = 4;
+  string message = 5;
+  string createTime = 6;
+}
+//根据userId恢复用户连接信息
+message RecoverUserCmd{
+  string userId = 1;
+}
+message RecoverUserAck{
+  string userId = 1;
+  string userName = 2;
+  string userAvatar = 3;
+  string roomId = 4;
 }
