@@ -19,12 +19,18 @@ aq-chat:
 spring:
   application:
     name: AQChat
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: 127.0.0.1:3306
+    username: root
+    password: root
+
   data:
     redis:
       database: 0
       host: 127.0.0.1
       port: 6379
-      password:
+      password: 
       timeout: 5000
       lettuce:
         pool:
@@ -33,3 +39,7 @@ spring:
           max-idle: 16
           min-idle: 8
 
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
