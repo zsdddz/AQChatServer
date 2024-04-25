@@ -19,6 +19,8 @@ aq-chat:
 spring:
   application:
     name: AQChat
+  main:
+    banner-mode: off
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: 127.0.0.1:3306

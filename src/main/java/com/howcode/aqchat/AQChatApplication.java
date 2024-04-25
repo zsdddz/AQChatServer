@@ -15,5 +15,16 @@ public class AQChatApplication {
         SpringApplication springApplication = new SpringApplication(AQChatApplication.class);
         springApplication.setWebApplicationType(WebApplicationType.NONE);
         springApplication.run(args);
+        System.out.print("""
+                 ________  ________  ________  ___  ___  ________  _________
+                |\\   __  \\|\\   __  \\|\\   ____\\|\\  \\|\\  \\|\\   __  \\|\\___   ___\\
+                \\ \\  \\|\\  \\ \\  \\|\\  \\ \\  \\___|\\ \\  \\\\\\  \\ \\  \\|\\  \\|___ \\  \\_|
+                 \\ \\   __  \\ \\  \\\\\\  \\ \\  \\    \\ \\   __  \\ \\   __  \\   \\ \\  \\
+                  \\ \\  \\ \\  \\ \\  \\\\\\  \\ \\  \\____\\ \\  \\ \\  \\ \\  \\ \\  \\   \\ \\  \\
+                   \\ \\__\\ \\__\\ \\_____  \\ \\_______\\ \\__\\ \\__\\ \\__\\ \\__\\   \\ \\__\\
+                    \\|__|\\|__|\\|___| \\__\\|_______|\\|__|\\|__|\\|__|\\|__|    \\|__|
+                                    \\|__|
+                                                        AQChat v1.0.0 启动成功
+                """);
     }
 }
