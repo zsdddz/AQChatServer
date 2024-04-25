@@ -15,6 +15,9 @@ public enum AQChatExceptionEnum implements AQChatEnum{
     ROOM_EXIST(10002, "房间已存在"),
     //房间不存在
     ROOM_NOT_EXIST(10003, "房间不存在"),
+    GET_STS_FAILED(10004, "获取阿里云临时凭证失败"),
+    //消息类型不存在
+    MSG_TYPE_NOT_EXIST(10005, "消息类型不存在"),
     ;
 
     private final int code;

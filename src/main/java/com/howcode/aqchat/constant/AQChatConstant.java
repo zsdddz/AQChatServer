@@ -50,6 +50,10 @@ public class AQChatConstant {
          * 用户信息缓存时长 单位秒 24小时
          */
         long USER_INFO_CACHE_TIME = 60 * 60 * 24;
+        /**
+         * 阿里云临时凭证缓存时长 单位秒 1小时
+         */
+        int ALI_OSS_STS_CACHE_TIME = 60 * 60 - 60;
     }
 
     public interface AQRedisKeyPrefix {
@@ -66,5 +70,9 @@ public class AQChatConstant {
          * 房间缓存前缀
          */
         String AQ_ROOM_PREFIX = "AQChat:room:room:";
+        /**
+         * 阿里云临时凭证缓存
+         */
+        String ALI_OSS_STS = "AQChat:aliOssSts";
     }
 }

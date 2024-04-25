@@ -28,6 +28,9 @@ enum MsgCommand{
   EXCEPTION_MSG = 13;
   //掉线消息
   OFFLINE_MSG = 14;
+  //获取阿里sts凭证
+  GET_STS_CMD = 15;
+  GET_STS_ACK = 16;
 
 }
 
@@ -126,4 +129,17 @@ message ExceptionMsg{
 message OfflineMsg{
   User user = 1;
   string roomId = 2;
+}
+//阿里sts凭证
+message GetStsCmd{
+  MsgType msgType = 1;
+}
+message GetStsAck{
+  string accessKeyId = 1;
+  string accessKeySecret = 2;
+  string securityToken = 3;
+  string region = 4;
+  string bucket = 5;
+  string uploadPath = 6;
+  string endpoint = 7;
 }

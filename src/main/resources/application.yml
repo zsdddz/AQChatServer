@@ -2,7 +2,19 @@ aq-chat:
   websocketPort: 9090
   bossThreadSize: 1
   workThreadSize: 8
-  heartBeatTime: 3000
+  heartBeatTime: 10000
+  aliOssConfig:
+    endpoint: oss-cn-shenzhen.aliyuncs.com
+  aliOssStsConfig:
+    accessKeyId:
+    accessKeySecret:
+    bucketName:
+    endpoint: sts.cn-hangzhou.aliyuncs.com
+    regionId: cn-hangzhou
+    roleSessionName: aqchat-oss-sts
+    roleArn:
+    durationSeconds: 3600
+
 
 spring:
   application:
