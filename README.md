@@ -19,4 +19,5 @@ Mybatis-Plus 3.5.3.2<br/>
 protobuf 3 <br/>
 MySQL 8.0.34 <br/>
 Redis 6.0.8 <br/>
+RocketMQ 4.4.0
 
