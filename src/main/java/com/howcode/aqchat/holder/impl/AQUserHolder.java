@@ -2,7 +2,7 @@ package com.howcode.aqchat.holder.impl;
 
 import com.howcode.aqchat.constant.AQChatConstant;
 import com.howcode.aqchat.holder.IUserHolder;
-import com.howcode.aqchat.model.UserLoginInfoDto;
+import com.howcode.aqchat.model.UserGlobalInfoDto;
 import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -18,18 +18,18 @@ import java.util.concurrent.TimeUnit;
 public class AQUserHolder implements IUserHolder {
 
     @Resource
-    private RedisTemplate<String,UserLoginInfoDto> redisTemplate;
+    private RedisTemplate<String, UserGlobalInfoDto> redisTemplate;
 
     @Override
-    public void saveUserLoginInfo(UserLoginInfoDto userLoginInfoDto) {
-        redisTemplate.opsForValue().set(AQChatConstant.AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userLoginInfoDto.getUserId(),
-                userLoginInfoDto,
+    public void saveUserLoginInfo(UserGlobalInfoDto userGlobalInfoDto) {
+        redisTemplate.opsForValue().set(AQChatConstant.AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userGlobalInfoDto.getUserId(),
+                userGlobalInfoDto,
                 AQChatConstant.AQBusinessConstant.USER_INFO_CACHE_TIME,
                 TimeUnit.SECONDS);
     }
 
     @Override
-    public UserLoginInfoDto getUserLoginInfo(String userId) {
+    public UserGlobalInfoDto getUserLoginInfo(String userId) {
         return redisTemplate.opsForValue().get(AQChatConstant.AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userId);
     }
 

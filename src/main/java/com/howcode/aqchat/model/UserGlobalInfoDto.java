@@ -8,8 +8,9 @@ import lombok.Data;
  * @date 2024-04-22 11:39
  */
 @Data
-public class UserLoginInfoDto {
+public class UserGlobalInfoDto {
     private String userId;
     private String userName;
     private String userAvatar;
+    private String roomId;
 }

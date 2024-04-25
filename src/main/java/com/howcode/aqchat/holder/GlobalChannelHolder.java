@@ -5,7 +5,7 @@ import com.howcode.aqchat.holder.impl.AQUserHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageBroadcaster;
 import com.howcode.aqchat.model.RoomInfoDto;
-import com.howcode.aqchat.model.UserLoginInfoDto;
+import com.howcode.aqchat.model.UserGlobalInfoDto;
 import com.howcode.aqchat.utils.RedisCacheHelper;
 import io.netty.channel.Channel;
 import io.netty.channel.group.ChannelGroup;
@@ -112,7 +112,7 @@ public class GlobalChannelHolder {
     }
 
     public void sendMsgToRoom(String userId, AQChatMsgProtocol.SendMsgCmd cmd) {
-        UserLoginInfoDto userLoginInfo = aqUserHolder.getUserLoginInfo(userId);
+        UserGlobalInfoDto userLoginInfo = aqUserHolder.getUserLoginInfo(userId);
         if (null == userLoginInfo) {
             return;
         }

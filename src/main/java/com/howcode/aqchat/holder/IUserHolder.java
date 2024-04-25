@@ -1,6 +1,6 @@
 package com.howcode.aqchat.holder;
 
-import com.howcode.aqchat.model.UserLoginInfoDto;
+import com.howcode.aqchat.model.UserGlobalInfoDto;
 
 /**
  * @Author: ZhangWeinan
@@ -12,16 +12,16 @@ public interface IUserHolder {
 
     /**
      * 保存用户登录信息
-     * @param userLoginInfoDto
+     * @param userGlobalInfoDto
      */
-    void saveUserLoginInfo(UserLoginInfoDto userLoginInfoDto);
+    void saveUserLoginInfo(UserGlobalInfoDto userGlobalInfoDto);
 
     /**
      * 获取用户登录信息
      * @param userId
      * @return
      */
-    UserLoginInfoDto getUserLoginInfo(String userId);
+    UserGlobalInfoDto getUserLoginInfo(String userId);
 
     /**
      * 删除用户登录信息

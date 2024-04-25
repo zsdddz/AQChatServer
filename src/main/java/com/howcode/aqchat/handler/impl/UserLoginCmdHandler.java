@@ -5,17 +5,14 @@ import com.howcode.aqchat.handler.ICmdHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IUserHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
-import com.howcode.aqchat.model.UserLoginInfoDto;
+import com.howcode.aqchat.model.UserGlobalInfoDto;
 import com.howcode.aqchat.utils.IdProvider;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @Author: ZhangWeinan
@@ -46,11 +43,11 @@ public class UserLoginCmdHandler implements ICmdHandler<AQChatMsgProtocol.UserLo
         ctx.channel().attr(AttributeKey.valueOf(AQChatConstant.AQBusinessConstant.USER_ID)).set(userId);
 
         //将登录信息保存至redis
-        UserLoginInfoDto userLoginInfoDto = new UserLoginInfoDto();
-        userLoginInfoDto.setUserId(userId);
-        userLoginInfoDto.setUserName(userName);
-        userLoginInfoDto.setUserAvatar(userAvatar);
-        userHolder.saveUserLoginInfo(userLoginInfoDto);
+        UserGlobalInfoDto userGlobalInfoDto = new UserGlobalInfoDto();
+        userGlobalInfoDto.setUserId(userId);
+        userGlobalInfoDto.setUserName(userName);
+        userGlobalInfoDto.setUserAvatar(userAvatar);
+        userHolder.saveUserLoginInfo(userGlobalInfoDto);
 
         //添加用户channel
         channelHolder.put(userId, (NioSocketChannel) ctx.channel());

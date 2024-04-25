@@ -5,7 +5,7 @@ import com.howcode.aqchat.constant.AQChatConstant;
 import com.howcode.aqchat.holder.IUserHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
-import com.howcode.aqchat.model.UserLoginInfoDto;
+import com.howcode.aqchat.model.UserGlobalInfoDto;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -60,7 +60,7 @@ public class HearBeatHandler extends ChannelInboundHandlerAdapter implements Ini
                     AQChatMsgProtocol.OfflineMsg.Builder builder = AQChatMsgProtocol.OfflineMsg.newBuilder();
                     AQChatMsgProtocol.User.Builder userBuilder = AQChatMsgProtocol.User.newBuilder();
                     userBuilder.setUserId(userId);
-                    UserLoginInfoDto userLoginInfo = userHolder.getUserLoginInfo(userId);
+                    UserGlobalInfoDto userLoginInfo = userHolder.getUserLoginInfo(userId);
                     userBuilder.setUserAvatar(userLoginInfo.getUserAvatar());
                     userBuilder.setUserName(userLoginInfo.getUserName());
                     builder.setUser(userBuilder.build());
