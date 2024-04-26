@@ -42,12 +42,12 @@ spring:
       port: 6379
       password:
       timeout: 5000
-      lettuce:
+      jedis:
         pool:
-          max-active: 32
+          max-active: 8
           max-wait: -1
-          max-idle: 16
-          min-idle: 8
+          max-idle: 8
+          min-idle: 0
 
 mybatis-plus:
   configuration:
