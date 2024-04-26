@@ -44,6 +44,10 @@ enum MsgCommand{
   RECOVER_USER_CMD = 22;
   RECOVER_USER_ACK = 23;
 
+  //加入房间通知
+  JOIN_ROOM_NOTIFY = 24;
+  //离开房间通知
+  LEAVE_ROOM_NOTIFY = 25;
 }
 
 //用户登录
@@ -193,4 +197,14 @@ message RecoverUserAck{
   string userName = 2;
   string userAvatar = 3;
   string roomId = 4;
+}
+//加入房间通知
+message JoinRoomNotify{
+  User user = 1;
+  string roomId = 2;
+}
+//离开房间通知
+message LeaveRoomNotify{
+  User user = 1;
+  string roomId = 2;
 }
