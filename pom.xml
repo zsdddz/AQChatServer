@@ -28,6 +28,7 @@
         <redisson.version>3.23.5</redisson.version>
         <hutool.version>5.8.16</hutool.version>
         <alisdk.version>3.15.1</alisdk.version>
+        <rocketmq.client.version>4.8.0</rocketmq.client.version>
     </properties>
 
     <dependencyManagement>

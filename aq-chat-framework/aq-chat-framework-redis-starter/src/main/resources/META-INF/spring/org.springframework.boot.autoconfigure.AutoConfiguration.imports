@@ -1,1 +1,2 @@
+com.howcode.aqchat.framework.redis.starter.config.RedisConfig
 com.howcode.aqchat.framework.redis.starter.RedisCacheHelper

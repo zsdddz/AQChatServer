@@ -1,7 +1,10 @@
 package com.howcode.aqchat.handler;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.protobuf.GeneratedMessageV3;
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
+import com.howcode.aqchat.common.constant.AQMessageQueueTopicConstant;
+import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IUserHolder;
 import io.netty.channel.ChannelHandler;
@@ -10,6 +13,8 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
+import org.apache.rocketmq.client.producer.MQProducer;
+import org.apache.rocketmq.common.message.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -27,11 +32,12 @@ public class AQChatCommandHandler extends SimpleChannelInboundHandler<Object> {
 
     @Resource
     AQChatHandlerFactory commandHandlerFactory;
-
     @Resource
     private IUserHolder userHolder;
     @Resource
     private GlobalChannelHolder globalChannelHolder;
+    @Resource
+    private MQProducer mqProducer;
 
     /**
      * 异常或者正常断线 都会触发该方法
@@ -44,10 +50,21 @@ public class AQChatCommandHandler extends SimpleChannelInboundHandler<Object> {
         super.channelInactive(ctx);
         //获取用户id
         String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
+        if (userId == null){
+            ctx.close();
+            return;
+        }
         LOGGER.info("用户{}断开连接",userId);
+        UserGlobalInfoDto userLoginInfo = userHolder.getUserLoginInfo(userId);
         userHolder.removeUserLoginInfo(userId);
         //移除用户连接以及用户所在房间
         NioSocketChannel logout = globalChannelHolder.logout(userId);
+
+        //mq发送用户离线消息
+        Message message = new Message();
+        message.setBody(JSONObject.toJSONString(userLoginInfo).getBytes());
+        message.setTopic(AQMessageQueueTopicConstant.OFFLINE_MESSAGE_TOPIC);
+        mqProducer.send(message);
         logout.close();
         ctx.close();
     }
