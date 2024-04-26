@@ -37,4 +37,9 @@ public interface AQBusinessConstant {
      * 阿里云临时凭证缓存时长 单位秒 1小时
      */
     int ALI_OSS_STS_CACHE_TIME = 60 * 60 - 60;
+    /**
+     * 上传路径 时间格式
+     */
+    String UPLOAD_PATH_DATE_FORMAT = "yyyy-MM-dd";
+
 }

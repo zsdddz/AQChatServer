@@ -17,6 +17,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @Author: ZhangWeinan
  * @Description:
@@ -28,6 +31,7 @@ public class GetStsCmdHandler implements ICmdHandler<AQChatMsgProtocol.GetStsCmd
     @Resource
     @Lazy
     private AliOssProvider aliOssProvider;
+
     @Override
     public void handle(ChannelHandlerContext ctx, AQChatMsgProtocol.GetStsCmd cmd) {
         if (null == ctx || null == cmd) {
@@ -48,15 +52,39 @@ public class GetStsCmdHandler implements ICmdHandler<AQChatMsgProtocol.GetStsCmd
             return;
         }
         int msgTypeValue = cmd.getMsgTypeValue();
-        String msgTypeByCode = MsgTypeEnum.getMsgTypeByCode(msgTypeValue);
-        if (null == msgTypeByCode){
-            AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.MSG_TYPE_NOT_EXIST);
-            ctx.writeAndFlush(exceptionMsg);
-            return;
-        }
-        aliOssSts.setUploadPath(msgTypeByCode);
-        LOGGER.info("用户{}获取阿里云临时凭证成功,凭证信息:{}", userId,aliOssSts);
+        String msgTypeByCode = getMsgTypeByCode(ctx, msgTypeValue);
+        if (msgTypeByCode == null) return;
+        aliOssSts.setUploadPath(msgTypeByCode + "/" + getFormatTime());
+        LOGGER.info("用户{}获取阿里云临时凭证成功,凭证信息:{}", userId, aliOssSts);
         AQChatMsgProtocol.GetStsAck ack = MessageConstructor.buildGetStsAck(aliOssSts);
         ctx.writeAndFlush(ack);
     }
+
+    /**
+     * 根据消息类型code获取消息类型
+     *
+     * @param ctx
+     * @param msgTypeValue
+     * @return
+     */
+    private static String getMsgTypeByCode(ChannelHandlerContext ctx, int msgTypeValue) {
+        String msgTypeByCode = MsgTypeEnum.getMsgTypeByCode(msgTypeValue);
+        if (null == msgTypeByCode) {
+            AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.MSG_TYPE_NOT_EXIST);
+            ctx.writeAndFlush(exceptionMsg);
+            return null;
+        }
+        return msgTypeByCode;
+    }
+
+    /**
+     * 获取格式化时间
+     *
+     * @return 格式化时间
+     */
+    private static String getFormatTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat(AQBusinessConstant.UPLOAD_PATH_DATE_FORMAT);
+        return sdf.format(new Date());
+    }
+
 }
