@@ -2,6 +2,7 @@ package com.howcode.aqchat.holder;
 
 
 import com.howcode.aqchat.common.constant.AQRedisKeyPrefix;
+import com.howcode.aqchat.common.model.MessageDto;
 import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.framework.redis.starter.RedisCacheHelper;
@@ -90,17 +91,17 @@ public class GlobalChannelHolder {
     public void joinRoom(String roomId, String userId, Channel channel) {
         messageBroadcaster.joinRoom(roomId, userId, (NioSocketChannel) channel);
         //添加用户所在房间信息
-        UserGlobalInfoDto userLoginInfo = aqUserHolder.getUserLoginInfo(userId);
+        UserGlobalInfoDto userLoginInfo = aqUserHolder.getUserInfo(userId);
         userLoginInfo.setRoomId(roomId);
-        aqUserHolder.saveUserLoginInfo(userLoginInfo);
+        aqUserHolder.saveUserInfo(userLoginInfo);
     }
 
     public void leaveRoom(String userId, Channel channel) {
         messageBroadcaster.leaveRoom(userId, (NioSocketChannel) channel);
         //删除用户所在房间信息
-        UserGlobalInfoDto userLoginInfo = aqUserHolder.getUserLoginInfo(userId);
+        UserGlobalInfoDto userLoginInfo = aqUserHolder.getUserInfo(userId);
         userLoginInfo.setRoomId(null);
-        aqUserHolder.saveUserLoginInfo(userLoginInfo);
+        aqUserHolder.saveUserInfo(userLoginInfo);
     }
 
     public void isOrNoDissolveTheRoom(String roomId, Integer roomNo) {
@@ -129,11 +130,24 @@ public class GlobalChannelHolder {
         return redisCacheHelper.getCacheObject(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, RoomInfoDto.class);
     }
 
-    public void sendMsgToRoom(String userId, AQChatMsgProtocol.SendMsgCmd cmd) {
-        UserGlobalInfoDto userLoginInfo = aqUserHolder.getUserLoginInfo(userId);
-        if (null == userLoginInfo) {
+    public void sendBroadcastMessage(MessageDto messageDto) {
+        if (null == messageDto) {
             return;
         }
-        messageBroadcaster.sendMsgToRoom(userLoginInfo, cmd);
+        UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(messageDto.getSenderId());
+        if (null == userInfo) {
+            return;
+        }
+        AQChatMsgProtocol.User.Builder userBuilder = AQChatMsgProtocol.User.newBuilder();
+        userBuilder.setUserId(userInfo.getUserId());
+        userBuilder.setUserName(userInfo.getUserName());
+        userBuilder.setUserAvatar(userInfo.getUserAvatar());
+        AQChatMsgProtocol.BroadcastMsgAck broadcastMsgAck = AQChatMsgProtocol.BroadcastMsgAck.newBuilder()
+                .setRoomId(messageDto.getRoomId())
+                .setUser(userBuilder.build())
+                .setMsgType(AQChatMsgProtocol.MsgType.forNumber(messageDto.getMessageType()))
+                .setMsg(messageDto.getMessageContent())
+                .build();
+        messageBroadcaster.broadcast(userInfo.getRoomId(), broadcastMsgAck);
     }
 }

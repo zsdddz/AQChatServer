@@ -15,20 +15,20 @@ public interface IUserHolder {
      * 保存用户登录信息
      * @param userGlobalInfoDto
      */
-    void saveUserLoginInfo(UserGlobalInfoDto userGlobalInfoDto);
+    void saveUserInfo(UserGlobalInfoDto userGlobalInfoDto);
 
     /**
      * 获取用户登录信息
      * @param userId
      * @return
      */
-    UserGlobalInfoDto getUserLoginInfo(String userId);
+    UserGlobalInfoDto getUserInfo(String userId);
 
     /**
      * 删除用户登录信息
      * @param userId
      */
-    void removeUserLoginInfo(String userId);
+    void removeUserInfo(String userId);
 
     void offline(String userId);
 }

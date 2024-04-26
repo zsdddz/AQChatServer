@@ -48,7 +48,7 @@ public class UserLoginCmdHandler implements ICmdHandler<AQChatMsgProtocol.UserLo
         userGlobalInfoDto.setUserId(userId);
         userGlobalInfoDto.setUserName(userName);
         userGlobalInfoDto.setUserAvatar(userAvatar);
-        userHolder.saveUserLoginInfo(userGlobalInfoDto);
+        userHolder.saveUserInfo(userGlobalInfoDto);
 
         //添加用户channel
         channelHolder.put(userId, (NioSocketChannel) ctx.channel());

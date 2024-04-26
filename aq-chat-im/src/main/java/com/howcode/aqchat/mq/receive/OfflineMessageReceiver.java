@@ -21,8 +21,8 @@ import org.springframework.stereotype.Component;
  * @date 2024-04-26 17:36
  */
 @Component
-public class OfflineMessageListener implements InitializingBean {
-    private static final Logger LOGGER = LoggerFactory.getLogger(OfflineMessageListener.class);
+public class OfflineMessageReceiver implements InitializingBean {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OfflineMessageReceiver.class);
 
     @Resource
     private RocketMQConfig rocketMQConfig;
@@ -52,7 +52,6 @@ public class OfflineMessageListener implements InitializingBean {
         } catch (MQClientException e) {
             LOGGER.error("订阅消息失败", e);
         }
-
     }
 
 

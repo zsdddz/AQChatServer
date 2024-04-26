@@ -62,7 +62,7 @@ public class HearBeatHandler extends ChannelInboundHandlerAdapter implements Ini
                     AQChatMsgProtocol.OfflineMsg.Builder builder = AQChatMsgProtocol.OfflineMsg.newBuilder();
                     AQChatMsgProtocol.User.Builder userBuilder = AQChatMsgProtocol.User.newBuilder();
                     userBuilder.setUserId(userId);
-                    UserGlobalInfoDto userLoginInfo = userHolder.getUserLoginInfo(userId);
+                    UserGlobalInfoDto userLoginInfo = userHolder.getUserInfo(userId);
                     userBuilder.setUserAvatar(userLoginInfo.getUserAvatar());
                     userBuilder.setUserName(userLoginInfo.getUserName());
                     builder.setUser(userBuilder.build());
