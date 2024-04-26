@@ -34,5 +34,9 @@ public class AQChatMQConstant {
          * 成员离线消息的topic
          */
         String OFFLINE_MESSAGE_TOPIC = "offline_message_topic";
+        /**
+         * 遗留数据的topic
+         */
+        String LEGACY_DATA_TOPIC = "legacy_data_topic";
     }
 }

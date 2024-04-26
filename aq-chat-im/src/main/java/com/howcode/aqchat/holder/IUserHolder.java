@@ -30,4 +30,5 @@ public interface IUserHolder {
      */
     void removeUserLoginInfo(String userId);
 
+    void offline(String userId);
 }

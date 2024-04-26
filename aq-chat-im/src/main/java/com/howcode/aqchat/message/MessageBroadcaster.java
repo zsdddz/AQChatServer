@@ -34,8 +34,8 @@ public class MessageBroadcaster {
     public ChannelGroup getChannelGroup(String roomId) {
         return channelGroupMap.get(roomId);
     }
-    public ChannelGroup removeChannelGroup(String roomId) {
-        return channelGroupMap.remove(roomId);
+    public void removeChannelGroup(String roomId) {
+        channelGroupMap.remove(roomId);
     }
 
     /**
@@ -111,5 +111,20 @@ public class MessageBroadcaster {
                 .setMsg(cmd.getMsg())
                 .build();
         broadcast(roomId, sendMsgCmd);
+    }
+
+    public void removeChannel(String userId, NioSocketChannel nioSocketChannel) {
+        if (null == nioSocketChannel) {
+            return;
+        }
+        String roomId = userRoomMap.remove(userId);
+        if (null == roomId) {
+            return;
+        }
+        ChannelGroup channelGroup = channelGroupMap.get(roomId);
+        if (null == channelGroup) {
+            return;
+        }
+        channelGroup.remove(nioSocketChannel);
     }
 }

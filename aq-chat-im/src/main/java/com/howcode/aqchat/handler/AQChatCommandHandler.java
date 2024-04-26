@@ -52,15 +52,12 @@ public class AQChatCommandHandler extends SimpleChannelInboundHandler<Object> {
             return;
         }
         LOGGER.info("用户{}断开连接",userId);
-        UserGlobalInfoDto userLoginInfo = userHolder.getUserLoginInfo(userId);
-        userHolder.removeUserLoginInfo(userId);
-        //移除用户连接以及用户所在房间
-        NioSocketChannel logout = globalChannelHolder.logout(userId);
-
+        //设置用户离线
+        userHolder.offline(userId);
+        //移除用户连接
+        globalChannelHolder.offline(userId,(NioSocketChannel) ctx.channel());
         //mq发送用户离线消息
-        mqSendingAgent.sendOfflineMessage(userLoginInfo);
-
-        logout.close();
+        mqSendingAgent.sendOfflineMessage(userId);
         ctx.close();
     }
 

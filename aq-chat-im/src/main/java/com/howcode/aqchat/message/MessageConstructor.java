@@ -2,6 +2,7 @@ package com.howcode.aqchat.message;
 
 import com.howcode.aqchat.common.enums.AQChatEnum;
 import com.howcode.aqchat.common.model.AliOssStsDto;
+import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,5 +29,18 @@ public class MessageConstructor {
                 .setUploadPath(aliOssSts.getUploadPath())
                 .setEndpoint(aliOssSts.getOssEndpoint())
                 .build();
+    }
+
+    public static AQChatMsgProtocol.RecoverUserAck buildRecoverUserAck(UserGlobalInfoDto userLoginInfo) {
+        return AQChatMsgProtocol.RecoverUserAck.newBuilder()
+                .setUserId(userLoginInfo.getUserId())
+                .setUserName(userLoginInfo.getUserName())
+                .setRoomId(userLoginInfo.getRoomId())
+                .setUserAvatar(userLoginInfo.getUserAvatar())
+                .build();
+    }
+
+    public static AQChatMsgProtocol.UserLogoutAck buildUserLogoutAck(String userId) {
+        return AQChatMsgProtocol.UserLogoutAck.newBuilder().setUserId(userId).build();
     }
 }

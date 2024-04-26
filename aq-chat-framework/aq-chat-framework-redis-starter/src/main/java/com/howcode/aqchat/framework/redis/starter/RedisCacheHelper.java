@@ -4,16 +4,19 @@ import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-
+/**
+ * @Author: ZhangWeinan
+ * @Description:
+ * @date 2024-04-22 13:26
+ */
 @Component
 public class RedisCacheHelper {
     @Resource
-    public RedisTemplate redisTemplate;
+    public RedisTemplate<String,Object> redisTemplate;
 
     /**
      * 缓存基本的对象，Integer、String、实体类等
@@ -33,7 +36,7 @@ public class RedisCacheHelper {
      * @param timeout  时间
      * @param timeUnit 时间颗粒度
      */
-    public <T> void setCacheObject(final String key, final T value, final Integer timeout, final TimeUnit timeUnit) {
+    public <T> void setCacheObject(final String key, final T value, final Long timeout, final TimeUnit timeUnit) {
         redisTemplate.opsForValue().set(key, value, timeout, timeUnit);
     }
 
@@ -67,8 +70,11 @@ public class RedisCacheHelper {
      * @return 缓存键值对应的数据
      */
     public <T> T getCacheObject(final String key,Class<T> tClass) {
-        ValueOperations<String, T> operation = redisTemplate.opsForValue();
-        return operation.get(key);
+        Object object = redisTemplate.opsForValue().get(key);
+        if (object == null) {
+            return null;
+        }
+        return (T) object;
     }
 
     /**
@@ -108,8 +114,8 @@ public class RedisCacheHelper {
      * @param key 缓存的键值
      * @return 缓存键值对应的数据
      */
-    public <T> List<T> getCacheList(final String key) {
-        return redisTemplate.opsForList().range(key, 0, -1);
+    public List<Object> getCacheList(final String key) {
+        return  redisTemplate.opsForList().range(key, 0, -1);
     }
 
     /**
@@ -120,7 +126,7 @@ public class RedisCacheHelper {
      * @return 缓存数据的对象
      */
     public <T> BoundSetOperations<String, T> setCacheSet(final String key, final Set<T> dataSet) {
-        BoundSetOperations<String, T> setOperation = redisTemplate.boundSetOps(key);
+        BoundSetOperations<String, T> setOperation = (BoundSetOperations<String, T>) redisTemplate.boundSetOps(key);
         Iterator<T> it = dataSet.iterator();
         while (it.hasNext()) {
             setOperation.add(it.next());
@@ -134,7 +140,7 @@ public class RedisCacheHelper {
      * @param key
      * @return
      */
-    public <T> Set<T> getCacheSet(final String key) {
+    public Set<Object> getCacheSet(final String key) {
         return redisTemplate.opsForSet().members(key);
     }
 
@@ -156,7 +162,7 @@ public class RedisCacheHelper {
      * @param key
      * @return
      */
-    public <T> Map<String, T> getCacheMap(final String key) {
+    public <T> Map<Object, Object> getCacheMap(final String key) {
         return redisTemplate.opsForHash().entries(key);
     }
 
@@ -206,7 +212,7 @@ public class RedisCacheHelper {
      * @param hKeys Hash键集合
      * @return Hash对象集合
      */
-    public <T> List<T> getMultiCacheMapValue(final String key, final Collection<Object> hKeys) {
+    public List<Object> getMultiCacheMapValue(final String key, final Collection<Object> hKeys) {
         return redisTemplate.opsForHash().multiGet(key, hKeys);
     }
 

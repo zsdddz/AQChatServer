@@ -23,16 +23,24 @@ public class MqSendingAgent {
     @Resource
     private MQProducer mqProducer;
 
-    public void sendOfflineMessage(UserGlobalInfoDto userLoginInfo) {
-        if (null == userLoginInfo) {
-            LOGGER.error("用户离线消息为空");
+    public void sendOfflineMessage(String userId) {
+        if (null == userId) {
+            LOGGER.error("离线消息用户id为空");
             return;
         }
-        Message message = new Message();
-        message.setBody(JSONObject.toJSONString(userLoginInfo).getBytes());
-        message.setTopic(AQChatMQConstant.MQTopic.OFFLINE_MESSAGE_TOPIC);
+        //发送离线消息
+        Message offlineMessage = new Message();
+        offlineMessage.setBody(userId.getBytes());
+        offlineMessage.setTopic(AQChatMQConstant.MQTopic.OFFLINE_MESSAGE_TOPIC);
+
+        //发送遗留数据处理通知
+        Message legacyDataMessage = new Message();
+        legacyDataMessage.setBody(userId.getBytes());
+        legacyDataMessage.setTopic(AQChatMQConstant.MQTopic.LEGACY_DATA_TOPIC);
+        legacyDataMessage.setDelayTimeLevel(14);
         try {
-            mqProducer.send(message);
+            mqProducer.send(offlineMessage);
+            mqProducer.send(legacyDataMessage);
         } catch (Exception e) {
             LOGGER.error("发送离线消息失败", e);
         }
@@ -51,5 +59,9 @@ public class MqSendingAgent {
         } catch (Exception e) {
             LOGGER.error("发送消息失败", e);
         }
+    }
+
+    public void sendLogoutMessage(String userId) {
+
     }
 }

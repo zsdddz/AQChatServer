@@ -18,6 +18,10 @@ public enum AQChatExceptionEnum implements AQChatEnum{
     GET_STS_FAILED(10004, "获取阿里云临时凭证失败"),
     //消息类型不存在
     MSG_TYPE_NOT_EXIST(10005, "消息类型不存在"),
+    //用户不存在或者退出
+    USER_DOES_NOT_EXIST_OR_EXITS(10006, "用户不存在或者退出"),
+    //用户id不匹配
+    USER_ID_NOT_MATCH(10007, "用户id不匹配"),
     ;
 
     private final int code;

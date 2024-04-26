@@ -4,9 +4,9 @@ package com.howcode.aqchat.holder.impl;
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.constant.AQRedisKeyPrefix;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
+import com.howcode.aqchat.framework.redis.starter.RedisCacheHelper;
 import com.howcode.aqchat.holder.IUserHolder;
 import jakarta.annotation.Resource;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
@@ -20,11 +20,12 @@ import java.util.concurrent.TimeUnit;
 public class AQUserHolder implements IUserHolder {
 
     @Resource
-    private RedisTemplate<String, UserGlobalInfoDto> redisTemplate;
+    private RedisCacheHelper redisCacheHelper;
 
     @Override
     public void saveUserLoginInfo(UserGlobalInfoDto userGlobalInfoDto) {
-        redisTemplate.opsForValue().set(AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userGlobalInfoDto.getUserId(),
+        redisCacheHelper.setCacheObject(
+                AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userGlobalInfoDto.getUserId(),
                 userGlobalInfoDto,
                 AQBusinessConstant.USER_INFO_CACHE_TIME,
                 TimeUnit.SECONDS);
@@ -32,11 +33,18 @@ public class AQUserHolder implements IUserHolder {
 
     @Override
     public UserGlobalInfoDto getUserLoginInfo(String userId) {
-        return redisTemplate.opsForValue().get(AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userId);
+        return redisCacheHelper.getCacheObject(AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userId,UserGlobalInfoDto.class);
     }
 
     @Override
     public void removeUserLoginInfo(String userId) {
-        redisTemplate.delete(AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userId);
+        redisCacheHelper.deleteObject(AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userId);
+    }
+
+    @Override
+    public void offline(String userId) {
+        redisCacheHelper.expire(AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userId,
+                AQBusinessConstant.USER_OFFLINE_CACHE_TIME,
+                TimeUnit.SECONDS);
     }
 }

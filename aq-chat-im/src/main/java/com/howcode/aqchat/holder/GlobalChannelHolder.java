@@ -70,6 +70,13 @@ public class GlobalChannelHolder {
     }
 
     /**
+     * 离线
+     */
+    public void offline(String userId,NioSocketChannel nioSocketChannel) {
+        messageBroadcaster.removeChannel(userId,nioSocketChannel);
+    }
+
+    /**
      * 创建房间
      *
      * @param roomId
@@ -82,10 +89,18 @@ public class GlobalChannelHolder {
 
     public void joinRoom(String roomId, String userId, Channel channel) {
         messageBroadcaster.joinRoom(roomId, userId, (NioSocketChannel) channel);
+        //添加用户所在房间信息
+        UserGlobalInfoDto userLoginInfo = aqUserHolder.getUserLoginInfo(userId);
+        userLoginInfo.setRoomId(roomId);
+        aqUserHolder.saveUserLoginInfo(userLoginInfo);
     }
 
     public void leaveRoom(String userId, Channel channel) {
         messageBroadcaster.leaveRoom(userId, (NioSocketChannel) channel);
+        //删除用户所在房间信息
+        UserGlobalInfoDto userLoginInfo = aqUserHolder.getUserLoginInfo(userId);
+        userLoginInfo.setRoomId(null);
+        aqUserHolder.saveUserLoginInfo(userLoginInfo);
     }
 
     public void isOrNoDissolveTheRoom(String roomId, Integer roomNo) {
@@ -94,6 +109,8 @@ public class GlobalChannelHolder {
             redisCacheHelper.deleteObject(AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo);
             redisCacheHelper.deleteObject(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId);
         }
+        //解散房间
+        messageBroadcaster.removeChannelGroup(roomId);
     }
 
     public void dissolveTheRoom4Logout(String roomId) {

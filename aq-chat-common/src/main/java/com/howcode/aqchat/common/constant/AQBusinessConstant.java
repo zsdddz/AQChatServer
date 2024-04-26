@@ -33,10 +33,15 @@ public interface AQBusinessConstant {
      * 用户信息缓存时长 单位秒 24小时
      */
     long USER_INFO_CACHE_TIME = 60 * 60 * 24;
+
+    /**
+     * 用户离线后缓存时间  10分钟
+     */
+    long USER_OFFLINE_CACHE_TIME = 60 * 10;
     /**
      * 阿里云临时凭证缓存时长 单位秒 1小时
      */
-    int ALI_OSS_STS_CACHE_TIME = 60 * 60 - 60;
+    long ALI_OSS_STS_CACHE_TIME = 60 * 60 - 60;
     /**
      * 上传路径 时间格式
      */
