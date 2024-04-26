@@ -91,17 +91,17 @@ public class GlobalChannelHolder {
     public void joinRoom(String roomId, String userId, Channel channel) {
         messageBroadcaster.joinRoom(roomId, userId, (NioSocketChannel) channel);
         //添加用户所在房间信息
-        UserGlobalInfoDto userLoginInfo = aqUserHolder.getUserInfo(userId);
-        userLoginInfo.setRoomId(roomId);
-        aqUserHolder.saveUserInfo(userLoginInfo);
+        UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(userId);
+        userInfo.setRoomId(roomId);
+        aqUserHolder.saveUserInfo(userInfo);
     }
 
     public void leaveRoom(String userId, Channel channel) {
         messageBroadcaster.leaveRoom(userId, (NioSocketChannel) channel);
         //删除用户所在房间信息
-        UserGlobalInfoDto userLoginInfo = aqUserHolder.getUserInfo(userId);
-        userLoginInfo.setRoomId(null);
-        aqUserHolder.saveUserInfo(userLoginInfo);
+        UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(userId);
+        userInfo.setRoomId(null);
+        aqUserHolder.saveUserInfo(userInfo);
     }
 
     public void isOrNoDissolveTheRoom(String roomId, Integer roomNo) {

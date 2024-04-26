@@ -36,19 +36,19 @@ public class RecoverUserCmdHandler implements ICmdHandler<AQChatMsgProtocol.Reco
             return;
         }
         String userId = cmd.getUserId();
-        UserGlobalInfoDto userLoginInfo = aqUserHolder.getUserInfo(userId);
-        if (null == userLoginInfo) {
+        UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(userId);
+        if (null == userInfo) {
             //离线时间过长
             ctx.writeAndFlush(MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_DOES_NOT_EXIST_OR_EXITS));
             return;
         }
         //重新登录 续期
-        aqUserHolder.saveUserInfo(userLoginInfo);
+        aqUserHolder.saveUserInfo(userInfo);
         //判断是否有房间
-        if (null != userLoginInfo.getRoomId()) {
+        if (null != userInfo.getRoomId()) {
             //加入房间
-            globalChannelHolder.joinRoom(userLoginInfo.getRoomId(),userId,ctx.channel());
+            globalChannelHolder.joinRoom(userInfo.getRoomId(),userId,ctx.channel());
         }
-        ctx.writeAndFlush(MessageConstructor.buildRecoverUserAck(userLoginInfo));
+        ctx.writeAndFlush(MessageConstructor.buildRecoverUserAck(userInfo));
     }
 }
