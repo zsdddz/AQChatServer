@@ -29,6 +29,10 @@ public class AQChatMQConstant {
          * 存储消息的消费者组
          */
         String STORE_MESSAGE_CONSUMER_GROUP = "store_message_consumer_group";
+        /**
+         * 用户退出的消费者组
+         */
+        String USER_LOGOUT_CONSUMER_GROUP = "user_logout_consumer_group";
     }
     /**
      * MQ的topic
@@ -51,5 +55,9 @@ public class AQChatMQConstant {
          * 遗留数据的topic
          */
         String LEGACY_DATA_TOPIC = "legacy_data_topic";
+        /**
+         * 用户退出的topic
+         */
+        String USER_LOGOUT_TOPIC = "user_logout_topic";
     }
 }

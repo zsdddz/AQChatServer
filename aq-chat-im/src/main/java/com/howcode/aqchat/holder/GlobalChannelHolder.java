@@ -150,4 +150,24 @@ public class GlobalChannelHolder {
                 .build();
         messageBroadcaster.broadcast(userInfo.getRoomId(), broadcastMsgAck);
     }
+
+    public void notifyLogout(String userId) {
+        if (null == userId) {
+            return;
+        }
+        UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(userId);
+        if (null == userInfo) {
+            return;
+        }
+        AQChatMsgProtocol.User.Builder userBuilder = AQChatMsgProtocol.User.newBuilder();
+        userBuilder.setUserId(userInfo.getUserId());
+        userBuilder.setUserName(userInfo.getUserName());
+        userBuilder.setUserAvatar(userInfo.getUserAvatar());
+        AQChatMsgProtocol.LeaveRoomNotify leaveRoomNotify = AQChatMsgProtocol.LeaveRoomNotify.newBuilder()
+                .setUser(userBuilder)
+                .setRoomId(userInfo.getRoomId())
+                .build();
+        messageBroadcaster.broadcast(userInfo.getRoomId(), leaveRoomNotify);
+        aqUserHolder.removeUserInfo(userId);
+    }
 }

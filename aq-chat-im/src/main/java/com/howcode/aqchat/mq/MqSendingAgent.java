@@ -63,7 +63,18 @@ public class MqSendingAgent {
     }
 
     public void sendLogoutMessage(String userId) {
-
+        if (null == userId) {
+            LOGGER.error("用户id为空");
+            return;
+        }
+        Message message = new Message();
+        message.setTopic(AQChatMQConstant.MQTopic.USER_LOGOUT_TOPIC);
+        message.setBody(userId.getBytes());
+        try {
+            mqProducer.send(message);
+        } catch (Exception e) {
+            LOGGER.error("发送用户退出消息失败", e);
+        }
     }
 
     public void sendMessageToRoom(MessageDto messageDto) {
