@@ -1,7 +1,8 @@
 package com.howcode.aqchat.holder.impl;
 
 
-import com.howcode.aqchat.common.constant.AQChatConstant;
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
+import com.howcode.aqchat.common.constant.AQRedisKeyPrefix;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.holder.IUserHolder;
 import jakarta.annotation.Resource;
@@ -23,19 +24,19 @@ public class AQUserHolder implements IUserHolder {
 
     @Override
     public void saveUserLoginInfo(UserGlobalInfoDto userGlobalInfoDto) {
-        redisTemplate.opsForValue().set(AQChatConstant.AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userGlobalInfoDto.getUserId(),
+        redisTemplate.opsForValue().set(AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userGlobalInfoDto.getUserId(),
                 userGlobalInfoDto,
-                AQChatConstant.AQBusinessConstant.USER_INFO_CACHE_TIME,
+                AQBusinessConstant.USER_INFO_CACHE_TIME,
                 TimeUnit.SECONDS);
     }
 
     @Override
     public UserGlobalInfoDto getUserLoginInfo(String userId) {
-        return redisTemplate.opsForValue().get(AQChatConstant.AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userId);
+        return redisTemplate.opsForValue().get(AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userId);
     }
 
     @Override
     public void removeUserLoginInfo(String userId) {
-        redisTemplate.delete(AQChatConstant.AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userId);
+        redisTemplate.delete(AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userId);
     }
 }

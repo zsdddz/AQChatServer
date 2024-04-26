@@ -4,6 +4,7 @@ import com.howcode.aqchat.common.model.MessageDto;
 import com.howcode.aqchat.service.dao.mapper.IAQMessageMapper;
 import com.howcode.aqchat.service.service.IAQMessageService;
 import jakarta.annotation.Resource;
+import org.apache.rocketmq.client.producer.MQProducer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,8 @@ import java.util.List;
 public class AQMessageServiceImpl implements IAQMessageService {
     @Resource
     private IAQMessageMapper messageMapper;
+    @Resource
+    private MQProducer mqProducer;
 
     @Override
     public void saveMessage(MessageDto messageDto) {

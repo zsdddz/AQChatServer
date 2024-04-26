@@ -2,7 +2,7 @@ package com.howcode.aqchat.handler;
 
 
 import com.howcode.aqchat.common.config.AQChatConfig;
-import com.howcode.aqchat.common.constant.AQChatConstant;
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.holder.IUserHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
@@ -51,13 +51,13 @@ public class HearBeatHandler extends ChannelInboundHandlerAdapter implements Ini
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         if (evt instanceof IdleStateEvent event) {
             if (event.state() == IdleState.ALL_IDLE) {
-                Long lastReadTime = (Long) ctx.channel().attr(AttributeKey.valueOf(AQChatConstant.AQBusinessConstant.HEART_BEAT_TIME)).get();
+                Long lastReadTime = (Long) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.HEART_BEAT_TIME)).get();
                 long now = System.currentTimeMillis();
                 if (lastReadTime != null && now - lastReadTime > heartBeatTime) {
                     // 下线
                     Logger.info("心跳超时，发送离线消息");
                     //获取用户id
-                    String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQChatConstant.AQBusinessConstant.USER_ID)).get();
+                    String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
                     //构建离线消息
                     AQChatMsgProtocol.OfflineMsg.Builder builder = AQChatMsgProtocol.OfflineMsg.newBuilder();
                     AQChatMsgProtocol.User.Builder userBuilder = AQChatMsgProtocol.User.newBuilder();

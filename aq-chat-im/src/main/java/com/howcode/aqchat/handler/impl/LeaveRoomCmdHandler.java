@@ -1,6 +1,6 @@
 package com.howcode.aqchat.handler.impl;
 
-import com.howcode.aqchat.common.constant.AQChatConstant;
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.handler.ICmdHandler;
@@ -29,7 +29,7 @@ public class LeaveRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.LeaveR
             return;
         }
         // 获取用户Idq
-        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQChatConstant.AQBusinessConstant.USER_ID)).get();
+        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
         if (null == userId) {
             // 用户未登录
             AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_NOT_LOGIN);

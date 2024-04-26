@@ -1,7 +1,8 @@
 package com.howcode.aqchat.handler.impl;
 
 
-import com.howcode.aqchat.common.constant.AQChatConstant;
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
+import com.howcode.aqchat.common.constant.AQRedisKeyPrefix;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.common.utils.IdProvider;
@@ -43,7 +44,7 @@ public class CreateRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.Creat
         String roomName = cmd.getRoomName();
         int roomNo = cmd.getRoomNo();
         //判断当前房间号是否已经存在
-        String roomNoIsExist = redisCacheHelper.getCacheObject(AQChatConstant.AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo,String.class);
+        String roomNoIsExist = redisCacheHelper.getCacheObject(AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo,String.class);
         if (null != roomNoIsExist){
             //房间号已经存在 返回错误信息
             AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.ROOM_EXIST);
@@ -52,17 +53,17 @@ public class CreateRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.Creat
         }
         //将房间号保存至redis
         String roomId = IdProvider.generateRoomId();
-        redisCacheHelper.setCacheObject(AQChatConstant.AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo,roomId);
+        redisCacheHelper.setCacheObject(AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo,roomId);
         //将房间信息保存至redis
         RoomInfoDto roomInfoDto = new RoomInfoDto();
         roomInfoDto.setRoomId(roomId);
         roomInfoDto.setRoomNo(roomNo);
         roomInfoDto.setRoomName(roomName);
-        redisCacheHelper.setCacheObject(AQChatConstant.AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomInfoDto.getRoomId(),roomInfoDto);
+        redisCacheHelper.setCacheObject(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomInfoDto.getRoomId(),roomInfoDto);
         //处理房间连接
         globalChannelHolder.createChannelGroup(roomInfoDto.getRoomId());
         //将创建者加入房间
-        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQChatConstant.AQBusinessConstant.USER_ID)).get();
+        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
         globalChannelHolder.joinRoom(roomInfoDto.getRoomId(),userId,ctx.channel());
         LOGGER.info("用户{}创建房间{}成功",userId,roomInfoDto.getRoomId());
         //返回创建房间成功消息

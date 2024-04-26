@@ -1,6 +1,7 @@
 package com.howcode.aqchat.handler.impl;
 
-import com.howcode.aqchat.common.constant.AQChatConstant;
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
+import com.howcode.aqchat.common.constant.AQRedisKeyPrefix;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.framework.redis.starter.RedisCacheHelper;
@@ -36,7 +37,7 @@ public class JoinRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.JoinRoo
         }
         int roomNo = cmd.getRoomNo();
         //判断房间号是否存在
-        String roomId = redisCacheHelper.getCacheObject(AQChatConstant.AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo, String.class);
+        String roomId = redisCacheHelper.getCacheObject(AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo, String.class);
         if (null == roomId) {
             //房间号不存在 返回错误信息
             AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.ROOM_NOT_EXIST);
@@ -44,11 +45,11 @@ public class JoinRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.JoinRoo
             return;
         }
         //将用户加入房间
-        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQChatConstant.AQBusinessConstant.USER_ID)).get();
+        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
         globalChannelHolder.joinRoom(roomId, userId, ctx.channel());
         //返回加入房间成功
         //获取房间信息
-        RoomInfoDto roomInfoDto = redisCacheHelper.getCacheObject(AQChatConstant.AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, RoomInfoDto.class);
+        RoomInfoDto roomInfoDto = redisCacheHelper.getCacheObject(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, RoomInfoDto.class);
         AQChatMsgProtocol.JoinRoomAck joinRoomAck = AQChatMsgProtocol.JoinRoomAck.newBuilder()
                 .setRoomNo(roomInfoDto.getRoomNo())
                 .setRoomName(roomInfoDto.getRoomName())

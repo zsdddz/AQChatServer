@@ -1,7 +1,7 @@
 package com.howcode.aqchat.handler;
 
 import com.google.protobuf.GeneratedMessageV3;
-import com.howcode.aqchat.common.constant.AQChatConstant;
+import com.howcode.aqchat.common.constant.AQMessageHandlerConstant;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +36,7 @@ public class AQChatHandlerFactory implements InitializingBean {
         // 获取包名称
         String packageName = AQChatHandlerFactory.class.getPackage().getName();
         // 获取所有的 ICmdHandler 子类
-        Set<Class<?>> clazzSet = listSubClazz(packageName + AQChatConstant.MessageHandlerConstant.HANDLER_IMPLEMENTATION_PACKAGE_NAME);
+        Set<Class<?>> clazzSet = listSubClazz(packageName + AQMessageHandlerConstant.HANDLER_IMPLEMENTATION_PACKAGE_NAME);
         for (Class<?> cmdHandlerClazz : clazzSet) {
             if (null == cmdHandlerClazz || 0 != (cmdHandlerClazz.getModifiers() & Modifier.ABSTRACT)) {
                 // 如果是抽象类,
@@ -49,7 +49,7 @@ public class AQChatHandlerFactory implements InitializingBean {
             Class<?> cmdClazz = null;
 
             for (Method currMethod : methodArray) {
-                if (!currMethod.getName().equals(AQChatConstant.MessageHandlerConstant.HANDLER_METHOD_NAME)) {
+                if (!currMethod.getName().equals(AQMessageHandlerConstant.HANDLER_METHOD_NAME)) {
                     // 如果不是 handle 方法,
                     continue;
                 }

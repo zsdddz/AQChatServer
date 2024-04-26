@@ -1,6 +1,6 @@
 package com.howcode.aqchat.handler.impl;
 
-import com.howcode.aqchat.common.constant.AQChatConstant;
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.handler.ICmdHandler;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
@@ -23,9 +23,9 @@ public class HeartBeatCmdHandler implements ICmdHandler<AQChatMsgProtocol.HeartB
             return;
         }
         //更新心跳时间
-        ctx.channel().attr(AttributeKey.valueOf(AQChatConstant.AQBusinessConstant.HEART_BEAT_TIME)).set(System.currentTimeMillis());
+        ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.HEART_BEAT_TIME)).set(System.currentTimeMillis());
         //获取userId
-        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQChatConstant.AQBusinessConstant.USER_ID)).get();
+        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
         if (null == userId) {
             //未登录  构建异常消息
             AQChatMsgProtocol.ExceptionMsg exceptionMsg = AQChatMsgProtocol.ExceptionMsg.newBuilder()
@@ -35,6 +35,6 @@ public class HeartBeatCmdHandler implements ICmdHandler<AQChatMsgProtocol.HeartB
             return;
         }
         //返回心跳响应
-        ctx.writeAndFlush(AQChatMsgProtocol.HeartBeatAck.newBuilder().setPong(AQChatConstant.AQBusinessConstant.HEART_BEAT_ACK).build());
+        ctx.writeAndFlush(AQChatMsgProtocol.HeartBeatAck.newBuilder().setPong(AQBusinessConstant.HEART_BEAT_ACK).build());
     }
 }

@@ -1,7 +1,7 @@
 package com.howcode.aqchat.handler;
 
 import com.google.protobuf.GeneratedMessageV3;
-import com.howcode.aqchat.common.constant.AQChatConstant;
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IUserHolder;
 import io.netty.channel.ChannelHandler;
@@ -43,7 +43,7 @@ public class AQChatCommandHandler extends SimpleChannelInboundHandler<Object> {
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         super.channelInactive(ctx);
         //获取用户id
-        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQChatConstant.AQBusinessConstant.USER_ID)).get();
+        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
         LOGGER.info("用户{}断开连接",userId);
         userHolder.removeUserLoginInfo(userId);
         //移除用户连接以及用户所在房间

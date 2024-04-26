@@ -2,7 +2,7 @@ package com.howcode.aqchat.common.utils;
 
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;
-import com.howcode.aqchat.common.constant.AQChatConstant;
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
 
 
 /**
@@ -19,7 +19,7 @@ public class IdProvider {
      * @return
      */
     public static String generateUserId() {
-        return AQChatConstant.AQBusinessConstant.AQ_USER_PREFIX + snowflake.nextId();
+        return AQBusinessConstant.AQ_USER_PREFIX + snowflake.nextId();
     }
 
     /**
@@ -27,6 +27,6 @@ public class IdProvider {
      * @return
      */
     public static String generateRoomId() {
-        return AQChatConstant.AQBusinessConstant.AQ_ROOM_PREFIX + snowflake.nextId();
+        return AQBusinessConstant.AQ_ROOM_PREFIX + snowflake.nextId();
     }
 }

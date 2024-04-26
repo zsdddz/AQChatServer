@@ -1,7 +1,7 @@
 package com.howcode.aqchat.holder;
 
 
-import com.howcode.aqchat.common.constant.AQChatConstant;
+import com.howcode.aqchat.common.constant.AQRedisKeyPrefix;
 import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.framework.redis.starter.RedisCacheHelper;
@@ -91,8 +91,8 @@ public class GlobalChannelHolder {
     public void isOrNoDissolveTheRoom(String roomId, Integer roomNo) {
         ChannelGroup channelGroup = messageBroadcaster.getChannelGroup(roomId);
         if (null == channelGroup || channelGroup.isEmpty()) {
-            redisCacheHelper.deleteObject(AQChatConstant.AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo);
-            redisCacheHelper.deleteObject(AQChatConstant.AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId);
+            redisCacheHelper.deleteObject(AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo);
+            redisCacheHelper.deleteObject(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId);
         }
     }
 
@@ -109,7 +109,7 @@ public class GlobalChannelHolder {
      * 获取房间信息
      */
     public RoomInfoDto getRoomInfo(String roomId) {
-        return redisCacheHelper.getCacheObject(AQChatConstant.AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, RoomInfoDto.class);
+        return redisCacheHelper.getCacheObject(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, RoomInfoDto.class);
     }
 
     public void sendMsgToRoom(String userId, AQChatMsgProtocol.SendMsgCmd cmd) {

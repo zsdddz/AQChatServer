@@ -1,7 +1,7 @@
 package com.howcode.aqchat.handler.impl;
 
 
-import com.howcode.aqchat.common.constant.AQChatConstant;
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.common.utils.IdProvider;
 import com.howcode.aqchat.handler.ICmdHandler;
@@ -41,7 +41,7 @@ public class UserLoginCmdHandler implements ICmdHandler<AQChatMsgProtocol.UserLo
         String userAvatar = cmd.getUserAvatar();
         String userId = IdProvider.generateUserId();
         //添加userId到channel
-        ctx.channel().attr(AttributeKey.valueOf(AQChatConstant.AQBusinessConstant.USER_ID)).set(userId);
+        ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).set(userId);
 
         //将登录信息保存至redis
         UserGlobalInfoDto userGlobalInfoDto = new UserGlobalInfoDto();

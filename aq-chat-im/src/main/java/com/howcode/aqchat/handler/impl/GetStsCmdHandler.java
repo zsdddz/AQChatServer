@@ -1,7 +1,7 @@
 package com.howcode.aqchat.handler.impl;
 
 
-import com.howcode.aqchat.common.constant.AQChatConstant;
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.enums.MsgTypeEnum;
 import com.howcode.aqchat.common.model.AliOssStsDto;
@@ -34,7 +34,7 @@ public class GetStsCmdHandler implements ICmdHandler<AQChatMsgProtocol.GetStsCmd
             return;
         }
         //获取userId判断是否登录
-        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQChatConstant.AQBusinessConstant.USER_ID)).get();
+        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
         if (null == userId) {
             AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_NOT_LOGIN);
             ctx.writeAndFlush(exceptionMsg);
