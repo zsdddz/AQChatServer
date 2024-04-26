@@ -29,4 +29,8 @@ public class IdProvider {
     public static String generateRoomId() {
         return AQBusinessConstant.AQ_ROOM_PREFIX + snowflake.nextId();
     }
+
+    public static Long nextId() {
+        return snowflake.nextId();
+    }
 }

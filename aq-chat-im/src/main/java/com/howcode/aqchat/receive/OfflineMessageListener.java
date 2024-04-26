@@ -1,6 +1,6 @@
 package com.howcode.aqchat.receive;
 
-import com.howcode.aqchat.common.constant.AQMessageQueueTopicConstant;
+import com.howcode.aqchat.common.constant.AQChatMQConstant;
 import com.howcode.aqchat.framework.mq.starter.config.RocketMQConfig;
 import jakarta.annotation.Resource;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
@@ -33,11 +33,11 @@ public class OfflineMessageListener implements InitializingBean {
     public void initConsumer() {
         try {
             DefaultMQPushConsumer defaultMQPushConsumer = new DefaultMQPushConsumer();
-            defaultMQPushConsumer.setNamesrvAddr(rocketMQConfig.getNameSever());
-            defaultMQPushConsumer.setConsumerGroup(rocketMQConfig.getGroupName());
+            defaultMQPushConsumer.setNamesrvAddr(rocketMQConfig.getConsumer().getNameSever());
+            defaultMQPushConsumer.setConsumerGroup(AQChatMQConstant.ConsumerGroup.OFFLINE_MESSAGE_CONSUMER_GROUP);
             defaultMQPushConsumer.setConsumeMessageBatchMaxSize(1);
             defaultMQPushConsumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
-            defaultMQPushConsumer.subscribe(AQMessageQueueTopicConstant.OFFLINE_MESSAGE_TOPIC, "*");
+            defaultMQPushConsumer.subscribe(AQChatMQConstant.MQTopic.OFFLINE_MESSAGE_TOPIC, "*");
             defaultMQPushConsumer.setMessageListener((MessageListenerConcurrently) (messageExtList, consumeConcurrentlyContext) -> {
                 for (MessageExt messageExt : messageExtList) {
                     String msgStr = new String(messageExt.getBody());

@@ -14,12 +14,14 @@ aq-chat:
     roleSessionName: aqchat-oss-sts
     roleArn:
     durationSeconds: 3600
-  mq:
-    rocketmq:
+  rocketmq:
+    producer:
       nameSever: 127.0.0.1:9876
       groupName: AQChat
       retryTimes: 3
       sendTimeOut: 3000
+    consumer:
+      nameSever: 127.0.0.1:9876
 
 
 spring:

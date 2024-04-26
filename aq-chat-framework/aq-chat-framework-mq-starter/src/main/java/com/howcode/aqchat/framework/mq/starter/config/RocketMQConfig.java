@@ -12,22 +12,35 @@ import org.springframework.context.annotation.Configuration;
  */
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "aq-chat.mq.rocketmq")
+@ConfigurationProperties(prefix = "aq-chat.rocketmq")
 public class RocketMQConfig {
-    /**
-     * rocketmq的nameServer地址
-     */
-    private String nameSever;
-    /**
-     * 分组名字
-     */
-    private String groupName;
-    /**
-     * 信息重发次数
-     */
-    private int retryTimes;
-    /**
-     * 超时时间
-     */
-    private int sendTimeOut;
+    private Producer producer;
+    private Consumer consumer;
+
+    @Data
+    public static class Producer {
+        /**
+         * rocketmq的nameServer地址
+         */
+        private String nameSever;
+        /**
+         * 分组名字
+         */
+        private String groupName;
+        /**
+         * 信息重发次数
+         */
+        private int retryTimes;
+        /**
+         * 超时时间
+         */
+        private int sendTimeOut;
+    }
+    @Data
+    public static class Consumer {
+        /**
+         * rocketmq的nameServer地址
+         */
+        private String nameSever;
+    }
 }

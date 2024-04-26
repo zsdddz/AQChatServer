@@ -33,15 +33,15 @@ public class RocketMQProducerConfiguration {
         });
         DefaultMQProducer defaultMQProducer = new DefaultMQProducer();
         try {
-            defaultMQProducer.setNamesrvAddr(rocketMQConfig.getNameSever());
-            defaultMQProducer.setProducerGroup(rocketMQConfig.getGroupName());
-            defaultMQProducer.setRetryTimesWhenSendFailed(rocketMQConfig.getRetryTimes());
-            defaultMQProducer.setRetryTimesWhenSendAsyncFailed(rocketMQConfig.getRetryTimes());
+            defaultMQProducer.setNamesrvAddr(rocketMQConfig.getProducer().getNameSever());
+            defaultMQProducer.setProducerGroup(rocketMQConfig.getProducer().getGroupName());
+            defaultMQProducer.setRetryTimesWhenSendFailed(rocketMQConfig.getProducer().getRetryTimes());
+            defaultMQProducer.setRetryTimesWhenSendAsyncFailed(rocketMQConfig.getProducer().getRetryTimes());
             defaultMQProducer.setRetryAnotherBrokerWhenNotStoreOK(true);
             //设置发送信息的异步线程池
             defaultMQProducer.setAsyncSenderExecutor(asyncThreadPoolExecutor);
             defaultMQProducer.start();
-            System.out.println("RocketMQ 生产者启动成功====>NameSever is "+ rocketMQConfig.getNameSever());
+            System.out.println("RocketMQ 生产者启动成功====> NameSever is "+ rocketMQConfig.getProducer().getNameSever());
         } catch (MQClientException e) {
             throw new RuntimeException(e);
         }

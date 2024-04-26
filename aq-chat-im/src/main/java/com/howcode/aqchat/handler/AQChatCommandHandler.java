@@ -3,7 +3,7 @@ package com.howcode.aqchat.handler;
 import com.alibaba.fastjson.JSONObject;
 import com.google.protobuf.GeneratedMessageV3;
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
-import com.howcode.aqchat.common.constant.AQMessageQueueTopicConstant;
+import com.howcode.aqchat.common.constant.AQChatMQConstant;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IUserHolder;
@@ -63,7 +63,7 @@ public class AQChatCommandHandler extends SimpleChannelInboundHandler<Object> {
         //mq发送用户离线消息
         Message message = new Message();
         message.setBody(JSONObject.toJSONString(userLoginInfo).getBytes());
-        message.setTopic(AQMessageQueueTopicConstant.OFFLINE_MESSAGE_TOPIC);
+        message.setTopic(AQChatMQConstant.MQTopic.OFFLINE_MESSAGE_TOPIC);
         mqProducer.send(message);
         logout.close();
         ctx.close();

@@ -1,7 +1,11 @@
 package com.howcode.aqchat.handler.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
+import com.howcode.aqchat.common.constant.AQChatMQConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
+import com.howcode.aqchat.common.model.MessageDto;
+import com.howcode.aqchat.common.utils.IdProvider;
 import com.howcode.aqchat.handler.ICmdHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
@@ -9,8 +13,14 @@ import com.howcode.aqchat.message.MessageConstructor;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
+import org.apache.rocketmq.client.producer.MQProducer;
+import org.apache.rocketmq.common.message.Message;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 /**
  * @Author: ZhangWeinan
@@ -20,9 +30,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class SendMsgCmdHandler implements ICmdHandler<AQChatMsgProtocol.SendMsgCmd> {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SendMsgCmdHandler.class);
     @Resource
     @Lazy
     private GlobalChannelHolder globalChannelHolder;
+    @Resource
+    @Lazy
+    private MQProducer mqProducer;
 
     @Override
     public void handle(ChannelHandlerContext ctx, AQChatMsgProtocol.SendMsgCmd cmd) {
@@ -47,6 +61,23 @@ public class SendMsgCmdHandler implements ICmdHandler<AQChatMsgProtocol.SendMsgC
         }
         // 发送消息
         globalChannelHolder.sendMsgToRoom(userId, cmd);
+
+        // 发送消息到MQ
+        MessageDto messageDto = new MessageDto();
+        messageDto.setMessageId(IdProvider.nextId());
+        messageDto.setRoomId(roomId);
+        messageDto.setSenderId(userId);
+        messageDto.setMessageType(cmd.getMsgType().getNumber());
+        messageDto.setMessageContent(cmd.getMsg());
+        messageDto.setCreateTime(new Date());
+        Message message = new Message();
+        message.setTopic(AQChatMQConstant.MQTopic.SEND_MESSAGE_TOPIC);
+        message.setBody(JSONObject.toJSONString(messageDto).getBytes());
+        try {
+            mqProducer.send(message);
+        } catch (Exception e) {
+            LOGGER.error("发送消息失败", e);
+        }
 
         //返回消息发送成功
         AQChatMsgProtocol.SendMsgAck result = AQChatMsgProtocol.SendMsgAck.newBuilder()
