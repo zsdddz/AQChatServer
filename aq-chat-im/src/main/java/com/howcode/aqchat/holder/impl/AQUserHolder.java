@@ -25,7 +25,7 @@ public class AQUserHolder implements IUserHolder {
     @Override
     public void saveUserInfo(UserGlobalInfoDto userGlobalInfoDto) {
         redisCacheHelper.setCacheObject(
-                AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userGlobalInfoDto.getUserId(),
+                AQRedisKeyPrefix.AQ_USER_INFO_PREFIX + userGlobalInfoDto.getUserId(),
                 userGlobalInfoDto,
                 AQBusinessConstant.USER_INFO_CACHE_TIME,
                 TimeUnit.SECONDS);
@@ -33,17 +33,17 @@ public class AQUserHolder implements IUserHolder {
 
     @Override
     public UserGlobalInfoDto getUserInfo(String userId) {
-        return redisCacheHelper.getCacheObject(AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userId,UserGlobalInfoDto.class);
+        return redisCacheHelper.getCacheObject(AQRedisKeyPrefix.AQ_USER_INFO_PREFIX + userId,UserGlobalInfoDto.class);
     }
 
     @Override
     public void removeUserInfo(String userId) {
-        redisCacheHelper.deleteObject(AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userId);
+        redisCacheHelper.deleteObject(AQRedisKeyPrefix.AQ_USER_INFO_PREFIX + userId);
     }
 
     @Override
     public void offline(String userId) {
-        redisCacheHelper.expire(AQRedisKeyPrefix.AQ_USER_LOGIN_INFO_PREFIX + userId,
+        redisCacheHelper.expire(AQRedisKeyPrefix.AQ_USER_INFO_PREFIX + userId,
                 AQBusinessConstant.USER_OFFLINE_CACHE_TIME,
                 TimeUnit.SECONDS);
     }
