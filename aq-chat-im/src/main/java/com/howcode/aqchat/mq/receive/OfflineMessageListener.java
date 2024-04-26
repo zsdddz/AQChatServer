@@ -1,4 +1,4 @@
-package com.howcode.aqchat.receive;
+package com.howcode.aqchat.mq.receive;
 
 import com.howcode.aqchat.common.constant.AQChatMQConstant;
 import com.howcode.aqchat.framework.mq.starter.config.RocketMQConfig;

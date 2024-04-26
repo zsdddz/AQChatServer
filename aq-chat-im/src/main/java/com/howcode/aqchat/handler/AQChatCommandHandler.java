@@ -1,20 +1,17 @@
 package com.howcode.aqchat.handler;
 
-import com.alibaba.fastjson.JSONObject;
 import com.google.protobuf.GeneratedMessageV3;
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
-import com.howcode.aqchat.common.constant.AQChatMQConstant;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IUserHolder;
+import com.howcode.aqchat.mq.MqSendingAgent;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
-import org.apache.rocketmq.client.producer.MQProducer;
-import org.apache.rocketmq.common.message.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -37,7 +34,7 @@ public class AQChatCommandHandler extends SimpleChannelInboundHandler<Object> {
     @Resource
     private GlobalChannelHolder globalChannelHolder;
     @Resource
-    private MQProducer mqProducer;
+    private MqSendingAgent mqSendingAgent;
 
     /**
      * 异常或者正常断线 都会触发该方法
@@ -61,10 +58,8 @@ public class AQChatCommandHandler extends SimpleChannelInboundHandler<Object> {
         NioSocketChannel logout = globalChannelHolder.logout(userId);
 
         //mq发送用户离线消息
-        Message message = new Message();
-        message.setBody(JSONObject.toJSONString(userLoginInfo).getBytes());
-        message.setTopic(AQChatMQConstant.MQTopic.OFFLINE_MESSAGE_TOPIC);
-        mqProducer.send(message);
+        mqSendingAgent.sendOfflineMessage(userLoginInfo);
+
         logout.close();
         ctx.close();
     }
