@@ -99,7 +99,7 @@ public class MessageBroadcaster {
         if (null == nioSocketChannel) {
             return;
         }
-        String roomId = userRoomMap.remove(userId);
+        String roomId = userRoomMap.get(userId);
         if (null == roomId) {
             return;
         }

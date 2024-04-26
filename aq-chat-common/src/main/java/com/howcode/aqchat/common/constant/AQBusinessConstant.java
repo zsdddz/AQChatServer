@@ -35,9 +35,9 @@ public interface AQBusinessConstant {
     long USER_INFO_CACHE_TIME = 60 * 60 * 24;
 
     /**
-     * 用户离线后缓存时间  10分钟
+     * 用户离线后缓存时间  9分钟
      */
-    long USER_OFFLINE_CACHE_TIME = 60 * 10;
+    long USER_OFFLINE_CACHE_TIME = 60 * 9;
     /**
      * 阿里云临时凭证缓存时长 单位秒 1小时
      */
