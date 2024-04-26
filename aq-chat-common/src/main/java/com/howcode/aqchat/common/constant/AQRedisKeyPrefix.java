@@ -9,7 +9,7 @@ public interface AQRedisKeyPrefix {
     /**
      * 用户登录信息前缀
      */
-    String AQ_USER_LOGIN_INFO_PREFIX = "AQChat:userLoginInfo:";
+    String AQ_USER_INFO_PREFIX = "AQChat:userInfo:";
 
     /**
      * 房间号缓存前缀
