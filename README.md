@@ -29,5 +29,5 @@ protobuf 3 <br/>
 MySQL 8.0.34 <br/>
 Redis 6.0.8 <br/>
 RocketMQ 4.4.0 <br/>
-阿里OSS
+阿里云OSS
 
