@@ -39,7 +39,7 @@ public class MessageBroadcastReceiver implements InitializingBean {
         try {
             DefaultMQPushConsumer defaultMQPushConsumer = new DefaultMQPushConsumer();
             defaultMQPushConsumer.setNamesrvAddr(rocketMQConfig.getConsumer().getNameSever());
-            defaultMQPushConsumer.setConsumerGroup(AQChatMQConstant.ConsumerGroup.NOTICE_MESSAGE_CONSUMER_GROUP);
+            defaultMQPushConsumer.setConsumerGroup(AQChatMQConstant.ConsumerGroup.SEND_MESSAGE_CONSUMER_GROUP);
             defaultMQPushConsumer.setConsumeMessageBatchMaxSize(1);
             defaultMQPushConsumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
             defaultMQPushConsumer.subscribe(AQChatMQConstant.MQTopic.SEND_MESSAGE_TOPIC, "*");

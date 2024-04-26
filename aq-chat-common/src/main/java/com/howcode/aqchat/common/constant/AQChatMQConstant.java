@@ -26,9 +26,9 @@ public class AQChatMQConstant {
          */
         String LEGACY_DATA_CONSUMER_GROUP = "legacy_data_consumer_group";
         /**
-         * 通知消息的消费者组
+         * 存储消息的消费者组
          */
-        String NOTICE_MESSAGE_CONSUMER_GROUP = "notice_message_consumer_group";
+        String STORE_MESSAGE_CONSUMER_GROUP = "store_message_consumer_group";
     }
     /**
      * MQ的topic

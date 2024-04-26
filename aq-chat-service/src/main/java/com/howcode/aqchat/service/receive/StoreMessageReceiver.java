@@ -12,6 +12,7 @@ import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
+import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -39,10 +40,10 @@ public class StoreMessageReceiver implements InitializingBean {
         try {
             DefaultMQPushConsumer defaultMQPushConsumer = new DefaultMQPushConsumer();
             defaultMQPushConsumer.setNamesrvAddr(rocketMQConfig.getConsumer().getNameSever());
-            defaultMQPushConsumer.setConsumerGroup(AQChatMQConstant.ConsumerGroup.SEND_MESSAGE_CONSUMER_GROUP);
+            defaultMQPushConsumer.setConsumerGroup(AQChatMQConstant.ConsumerGroup.STORE_MESSAGE_CONSUMER_GROUP);
             defaultMQPushConsumer.setConsumeMessageBatchMaxSize(1);
-
             defaultMQPushConsumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
+            defaultMQPushConsumer.setMessageModel(MessageModel.CLUSTERING);
             defaultMQPushConsumer.subscribe(AQChatMQConstant.MQTopic.STORE_MESSAGE_TOPIC, "*");
             defaultMQPushConsumer.setMessageListener((MessageListenerConcurrently) (messageExtList, consumeConcurrentlyContext) -> {
                 for (MessageExt messageExt : messageExtList) {
@@ -54,6 +55,7 @@ public class StoreMessageReceiver implements InitializingBean {
                         messageService.saveMessage(messageDto);
                     }
                 }
+                LOGGER.info("存储消息成功");
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             });
             defaultMQPushConsumer.start();
