@@ -2,6 +2,7 @@ package com.howcode.aqchat.service.service.impl;
 
 import com.howcode.aqchat.common.model.MessageDto;
 import com.howcode.aqchat.service.dao.mapper.IAQMessageMapper;
+import com.howcode.aqchat.service.dao.po.AqMessage;
 import com.howcode.aqchat.service.service.IAQMessageService;
 import jakarta.annotation.Resource;
 import org.apache.rocketmq.client.producer.MQProducer;
@@ -23,7 +24,15 @@ public class AQMessageServiceImpl implements IAQMessageService {
 
     @Override
     public void saveMessage(MessageDto messageDto) {
-
+        AqMessage aqMessage = new AqMessage();
+        aqMessage.setMessageId(messageDto.getMessageId());
+        aqMessage.setRoomId(messageDto.getRoomId());
+        aqMessage.setSenderId(messageDto.getSenderId());
+        aqMessage.setMessageType(messageDto.getMessageType());
+        aqMessage.setMessageContent(messageDto.getMessageContent());
+        aqMessage.setCreateTime(messageDto.getCreateTime());
+        System.out.println(aqMessage);
+        messageMapper.insert(aqMessage);
     }
 
     @Override

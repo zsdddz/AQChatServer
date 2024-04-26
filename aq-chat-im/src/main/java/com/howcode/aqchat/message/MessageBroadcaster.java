@@ -95,24 +95,6 @@ public class MessageBroadcaster {
         channelGroup.writeAndFlush(msg);
     }
 
-    public void sendMsgToRoom(UserGlobalInfoDto userInfo, AQChatMsgProtocol.SendMsgCmd cmd) {
-        String roomId = userRoomMap.get(userInfo.getUserId());
-        if (null == roomId) {
-            return;
-        }
-        AQChatMsgProtocol.User.Builder userBuilder = AQChatMsgProtocol.User.newBuilder();
-        userBuilder.setUserId(userInfo.getUserId());
-        userBuilder.setUserName(userInfo.getUserName());
-        userBuilder.setUserAvatar(userInfo.getUserAvatar());
-        AQChatMsgProtocol.BroadcastMsgAck sendMsgCmd = AQChatMsgProtocol.BroadcastMsgAck.newBuilder()
-                .setRoomId(roomId)
-                .setUser(userBuilder.build())
-                .setMsgType(cmd.getMsgType())
-                .setMsg(cmd.getMsg())
-                .build();
-        broadcast(roomId, sendMsgCmd);
-    }
-
     public void removeChannel(String userId, NioSocketChannel nioSocketChannel) {
         if (null == nioSocketChannel) {
             return;

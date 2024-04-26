@@ -3,7 +3,6 @@ package com.howcode.aqchat.mq;
 import com.alibaba.fastjson.JSONObject;
 import com.howcode.aqchat.common.constant.AQChatMQConstant;
 import com.howcode.aqchat.common.model.MessageDto;
-import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import jakarta.annotation.Resource;
 import org.apache.rocketmq.client.producer.MQProducer;
 import org.apache.rocketmq.common.message.Message;
@@ -37,6 +36,8 @@ public class MqSendingAgent {
         Message legacyDataMessage = new Message();
         legacyDataMessage.setBody(userId.getBytes());
         legacyDataMessage.setTopic(AQChatMQConstant.MQTopic.LEGACY_DATA_TOPIC);
+        // 1  2  3    4    5  6  7   8   9  10  11 12 13  14  15  16  17  18
+        // 1s 5s 10s  30s  1m 2m 3m  4m 5m  6m  7m 8m 9m 10m  20m  30m 1h  2h
         legacyDataMessage.setDelayTimeLevel(14);
         try {
             mqProducer.send(offlineMessage);
@@ -52,7 +53,7 @@ public class MqSendingAgent {
             return;
         }
         Message message = new Message();
-        message.setTopic(AQChatMQConstant.MQTopic.SEND_MESSAGE_TOPIC);
+        message.setTopic(AQChatMQConstant.MQTopic.STORE_MESSAGE_TOPIC);
         message.setBody(JSONObject.toJSONString(messageDto).getBytes());
         try {
             mqProducer.send(message);
@@ -63,5 +64,20 @@ public class MqSendingAgent {
 
     public void sendLogoutMessage(String userId) {
 
+    }
+
+    public void sendMessageToRoom(MessageDto messageDto) {
+        if (null == messageDto) {
+            LOGGER.error("消息为空");
+            return;
+        }
+        Message message = new Message();
+        message.setTopic(AQChatMQConstant.MQTopic.SEND_MESSAGE_TOPIC);
+        message.setBody(JSONObject.toJSONString(messageDto).getBytes());
+        try {
+            mqProducer.send(message);
+        } catch (Exception e) {
+            LOGGER.error("发送消息失败", e);
+        }
     }
 }

@@ -31,7 +31,7 @@ spring:
     banner-mode: off
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: 127.0.0.1:3306
+    url: jdbc:mysql://127.0.0.1:3306/aqchat?useUnicode=true&characterEncoding=UTF-8
     username: root
     password: root
 
@@ -51,5 +51,4 @@ spring:
 
 mybatis-plus:
   configuration:
-    map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

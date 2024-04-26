@@ -1,5 +1,6 @@
 package com.howcode.aqchat.service.dao.po;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -16,9 +17,14 @@ import java.util.Date;
 public class AqMessage {
     @TableId
     private Long messageId;
+    @TableField("room_id")
     private String roomId;
+    @TableField("sender_id")
     private String senderId;
+    @TableField("message_type")
     private Integer messageType;
+    @TableField("message_content")
     private String messageContent;
+    @TableField("create_time")
     private Date createTime;
 }

@@ -57,9 +57,6 @@ public class SendMsgCmdHandler implements ICmdHandler<AQChatMsgProtocol.SendMsgC
             return;
         }
         // 发送消息
-        globalChannelHolder.sendMsgToRoom(userId, cmd);
-
-        // 发送消息到MQ
         MessageDto messageDto = new MessageDto();
         messageDto.setMessageId(IdProvider.nextId());
         messageDto.setRoomId(roomId);
@@ -67,6 +64,7 @@ public class SendMsgCmdHandler implements ICmdHandler<AQChatMsgProtocol.SendMsgC
         messageDto.setMessageType(cmd.getMsgType().getNumber());
         messageDto.setMessageContent(cmd.getMsg());
         messageDto.setCreateTime(new Date());
+        mqSendingAgent.sendMessageToRoom(messageDto);
         mqSendingAgent.storeMessages(messageDto);
 
         //返回消息发送成功

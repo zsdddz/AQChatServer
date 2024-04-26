@@ -20,6 +20,15 @@ public class AQChatMQConstant {
          * 离线消息的消费者组
          */
         String OFFLINE_MESSAGE_CONSUMER_GROUP = "offline_message_consumer_group";
+
+        /**
+         * 遗留数据的消费者组
+         */
+        String LEGACY_DATA_CONSUMER_GROUP = "legacy_data_consumer_group";
+        /**
+         * 通知消息的消费者组
+         */
+        String NOTICE_MESSAGE_CONSUMER_GROUP = "notice_message_consumer_group";
     }
     /**
      * MQ的topic
@@ -29,6 +38,10 @@ public class AQChatMQConstant {
          * 发送消息的topic
          */
         String SEND_MESSAGE_TOPIC = "send_message_topic";
+        /**
+         * 存储消息的topic
+         */
+        String STORE_MESSAGE_TOPIC = "store_message_topic";
 
         /**
          * 成员离线消息的topic
