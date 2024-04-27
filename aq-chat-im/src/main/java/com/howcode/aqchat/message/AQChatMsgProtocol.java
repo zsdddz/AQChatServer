@@ -144,9 +144,9 @@ public final class AQChatMsgProtocol {
      *朋友离线
      * </pre>
      *
-     * <code>FRIEND_OFFLINE_ACK = 19;</code>
+     * <code>OFFLINE_NOTIFY = 19;</code>
      */
-    FRIEND_OFFLINE_ACK(19),
+    OFFLINE_NOTIFY(19),
     /**
      * <pre>
      *同步聊天室聊天记录
@@ -315,9 +315,9 @@ public final class AQChatMsgProtocol {
      *朋友离线
      * </pre>
      *
-     * <code>FRIEND_OFFLINE_ACK = 19;</code>
+     * <code>OFFLINE_NOTIFY = 19;</code>
      */
-    public static final int FRIEND_OFFLINE_ACK_VALUE = 19;
+    public static final int OFFLINE_NOTIFY_VALUE = 19;
     /**
      * <pre>
      *同步聊天室聊天记录
@@ -403,7 +403,7 @@ public final class AQChatMsgProtocol {
         case 16: return GET_STS_ACK;
         case 17: return USER_LOGOUT_CMD;
         case 18: return USER_LOGOUT_ACK;
-        case 19: return FRIEND_OFFLINE_ACK;
+        case 19: return OFFLINE_NOTIFY;
         case 20: return SYNC_CHAT_RECORD_CMD;
         case 21: return SYNC_CHAT_RECORD_ACK;
         case 22: return RECOVER_USER_CMD;
@@ -15332,47 +15332,62 @@ public final class AQChatMsgProtocol {
 
   }
 
-  public interface FriendOfflineAckOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:chat_msg.FriendOfflineAck)
+  public interface OfflineNotifyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:chat_msg.OfflineNotify)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string userId = 1;</code>
-     * @return The userId.
+     * <code>.chat_msg.User user = 1;</code>
+     * @return Whether the user field is set.
      */
-    java.lang.String getUserId();
+    boolean hasUser();
     /**
-     * <code>string userId = 1;</code>
-     * @return The bytes for userId.
+     * <code>.chat_msg.User user = 1;</code>
+     * @return The user.
+     */
+    com.howcode.aqchat.message.AQChatMsgProtocol.User getUser();
+    /**
+     * <code>.chat_msg.User user = 1;</code>
+     */
+    com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder getUserOrBuilder();
+
+    /**
+     * <code>string roomId = 2;</code>
+     * @return The roomId.
+     */
+    java.lang.String getRoomId();
+    /**
+     * <code>string roomId = 2;</code>
+     * @return The bytes for roomId.
      */
     com.google.protobuf.ByteString
-        getUserIdBytes();
+        getRoomIdBytes();
   }
   /**
    * <pre>
    *朋友离线
    * </pre>
    *
-   * Protobuf type {@code chat_msg.FriendOfflineAck}
+   * Protobuf type {@code chat_msg.OfflineNotify}
    */
-  public static final class FriendOfflineAck extends
+  public static final class OfflineNotify extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:chat_msg.FriendOfflineAck)
-      FriendOfflineAckOrBuilder {
+      // @@protoc_insertion_point(message_implements:chat_msg.OfflineNotify)
+      OfflineNotifyOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use FriendOfflineAck.newBuilder() to construct.
-    private FriendOfflineAck(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use OfflineNotify.newBuilder() to construct.
+    private OfflineNotify(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private FriendOfflineAck() {
-      userId_ = "";
+    private OfflineNotify() {
+      roomId_ = "";
     }
 
     @java.lang.Override
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new FriendOfflineAck();
+      return new OfflineNotify();
     }
 
     @java.lang.Override
@@ -15380,7 +15395,7 @@ public final class AQChatMsgProtocol {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private FriendOfflineAck(
+    private OfflineNotify(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -15399,9 +15414,22 @@ public final class AQChatMsgProtocol {
               done = true;
               break;
             case 10: {
+              com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder subBuilder = null;
+              if (user_ != null) {
+                subBuilder = user_.toBuilder();
+              }
+              user_ = input.readMessage(com.howcode.aqchat.message.AQChatMsgProtocol.User.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(user_);
+                user_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              userId_ = s;
+              roomId_ = s;
               break;
             }
             default: {
@@ -15425,49 +15453,75 @@ public final class AQChatMsgProtocol {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_FriendOfflineAck_descriptor;
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_OfflineNotify_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_FriendOfflineAck_fieldAccessorTable
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_OfflineNotify_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck.Builder.class);
+              com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify.class, com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify.Builder.class);
     }
 
-    public static final int USERID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object userId_;
+    public static final int USER_FIELD_NUMBER = 1;
+    private com.howcode.aqchat.message.AQChatMsgProtocol.User user_;
     /**
-     * <code>string userId = 1;</code>
-     * @return The userId.
+     * <code>.chat_msg.User user = 1;</code>
+     * @return Whether the user field is set.
      */
     @java.lang.Override
-    public java.lang.String getUserId() {
-      java.lang.Object ref = userId_;
+    public boolean hasUser() {
+      return user_ != null;
+    }
+    /**
+     * <code>.chat_msg.User user = 1;</code>
+     * @return The user.
+     */
+    @java.lang.Override
+    public com.howcode.aqchat.message.AQChatMsgProtocol.User getUser() {
+      return user_ == null ? com.howcode.aqchat.message.AQChatMsgProtocol.User.getDefaultInstance() : user_;
+    }
+    /**
+     * <code>.chat_msg.User user = 1;</code>
+     */
+    @java.lang.Override
+    public com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder getUserOrBuilder() {
+      return getUser();
+    }
+
+    public static final int ROOMID_FIELD_NUMBER = 2;
+    private volatile java.lang.Object roomId_;
+    /**
+     * <code>string roomId = 2;</code>
+     * @return The roomId.
+     */
+    @java.lang.Override
+    public java.lang.String getRoomId() {
+      java.lang.Object ref = roomId_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        userId_ = s;
+        roomId_ = s;
         return s;
       }
     }
     /**
-     * <code>string userId = 1;</code>
-     * @return The bytes for userId.
+     * <code>string roomId = 2;</code>
+     * @return The bytes for roomId.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getUserIdBytes() {
-      java.lang.Object ref = userId_;
+        getRoomIdBytes() {
+      java.lang.Object ref = roomId_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        userId_ = b;
+        roomId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -15488,8 +15542,11 @@ public final class AQChatMsgProtocol {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, userId_);
+      if (user_ != null) {
+        output.writeMessage(1, getUser());
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, roomId_);
       }
       unknownFields.writeTo(output);
     }
@@ -15500,8 +15557,12 @@ public final class AQChatMsgProtocol {
       if (size != -1) return size;
 
       size = 0;
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, userId_);
+      if (user_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getUser());
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, roomId_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -15513,13 +15574,18 @@ public final class AQChatMsgProtocol {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck)) {
+      if (!(obj instanceof com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify)) {
         return super.equals(obj);
       }
-      com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck other = (com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck) obj;
+      com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify other = (com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify) obj;
 
-      if (!getUserId()
-          .equals(other.getUserId())) return false;
+      if (hasUser() != other.hasUser()) return false;
+      if (hasUser()) {
+        if (!getUser()
+            .equals(other.getUser())) return false;
+      }
+      if (!getRoomId()
+          .equals(other.getRoomId())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -15531,76 +15597,80 @@ public final class AQChatMsgProtocol {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + USERID_FIELD_NUMBER;
-      hash = (53 * hash) + getUserId().hashCode();
+      if (hasUser()) {
+        hash = (37 * hash) + USER_FIELD_NUMBER;
+        hash = (53 * hash) + getUser().hashCode();
+      }
+      hash = (37 * hash) + ROOMID_FIELD_NUMBER;
+      hash = (53 * hash) + getRoomId().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(byte[] data)
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(java.io.InputStream input)
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseDelimitedFrom(java.io.InputStream input)
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseDelimitedFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -15613,7 +15683,7 @@ public final class AQChatMsgProtocol {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck prototype) {
+    public static Builder newBuilder(com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -15633,26 +15703,26 @@ public final class AQChatMsgProtocol {
      *朋友离线
      * </pre>
      *
-     * Protobuf type {@code chat_msg.FriendOfflineAck}
+     * Protobuf type {@code chat_msg.OfflineNotify}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:chat_msg.FriendOfflineAck)
-        com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAckOrBuilder {
+        // @@protoc_insertion_point(builder_implements:chat_msg.OfflineNotify)
+        com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotifyOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_FriendOfflineAck_descriptor;
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_OfflineNotify_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_FriendOfflineAck_fieldAccessorTable
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_OfflineNotify_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck.Builder.class);
+                com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify.class, com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify.Builder.class);
       }
 
-      // Construct using com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck.newBuilder()
+      // Construct using com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -15670,7 +15740,13 @@ public final class AQChatMsgProtocol {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        userId_ = "";
+        if (userBuilder_ == null) {
+          user_ = null;
+        } else {
+          user_ = null;
+          userBuilder_ = null;
+        }
+        roomId_ = "";
 
         return this;
       }
@@ -15678,17 +15754,17 @@ public final class AQChatMsgProtocol {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_FriendOfflineAck_descriptor;
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_OfflineNotify_descriptor;
       }
 
       @java.lang.Override
-      public com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck getDefaultInstanceForType() {
-        return com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck.getDefaultInstance();
+      public com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify getDefaultInstanceForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify.getDefaultInstance();
       }
 
       @java.lang.Override
-      public com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck build() {
-        com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck result = buildPartial();
+      public com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify build() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -15696,9 +15772,14 @@ public final class AQChatMsgProtocol {
       }
 
       @java.lang.Override
-      public com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck buildPartial() {
-        com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck result = new com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck(this);
-        result.userId_ = userId_;
+      public com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify buildPartial() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify result = new com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify(this);
+        if (userBuilder_ == null) {
+          result.user_ = user_;
+        } else {
+          result.user_ = userBuilder_.build();
+        }
+        result.roomId_ = roomId_;
         onBuilt();
         return result;
       }
@@ -15737,18 +15818,21 @@ public final class AQChatMsgProtocol {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck) {
-          return mergeFrom((com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck)other);
+        if (other instanceof com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify) {
+          return mergeFrom((com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck other) {
-        if (other == com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck.getDefaultInstance()) return this;
-        if (!other.getUserId().isEmpty()) {
-          userId_ = other.userId_;
+      public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify other) {
+        if (other == com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify.getDefaultInstance()) return this;
+        if (other.hasUser()) {
+          mergeUser(other.getUser());
+        }
+        if (!other.getRoomId().isEmpty()) {
+          roomId_ = other.roomId_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -15766,11 +15850,11 @@ public final class AQChatMsgProtocol {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck parsedMessage = null;
+        com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck) e.getUnfinishedMessage();
+          parsedMessage = (com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -15780,78 +15864,197 @@ public final class AQChatMsgProtocol {
         return this;
       }
 
-      private java.lang.Object userId_ = "";
+      private com.howcode.aqchat.message.AQChatMsgProtocol.User user_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.howcode.aqchat.message.AQChatMsgProtocol.User, com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder, com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder> userBuilder_;
       /**
-       * <code>string userId = 1;</code>
-       * @return The userId.
+       * <code>.chat_msg.User user = 1;</code>
+       * @return Whether the user field is set.
        */
-      public java.lang.String getUserId() {
-        java.lang.Object ref = userId_;
+      public boolean hasUser() {
+        return userBuilder_ != null || user_ != null;
+      }
+      /**
+       * <code>.chat_msg.User user = 1;</code>
+       * @return The user.
+       */
+      public com.howcode.aqchat.message.AQChatMsgProtocol.User getUser() {
+        if (userBuilder_ == null) {
+          return user_ == null ? com.howcode.aqchat.message.AQChatMsgProtocol.User.getDefaultInstance() : user_;
+        } else {
+          return userBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.chat_msg.User user = 1;</code>
+       */
+      public Builder setUser(com.howcode.aqchat.message.AQChatMsgProtocol.User value) {
+        if (userBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          user_ = value;
+          onChanged();
+        } else {
+          userBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.chat_msg.User user = 1;</code>
+       */
+      public Builder setUser(
+          com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder builderForValue) {
+        if (userBuilder_ == null) {
+          user_ = builderForValue.build();
+          onChanged();
+        } else {
+          userBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.chat_msg.User user = 1;</code>
+       */
+      public Builder mergeUser(com.howcode.aqchat.message.AQChatMsgProtocol.User value) {
+        if (userBuilder_ == null) {
+          if (user_ != null) {
+            user_ =
+              com.howcode.aqchat.message.AQChatMsgProtocol.User.newBuilder(user_).mergeFrom(value).buildPartial();
+          } else {
+            user_ = value;
+          }
+          onChanged();
+        } else {
+          userBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.chat_msg.User user = 1;</code>
+       */
+      public Builder clearUser() {
+        if (userBuilder_ == null) {
+          user_ = null;
+          onChanged();
+        } else {
+          user_ = null;
+          userBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.chat_msg.User user = 1;</code>
+       */
+      public com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder getUserBuilder() {
+        
+        onChanged();
+        return getUserFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.chat_msg.User user = 1;</code>
+       */
+      public com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder getUserOrBuilder() {
+        if (userBuilder_ != null) {
+          return userBuilder_.getMessageOrBuilder();
+        } else {
+          return user_ == null ?
+              com.howcode.aqchat.message.AQChatMsgProtocol.User.getDefaultInstance() : user_;
+        }
+      }
+      /**
+       * <code>.chat_msg.User user = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.howcode.aqchat.message.AQChatMsgProtocol.User, com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder, com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder> 
+          getUserFieldBuilder() {
+        if (userBuilder_ == null) {
+          userBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.howcode.aqchat.message.AQChatMsgProtocol.User, com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder, com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder>(
+                  getUser(),
+                  getParentForChildren(),
+                  isClean());
+          user_ = null;
+        }
+        return userBuilder_;
+      }
+
+      private java.lang.Object roomId_ = "";
+      /**
+       * <code>string roomId = 2;</code>
+       * @return The roomId.
+       */
+      public java.lang.String getRoomId() {
+        java.lang.Object ref = roomId_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          userId_ = s;
+          roomId_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string userId = 1;</code>
-       * @return The bytes for userId.
+       * <code>string roomId = 2;</code>
+       * @return The bytes for roomId.
        */
       public com.google.protobuf.ByteString
-          getUserIdBytes() {
-        java.lang.Object ref = userId_;
+          getRoomIdBytes() {
+        java.lang.Object ref = roomId_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          userId_ = b;
+          roomId_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string userId = 1;</code>
-       * @param value The userId to set.
+       * <code>string roomId = 2;</code>
+       * @param value The roomId to set.
        * @return This builder for chaining.
        */
-      public Builder setUserId(
+      public Builder setRoomId(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        userId_ = value;
+        roomId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string userId = 1;</code>
+       * <code>string roomId = 2;</code>
        * @return This builder for chaining.
        */
-      public Builder clearUserId() {
+      public Builder clearRoomId() {
         
-        userId_ = getDefaultInstance().getUserId();
+        roomId_ = getDefaultInstance().getRoomId();
         onChanged();
         return this;
       }
       /**
-       * <code>string userId = 1;</code>
-       * @param value The bytes for userId to set.
+       * <code>string roomId = 2;</code>
+       * @param value The bytes for roomId to set.
        * @return This builder for chaining.
        */
-      public Builder setUserIdBytes(
+      public Builder setRoomIdBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        userId_ = value;
+        roomId_ = value;
         onChanged();
         return this;
       }
@@ -15868,41 +16071,41 @@ public final class AQChatMsgProtocol {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:chat_msg.FriendOfflineAck)
+      // @@protoc_insertion_point(builder_scope:chat_msg.OfflineNotify)
     }
 
-    // @@protoc_insertion_point(class_scope:chat_msg.FriendOfflineAck)
-    private static final com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:chat_msg.OfflineNotify)
+    private static final com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck();
+      DEFAULT_INSTANCE = new com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify();
     }
 
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck getDefaultInstance() {
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<FriendOfflineAck>
-        PARSER = new com.google.protobuf.AbstractParser<FriendOfflineAck>() {
+    private static final com.google.protobuf.Parser<OfflineNotify>
+        PARSER = new com.google.protobuf.AbstractParser<OfflineNotify>() {
       @java.lang.Override
-      public FriendOfflineAck parsePartialFrom(
+      public OfflineNotify parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new FriendOfflineAck(input, extensionRegistry);
+        return new OfflineNotify(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<FriendOfflineAck> parser() {
+    public static com.google.protobuf.Parser<OfflineNotify> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<FriendOfflineAck> getParserForType() {
+    public com.google.protobuf.Parser<OfflineNotify> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.howcode.aqchat.message.AQChatMsgProtocol.FriendOfflineAck getDefaultInstanceForType() {
+    public com.howcode.aqchat.message.AQChatMsgProtocol.OfflineNotify getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -21805,10 +22008,10 @@ public final class AQChatMsgProtocol {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chat_msg_UserLogoutAck_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_chat_msg_FriendOfflineAck_descriptor;
+    internal_static_chat_msg_OfflineNotify_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_chat_msg_FriendOfflineAck_fieldAccessorTable;
+      internal_static_chat_msg_OfflineNotify_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chat_msg_SyncChatRecordCmd_descriptor;
   private static final 
@@ -21882,36 +22085,37 @@ public final class AQChatMsgProtocol {
       "oken\030\003 \001(\t\022\016\n\006region\030\004 \001(\t\022\016\n\006bucket\030\005 \001" +
       "(\t\022\022\n\nuploadPath\030\006 \001(\t\022\020\n\010endpoint\030\007 \001(\t" +
       "\"\037\n\rUserLogoutCmd\022\016\n\006userId\030\001 \001(\t\"\037\n\rUse" +
-      "rLogoutAck\022\016\n\006userId\030\001 \001(\t\"\"\n\020FriendOffl" +
-      "ineAck\022\016\n\006userId\030\001 \001(\t\"#\n\021SyncChatRecord" +
-      "Cmd\022\016\n\006roomId\030\001 \001(\t\">\n\021SyncChatRecordAck" +
-      "\022)\n\013chatRecords\030\001 \003(\0132\024.chat_msg.ChatRec" +
-      "ord\"\213\001\n\nChatRecord\022\016\n\006userId\030\001 \001(\t\022\020\n\010us" +
-      "erName\030\002 \001(\t\022\022\n\nuserAvatar\030\003 \001(\t\022\"\n\007msgT" +
-      "ype\030\004 \001(\0162\021.chat_msg.MsgType\022\017\n\007message\030" +
-      "\005 \001(\t\022\022\n\ncreateTime\030\006 \001(\t\" \n\016RecoverUser" +
-      "Cmd\022\016\n\006userId\030\001 \001(\t\"V\n\016RecoverUserAck\022\016\n" +
-      "\006userId\030\001 \001(\t\022\020\n\010userName\030\002 \001(\t\022\022\n\nuserA" +
-      "vatar\030\003 \001(\t\022\016\n\006roomId\030\004 \001(\t\">\n\016JoinRoomN" +
-      "otify\022\034\n\004user\030\001 \001(\0132\016.chat_msg.User\022\016\n\006r" +
-      "oomId\030\002 \001(\t\"?\n\017LeaveRoomNotify\022\034\n\004user\030\001" +
-      " \001(\0132\016.chat_msg.User\022\016\n\006roomId\030\002 \001(\t*\244\004\n" +
-      "\nMsgCommand\022\022\n\016USER_LOGIN_CMD\020\000\022\022\n\016USER_" +
-      "LOGIN_ACK\020\001\022\022\n\016HEART_BEAT_CMD\020\002\022\022\n\016HEART" +
-      "_BEAT_ACK\020\003\022\021\n\rJOIN_ROOM_CMD\020\004\022\021\n\rJOIN_R" +
-      "OOM_ACK\020\005\022\023\n\017CREATE_ROOM_CMD\020\006\022\023\n\017CREATE" +
-      "_ROOM_ACK\020\007\022\022\n\016LEAVE_ROOM_CMD\020\010\022\022\n\016LEAVE" +
-      "_ROOM_ACK\020\t\022\020\n\014SEND_MSG_CMD\020\n\022\020\n\014SEND_MS" +
-      "G_ACK\020\013\022\025\n\021BROADCAST_MSG_ACK\020\014\022\021\n\rEXCEPT" +
-      "ION_MSG\020\r\022\017\n\013OFFLINE_MSG\020\016\022\017\n\013GET_STS_CM" +
-      "D\020\017\022\017\n\013GET_STS_ACK\020\020\022\023\n\017USER_LOGOUT_CMD\020" +
-      "\021\022\023\n\017USER_LOGOUT_ACK\020\022\022\026\n\022FRIEND_OFFLINE" +
-      "_ACK\020\023\022\030\n\024SYNC_CHAT_RECORD_CMD\020\024\022\030\n\024SYNC" +
-      "_CHAT_RECORD_ACK\020\025\022\024\n\020RECOVER_USER_CMD\020\026" +
-      "\022\024\n\020RECOVER_USER_ACK\020\027\022\024\n\020JOIN_ROOM_NOTI" +
-      "FY\020\030\022\025\n\021LEAVE_ROOM_NOTIFY\020\031*4\n\007MsgType\022\010" +
-      "\n\004TEXT\020\000\022\t\n\005IMAGE\020\001\022\t\n\005VOICE\020\002\022\t\n\005VIDEO\020" +
-      "\003B\034\n\032com.howcode.aqchat.messageb\006proto3"
+      "rLogoutAck\022\016\n\006userId\030\001 \001(\t\"=\n\rOfflineNot" +
+      "ify\022\034\n\004user\030\001 \001(\0132\016.chat_msg.User\022\016\n\006roo" +
+      "mId\030\002 \001(\t\"#\n\021SyncChatRecordCmd\022\016\n\006roomId" +
+      "\030\001 \001(\t\">\n\021SyncChatRecordAck\022)\n\013chatRecor" +
+      "ds\030\001 \003(\0132\024.chat_msg.ChatRecord\"\213\001\n\nChatR" +
+      "ecord\022\016\n\006userId\030\001 \001(\t\022\020\n\010userName\030\002 \001(\t\022" +
+      "\022\n\nuserAvatar\030\003 \001(\t\022\"\n\007msgType\030\004 \001(\0162\021.c" +
+      "hat_msg.MsgType\022\017\n\007message\030\005 \001(\t\022\022\n\ncrea" +
+      "teTime\030\006 \001(\t\" \n\016RecoverUserCmd\022\016\n\006userId" +
+      "\030\001 \001(\t\"V\n\016RecoverUserAck\022\016\n\006userId\030\001 \001(\t" +
+      "\022\020\n\010userName\030\002 \001(\t\022\022\n\nuserAvatar\030\003 \001(\t\022\016" +
+      "\n\006roomId\030\004 \001(\t\">\n\016JoinRoomNotify\022\034\n\004user" +
+      "\030\001 \001(\0132\016.chat_msg.User\022\016\n\006roomId\030\002 \001(\t\"?" +
+      "\n\017LeaveRoomNotify\022\034\n\004user\030\001 \001(\0132\016.chat_m" +
+      "sg.User\022\016\n\006roomId\030\002 \001(\t*\240\004\n\nMsgCommand\022\022" +
+      "\n\016USER_LOGIN_CMD\020\000\022\022\n\016USER_LOGIN_ACK\020\001\022\022" +
+      "\n\016HEART_BEAT_CMD\020\002\022\022\n\016HEART_BEAT_ACK\020\003\022\021" +
+      "\n\rJOIN_ROOM_CMD\020\004\022\021\n\rJOIN_ROOM_ACK\020\005\022\023\n\017" +
+      "CREATE_ROOM_CMD\020\006\022\023\n\017CREATE_ROOM_ACK\020\007\022\022" +
+      "\n\016LEAVE_ROOM_CMD\020\010\022\022\n\016LEAVE_ROOM_ACK\020\t\022\020" +
+      "\n\014SEND_MSG_CMD\020\n\022\020\n\014SEND_MSG_ACK\020\013\022\025\n\021BR" +
+      "OADCAST_MSG_ACK\020\014\022\021\n\rEXCEPTION_MSG\020\r\022\017\n\013" +
+      "OFFLINE_MSG\020\016\022\017\n\013GET_STS_CMD\020\017\022\017\n\013GET_ST" +
+      "S_ACK\020\020\022\023\n\017USER_LOGOUT_CMD\020\021\022\023\n\017USER_LOG" +
+      "OUT_ACK\020\022\022\022\n\016OFFLINE_NOTIFY\020\023\022\030\n\024SYNC_CH" +
+      "AT_RECORD_CMD\020\024\022\030\n\024SYNC_CHAT_RECORD_ACK\020" +
+      "\025\022\024\n\020RECOVER_USER_CMD\020\026\022\024\n\020RECOVER_USER_" +
+      "ACK\020\027\022\024\n\020JOIN_ROOM_NOTIFY\020\030\022\025\n\021LEAVE_ROO" +
+      "M_NOTIFY\020\031*4\n\007MsgType\022\010\n\004TEXT\020\000\022\t\n\005IMAGE" +
+      "\020\001\022\t\n\005VOICE\020\002\022\t\n\005VIDEO\020\003B\034\n\032com.howcode." +
+      "aqchat.messageb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -22037,12 +22241,12 @@ public final class AQChatMsgProtocol {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chat_msg_UserLogoutAck_descriptor,
         new java.lang.String[] { "UserId", });
-    internal_static_chat_msg_FriendOfflineAck_descriptor =
+    internal_static_chat_msg_OfflineNotify_descriptor =
       getDescriptor().getMessageTypes().get(20);
-    internal_static_chat_msg_FriendOfflineAck_fieldAccessorTable = new
+    internal_static_chat_msg_OfflineNotify_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_chat_msg_FriendOfflineAck_descriptor,
-        new java.lang.String[] { "UserId", });
+        internal_static_chat_msg_OfflineNotify_descriptor,
+        new java.lang.String[] { "User", "RoomId", });
     internal_static_chat_msg_SyncChatRecordCmd_descriptor =
       getDescriptor().getMessageTypes().get(21);
     internal_static_chat_msg_SyncChatRecordCmd_fieldAccessorTable = new

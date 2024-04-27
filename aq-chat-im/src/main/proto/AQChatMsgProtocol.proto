@@ -36,7 +36,7 @@ enum MsgCommand{
   USER_LOGOUT_CMD = 17;
   USER_LOGOUT_ACK = 18;
   //朋友离线
-  FRIEND_OFFLINE_ACK = 19;
+  OFFLINE_NOTIFY = 19;
   //同步聊天室聊天记录
   SYNC_CHAT_RECORD_CMD = 20;
   SYNC_CHAT_RECORD_ACK = 21;
@@ -169,8 +169,9 @@ message UserLogoutAck{
 }
 
 //朋友离线
-message FriendOfflineAck{
-  string userId = 1;
+message OfflineNotify{
+  User user = 1;
+  string roomId = 2;
 }
 
 //同步聊天室聊天记录
