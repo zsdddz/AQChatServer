@@ -13,6 +13,8 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +25,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class UserLoginCmdHandler implements ICmdHandler<AQChatMsgProtocol.UserLoginCmd> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserLoginCmdHandler.class);
 
     @Resource
     @Lazy
@@ -55,11 +58,13 @@ public class UserLoginCmdHandler implements ICmdHandler<AQChatMsgProtocol.UserLo
         userGlobalInfoDto.setUserAvatar(userAvatar);
         userHolder.saveUserInfo(userGlobalInfoDto);
 
+        LOGGER.info("UserLoginCmdHandler handle, userId:{}, userName:{}, userAvatar:{}", userId, userName, userAvatar);
         userService.saveUser(userId, userName, userAvatar);
 
         //添加用户channel
         channelHolder.put(userId, (NioSocketChannel) ctx.channel());
 
+        LOGGER.info("UserLoginCmdHandler handle, user login success, userId:{}", userId);
         AQChatMsgProtocol.UserLoginAck.Builder builder = AQChatMsgProtocol.UserLoginAck.newBuilder();
         AQChatMsgProtocol.UserLoginAck userLoginAck = builder.setUserId(userId)
                 .setUserName(userName)
