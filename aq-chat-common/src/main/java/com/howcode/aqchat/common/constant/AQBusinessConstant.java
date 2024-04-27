@@ -47,4 +47,5 @@ public interface AQBusinessConstant {
      */
     String UPLOAD_PATH_DATE_FORMAT = "yyyy-MM-dd";
 
+    String LIMIT = "limit 100";
 }

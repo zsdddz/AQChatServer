@@ -3,6 +3,7 @@ package com.howcode.aqchat.service.service;
 
 import java.util.List;
 import com.howcode.aqchat.common.model.MessageDto;
+import com.howcode.aqchat.common.model.MessageRecordDto;
 
 /**
  * @Author: ZhangWeinan
@@ -22,6 +23,6 @@ public interface IAQMessageService {
      * @param roomId 房间ID
      * @return 房间消息列表
      */
-    List<MessageDto> getMessageList(String roomId);
+    List<MessageRecordDto> getMessageList(String roomId);
 
 }
