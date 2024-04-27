@@ -1,6 +1,8 @@
 package com.howcode.aqchat.mq.receive;
 
+import com.alibaba.fastjson.JSONObject;
 import com.howcode.aqchat.common.constant.AQChatMQConstant;
+import com.howcode.aqchat.common.model.RoomNotifyDto;
 import com.howcode.aqchat.framework.mq.starter.config.RocketMQConfig;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import jakarta.annotation.Resource;
@@ -15,20 +17,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
-
 /**
  * @Author: ZhangWeinan
  * @Description:
- * @date 2024-04-26 17:36
+ * @date 2024-04-27 11:59
  */
 @Component
-public class OfflineMessageReceiver implements InitializingBean {
-    private static final Logger LOGGER = LoggerFactory.getLogger(OfflineMessageReceiver.class);
-
+public class LeaveRoomReceiver implements InitializingBean {
+    private static final Logger LOGGER = LoggerFactory.getLogger(LeaveRoomReceiver.class);
     @Resource
     private RocketMQConfig rocketMQConfig;
     @Resource
     private GlobalChannelHolder globalChannelHolder;
+
     /**
      * 初始化消费者
      */
@@ -36,29 +37,29 @@ public class OfflineMessageReceiver implements InitializingBean {
         try {
             DefaultMQPushConsumer defaultMQPushConsumer = new DefaultMQPushConsumer();
             defaultMQPushConsumer.setNamesrvAddr(rocketMQConfig.getConsumer().getNameSever());
-            defaultMQPushConsumer.setConsumerGroup(AQChatMQConstant.ConsumerGroup.OFFLINE_MESSAGE_CONSUMER_GROUP);
+            defaultMQPushConsumer.setConsumerGroup(AQChatMQConstant.ConsumerGroup.LEAVE_ROOM_CONSUMER_GROUP);
             defaultMQPushConsumer.setConsumeMessageBatchMaxSize(1);
             defaultMQPushConsumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
-            defaultMQPushConsumer.subscribe(AQChatMQConstant.MQTopic.OFFLINE_MESSAGE_TOPIC, "*");
+            defaultMQPushConsumer.subscribe(AQChatMQConstant.MQTopic.LEAVE_ROOM_TOPIC, "*");
             defaultMQPushConsumer.setMessageListener((MessageListenerConcurrently) (messageExtList, consumeConcurrentlyContext) -> {
                 for (MessageExt messageExt : messageExtList) {
-                    String userId = new String(messageExt.getBody());
-                    LOGGER.info("mq收到消息[用户离线消息]:{}", userId);
-                    // 广播用户离线
-                    if (!userId.isEmpty()) {
-                        globalChannelHolder.notifyOfflineMessage(userId);
+                    String msgStr = new String(messageExt.getBody());
+                    LOGGER.info("mq收到消息[离开房间]:{}", msgStr);
+                    // 广播用户加入房间
+                    if (!msgStr.isEmpty()) {
+                        RoomNotifyDto roomNotifyDto = JSONObject.parseObject(msgStr, RoomNotifyDto.class);
+                        globalChannelHolder.notifyLeaveRoom(roomNotifyDto);
                     }
+
                 }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             });
             defaultMQPushConsumer.start();
-            LOGGER.info("[离线消息]订阅消息成功");
+            LOGGER.info("[离开房间]订阅消息成功");
         } catch (MQClientException e) {
-            LOGGER.error("订阅消息失败", e);
+            LOGGER.error("离开房间 订阅失败", e);
         }
     }
-
-
 
     @Override
     public void afterPropertiesSet() throws Exception {

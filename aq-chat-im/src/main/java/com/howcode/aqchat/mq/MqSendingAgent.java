@@ -2,6 +2,7 @@ package com.howcode.aqchat.mq;
 
 import com.alibaba.fastjson.JSONObject;
 import com.howcode.aqchat.common.constant.AQChatMQConstant;
+import com.howcode.aqchat.common.model.RoomNotifyDto;
 import com.howcode.aqchat.common.model.MessageDto;
 import jakarta.annotation.Resource;
 import org.apache.rocketmq.client.producer.MQProducer;
@@ -89,6 +90,36 @@ public class MqSendingAgent {
             mqProducer.send(message);
         } catch (Exception e) {
             LOGGER.error("发送消息失败", e);
+        }
+    }
+
+    public void sendLeaveRoomMsg(String userId, String roomId) {
+        if (null == userId) {
+            LOGGER.error("用户id为空");
+            return;
+        }
+        Message message = new Message();
+        message.setTopic(AQChatMQConstant.MQTopic.LEAVE_ROOM_TOPIC);
+        message.setBody(JSONObject.toJSONString(new RoomNotifyDto(roomId,roomId)).getBytes());
+        try {
+            mqProducer.send(message);
+        } catch (Exception e) {
+            LOGGER.error("发送用户退出消息失败", e);
+        }
+    }
+
+    public void sendJoinRoomMsg(String userId, String roomId) {
+        if (null == userId || null == roomId) {
+            LOGGER.error("用户id或房间id为空");
+            return;
+        }
+        Message message = new Message();
+        message.setTopic(AQChatMQConstant.MQTopic.JOIN_ROOM_TOPIC);
+        message.setBody(JSONObject.toJSONString(new RoomNotifyDto(roomId,userId)).getBytes());
+        try {
+            mqProducer.send(message);
+        } catch (Exception e) {
+            LOGGER.error("发送用户加入房间消息失败", e);
         }
     }
 }

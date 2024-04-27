@@ -9,6 +9,7 @@ import com.howcode.aqchat.handler.ICmdHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
+import com.howcode.aqchat.mq.MqSendingAgent;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
@@ -29,6 +30,9 @@ public class JoinRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.JoinRoo
     @Resource
     @Lazy
     private RedisCacheHelper redisCacheHelper;
+    @Resource
+    @Lazy
+    private MqSendingAgent mqSendingAgent;
 
     @Override
     public void handle(ChannelHandlerContext ctx, AQChatMsgProtocol.JoinRoomCmd cmd) {
@@ -47,9 +51,9 @@ public class JoinRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.JoinRoo
         //将用户加入房间
         String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
         globalChannelHolder.joinRoom(roomId, userId, ctx.channel());
+        mqSendingAgent.sendJoinRoomMsg(userId, roomId);
         //返回加入房间成功
-        //获取房间信息
-        RoomInfoDto roomInfoDto = redisCacheHelper.getCacheObject(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, RoomInfoDto.class);
+        RoomInfoDto roomInfoDto = globalChannelHolder.getRoomInfo(roomId);
         AQChatMsgProtocol.JoinRoomAck joinRoomAck = AQChatMsgProtocol.JoinRoomAck.newBuilder()
                 .setRoomNo(roomInfoDto.getRoomNo())
                 .setRoomName(roomInfoDto.getRoomName())

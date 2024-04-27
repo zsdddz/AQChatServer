@@ -4,6 +4,7 @@ package com.howcode.aqchat.holder;
 import com.howcode.aqchat.common.constant.AQRedisKeyPrefix;
 import com.howcode.aqchat.common.model.MessageDto;
 import com.howcode.aqchat.common.model.RoomInfoDto;
+import com.howcode.aqchat.common.model.RoomNotifyDto;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.framework.redis.starter.RedisCacheHelper;
 import com.howcode.aqchat.holder.impl.AQUserHolder;
@@ -135,13 +136,8 @@ public class GlobalChannelHolder {
             return;
         }
         UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(messageDto.getSenderId());
-        if (null == userInfo) {
-            return;
-        }
-        AQChatMsgProtocol.User.Builder userBuilder = AQChatMsgProtocol.User.newBuilder();
-        userBuilder.setUserId(userInfo.getUserId());
-        userBuilder.setUserName(userInfo.getUserName());
-        userBuilder.setUserAvatar(userInfo.getUserAvatar());
+        AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
+        if (userBuilder == null) return;
         AQChatMsgProtocol.BroadcastMsgAck broadcastMsgAck = AQChatMsgProtocol.BroadcastMsgAck.newBuilder()
                 .setRoomId(messageDto.getRoomId())
                 .setUser(userBuilder.build())
@@ -156,18 +152,66 @@ public class GlobalChannelHolder {
             return;
         }
         UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(userId);
-        if (null == userInfo) {
-            return;
-        }
-        AQChatMsgProtocol.User.Builder userBuilder = AQChatMsgProtocol.User.newBuilder();
-        userBuilder.setUserId(userInfo.getUserId());
-        userBuilder.setUserName(userInfo.getUserName());
-        userBuilder.setUserAvatar(userInfo.getUserAvatar());
+        AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
+        if (userBuilder == null) return;
         AQChatMsgProtocol.LeaveRoomNotify leaveRoomNotify = AQChatMsgProtocol.LeaveRoomNotify.newBuilder()
                 .setUser(userBuilder)
                 .setRoomId(userInfo.getRoomId())
                 .build();
         messageBroadcaster.broadcast(userInfo.getRoomId(), leaveRoomNotify);
         aqUserHolder.removeUserInfo(userId);
+    }
+
+    public void notifyJoinRoom(RoomNotifyDto roomNotifyDto) {
+        if (null == roomNotifyDto) {
+            return;
+        }
+        UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(roomNotifyDto.getUserId());
+        AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
+        if (userBuilder == null) return;
+        AQChatMsgProtocol.JoinRoomNotify joinRoomNotify = AQChatMsgProtocol.JoinRoomNotify.newBuilder()
+                .setUser(userBuilder)
+                .setRoomId(roomNotifyDto.getRoomId())
+                .build();
+        messageBroadcaster.broadcast(userInfo.getRoomId(), joinRoomNotify);
+    }
+
+    private static AQChatMsgProtocol.User.Builder getUserBuilder(UserGlobalInfoDto userInfo) {
+        if (null == userInfo) {
+            return null;
+        }
+        AQChatMsgProtocol.User.Builder userBuilder = AQChatMsgProtocol.User.newBuilder();
+        userBuilder.setUserId(userInfo.getUserId());
+        userBuilder.setUserName(userInfo.getUserName());
+        userBuilder.setUserAvatar(userInfo.getUserAvatar());
+        return userBuilder;
+    }
+
+    public void notifyLeaveRoom(RoomNotifyDto roomNotifyDto) {
+        if (null == roomNotifyDto) {
+            return;
+        }
+        UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(roomNotifyDto.getUserId());
+        AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
+        if (userBuilder == null) return;
+        AQChatMsgProtocol.LeaveRoomNotify leaveRoomNotify = AQChatMsgProtocol.LeaveRoomNotify.newBuilder()
+                .setUser(userBuilder)
+                .setRoomId(roomNotifyDto.getRoomId())
+                .build();
+        messageBroadcaster.broadcast(userInfo.getRoomId(), leaveRoomNotify);
+    }
+
+    public void notifyOfflineMessage(String userId) {
+        if (null == userId) {
+            return;
+        }
+        UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(userId);
+        AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
+        if (userBuilder == null) return;
+        AQChatMsgProtocol.OfflineNotify offlineNotify = AQChatMsgProtocol.OfflineNotify.newBuilder()
+                .setUser(userBuilder)
+                .setRoomId(userInfo.getRoomId())
+                .build();
+        messageBroadcaster.broadcast(userInfo.getRoomId(), offlineNotify);
     }
 }

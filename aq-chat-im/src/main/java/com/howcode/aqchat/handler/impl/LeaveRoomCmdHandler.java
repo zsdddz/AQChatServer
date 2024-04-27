@@ -7,6 +7,7 @@ import com.howcode.aqchat.handler.ICmdHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
+import com.howcode.aqchat.mq.MqSendingAgent;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
@@ -23,6 +24,9 @@ public class LeaveRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.LeaveR
     @Resource
     @Lazy
     private GlobalChannelHolder globalChannelHolder;
+    @Resource
+    @Lazy
+    private MqSendingAgent mqSendingAgent;
     @Override
     public void handle(ChannelHandlerContext ctx, AQChatMsgProtocol.LeaveRoomCmd cmd) {
         if (ctx == null || cmd == null) {
@@ -46,10 +50,10 @@ public class LeaveRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.LeaveR
             ctx.writeAndFlush(exceptionMsg);
             return;
         }
+        mqSendingAgent.sendLeaveRoomMsg(userId,roomId);
         globalChannelHolder.leaveRoom(userId,ctx.channel());
-
         //判断房间是否为空 如果为空则解散房间
-        globalChannelHolder.isOrNoDissolveTheRoom(roomId,roomInfoDto.getRoomNo());
+        globalChannelHolder.dissolveTheRoom4Logout(roomId);
         //返回离开房间成功
         AQChatMsgProtocol.LeaveRoomAck.Builder builder = AQChatMsgProtocol.LeaveRoomAck.newBuilder();
         builder.setRoomId(roomId);
