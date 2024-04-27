@@ -23,13 +23,29 @@ AQChat 一个极速、便捷的匿名在线即时聊天室。
 
 
 ### 项目环境
-JDK17 <br/>
-Netty 4.1.89.Final <br/>
-SpringBoot 3.2.5 <br/>
-Mybatis-Plus 3.5.3.2<br/>
-protobuf 3 <br/>
-MySQL 8.0.34 <br/>
-Redis 6.0.8 <br/>
-RocketMQ 4.4.0 <br/>
-阿里云OSS
+| 环境       | 版本       |
+|----------|----------|
+| JDK      | 17     |
+| Netty    | 4.1.89.Final   |
+| SpringBoot | 3.2.5    |
+| Mybatis-Plus|3.5.5|
+| Protobuf | 3        |
+| MySQL    | 8.0.34   |
+| Redis    | 6.0.8    |
+| RocketMQ | 4.4.0    |
+| 阿里云OSS  |          |
 
+### 项目截图
+
+### 项目部署
+1. 克隆项目到本地
+```shell
+git clone https://gitee.com/howcode/aq-chat-server.git
+```
+修改配置文件`application.yml`中的数据库、Redis、RocketMQ、阿里云OSS等配置
+
+2. 打包项目
+进入`aq-chat-im`模块，执行以下命令
+```shell
+mvn clean package -Dmaven.test.skip=true
+```
