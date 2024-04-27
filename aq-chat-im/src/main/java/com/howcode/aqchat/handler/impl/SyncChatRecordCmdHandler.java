@@ -9,6 +9,7 @@ import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.List;
 public class SyncChatRecordCmdHandler implements ICmdHandler<AQChatMsgProtocol.SyncChatRecordCmd> {
     private static final Logger LOGGER = LoggerFactory.getLogger(SyncChatRecordCmdHandler.class);
     @Resource
+    @Lazy
     private IAQMessageService messageService;
 
     @Override
