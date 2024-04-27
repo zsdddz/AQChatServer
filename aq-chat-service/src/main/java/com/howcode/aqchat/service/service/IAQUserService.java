@@ -9,4 +9,6 @@ import com.howcode.aqchat.service.dao.po.AqUser;
  */
 public interface IAQUserService {
     AqUser getUserById(String userId);
+
+    void saveUser(String userId, String userName, String userAvatar);
 }

@@ -19,4 +19,13 @@ public class AQUserServiceImpl implements IAQUserService {
     public AqUser getUserById(String userId) {
         return userMapper.selectById(userId);
     }
+
+    @Override
+    public void saveUser(String userId, String userName, String userAvatar) {
+        AqUser user = new AqUser();
+        user.setUserId(userId);
+        user.setUserName(userName);
+        user.setUserAvatar(userAvatar);
+        userMapper.insert(user);
+    }
 }

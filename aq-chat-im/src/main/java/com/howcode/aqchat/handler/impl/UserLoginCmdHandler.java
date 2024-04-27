@@ -8,6 +8,7 @@ import com.howcode.aqchat.handler.ICmdHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IUserHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
+import com.howcode.aqchat.service.service.IAQUserService;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
@@ -31,6 +32,10 @@ public class UserLoginCmdHandler implements ICmdHandler<AQChatMsgProtocol.UserLo
     @Lazy
     private GlobalChannelHolder channelHolder;
 
+    @Resource
+    @Lazy
+    private IAQUserService userService;
+
 
     @Override
     public void handle(ChannelHandlerContext ctx, AQChatMsgProtocol.UserLoginCmd cmd) {
@@ -49,6 +54,8 @@ public class UserLoginCmdHandler implements ICmdHandler<AQChatMsgProtocol.UserLo
         userGlobalInfoDto.setUserName(userName);
         userGlobalInfoDto.setUserAvatar(userAvatar);
         userHolder.saveUserInfo(userGlobalInfoDto);
+
+        userService.saveUser(userId, userName, userAvatar);
 
         //添加用户channel
         channelHolder.put(userId, (NioSocketChannel) ctx.channel());
