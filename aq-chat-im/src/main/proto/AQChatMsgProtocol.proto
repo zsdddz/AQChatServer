@@ -182,12 +182,10 @@ message SyncChatRecordAck{
   repeated ChatRecord chatRecords = 1;
 }
 message ChatRecord{
-  string userId = 1;
-  string userName = 2;
-  string userAvatar = 3;
-  MsgType msgType = 4;
-  string message = 5;
-  string createTime = 6;
+  User user = 1;
+  MsgType msgType = 2;
+  string message = 3;
+  string createTime = 4;
 }
 //根据userId恢复用户连接信息
 message RecoverUserCmd{
