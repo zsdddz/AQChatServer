@@ -35,6 +35,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>${rocketmq.client.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.howcode</groupId>
             <artifactId>aq-chat-common</artifactId>
             <version>1.0.0</version>
