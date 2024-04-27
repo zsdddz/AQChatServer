@@ -108,6 +108,8 @@ message SendMsgAck{
   string userId = 1;
   string roomId = 2;
   bool success = 3;
+  //消息id
+  string msgId = 4;
 }
 
 //定义消息类型
@@ -124,8 +126,9 @@ enum MsgType{
 message BroadcastMsgAck{
   User user = 1;
   string roomId = 2;
-  MsgType msgType = 3;
-  string msg = 4;
+  string msgId = 3;
+  MsgType msgType = 4;
+  string msg = 5;
 }
 //发送者信息
 message User{
