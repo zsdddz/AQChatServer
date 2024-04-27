@@ -2,9 +2,12 @@ package com.howcode.aqchat.message;
 
 import com.howcode.aqchat.common.enums.AQChatEnum;
 import com.howcode.aqchat.common.model.AliOssStsDto;
+import com.howcode.aqchat.common.model.MessageRecordDto;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 /**
  * @Author: ZhangWeinan
@@ -42,5 +45,23 @@ public class MessageConstructor {
 
     public static AQChatMsgProtocol.UserLogoutAck buildUserLogoutAck(String userId) {
         return AQChatMsgProtocol.UserLogoutAck.newBuilder().setUserId(userId).build();
+    }
+
+    public static AQChatMsgProtocol.SyncChatRecordAck buildSyncChatRecordAck(List<MessageRecordDto> messageList) {
+        AQChatMsgProtocol.SyncChatRecordAck.Builder builder = AQChatMsgProtocol.SyncChatRecordAck.newBuilder();
+        messageList.forEach(message -> {
+            AQChatMsgProtocol.User user = AQChatMsgProtocol.User.newBuilder()
+                    .setUserId(message.getSenderId())
+                    .setUserName(message.getSenderName())
+                    .setUserAvatar(message.getSenderAvatar())
+                    .build();
+            builder.addChatRecords(AQChatMsgProtocol.ChatRecord.newBuilder()
+                    .setUser(user)
+                    .setMsgType(AQChatMsgProtocol.MsgType.forNumber(message.getMessageType()))
+                    .setMessage(message.getMessageContent())
+                    .setCreateTime(message.getCreateTime())
+                    .build());
+        });
+        return builder.build();
     }
 }
