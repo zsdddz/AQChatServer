@@ -10,7 +10,7 @@ AQChat 一个极速、便捷的匿名在线即时聊天室。
 本项目为服务端代码，客户端代码请查看：<a href="https://gitee.com/howcode/aq-chat">AQChat</a>
 
 
-项目演示地址：https://demo.aqchat.run
+项目地址：https://aqchat.run
 
 
 ### 项目架构说明
