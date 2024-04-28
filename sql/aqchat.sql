@@ -1,18 +1,3 @@
-/*
- Navicat Premium Data Transfer
-
- Source Server         : RDS-高级权限
- Source Server Type    : MySQL
- Source Server Version : 80034 (8.0.34)
- Source Host           : rm-cn-jia3nj12q000j7oo.rwlb.rds.aliyuncs.com:3306
- Source Schema         : aqchat
-
- Target Server Type    : MySQL
- Target Server Version : 80034 (8.0.34)
- File Encoding         : 65001
-
- Date: 27/04/2024 16:28:58
-*/
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
