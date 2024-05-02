@@ -17,7 +17,7 @@ import java.util.List;
 public class MessageConstructor {
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageConstructor.class);
 
-    public static AQChatMsgProtocol.ExceptionMsg buildExceptionMsg(AQChatEnum aqChatEnum){
+    public static AQChatMsgProtocol.ExceptionMsg buildExceptionMsg(AQChatEnum aqChatEnum) {
         LOGGER.error("构建异常消息: code = {}, msg = {}", aqChatEnum.getCode(), aqChatEnum.getMessage());
         return AQChatMsgProtocol.ExceptionMsg.newBuilder().setCode(aqChatEnum.getCode()).setMsg(aqChatEnum.getMessage()).build();
     }
@@ -34,13 +34,18 @@ public class MessageConstructor {
                 .build();
     }
 
-    public static AQChatMsgProtocol.RecoverUserAck buildRecoverUserAck(UserGlobalInfoDto userLoginInfo) {
-        return AQChatMsgProtocol.RecoverUserAck.newBuilder()
-                .setUserId(userLoginInfo.getUserId())
-                .setUserName(userLoginInfo.getUserName())
-                .setRoomId(userLoginInfo.getRoomId())
-                .setUserAvatar(userLoginInfo.getUserAvatar())
-                .build();
+    public static AQChatMsgProtocol.RecoverUserAck buildRecoverUserAck(UserGlobalInfoDto userGlobalInfoDto) {
+        AQChatMsgProtocol.RecoverUserAck.Builder builder = AQChatMsgProtocol.RecoverUserAck.newBuilder();
+        if (userGlobalInfoDto.getUserId() == null) {
+            return null;
+        }
+        builder.setUserId(userGlobalInfoDto.getUserId());
+        builder.setUserName(userGlobalInfoDto.getUserName());
+        if (null != userGlobalInfoDto.getRoomId()) {
+            builder.setRoomId(userGlobalInfoDto.getRoomId());
+        }
+        builder.setUserAvatar(userGlobalInfoDto.getUserAvatar());
+        return builder.build();
     }
 
     public static AQChatMsgProtocol.UserLogoutAck buildUserLogoutAck(String userId) {

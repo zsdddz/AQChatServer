@@ -1,5 +1,6 @@
 package com.howcode.aqchat.handler.impl;
 
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.handler.ICmdHandler;
@@ -8,6 +9,7 @@ import com.howcode.aqchat.holder.impl.AQUserHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,11 +46,13 @@ public class RecoverUserCmdHandler implements ICmdHandler<AQChatMsgProtocol.Reco
         }
         //重新登录 续期
         aqUserHolder.saveUserInfo(userInfo);
+        ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).set(userId);
         //判断是否有房间
         if (null != userInfo.getRoomId()) {
             //加入房间
             globalChannelHolder.joinRoom(userInfo.getRoomId(),userId,ctx.channel());
         }
-        ctx.writeAndFlush(MessageConstructor.buildRecoverUserAck(userInfo));
+        AQChatMsgProtocol.RecoverUserAck recoverUserAck = MessageConstructor.buildRecoverUserAck(userInfo);
+        ctx.writeAndFlush(recoverUserAck);
     }
 }
