@@ -68,6 +68,7 @@ public class HearBeatHandler extends ChannelInboundHandlerAdapter implements Ini
                     builder.setUser(userBuilder.build());
                     builder.setRoomId(channelHolder.getRoomId(userId));
                     ctx.writeAndFlush(builder.build());
+                    ctx.close();
                 }
             }
         }
