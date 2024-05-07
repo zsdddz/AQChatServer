@@ -56,7 +56,7 @@ public class AQChatNettyStarter implements InitializingBean {
                         ch.pipeline().addLast(new HttpServerCodec());
                         ch.pipeline().addLast(new ChunkedWriteHandler());
                         ch.pipeline().addLast(new HttpObjectAggregator(65535));
-                        ch.pipeline().addLast(new WebSocketServerProtocolHandler("/ws"));
+                        ch.pipeline().addLast(new WebSocketServerProtocolHandler("/"));
                         ch.pipeline().addLast(new IdleStateHandler(0,0,10));
                         ch.pipeline().addLast(hearBeatHandler);
                         ch.pipeline().addLast(messageDecoder);
