@@ -55,6 +55,7 @@ public class JoinRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.JoinRoo
         //返回加入房间成功
         RoomInfoDto roomInfoDto = globalChannelHolder.getRoomInfo(roomId);
         AQChatMsgProtocol.JoinRoomAck joinRoomAck = AQChatMsgProtocol.JoinRoomAck.newBuilder()
+                .setRoomId(roomId)
                 .setRoomNo(roomInfoDto.getRoomNo())
                 .setRoomName(roomInfoDto.getRoomName())
                 .build();
