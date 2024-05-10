@@ -118,6 +118,7 @@ public class MqSendingAgent {
         message.setBody(JSONObject.toJSONString(new RoomNotifyDto(roomId,userId)).getBytes());
         try {
             mqProducer.send(message);
+            LOGGER.info("发送用户加入房间消息成功");
         } catch (Exception e) {
             LOGGER.error("发送用户加入房间消息失败", e);
         }
