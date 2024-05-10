@@ -52,10 +52,6 @@ public class MessageBroadcaster {
         if (null == roomId || null == userId || null == channel) {
             return;
         }
-        //判断用户是否已经在房间内
-        if (null != userRoomMap.get(userId)) {
-            return;
-        }
         userRoomMap.put(userId, roomId);
         ChannelGroup channelGroup = channelGroupMap.get(roomId);
         if (null == channelGroup) {
