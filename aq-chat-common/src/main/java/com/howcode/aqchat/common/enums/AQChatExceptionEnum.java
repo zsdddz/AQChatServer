@@ -22,6 +22,12 @@ public enum AQChatExceptionEnum implements AQChatEnum{
     USER_DOES_NOT_EXIST_OR_EXITS(10006, "用户不存在或者退出"),
     //用户id不匹配
     USER_ID_NOT_MATCH(10007, "用户id不匹配"),
+    //用户已登录
+    USER_ALREADY_LOGIN(10008, "用户已登录"),
+    //用户已在房间中
+    USER_ALREADY_IN_ROOM(10009, "用户已在房间中"),
+    //用户不在房间中
+    USER_NOT_IN_ROOM(10010, "用户不在房间中"),
     ;
 
     private final int code;

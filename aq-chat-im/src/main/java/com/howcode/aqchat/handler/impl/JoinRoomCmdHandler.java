@@ -39,9 +39,26 @@ public class JoinRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.JoinRoo
         if (null == ctx || null == cmd) {
             return;
         }
+        // 获取用户Id
+        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
+        if (null == userId) {
+            // 用户未登录
+            AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_NOT_LOGIN);
+            ctx.writeAndFlush(exceptionMsg);
+            return;
+        }
+        // 判断用户是否已经在房间中
+        String roomId = globalChannelHolder.getRoomId(userId);
+        if (null != roomId) {
+            //用户已经在房间中
+            AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_ALREADY_IN_ROOM);
+            ctx.writeAndFlush(exceptionMsg);
+            return;
+        }
+
         int roomNo = cmd.getRoomNo();
         //判断房间号是否存在
-        String roomId = redisCacheHelper.getCacheObject(AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo, String.class);
+        roomId = redisCacheHelper.getCacheObject(AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo, String.class);
         if (null == roomId) {
             //房间号不存在 返回错误信息
             AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.ROOM_NOT_EXIST);
@@ -49,7 +66,6 @@ public class JoinRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.JoinRoo
             return;
         }
         //将用户加入房间
-        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
         globalChannelHolder.joinRoom(roomId, userId, ctx.channel());
         mqSendingAgent.sendJoinRoomMsg(userId, roomId);
         //返回加入房间成功

@@ -48,7 +48,17 @@ public class SendMsgCmdHandler implements ICmdHandler<AQChatMsgProtocol.SendMsgC
             ctx.writeAndFlush(exceptionMsg);
             return;
         }
-        String roomId = cmd.getRoomId();
+        // 判断用户是否在房间中
+        String roomId = globalChannelHolder.getRoomId(userId);
+        if (null == roomId || !roomId.equals(cmd.getRoomId())) {
+            // 用户未加入房间
+            AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_NOT_IN_ROOM);
+            ctx.writeAndFlush(exceptionMsg);
+            return;
+        }
+
+
+        roomId = cmd.getRoomId();
         //判断房间是否存在
         if (null == globalChannelHolder.getRoomId(userId) || null == globalChannelHolder.getRoomInfo(roomId)) {
             // 房间不存在

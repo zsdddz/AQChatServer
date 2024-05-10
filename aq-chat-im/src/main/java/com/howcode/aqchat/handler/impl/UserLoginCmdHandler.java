@@ -2,12 +2,14 @@ package com.howcode.aqchat.handler.impl;
 
 
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
+import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.common.utils.IdProvider;
 import com.howcode.aqchat.handler.ICmdHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IUserHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
+import com.howcode.aqchat.message.MessageConstructor;
 import com.howcode.aqchat.service.service.IAQUserService;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -45,9 +47,17 @@ public class UserLoginCmdHandler implements ICmdHandler<AQChatMsgProtocol.UserLo
         if (null == ctx || null == cmd) {
             return;
         }
+        //判断用户是否已经登录
+        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
+        if (null != userId) {
+            LOGGER.info("UserLoginCmdHandler handle, user already login, userId:{}", userId);
+            AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_ALREADY_LOGIN);
+            ctx.writeAndFlush(exceptionMsg);
+            return;
+        }
         String userName = cmd.getUserName();
         String userAvatar = cmd.getUserAvatar();
-        String userId = IdProvider.generateUserId();
+        userId = IdProvider.generateUserId();
         //添加userId到channel
         ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).set(userId);
 
