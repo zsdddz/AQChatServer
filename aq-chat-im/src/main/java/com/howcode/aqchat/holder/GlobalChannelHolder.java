@@ -62,13 +62,12 @@ public class GlobalChannelHolder {
      * 退出
      *
      * @param userId
-     * @return
      */
-    public NioSocketChannel logout(String userId) {
+    public void logout(String userId) {
         NioSocketChannel nioSocketChannel = getUserChannel(userId);
         String roomId = messageBroadcaster.leaveRoom(userId, nioSocketChannel);
-        dissolveTheRoom4Logout(roomId);
-        return remove(userId);
+        dissolveTheRoomByLogout(roomId);
+        remove(userId);
     }
 
     /**
@@ -115,7 +114,7 @@ public class GlobalChannelHolder {
         messageBroadcaster.removeChannelGroup(roomId);
     }
 
-    public void dissolveTheRoom4Logout(String roomId) {
+    public void dissolveTheRoomByLogout(String roomId) {
         //获取房间信息
         RoomInfoDto roomInfoDto = getRoomInfo(roomId);
         if (null == roomInfoDto) {
