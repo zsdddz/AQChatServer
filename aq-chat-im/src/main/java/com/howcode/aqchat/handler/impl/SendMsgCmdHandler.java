@@ -40,6 +40,15 @@ public class SendMsgCmdHandler implements ICmdHandler<AQChatMsgProtocol.SendMsgC
         if (ctx == null || cmd == null) {
             return;
         }
+        long msgId = cmd.getMsgId();
+        // 判断消息Id是否为空
+        if (msgId == 0) {
+            // 错误消息
+            AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.MESSAGE_ID_ERROR);
+            ctx.writeAndFlush(exceptionMsg);
+            return;
+        }
+
         // 获取用户Id
         String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
         if (null == userId) {
@@ -57,7 +66,6 @@ public class SendMsgCmdHandler implements ICmdHandler<AQChatMsgProtocol.SendMsgC
             return;
         }
 
-
         roomId = cmd.getRoomId();
         //判断房间是否存在
         if (null == globalChannelHolder.getRoomId(userId) || null == globalChannelHolder.getRoomInfo(roomId)) {
@@ -68,7 +76,7 @@ public class SendMsgCmdHandler implements ICmdHandler<AQChatMsgProtocol.SendMsgC
         }
         // 发送消息
         MessageDto messageDto = new MessageDto();
-        messageDto.setMessageId(cmd.getMsgId());
+        messageDto.setMessageId(msgId);
         messageDto.setRoomId(roomId);
         messageDto.setSenderId(userId);
         messageDto.setMessageType(cmd.getMsgType().getNumber());
@@ -82,7 +90,7 @@ public class SendMsgCmdHandler implements ICmdHandler<AQChatMsgProtocol.SendMsgC
                 .setRoomId(roomId)
                 .setUserId(userId)
                 .setStatus(true)
-                .setMsgId(cmd.getMsgId())
+                .setMsgId(msgId)
                 .build();
         ctx.writeAndFlush(result);
     }

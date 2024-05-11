@@ -28,7 +28,7 @@ public enum AQChatExceptionEnum implements AQChatEnum{
     USER_ALREADY_IN_ROOM(10009, "用户已在房间中"),
     //用户不在房间中
     USER_NOT_IN_ROOM(10010, "用户不在房间中"),
-    ;
+    MESSAGE_ID_ERROR(10011, "消息Id错误"),;
 
     private final int code;
     private final String message;
