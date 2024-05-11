@@ -32,6 +32,7 @@ public class HeartBeatCmdHandler implements ICmdHandler<AQChatMsgProtocol.HeartB
             ctx.writeAndFlush(MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_NOT_LOGIN));
             return;
         }
+        LOGGER.info("用户{}发送心跳", userId);
         //更新心跳时间
         ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.HEART_BEAT_TIME)).set(System.currentTimeMillis());
         //返回心跳响应

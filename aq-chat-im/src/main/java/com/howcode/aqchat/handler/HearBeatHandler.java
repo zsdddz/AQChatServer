@@ -54,10 +54,10 @@ public class HearBeatHandler extends ChannelInboundHandlerAdapter implements Ini
                 Long lastReadTime = (Long) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.HEART_BEAT_TIME)).get();
                 long now = System.currentTimeMillis();
                 if (lastReadTime != null && now - lastReadTime > heartBeatTime) {
-                    // 下线
-                    Logger.info("心跳超时，发送离线消息");
                     //获取用户id
                     String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
+                    // 下线
+                    Logger.info("用户{}心跳超时，发送离线消息",userId);
                     //构建离线消息
                     AQChatMsgProtocol.OfflineMsg.Builder builder = AQChatMsgProtocol.OfflineMsg.newBuilder();
                     AQChatMsgProtocol.User.Builder userBuilder = AQChatMsgProtocol.User.newBuilder();
