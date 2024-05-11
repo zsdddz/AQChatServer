@@ -67,9 +67,8 @@ public class SendMsgCmdHandler implements ICmdHandler<AQChatMsgProtocol.SendMsgC
             return;
         }
         // 发送消息
-        Long messageId = IdProvider.nextId();
         MessageDto messageDto = new MessageDto();
-        messageDto.setMessageId(messageId);
+        messageDto.setMessageId(cmd.getMsgId());
         messageDto.setRoomId(roomId);
         messageDto.setSenderId(userId);
         messageDto.setMessageType(cmd.getMsgType().getNumber());
@@ -82,8 +81,8 @@ public class SendMsgCmdHandler implements ICmdHandler<AQChatMsgProtocol.SendMsgC
         AQChatMsgProtocol.SendMsgAck result = AQChatMsgProtocol.SendMsgAck.newBuilder()
                 .setRoomId(roomId)
                 .setUserId(userId)
-                .setSuccess(true)
-                .setMsgId(messageId.toString())
+                .setStatus(true)
+                .setMsgId(cmd.getMsgId())
                 .build();
         ctx.writeAndFlush(result);
     }
