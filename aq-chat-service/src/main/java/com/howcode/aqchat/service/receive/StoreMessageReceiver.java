@@ -50,8 +50,12 @@ public class StoreMessageReceiver implements InitializingBean {
                     String msgStr = new String(messageExt.getBody());
                     LOGGER.info("mq收到消息[存储消息]:{}", msgStr);
                     // 处理消息
-                    if (!msgStr.isEmpty()){
+                    if (!msgStr.isEmpty()) {
                         MessageDto messageDto = JSONObject.parseObject(msgStr, MessageDto.class);
+                        if (null == messageDto.getMessageId() || messageDto.getMessageId() == 0) {
+                            LOGGER.error("消息Id为空,丢弃消息");
+                            return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+                        }
                         messageService.saveMessage(messageDto);
                     }
                 }
