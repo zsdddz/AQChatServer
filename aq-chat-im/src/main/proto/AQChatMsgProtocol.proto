@@ -122,6 +122,8 @@ enum MsgType{
   VOICE = 2;
   //视频
   VIDEO = 3;
+  //文件
+  FILE = 4;
 }
 
 //消息广播

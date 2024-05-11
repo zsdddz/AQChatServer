@@ -499,6 +499,14 @@ public final class AQChatMsgProtocol {
      * <code>VIDEO = 3;</code>
      */
     VIDEO(3),
+    /**
+     * <pre>
+     *文件
+     * </pre>
+     *
+     * <code>FILE = 4;</code>
+     */
+    FILE(4),
     UNRECOGNIZED(-1),
     ;
 
@@ -526,6 +534,14 @@ public final class AQChatMsgProtocol {
      * <code>VIDEO = 3;</code>
      */
     public static final int VIDEO_VALUE = 3;
+    /**
+     * <pre>
+     *文件
+     * </pre>
+     *
+     * <code>FILE = 4;</code>
+     */
+    public static final int FILE_VALUE = 4;
 
 
     public final int getNumber() {
@@ -556,6 +572,7 @@ public final class AQChatMsgProtocol {
         case 1: return IMAGE;
         case 2: return VOICE;
         case 3: return VIDEO;
+        case 4: return FILE;
         default: return null;
       }
     }
@@ -22290,9 +22307,9 @@ public final class AQChatMsgProtocol {
       "CORD_CMD\020\024\022\030\n\024SYNC_CHAT_RECORD_ACK\020\025\022\024\n\020" +
       "RECOVER_USER_CMD\020\026\022\024\n\020RECOVER_USER_ACK\020\027" +
       "\022\024\n\020JOIN_ROOM_NOTIFY\020\030\022\025\n\021LEAVE_ROOM_NOT" +
-      "IFY\020\031*4\n\007MsgType\022\010\n\004TEXT\020\000\022\t\n\005IMAGE\020\001\022\t\n" +
-      "\005VOICE\020\002\022\t\n\005VIDEO\020\003B\034\n\032com.howcode.aqcha" +
-      "t.messageb\006proto3"
+      "IFY\020\031*>\n\007MsgType\022\010\n\004TEXT\020\000\022\t\n\005IMAGE\020\001\022\t\n" +
+      "\005VOICE\020\002\022\t\n\005VIDEO\020\003\022\010\n\004FILE\020\004B\034\n\032com.how" +
+      "code.aqchat.messageb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

@@ -9,6 +9,7 @@ public enum MsgTypeEnum implements AQChatEnum{
     IMAGE(1, "image"),
     VOICE(2, "voice"),
     VIDEO(3, "video"),
+    FILE(4, "file"),
     ;
 
     private final int code;
