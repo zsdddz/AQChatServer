@@ -41,7 +41,6 @@ public class AQMessageServiceImpl implements IAQMessageService {
         aqMessage.setMessageType(messageDto.getMessageType());
         aqMessage.setMessageContent(messageDto.getMessageContent());
         aqMessage.setCreateTime(messageDto.getCreateTime());
-        System.out.println(aqMessage);
         messageMapper.insert(aqMessage);
     }
 
