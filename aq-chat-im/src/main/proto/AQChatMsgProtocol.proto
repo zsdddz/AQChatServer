@@ -191,6 +191,8 @@ message ChatRecord{
   MsgType msgType = 2;
   string message = 3;
   string createTime = 4;
+  //消息id
+  int64 msgId = 5;
 }
 //根据userId恢复用户连接信息
 message RecoverUserCmd{

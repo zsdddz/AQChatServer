@@ -362,7 +362,7 @@ public final class AQChatMsgProtocol {
 
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
-        throw new IllegalArgumentException(
+        throw new java.lang.IllegalArgumentException(
             "Can't get the number of an unknown enum value.");
       }
       return value;
@@ -373,7 +373,7 @@ public final class AQChatMsgProtocol {
      * @return The enum associated with the given numeric wire value.
      * @deprecated Use {@link #forNumber(int)} instead.
      */
-    @Deprecated
+    @java.lang.Deprecated
     public static MsgCommand valueOf(int value) {
       return forNumber(value);
     }
@@ -17865,6 +17865,16 @@ public final class AQChatMsgProtocol {
      */
     com.google.protobuf.ByteString
         getCreateTimeBytes();
+
+    /**
+     * <pre>
+     *消息id
+     * </pre>
+     *
+     * <code>int64 msgId = 5;</code>
+     * @return The msgId.
+     */
+    long getMsgId();
   }
   /**
    * Protobuf type {@code chat_msg.ChatRecord}
@@ -17943,6 +17953,11 @@ public final class AQChatMsgProtocol {
               java.lang.String s = input.readStringRequireUtf8();
 
               createTime_ = s;
+              break;
+            }
+            case 40: {
+
+              msgId_ = input.readInt64();
               break;
             }
             default: {
@@ -18098,6 +18113,21 @@ public final class AQChatMsgProtocol {
       }
     }
 
+    public static final int MSGID_FIELD_NUMBER = 5;
+    private long msgId_;
+    /**
+     * <pre>
+     *消息id
+     * </pre>
+     *
+     * <code>int64 msgId = 5;</code>
+     * @return The msgId.
+     */
+    @java.lang.Override
+    public long getMsgId() {
+      return msgId_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -18124,6 +18154,9 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(createTime_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, createTime_);
       }
+      if (msgId_ != 0L) {
+        output.writeInt64(5, msgId_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -18146,6 +18179,10 @@ public final class AQChatMsgProtocol {
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(createTime_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, createTime_);
+      }
+      if (msgId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, msgId_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -18172,6 +18209,8 @@ public final class AQChatMsgProtocol {
           .equals(other.getMessage())) return false;
       if (!getCreateTime()
           .equals(other.getCreateTime())) return false;
+      if (getMsgId()
+          != other.getMsgId()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -18193,6 +18232,9 @@ public final class AQChatMsgProtocol {
       hash = (53 * hash) + getMessage().hashCode();
       hash = (37 * hash) + CREATETIME_FIELD_NUMBER;
       hash = (53 * hash) + getCreateTime().hashCode();
+      hash = (37 * hash) + MSGID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getMsgId());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -18338,6 +18380,8 @@ public final class AQChatMsgProtocol {
 
         createTime_ = "";
 
+        msgId_ = 0L;
+
         return this;
       }
 
@@ -18372,6 +18416,7 @@ public final class AQChatMsgProtocol {
         result.msgType_ = msgType_;
         result.message_ = message_;
         result.createTime_ = createTime_;
+        result.msgId_ = msgId_;
         onBuilt();
         return result;
       }
@@ -18433,6 +18478,9 @@ public final class AQChatMsgProtocol {
         if (!other.getCreateTime().isEmpty()) {
           createTime_ = other.createTime_;
           onChanged();
+        }
+        if (other.getMsgId() != 0L) {
+          setMsgId(other.getMsgId());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -18784,6 +18832,49 @@ public final class AQChatMsgProtocol {
   checkByteStringIsUtf8(value);
         
         createTime_ = value;
+        onChanged();
+        return this;
+      }
+
+      private long msgId_ ;
+      /**
+       * <pre>
+       *消息id
+       * </pre>
+       *
+       * <code>int64 msgId = 5;</code>
+       * @return The msgId.
+       */
+      @java.lang.Override
+      public long getMsgId() {
+        return msgId_;
+      }
+      /**
+       * <pre>
+       *消息id
+       * </pre>
+       *
+       * <code>int64 msgId = 5;</code>
+       * @param value The msgId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMsgId(long value) {
+        
+        msgId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *消息id
+       * </pre>
+       *
+       * <code>int64 msgId = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMsgId() {
+        
+        msgId_ = 0L;
         onChanged();
         return this;
       }
@@ -22175,33 +22266,33 @@ public final class AQChatMsgProtocol {
       "eNotify\022\034\n\004user\030\001 \001(\0132\016.chat_msg.User\022\016\n" +
       "\006roomId\030\002 \001(\t\"#\n\021SyncChatRecordCmd\022\016\n\006ro" +
       "omId\030\001 \001(\t\">\n\021SyncChatRecordAck\022)\n\013chatR" +
-      "ecords\030\001 \003(\0132\024.chat_msg.ChatRecord\"s\n\nCh" +
-      "atRecord\022\034\n\004user\030\001 \001(\0132\016.chat_msg.User\022\"" +
-      "\n\007msgType\030\002 \001(\0162\021.chat_msg.MsgType\022\017\n\007me" +
-      "ssage\030\003 \001(\t\022\022\n\ncreateTime\030\004 \001(\t\" \n\016Recov" +
-      "erUserCmd\022\016\n\006userId\030\001 \001(\t\"V\n\016RecoverUser" +
-      "Ack\022\016\n\006userId\030\001 \001(\t\022\020\n\010userName\030\002 \001(\t\022\022\n" +
-      "\nuserAvatar\030\003 \001(\t\022\016\n\006roomId\030\004 \001(\t\">\n\016Joi" +
-      "nRoomNotify\022\034\n\004user\030\001 \001(\0132\016.chat_msg.Use" +
-      "r\022\016\n\006roomId\030\002 \001(\t\"?\n\017LeaveRoomNotify\022\034\n\004" +
-      "user\030\001 \001(\0132\016.chat_msg.User\022\016\n\006roomId\030\002 \001" +
-      "(\t*\240\004\n\nMsgCommand\022\022\n\016USER_LOGIN_CMD\020\000\022\022\n" +
-      "\016USER_LOGIN_ACK\020\001\022\022\n\016HEART_BEAT_CMD\020\002\022\022\n" +
-      "\016HEART_BEAT_ACK\020\003\022\021\n\rJOIN_ROOM_CMD\020\004\022\021\n\r" +
-      "JOIN_ROOM_ACK\020\005\022\023\n\017CREATE_ROOM_CMD\020\006\022\023\n\017" +
-      "CREATE_ROOM_ACK\020\007\022\022\n\016LEAVE_ROOM_CMD\020\010\022\022\n" +
-      "\016LEAVE_ROOM_ACK\020\t\022\020\n\014SEND_MSG_CMD\020\n\022\020\n\014S" +
-      "END_MSG_ACK\020\013\022\025\n\021BROADCAST_MSG_ACK\020\014\022\021\n\r" +
-      "EXCEPTION_MSG\020\r\022\017\n\013OFFLINE_MSG\020\016\022\017\n\013GET_" +
-      "STS_CMD\020\017\022\017\n\013GET_STS_ACK\020\020\022\023\n\017USER_LOGOU" +
-      "T_CMD\020\021\022\023\n\017USER_LOGOUT_ACK\020\022\022\022\n\016OFFLINE_" +
-      "NOTIFY\020\023\022\030\n\024SYNC_CHAT_RECORD_CMD\020\024\022\030\n\024SY" +
-      "NC_CHAT_RECORD_ACK\020\025\022\024\n\020RECOVER_USER_CMD" +
-      "\020\026\022\024\n\020RECOVER_USER_ACK\020\027\022\024\n\020JOIN_ROOM_NO" +
-      "TIFY\020\030\022\025\n\021LEAVE_ROOM_NOTIFY\020\031*4\n\007MsgType" +
-      "\022\010\n\004TEXT\020\000\022\t\n\005IMAGE\020\001\022\t\n\005VOICE\020\002\022\t\n\005VIDE" +
-      "O\020\003B\034\n\032com.howcode.aqchat.messageb\006proto" +
-      "3"
+      "ecords\030\001 \003(\0132\024.chat_msg.ChatRecord\"\202\001\n\nC" +
+      "hatRecord\022\034\n\004user\030\001 \001(\0132\016.chat_msg.User\022" +
+      "\"\n\007msgType\030\002 \001(\0162\021.chat_msg.MsgType\022\017\n\007m" +
+      "essage\030\003 \001(\t\022\022\n\ncreateTime\030\004 \001(\t\022\r\n\005msgI" +
+      "d\030\005 \001(\003\" \n\016RecoverUserCmd\022\016\n\006userId\030\001 \001(" +
+      "\t\"V\n\016RecoverUserAck\022\016\n\006userId\030\001 \001(\t\022\020\n\010u" +
+      "serName\030\002 \001(\t\022\022\n\nuserAvatar\030\003 \001(\t\022\016\n\006roo" +
+      "mId\030\004 \001(\t\">\n\016JoinRoomNotify\022\034\n\004user\030\001 \001(" +
+      "\0132\016.chat_msg.User\022\016\n\006roomId\030\002 \001(\t\"?\n\017Lea" +
+      "veRoomNotify\022\034\n\004user\030\001 \001(\0132\016.chat_msg.Us" +
+      "er\022\016\n\006roomId\030\002 \001(\t*\240\004\n\nMsgCommand\022\022\n\016USE" +
+      "R_LOGIN_CMD\020\000\022\022\n\016USER_LOGIN_ACK\020\001\022\022\n\016HEA" +
+      "RT_BEAT_CMD\020\002\022\022\n\016HEART_BEAT_ACK\020\003\022\021\n\rJOI" +
+      "N_ROOM_CMD\020\004\022\021\n\rJOIN_ROOM_ACK\020\005\022\023\n\017CREAT" +
+      "E_ROOM_CMD\020\006\022\023\n\017CREATE_ROOM_ACK\020\007\022\022\n\016LEA" +
+      "VE_ROOM_CMD\020\010\022\022\n\016LEAVE_ROOM_ACK\020\t\022\020\n\014SEN" +
+      "D_MSG_CMD\020\n\022\020\n\014SEND_MSG_ACK\020\013\022\025\n\021BROADCA" +
+      "ST_MSG_ACK\020\014\022\021\n\rEXCEPTION_MSG\020\r\022\017\n\013OFFLI" +
+      "NE_MSG\020\016\022\017\n\013GET_STS_CMD\020\017\022\017\n\013GET_STS_ACK" +
+      "\020\020\022\023\n\017USER_LOGOUT_CMD\020\021\022\023\n\017USER_LOGOUT_A" +
+      "CK\020\022\022\022\n\016OFFLINE_NOTIFY\020\023\022\030\n\024SYNC_CHAT_RE" +
+      "CORD_CMD\020\024\022\030\n\024SYNC_CHAT_RECORD_ACK\020\025\022\024\n\020" +
+      "RECOVER_USER_CMD\020\026\022\024\n\020RECOVER_USER_ACK\020\027" +
+      "\022\024\n\020JOIN_ROOM_NOTIFY\020\030\022\025\n\021LEAVE_ROOM_NOT" +
+      "IFY\020\031*4\n\007MsgType\022\010\n\004TEXT\020\000\022\t\n\005IMAGE\020\001\022\t\n" +
+      "\005VOICE\020\002\022\t\n\005VIDEO\020\003B\034\n\032com.howcode.aqcha" +
+      "t.messageb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -22350,7 +22441,7 @@ public final class AQChatMsgProtocol {
     internal_static_chat_msg_ChatRecord_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chat_msg_ChatRecord_descriptor,
-        new java.lang.String[] { "User", "MsgType", "Message", "CreateTime", });
+        new java.lang.String[] { "User", "MsgType", "Message", "CreateTime", "MsgId", });
     internal_static_chat_msg_RecoverUserCmd_descriptor =
       getDescriptor().getMessageTypes().get(24);
     internal_static_chat_msg_RecoverUserCmd_fieldAccessorTable = new

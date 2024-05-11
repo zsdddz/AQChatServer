@@ -61,6 +61,7 @@ public class MessageConstructor {
                     .setUserAvatar(message.getSenderAvatar())
                     .build();
             builder.addChatRecords(AQChatMsgProtocol.ChatRecord.newBuilder()
+                    .setMsgId(message.getMessageId())
                     .setUser(user)
                     .setMsgType(AQChatMsgProtocol.MsgType.forNumber(message.getMessageType()))
                     .setMessage(message.getMessageContent())
