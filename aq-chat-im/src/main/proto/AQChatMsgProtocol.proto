@@ -99,17 +99,19 @@ message LeaveRoomAck{
 
 //发送消息
 message SendMsgCmd{
+  //消息id
+  int64 msgId = 1;
   string roomId = 2;
   MsgType msgType = 3;
   string msg = 4;
 }
 //发送消息响应 是否成功
 message SendMsgAck{
-  string userId = 1;
-  string roomId = 2;
-  bool success = 3;
   //消息id
-  string msgId = 4;
+  int64 msgId = 1;
+  string userId = 2;
+  string roomId = 3;
+  bool status = 4;
 }
 
 //定义消息类型
