@@ -62,7 +62,7 @@ public class AQMessageServiceImpl implements IAQMessageService {
 
         List<MessageRecordDto> collect = aqMessages.stream().map(m -> {
             MessageRecordDto messageRecordDto = new MessageRecordDto();
-            messageRecordDto.setMessageId(m.getMessageId().toString());
+            messageRecordDto.setMessageId(m.getMessageId());
             messageRecordDto.setRoomId(m.getRoomId());
             messageRecordDto.setSenderId(m.getSenderId());
 

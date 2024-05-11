@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @Data
 public class MessageRecordDto {
-    private String messageId;
+    private Long messageId;
     private String roomId;
     private String senderId;
     private String senderName;
