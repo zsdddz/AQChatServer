@@ -105,4 +105,12 @@ public class MessageBroadcaster {
         }
         channelGroup.remove(nioSocketChannel);
     }
+
+    public boolean isTheRoomEmpty(String roomId) {
+        return userRoomMap.containsValue(roomId);
+    }
+
+    public void remove(String userId) {
+        userRoomMap.remove(userId);
+    }
 }

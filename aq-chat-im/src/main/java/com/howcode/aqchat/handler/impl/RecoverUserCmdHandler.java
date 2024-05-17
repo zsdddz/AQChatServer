@@ -9,6 +9,7 @@ import com.howcode.aqchat.holder.impl.AQUserHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
@@ -45,6 +46,8 @@ public class RecoverUserCmdHandler implements ICmdHandler<AQChatMsgProtocol.Reco
             return;
         }
         //重新登录 续期
+        //添加用户channel
+        globalChannelHolder.put(userId, (NioSocketChannel) ctx.channel());
         aqUserHolder.saveUserInfo(userInfo);
         ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).set(userId);
         //判断是否有房间

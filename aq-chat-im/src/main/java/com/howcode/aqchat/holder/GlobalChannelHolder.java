@@ -73,8 +73,9 @@ public class GlobalChannelHolder {
     /**
      * 离线
      */
-    public void offline(String userId,NioSocketChannel nioSocketChannel) {
-        messageBroadcaster.removeChannel(userId,nioSocketChannel);
+    public void offline(String userId, NioSocketChannel nioSocketChannel) {
+        remove(userId);
+        messageBroadcaster.removeChannel(userId, nioSocketChannel);
     }
 
     /**
@@ -106,7 +107,7 @@ public class GlobalChannelHolder {
 
     public void isOrNoDissolveTheRoom(String roomId, Integer roomNo) {
         ChannelGroup channelGroup = messageBroadcaster.getChannelGroup(roomId);
-        if (null == channelGroup || channelGroup.isEmpty()) {
+        if (!messageBroadcaster.isTheRoomEmpty(roomId) && (null == channelGroup || channelGroup.isEmpty())) {
             redisCacheHelper.deleteObject(AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo);
             redisCacheHelper.deleteObject(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId);
         }
@@ -213,5 +214,9 @@ public class GlobalChannelHolder {
                 .setRoomId(userInfo.getRoomId())
                 .build();
         messageBroadcaster.broadcast(userInfo.getRoomId(), offlineNotify);
+    }
+
+    public void removeByBroadcaster(String userId) {
+        messageBroadcaster.remove(userId);
     }
 }

@@ -54,6 +54,7 @@ public class LegacyDataReceiver implements InitializingBean {
                             //清理遗留信息
                             LOGGER.info("用户离线时间超过系统限制，开始清理遗留信息");
                             String roomId = globalChannelHolder.getRoomId(userId);
+                            globalChannelHolder.removeByBroadcaster(userId);
                             LOGGER.info(roomId);
                             globalChannelHolder.dissolveTheRoomByLogout(roomId);
                         }
