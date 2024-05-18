@@ -110,9 +110,9 @@ public class GlobalChannelHolder {
         if (!messageBroadcaster.isTheRoomEmpty(roomId) && (null == channelGroup || channelGroup.isEmpty())) {
             redisCacheHelper.deleteObject(AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo);
             redisCacheHelper.deleteObject(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId);
+            //解散房间
+            messageBroadcaster.removeChannelGroup(roomId);
         }
-        //解散房间
-        messageBroadcaster.removeChannelGroup(roomId);
     }
 
     public void dissolveTheRoomByLogout(String roomId) {
@@ -199,7 +199,7 @@ public class GlobalChannelHolder {
                 .setUser(userBuilder)
                 .setRoomId(roomNotifyDto.getRoomId())
                 .build();
-        messageBroadcaster.broadcast(userInfo.getRoomId(), leaveRoomNotify);
+        messageBroadcaster.broadcast(roomNotifyDto.getRoomId(), leaveRoomNotify);
     }
 
     public void notifyOfflineMessage(String userId) {

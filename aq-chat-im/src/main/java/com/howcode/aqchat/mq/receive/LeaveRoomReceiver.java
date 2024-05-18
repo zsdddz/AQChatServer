@@ -47,10 +47,13 @@ public class LeaveRoomReceiver implements InitializingBean {
                     LOGGER.info("mq收到消息[离开房间]:{}", msgStr);
                     // 广播用户加入房间
                     if (!msgStr.isEmpty()) {
-                        RoomNotifyDto roomNotifyDto = JSONObject.parseObject(msgStr, RoomNotifyDto.class);
-                        globalChannelHolder.notifyLeaveRoom(roomNotifyDto);
+                        try {
+                            RoomNotifyDto roomNotifyDto = JSONObject.parseObject(msgStr, RoomNotifyDto.class);
+                            globalChannelHolder.notifyLeaveRoom(roomNotifyDto);
+                        }catch (Exception e){
+                            LOGGER.error("离开房间MQ失败",e);
+                        }
                     }
-
                 }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             });

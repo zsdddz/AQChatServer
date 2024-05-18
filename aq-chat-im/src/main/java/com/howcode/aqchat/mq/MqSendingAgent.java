@@ -100,7 +100,7 @@ public class MqSendingAgent {
         }
         Message message = new Message();
         message.setTopic(AQChatMQConstant.MQTopic.LEAVE_ROOM_TOPIC);
-        message.setBody(JSONObject.toJSONString(new RoomNotifyDto(roomId,roomId)).getBytes());
+        message.setBody(JSONObject.toJSONString(new RoomNotifyDto(roomId,userId)).getBytes());
         try {
             mqProducer.send(message);
         } catch (Exception e) {
