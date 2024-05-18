@@ -204,8 +204,15 @@ message RecoverUserAck{
   string userId = 1;
   string userName = 2;
   string userAvatar = 3;
-  string roomId = 4;
+  Room room = 4;
 }
+//房间信息
+message Room{
+  string roomId = 1;
+  int32 roomNo = 2;
+  string roomName = 3;
+}
+
 //加入房间通知
 message JoinRoomNotify{
   User user = 1;

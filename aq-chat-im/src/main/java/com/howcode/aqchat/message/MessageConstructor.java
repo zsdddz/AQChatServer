@@ -3,6 +3,7 @@ package com.howcode.aqchat.message;
 import com.howcode.aqchat.common.enums.AQChatEnum;
 import com.howcode.aqchat.common.model.AliOssStsDto;
 import com.howcode.aqchat.common.model.MessageRecordDto;
+import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,15 +35,19 @@ public class MessageConstructor {
                 .build();
     }
 
-    public static AQChatMsgProtocol.RecoverUserAck buildRecoverUserAck(UserGlobalInfoDto userGlobalInfoDto) {
+    public static AQChatMsgProtocol.RecoverUserAck buildRecoverUserAck(UserGlobalInfoDto userGlobalInfoDto, RoomInfoDto roomInfo) {
         AQChatMsgProtocol.RecoverUserAck.Builder builder = AQChatMsgProtocol.RecoverUserAck.newBuilder();
+        AQChatMsgProtocol.Room.Builder room = AQChatMsgProtocol.Room.newBuilder();
         if (userGlobalInfoDto.getUserId() == null) {
             return null;
         }
         builder.setUserId(userGlobalInfoDto.getUserId());
         builder.setUserName(userGlobalInfoDto.getUserName());
-        if (null != userGlobalInfoDto.getRoomId()) {
-            builder.setRoomId(userGlobalInfoDto.getRoomId());
+        if (null != roomInfo) {
+            room.setRoomId(roomInfo.getRoomId())
+                    .setRoomNo(roomInfo.getRoomNo())
+                    .setRoomName(roomInfo.getRoomName());
+            builder.setRoom(room);
         }
         builder.setUserAvatar(userGlobalInfoDto.getUserAvatar());
         return builder.build();

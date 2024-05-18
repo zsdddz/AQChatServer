@@ -2,12 +2,14 @@ package com.howcode.aqchat.handler.impl;
 
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
+import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.handler.ICmdHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.impl.AQUserHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
+import com.howcode.aqchat.mq.MqSendingAgent;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
@@ -32,6 +34,9 @@ public class RecoverUserCmdHandler implements ICmdHandler<AQChatMsgProtocol.Reco
     @Resource
     @Lazy
     private GlobalChannelHolder globalChannelHolder;
+    @Resource
+    @Lazy
+    private MqSendingAgent mqSendingAgent;
 
     @Override
     public void handle(ChannelHandlerContext ctx, AQChatMsgProtocol.RecoverUserCmd cmd) {
@@ -42,6 +47,7 @@ public class RecoverUserCmdHandler implements ICmdHandler<AQChatMsgProtocol.Reco
         UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(userId);
         if (null == userInfo) {
             //离线时间过长
+            LOGGER.info("用户{}离线时间过长",userId);
             ctx.writeAndFlush(MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_DOES_NOT_EXIST_OR_EXITS));
             return;
         }
@@ -54,8 +60,10 @@ public class RecoverUserCmdHandler implements ICmdHandler<AQChatMsgProtocol.Reco
         if (null != userInfo.getRoomId()) {
             //加入房间
             globalChannelHolder.joinRoom(userInfo.getRoomId(),userId,ctx.channel());
+            mqSendingAgent.sendJoinRoomMsg(userId, userInfo.getRoomId());
         }
-        AQChatMsgProtocol.RecoverUserAck recoverUserAck = MessageConstructor.buildRecoverUserAck(userInfo);
+        RoomInfoDto roomInfo = globalChannelHolder.getRoomInfo(userInfo.getRoomId());
+        AQChatMsgProtocol.RecoverUserAck recoverUserAck = MessageConstructor.buildRecoverUserAck(userInfo,roomInfo);
         ctx.writeAndFlush(recoverUserAck);
     }
 }
