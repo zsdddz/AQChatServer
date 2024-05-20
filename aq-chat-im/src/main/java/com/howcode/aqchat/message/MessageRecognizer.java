@@ -17,7 +17,6 @@ import java.util.Map;
  * @date 2024-04-20 12:21
  */
 @Component
-@SpringBootConfiguration
 public class MessageRecognizer implements InitializingBean {
 
     private final Logger LOGGER = LoggerFactory.getLogger(MessageRecognizer.class);
@@ -52,11 +51,11 @@ public class MessageRecognizer implements InitializingBean {
                 strMsgCode = strMsgCode.replaceAll("_", "");
                 strMsgCode = strMsgCode.toLowerCase();
 
-                if (!strMsgCode.startsWith(clazzName)) {
+                if (!strMsgCode.equals(clazzName)) {
                     continue;
                 }
                 try {
-                    // 调用 XxxCmd 或者 XxxResult 的 getDefaultInstance 静态方法,
+                    // 调用 XxxCmd  的 getDefaultInstance 静态方法,
                     // 目的是返回默认实例
                     Object returnObj = innerClazz.getDeclaredMethod("getDefaultInstance").invoke(innerClazz);
 
