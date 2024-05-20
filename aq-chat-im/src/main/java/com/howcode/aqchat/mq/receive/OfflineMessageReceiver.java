@@ -46,7 +46,11 @@ public class OfflineMessageReceiver implements InitializingBean {
                     LOGGER.info("mq收到消息[用户离线消息]:{}", userId);
                     // 广播用户离线
                     if (!userId.isEmpty()) {
-                        globalChannelHolder.notifyOfflineMessage(userId);
+                        try {
+                            globalChannelHolder.notifyOfflineMessage(userId);
+                        }catch (Exception e){
+                            LOGGER.error("离线消息MQ异常",e);
+                        }
                     }
                 }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;

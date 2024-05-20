@@ -47,8 +47,12 @@ public class LogoutMessageReceiver implements InitializingBean {
                     String userId = new String(messageExt.getBody());
                     LOGGER.info("mq收到消息[退出登录]:{}", userId);
                     // 广播用户退出消息
-                    if (!userId.isEmpty()) {
-                        globalChannelHolder.notifyLogout(userId);
+                    try {
+                        if (!userId.isEmpty()) {
+                            globalChannelHolder.notifyLogout(userId);
+                        }
+                    }catch (Exception e){
+                        LOGGER.error("退出登录MQ异常",e);
                     }
                 }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
