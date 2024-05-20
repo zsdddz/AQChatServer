@@ -35,7 +35,7 @@ public class UserLoginCmdHandler implements ICmdHandler<AQChatMsgProtocol.UserLo
 
     @Resource
     @Lazy
-    private GlobalChannelHolder channelHolder;
+    private GlobalChannelHolder globalChannelHolder;
 
     @Resource
     @Lazy
@@ -72,7 +72,7 @@ public class UserLoginCmdHandler implements ICmdHandler<AQChatMsgProtocol.UserLo
         userService.saveUser(userId, userName, userAvatar);
 
         //添加用户channel
-        channelHolder.put(userId, (NioSocketChannel) ctx.channel());
+        globalChannelHolder.put(userId, (NioSocketChannel) ctx.channel());
 
         LOGGER.info("UserLoginCmdHandler handle, user login success, userId:{}", userId);
         AQChatMsgProtocol.UserLoginAck.Builder builder = AQChatMsgProtocol.UserLoginAck.newBuilder();
