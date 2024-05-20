@@ -16,6 +16,8 @@ import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import jakarta.annotation.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -28,6 +30,9 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Component
 public class GlobalChannelHolder {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalChannelHolder.class);
+
     private final Map<String, NioSocketChannel> CHANNELS = new ConcurrentHashMap<>();
 
     @Resource
@@ -153,6 +158,10 @@ public class GlobalChannelHolder {
             return;
         }
         UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(userId);
+        if (null == userInfo){
+            LOGGER.error("[退出通知] 用户信息为空");
+            return;
+        }
         AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
         if (userBuilder == null) return;
         AQChatMsgProtocol.LeaveRoomNotify leaveRoomNotify = AQChatMsgProtocol.LeaveRoomNotify.newBuilder()

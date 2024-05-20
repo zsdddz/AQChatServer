@@ -30,30 +30,34 @@ public class UserLogoutCmdHandler implements ICmdHandler<AQChatMsgProtocol.UserL
     @Resource
     @Lazy
     private MqSendingAgent mqSendingAgent;
+
     @Override
     public void handle(ChannelHandlerContext ctx, AQChatMsgProtocol.UserLogoutCmd cmd) {
-        if (null == ctx|| null == cmd) {
+        if (null == ctx || null == cmd) {
             return;
         }
         //获取用户id
         String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
-        if (userId == null){
+        if (userId == null) {
             ctx.writeAndFlush(MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_NOT_LOGIN));
             ctx.close();
             return;
         }
         //退出
-        if (!userId.equals(cmd.getUserId())){
+        if (!userId.equals(cmd.getUserId())) {
             //用户id不匹配
             ctx.writeAndFlush(MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_ID_NOT_MATCH));
             return;
         }
+        //清除登录属性
+        ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).set(null);
+        //mq发送用户退出房间消息
+        mqSendingAgent.sendLeaveRoomMsg(userId,globalChannelHolder.getRoomId(userId));
         //mq发送用户退出消息
         mqSendingAgent.sendLogoutMessage(userId);
         //退出
         globalChannelHolder.logout(userId);
-        LOGGER.info("用户{}退出",userId);
+        LOGGER.info("用户{}退出", userId);
         ctx.writeAndFlush(MessageConstructor.buildUserLogoutAck(userId));
-        ctx.close();
     }
 }
