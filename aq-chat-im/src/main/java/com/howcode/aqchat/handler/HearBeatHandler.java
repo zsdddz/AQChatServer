@@ -56,6 +56,9 @@ public class HearBeatHandler extends ChannelInboundHandlerAdapter implements Ini
                 if (lastReadTime != null && now - lastReadTime > heartBeatTime) {
                     //获取用户id
                     String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
+                    if (null == userId){
+                        return;
+                    }
                     // 下线
                     Logger.info("用户{}心跳超时，发送离线消息",userId);
                     //构建离线消息
