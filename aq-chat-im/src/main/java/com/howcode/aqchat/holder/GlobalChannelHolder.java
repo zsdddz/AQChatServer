@@ -158,8 +158,8 @@ public class GlobalChannelHolder {
             return;
         }
         UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(userId);
-        if (null == userInfo){
-            LOGGER.error("[退出通知] 用户信息为空");
+        if (null == userInfo || null == userInfo.getRoomId() ){
+            LOGGER.info("[退出通知] 用户信息或者房间信息为空");
             return;
         }
         AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
@@ -216,6 +216,10 @@ public class GlobalChannelHolder {
             return;
         }
         UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(userId);
+        if (null == userInfo || null == userInfo.getRoomId() ){
+            LOGGER.info("[离线消息] 用户信息或者房间信息为空");
+            return;
+        }
         AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
         if (userBuilder == null) return;
         AQChatMsgProtocol.OfflineNotify offlineNotify = AQChatMsgProtocol.OfflineNotify.newBuilder()
