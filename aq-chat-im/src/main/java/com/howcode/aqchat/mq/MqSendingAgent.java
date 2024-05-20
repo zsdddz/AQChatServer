@@ -94,13 +94,13 @@ public class MqSendingAgent {
     }
 
     public void sendLeaveRoomMsg(String userId, String roomId) {
-        if (null == userId) {
-            LOGGER.error("用户id为空");
+        if (null == userId || null == roomId) {
+            LOGGER.error("用户id或者房间id为空");
             return;
         }
         Message message = new Message();
         message.setTopic(AQChatMQConstant.MQTopic.LEAVE_ROOM_TOPIC);
-        message.setBody(JSONObject.toJSONString(new RoomNotifyDto(roomId,userId)).getBytes());
+        message.setBody(JSONObject.toJSONString(new RoomNotifyDto(roomId, userId)).getBytes());
         try {
             mqProducer.send(message);
         } catch (Exception e) {
@@ -115,7 +115,7 @@ public class MqSendingAgent {
         }
         Message message = new Message();
         message.setTopic(AQChatMQConstant.MQTopic.JOIN_ROOM_TOPIC);
-        message.setBody(JSONObject.toJSONString(new RoomNotifyDto(roomId,userId)).getBytes());
+        message.setBody(JSONObject.toJSONString(new RoomNotifyDto(roomId, userId)).getBytes());
         try {
             mqProducer.send(message);
             LOGGER.info("发送用户加入房间消息成功");
