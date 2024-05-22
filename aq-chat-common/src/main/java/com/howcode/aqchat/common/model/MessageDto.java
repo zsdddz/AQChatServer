@@ -16,5 +16,6 @@ public class MessageDto {
     private String senderId;
     private Integer messageType;
     private String messageContent;
+    private String messageExt;
     private Date createTime;
 }

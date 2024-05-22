@@ -7285,6 +7285,18 @@ public final class AQChatMsgProtocol {
      */
     com.google.protobuf.ByteString
         getMsgBytes();
+
+    /**
+     * <code>string ext = 5;</code>
+     * @return The ext.
+     */
+    java.lang.String getExt();
+    /**
+     * <code>string ext = 5;</code>
+     * @return The bytes for ext.
+     */
+    com.google.protobuf.ByteString
+        getExtBytes();
   }
   /**
    * <pre>
@@ -7306,6 +7318,7 @@ public final class AQChatMsgProtocol {
       roomId_ = "";
       msgType_ = 0;
       msg_ = "";
+      ext_ = "";
     }
 
     @java.lang.Override
@@ -7359,6 +7372,12 @@ public final class AQChatMsgProtocol {
               java.lang.String s = input.readStringRequireUtf8();
 
               msg_ = s;
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              ext_ = s;
               break;
             }
             default: {
@@ -7503,6 +7522,44 @@ public final class AQChatMsgProtocol {
       }
     }
 
+    public static final int EXT_FIELD_NUMBER = 5;
+    private volatile java.lang.Object ext_;
+    /**
+     * <code>string ext = 5;</code>
+     * @return The ext.
+     */
+    @java.lang.Override
+    public java.lang.String getExt() {
+      java.lang.Object ref = ext_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        ext_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string ext = 5;</code>
+     * @return The bytes for ext.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getExtBytes() {
+      java.lang.Object ref = ext_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ext_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -7529,6 +7586,9 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msg_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, msg_);
       }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(ext_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, ext_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -7552,6 +7612,9 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msg_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, msg_);
       }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(ext_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, ext_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -7574,6 +7637,8 @@ public final class AQChatMsgProtocol {
       if (msgType_ != other.msgType_) return false;
       if (!getMsg()
           .equals(other.getMsg())) return false;
+      if (!getExt()
+          .equals(other.getExt())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -7594,6 +7659,8 @@ public final class AQChatMsgProtocol {
       hash = (53 * hash) + msgType_;
       hash = (37 * hash) + MSG_FIELD_NUMBER;
       hash = (53 * hash) + getMsg().hashCode();
+      hash = (37 * hash) + EXT_FIELD_NUMBER;
+      hash = (53 * hash) + getExt().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -7739,6 +7806,8 @@ public final class AQChatMsgProtocol {
 
         msg_ = "";
 
+        ext_ = "";
+
         return this;
       }
 
@@ -7769,6 +7838,7 @@ public final class AQChatMsgProtocol {
         result.roomId_ = roomId_;
         result.msgType_ = msgType_;
         result.msg_ = msg_;
+        result.ext_ = ext_;
         onBuilt();
         return result;
       }
@@ -7829,6 +7899,10 @@ public final class AQChatMsgProtocol {
         }
         if (!other.getMsg().isEmpty()) {
           msg_ = other.msg_;
+          onChanged();
+        }
+        if (!other.getExt().isEmpty()) {
+          ext_ = other.ext_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -8108,6 +8182,82 @@ public final class AQChatMsgProtocol {
         onChanged();
         return this;
       }
+
+      private java.lang.Object ext_ = "";
+      /**
+       * <code>string ext = 5;</code>
+       * @return The ext.
+       */
+      public java.lang.String getExt() {
+        java.lang.Object ref = ext_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          ext_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string ext = 5;</code>
+       * @return The bytes for ext.
+       */
+      public com.google.protobuf.ByteString
+          getExtBytes() {
+        java.lang.Object ref = ext_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          ext_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string ext = 5;</code>
+       * @param value The ext to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExt(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        ext_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ext = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearExt() {
+        
+        ext_ = getDefaultInstance().getExt();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ext = 5;</code>
+       * @param value The bytes for ext to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExtBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        ext_ = value;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -8204,6 +8354,18 @@ public final class AQChatMsgProtocol {
      * @return The status.
      */
     boolean getStatus();
+
+    /**
+     * <code>string ext = 5;</code>
+     * @return The ext.
+     */
+    java.lang.String getExt();
+    /**
+     * <code>string ext = 5;</code>
+     * @return The bytes for ext.
+     */
+    com.google.protobuf.ByteString
+        getExtBytes();
   }
   /**
    * <pre>
@@ -8224,6 +8386,7 @@ public final class AQChatMsgProtocol {
     private SendMsgAck() {
       userId_ = "";
       roomId_ = "";
+      ext_ = "";
     }
 
     @java.lang.Override
@@ -8276,6 +8439,12 @@ public final class AQChatMsgProtocol {
             case 32: {
 
               status_ = input.readBool();
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              ext_ = s;
               break;
             }
             default: {
@@ -8412,6 +8581,44 @@ public final class AQChatMsgProtocol {
       return status_;
     }
 
+    public static final int EXT_FIELD_NUMBER = 5;
+    private volatile java.lang.Object ext_;
+    /**
+     * <code>string ext = 5;</code>
+     * @return The ext.
+     */
+    @java.lang.Override
+    public java.lang.String getExt() {
+      java.lang.Object ref = ext_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        ext_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string ext = 5;</code>
+     * @return The bytes for ext.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getExtBytes() {
+      java.lang.Object ref = ext_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ext_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -8438,6 +8645,9 @@ public final class AQChatMsgProtocol {
       if (status_ != false) {
         output.writeBool(4, status_);
       }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(ext_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, ext_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -8460,6 +8670,9 @@ public final class AQChatMsgProtocol {
       if (status_ != false) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(4, status_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(ext_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, ext_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -8484,6 +8697,8 @@ public final class AQChatMsgProtocol {
           .equals(other.getRoomId())) return false;
       if (getStatus()
           != other.getStatus()) return false;
+      if (!getExt()
+          .equals(other.getExt())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -8505,6 +8720,8 @@ public final class AQChatMsgProtocol {
       hash = (37 * hash) + STATUS_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getStatus());
+      hash = (37 * hash) + EXT_FIELD_NUMBER;
+      hash = (53 * hash) + getExt().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -8650,6 +8867,8 @@ public final class AQChatMsgProtocol {
 
         status_ = false;
 
+        ext_ = "";
+
         return this;
       }
 
@@ -8680,6 +8899,7 @@ public final class AQChatMsgProtocol {
         result.userId_ = userId_;
         result.roomId_ = roomId_;
         result.status_ = status_;
+        result.ext_ = ext_;
         onBuilt();
         return result;
       }
@@ -8741,6 +8961,10 @@ public final class AQChatMsgProtocol {
         }
         if (other.getStatus() != false) {
           setStatus(other.getStatus());
+        }
+        if (!other.getExt().isEmpty()) {
+          ext_ = other.ext_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -8996,6 +9220,82 @@ public final class AQChatMsgProtocol {
         onChanged();
         return this;
       }
+
+      private java.lang.Object ext_ = "";
+      /**
+       * <code>string ext = 5;</code>
+       * @return The ext.
+       */
+      public java.lang.String getExt() {
+        java.lang.Object ref = ext_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          ext_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string ext = 5;</code>
+       * @return The bytes for ext.
+       */
+      public com.google.protobuf.ByteString
+          getExtBytes() {
+        java.lang.Object ref = ext_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          ext_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string ext = 5;</code>
+       * @param value The ext to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExt(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        ext_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ext = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearExt() {
+        
+        ext_ = getDefaultInstance().getExt();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ext = 5;</code>
+       * @param value The bytes for ext to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExtBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        ext_ = value;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -9114,6 +9414,18 @@ public final class AQChatMsgProtocol {
      */
     com.google.protobuf.ByteString
         getMsgBytes();
+
+    /**
+     * <code>string ext = 6;</code>
+     * @return The ext.
+     */
+    java.lang.String getExt();
+    /**
+     * <code>string ext = 6;</code>
+     * @return The bytes for ext.
+     */
+    com.google.protobuf.ByteString
+        getExtBytes();
   }
   /**
    * <pre>
@@ -9136,6 +9448,7 @@ public final class AQChatMsgProtocol {
       msgId_ = "";
       msgType_ = 0;
       msg_ = "";
+      ext_ = "";
     }
 
     @java.lang.Override
@@ -9203,6 +9516,12 @@ public final class AQChatMsgProtocol {
               java.lang.String s = input.readStringRequireUtf8();
 
               msg_ = s;
+              break;
+            }
+            case 50: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              ext_ = s;
               break;
             }
             default: {
@@ -9396,6 +9715,44 @@ public final class AQChatMsgProtocol {
       }
     }
 
+    public static final int EXT_FIELD_NUMBER = 6;
+    private volatile java.lang.Object ext_;
+    /**
+     * <code>string ext = 6;</code>
+     * @return The ext.
+     */
+    @java.lang.Override
+    public java.lang.String getExt() {
+      java.lang.Object ref = ext_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        ext_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string ext = 6;</code>
+     * @return The bytes for ext.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getExtBytes() {
+      java.lang.Object ref = ext_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ext_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -9425,6 +9782,9 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msg_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, msg_);
       }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(ext_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, ext_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -9450,6 +9810,9 @@ public final class AQChatMsgProtocol {
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msg_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, msg_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(ext_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, ext_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -9478,6 +9841,8 @@ public final class AQChatMsgProtocol {
       if (msgType_ != other.msgType_) return false;
       if (!getMsg()
           .equals(other.getMsg())) return false;
+      if (!getExt()
+          .equals(other.getExt())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -9501,6 +9866,8 @@ public final class AQChatMsgProtocol {
       hash = (53 * hash) + msgType_;
       hash = (37 * hash) + MSG_FIELD_NUMBER;
       hash = (53 * hash) + getMsg().hashCode();
+      hash = (37 * hash) + EXT_FIELD_NUMBER;
+      hash = (53 * hash) + getExt().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -9652,6 +10019,8 @@ public final class AQChatMsgProtocol {
 
         msg_ = "";
 
+        ext_ = "";
+
         return this;
       }
 
@@ -9687,6 +10056,7 @@ public final class AQChatMsgProtocol {
         result.msgId_ = msgId_;
         result.msgType_ = msgType_;
         result.msg_ = msg_;
+        result.ext_ = ext_;
         onBuilt();
         return result;
       }
@@ -9751,6 +10121,10 @@ public final class AQChatMsgProtocol {
         }
         if (!other.getMsg().isEmpty()) {
           msg_ = other.msg_;
+          onChanged();
+        }
+        if (!other.getExt().isEmpty()) {
+          ext_ = other.ext_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -10179,6 +10553,82 @@ public final class AQChatMsgProtocol {
   checkByteStringIsUtf8(value);
         
         msg_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object ext_ = "";
+      /**
+       * <code>string ext = 6;</code>
+       * @return The ext.
+       */
+      public java.lang.String getExt() {
+        java.lang.Object ref = ext_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          ext_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string ext = 6;</code>
+       * @return The bytes for ext.
+       */
+      public com.google.protobuf.ByteString
+          getExtBytes() {
+        java.lang.Object ref = ext_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          ext_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string ext = 6;</code>
+       * @param value The ext to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExt(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        ext_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ext = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearExt() {
+        
+        ext_ = getDefaultInstance().getExt();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ext = 6;</code>
+       * @param value The bytes for ext to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExtBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        ext_ = value;
         onChanged();
         return this;
       }
@@ -17834,30 +18284,29 @@ public final class AQChatMsgProtocol {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.chat_msg.User user = 1;</code>
+     * <pre>
+     *消息id
+     * </pre>
+     *
+     * <code>int64 msgId = 1;</code>
+     * @return The msgId.
+     */
+    long getMsgId();
+
+    /**
+     * <code>.chat_msg.User user = 2;</code>
      * @return Whether the user field is set.
      */
     boolean hasUser();
     /**
-     * <code>.chat_msg.User user = 1;</code>
+     * <code>.chat_msg.User user = 2;</code>
      * @return The user.
      */
     com.howcode.aqchat.message.AQChatMsgProtocol.User getUser();
     /**
-     * <code>.chat_msg.User user = 1;</code>
+     * <code>.chat_msg.User user = 2;</code>
      */
     com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder getUserOrBuilder();
-
-    /**
-     * <code>.chat_msg.MsgType msgType = 2;</code>
-     * @return The enum numeric value on the wire for msgType.
-     */
-    int getMsgTypeValue();
-    /**
-     * <code>.chat_msg.MsgType msgType = 2;</code>
-     * @return The msgType.
-     */
-    com.howcode.aqchat.message.AQChatMsgProtocol.MsgType getMsgType();
 
     /**
      * <code>string message = 3;</code>
@@ -17872,26 +18321,39 @@ public final class AQChatMsgProtocol {
         getMessageBytes();
 
     /**
-     * <code>string createTime = 4;</code>
+     * <code>.chat_msg.MsgType msgType = 4;</code>
+     * @return The enum numeric value on the wire for msgType.
+     */
+    int getMsgTypeValue();
+    /**
+     * <code>.chat_msg.MsgType msgType = 4;</code>
+     * @return The msgType.
+     */
+    com.howcode.aqchat.message.AQChatMsgProtocol.MsgType getMsgType();
+
+    /**
+     * <code>string ext = 5;</code>
+     * @return The ext.
+     */
+    java.lang.String getExt();
+    /**
+     * <code>string ext = 5;</code>
+     * @return The bytes for ext.
+     */
+    com.google.protobuf.ByteString
+        getExtBytes();
+
+    /**
+     * <code>string createTime = 6;</code>
      * @return The createTime.
      */
     java.lang.String getCreateTime();
     /**
-     * <code>string createTime = 4;</code>
+     * <code>string createTime = 6;</code>
      * @return The bytes for createTime.
      */
     com.google.protobuf.ByteString
         getCreateTimeBytes();
-
-    /**
-     * <pre>
-     *消息id
-     * </pre>
-     *
-     * <code>int64 msgId = 5;</code>
-     * @return The msgId.
-     */
-    long getMsgId();
   }
   /**
    * Protobuf type {@code chat_msg.ChatRecord}
@@ -17906,8 +18368,9 @@ public final class AQChatMsgProtocol {
       super(builder);
     }
     private ChatRecord() {
-      msgType_ = 0;
       message_ = "";
+      msgType_ = 0;
+      ext_ = "";
       createTime_ = "";
     }
 
@@ -17941,7 +18404,12 @@ public final class AQChatMsgProtocol {
             case 0:
               done = true;
               break;
-            case 10: {
+            case 8: {
+
+              msgId_ = input.readInt64();
+              break;
+            }
+            case 18: {
               com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder subBuilder = null;
               if (user_ != null) {
                 subBuilder = user_.toBuilder();
@@ -17954,27 +18422,28 @@ public final class AQChatMsgProtocol {
 
               break;
             }
-            case 16: {
-              int rawValue = input.readEnum();
-
-              msgType_ = rawValue;
-              break;
-            }
             case 26: {
               java.lang.String s = input.readStringRequireUtf8();
 
               message_ = s;
               break;
             }
-            case 34: {
+            case 32: {
+              int rawValue = input.readEnum();
+
+              msgType_ = rawValue;
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              ext_ = s;
+              break;
+            }
+            case 50: {
               java.lang.String s = input.readStringRequireUtf8();
 
               createTime_ = s;
-              break;
-            }
-            case 40: {
-
-              msgId_ = input.readInt64();
               break;
             }
             default: {
@@ -18009,10 +18478,25 @@ public final class AQChatMsgProtocol {
               com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.class, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder.class);
     }
 
-    public static final int USER_FIELD_NUMBER = 1;
+    public static final int MSGID_FIELD_NUMBER = 1;
+    private long msgId_;
+    /**
+     * <pre>
+     *消息id
+     * </pre>
+     *
+     * <code>int64 msgId = 1;</code>
+     * @return The msgId.
+     */
+    @java.lang.Override
+    public long getMsgId() {
+      return msgId_;
+    }
+
+    public static final int USER_FIELD_NUMBER = 2;
     private com.howcode.aqchat.message.AQChatMsgProtocol.User user_;
     /**
-     * <code>.chat_msg.User user = 1;</code>
+     * <code>.chat_msg.User user = 2;</code>
      * @return Whether the user field is set.
      */
     @java.lang.Override
@@ -18020,7 +18504,7 @@ public final class AQChatMsgProtocol {
       return user_ != null;
     }
     /**
-     * <code>.chat_msg.User user = 1;</code>
+     * <code>.chat_msg.User user = 2;</code>
      * @return The user.
      */
     @java.lang.Override
@@ -18028,30 +18512,11 @@ public final class AQChatMsgProtocol {
       return user_ == null ? com.howcode.aqchat.message.AQChatMsgProtocol.User.getDefaultInstance() : user_;
     }
     /**
-     * <code>.chat_msg.User user = 1;</code>
+     * <code>.chat_msg.User user = 2;</code>
      */
     @java.lang.Override
     public com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder getUserOrBuilder() {
       return getUser();
-    }
-
-    public static final int MSGTYPE_FIELD_NUMBER = 2;
-    private int msgType_;
-    /**
-     * <code>.chat_msg.MsgType msgType = 2;</code>
-     * @return The enum numeric value on the wire for msgType.
-     */
-    @java.lang.Override public int getMsgTypeValue() {
-      return msgType_;
-    }
-    /**
-     * <code>.chat_msg.MsgType msgType = 2;</code>
-     * @return The msgType.
-     */
-    @java.lang.Override public com.howcode.aqchat.message.AQChatMsgProtocol.MsgType getMsgType() {
-      @SuppressWarnings("deprecation")
-      com.howcode.aqchat.message.AQChatMsgProtocol.MsgType result = com.howcode.aqchat.message.AQChatMsgProtocol.MsgType.valueOf(msgType_);
-      return result == null ? com.howcode.aqchat.message.AQChatMsgProtocol.MsgType.UNRECOGNIZED : result;
     }
 
     public static final int MESSAGE_FIELD_NUMBER = 3;
@@ -18092,10 +18557,67 @@ public final class AQChatMsgProtocol {
       }
     }
 
-    public static final int CREATETIME_FIELD_NUMBER = 4;
+    public static final int MSGTYPE_FIELD_NUMBER = 4;
+    private int msgType_;
+    /**
+     * <code>.chat_msg.MsgType msgType = 4;</code>
+     * @return The enum numeric value on the wire for msgType.
+     */
+    @java.lang.Override public int getMsgTypeValue() {
+      return msgType_;
+    }
+    /**
+     * <code>.chat_msg.MsgType msgType = 4;</code>
+     * @return The msgType.
+     */
+    @java.lang.Override public com.howcode.aqchat.message.AQChatMsgProtocol.MsgType getMsgType() {
+      @SuppressWarnings("deprecation")
+      com.howcode.aqchat.message.AQChatMsgProtocol.MsgType result = com.howcode.aqchat.message.AQChatMsgProtocol.MsgType.valueOf(msgType_);
+      return result == null ? com.howcode.aqchat.message.AQChatMsgProtocol.MsgType.UNRECOGNIZED : result;
+    }
+
+    public static final int EXT_FIELD_NUMBER = 5;
+    private volatile java.lang.Object ext_;
+    /**
+     * <code>string ext = 5;</code>
+     * @return The ext.
+     */
+    @java.lang.Override
+    public java.lang.String getExt() {
+      java.lang.Object ref = ext_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        ext_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string ext = 5;</code>
+     * @return The bytes for ext.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getExtBytes() {
+      java.lang.Object ref = ext_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ext_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CREATETIME_FIELD_NUMBER = 6;
     private volatile java.lang.Object createTime_;
     /**
-     * <code>string createTime = 4;</code>
+     * <code>string createTime = 6;</code>
      * @return The createTime.
      */
     @java.lang.Override
@@ -18112,7 +18634,7 @@ public final class AQChatMsgProtocol {
       }
     }
     /**
-     * <code>string createTime = 4;</code>
+     * <code>string createTime = 6;</code>
      * @return The bytes for createTime.
      */
     @java.lang.Override
@@ -18130,21 +18652,6 @@ public final class AQChatMsgProtocol {
       }
     }
 
-    public static final int MSGID_FIELD_NUMBER = 5;
-    private long msgId_;
-    /**
-     * <pre>
-     *消息id
-     * </pre>
-     *
-     * <code>int64 msgId = 5;</code>
-     * @return The msgId.
-     */
-    @java.lang.Override
-    public long getMsgId() {
-      return msgId_;
-    }
-
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -18159,20 +18666,23 @@ public final class AQChatMsgProtocol {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (user_ != null) {
-        output.writeMessage(1, getUser());
+      if (msgId_ != 0L) {
+        output.writeInt64(1, msgId_);
       }
-      if (msgType_ != com.howcode.aqchat.message.AQChatMsgProtocol.MsgType.TEXT.getNumber()) {
-        output.writeEnum(2, msgType_);
+      if (user_ != null) {
+        output.writeMessage(2, getUser());
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, message_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(createTime_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, createTime_);
+      if (msgType_ != com.howcode.aqchat.message.AQChatMsgProtocol.MsgType.TEXT.getNumber()) {
+        output.writeEnum(4, msgType_);
       }
-      if (msgId_ != 0L) {
-        output.writeInt64(5, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(ext_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, ext_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(createTime_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, createTime_);
       }
       unknownFields.writeTo(output);
     }
@@ -18183,23 +18693,26 @@ public final class AQChatMsgProtocol {
       if (size != -1) return size;
 
       size = 0;
+      if (msgId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, msgId_);
+      }
       if (user_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getUser());
-      }
-      if (msgType_ != com.howcode.aqchat.message.AQChatMsgProtocol.MsgType.TEXT.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(2, msgType_);
+          .computeMessageSize(2, getUser());
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, message_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(createTime_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, createTime_);
-      }
-      if (msgId_ != 0L) {
+      if (msgType_ != com.howcode.aqchat.message.AQChatMsgProtocol.MsgType.TEXT.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(5, msgId_);
+          .computeEnumSize(4, msgType_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(ext_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, ext_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(createTime_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, createTime_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -18216,18 +18729,20 @@ public final class AQChatMsgProtocol {
       }
       com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord other = (com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord) obj;
 
+      if (getMsgId()
+          != other.getMsgId()) return false;
       if (hasUser() != other.hasUser()) return false;
       if (hasUser()) {
         if (!getUser()
             .equals(other.getUser())) return false;
       }
-      if (msgType_ != other.msgType_) return false;
       if (!getMessage()
           .equals(other.getMessage())) return false;
+      if (msgType_ != other.msgType_) return false;
+      if (!getExt()
+          .equals(other.getExt())) return false;
       if (!getCreateTime()
           .equals(other.getCreateTime())) return false;
-      if (getMsgId()
-          != other.getMsgId()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -18239,19 +18754,21 @@ public final class AQChatMsgProtocol {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + MSGID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getMsgId());
       if (hasUser()) {
         hash = (37 * hash) + USER_FIELD_NUMBER;
         hash = (53 * hash) + getUser().hashCode();
       }
-      hash = (37 * hash) + MSGTYPE_FIELD_NUMBER;
-      hash = (53 * hash) + msgType_;
       hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
       hash = (53 * hash) + getMessage().hashCode();
+      hash = (37 * hash) + MSGTYPE_FIELD_NUMBER;
+      hash = (53 * hash) + msgType_;
+      hash = (37 * hash) + EXT_FIELD_NUMBER;
+      hash = (53 * hash) + getExt().hashCode();
       hash = (37 * hash) + CREATETIME_FIELD_NUMBER;
       hash = (53 * hash) + getCreateTime().hashCode();
-      hash = (37 * hash) + MSGID_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getMsgId());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -18385,19 +18902,21 @@ public final class AQChatMsgProtocol {
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        msgId_ = 0L;
+
         if (userBuilder_ == null) {
           user_ = null;
         } else {
           user_ = null;
           userBuilder_ = null;
         }
-        msgType_ = 0;
-
         message_ = "";
 
-        createTime_ = "";
+        msgType_ = 0;
 
-        msgId_ = 0L;
+        ext_ = "";
+
+        createTime_ = "";
 
         return this;
       }
@@ -18425,15 +18944,16 @@ public final class AQChatMsgProtocol {
       @java.lang.Override
       public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord buildPartial() {
         com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord result = new com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord(this);
+        result.msgId_ = msgId_;
         if (userBuilder_ == null) {
           result.user_ = user_;
         } else {
           result.user_ = userBuilder_.build();
         }
-        result.msgType_ = msgType_;
         result.message_ = message_;
+        result.msgType_ = msgType_;
+        result.ext_ = ext_;
         result.createTime_ = createTime_;
-        result.msgId_ = msgId_;
         onBuilt();
         return result;
       }
@@ -18482,22 +19002,26 @@ public final class AQChatMsgProtocol {
 
       public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord other) {
         if (other == com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.getDefaultInstance()) return this;
+        if (other.getMsgId() != 0L) {
+          setMsgId(other.getMsgId());
+        }
         if (other.hasUser()) {
           mergeUser(other.getUser());
-        }
-        if (other.msgType_ != 0) {
-          setMsgTypeValue(other.getMsgTypeValue());
         }
         if (!other.getMessage().isEmpty()) {
           message_ = other.message_;
           onChanged();
         }
+        if (other.msgType_ != 0) {
+          setMsgTypeValue(other.getMsgTypeValue());
+        }
+        if (!other.getExt().isEmpty()) {
+          ext_ = other.ext_;
+          onChanged();
+        }
         if (!other.getCreateTime().isEmpty()) {
           createTime_ = other.createTime_;
           onChanged();
-        }
-        if (other.getMsgId() != 0L) {
-          setMsgId(other.getMsgId());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -18528,18 +19052,61 @@ public final class AQChatMsgProtocol {
         return this;
       }
 
+      private long msgId_ ;
+      /**
+       * <pre>
+       *消息id
+       * </pre>
+       *
+       * <code>int64 msgId = 1;</code>
+       * @return The msgId.
+       */
+      @java.lang.Override
+      public long getMsgId() {
+        return msgId_;
+      }
+      /**
+       * <pre>
+       *消息id
+       * </pre>
+       *
+       * <code>int64 msgId = 1;</code>
+       * @param value The msgId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMsgId(long value) {
+        
+        msgId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *消息id
+       * </pre>
+       *
+       * <code>int64 msgId = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMsgId() {
+        
+        msgId_ = 0L;
+        onChanged();
+        return this;
+      }
+
       private com.howcode.aqchat.message.AQChatMsgProtocol.User user_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.howcode.aqchat.message.AQChatMsgProtocol.User, com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder, com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder> userBuilder_;
       /**
-       * <code>.chat_msg.User user = 1;</code>
+       * <code>.chat_msg.User user = 2;</code>
        * @return Whether the user field is set.
        */
       public boolean hasUser() {
         return userBuilder_ != null || user_ != null;
       }
       /**
-       * <code>.chat_msg.User user = 1;</code>
+       * <code>.chat_msg.User user = 2;</code>
        * @return The user.
        */
       public com.howcode.aqchat.message.AQChatMsgProtocol.User getUser() {
@@ -18550,7 +19117,7 @@ public final class AQChatMsgProtocol {
         }
       }
       /**
-       * <code>.chat_msg.User user = 1;</code>
+       * <code>.chat_msg.User user = 2;</code>
        */
       public Builder setUser(com.howcode.aqchat.message.AQChatMsgProtocol.User value) {
         if (userBuilder_ == null) {
@@ -18566,7 +19133,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>.chat_msg.User user = 1;</code>
+       * <code>.chat_msg.User user = 2;</code>
        */
       public Builder setUser(
           com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder builderForValue) {
@@ -18580,7 +19147,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>.chat_msg.User user = 1;</code>
+       * <code>.chat_msg.User user = 2;</code>
        */
       public Builder mergeUser(com.howcode.aqchat.message.AQChatMsgProtocol.User value) {
         if (userBuilder_ == null) {
@@ -18598,7 +19165,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>.chat_msg.User user = 1;</code>
+       * <code>.chat_msg.User user = 2;</code>
        */
       public Builder clearUser() {
         if (userBuilder_ == null) {
@@ -18612,7 +19179,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>.chat_msg.User user = 1;</code>
+       * <code>.chat_msg.User user = 2;</code>
        */
       public com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder getUserBuilder() {
         
@@ -18620,7 +19187,7 @@ public final class AQChatMsgProtocol {
         return getUserFieldBuilder().getBuilder();
       }
       /**
-       * <code>.chat_msg.User user = 1;</code>
+       * <code>.chat_msg.User user = 2;</code>
        */
       public com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder getUserOrBuilder() {
         if (userBuilder_ != null) {
@@ -18631,7 +19198,7 @@ public final class AQChatMsgProtocol {
         }
       }
       /**
-       * <code>.chat_msg.User user = 1;</code>
+       * <code>.chat_msg.User user = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.howcode.aqchat.message.AQChatMsgProtocol.User, com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder, com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder> 
@@ -18645,60 +19212,6 @@ public final class AQChatMsgProtocol {
           user_ = null;
         }
         return userBuilder_;
-      }
-
-      private int msgType_ = 0;
-      /**
-       * <code>.chat_msg.MsgType msgType = 2;</code>
-       * @return The enum numeric value on the wire for msgType.
-       */
-      @java.lang.Override public int getMsgTypeValue() {
-        return msgType_;
-      }
-      /**
-       * <code>.chat_msg.MsgType msgType = 2;</code>
-       * @param value The enum numeric value on the wire for msgType to set.
-       * @return This builder for chaining.
-       */
-      public Builder setMsgTypeValue(int value) {
-        
-        msgType_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.chat_msg.MsgType msgType = 2;</code>
-       * @return The msgType.
-       */
-      @java.lang.Override
-      public com.howcode.aqchat.message.AQChatMsgProtocol.MsgType getMsgType() {
-        @SuppressWarnings("deprecation")
-        com.howcode.aqchat.message.AQChatMsgProtocol.MsgType result = com.howcode.aqchat.message.AQChatMsgProtocol.MsgType.valueOf(msgType_);
-        return result == null ? com.howcode.aqchat.message.AQChatMsgProtocol.MsgType.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.chat_msg.MsgType msgType = 2;</code>
-       * @param value The msgType to set.
-       * @return This builder for chaining.
-       */
-      public Builder setMsgType(com.howcode.aqchat.message.AQChatMsgProtocol.MsgType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        msgType_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.chat_msg.MsgType msgType = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearMsgType() {
-        
-        msgType_ = 0;
-        onChanged();
-        return this;
       }
 
       private java.lang.Object message_ = "";
@@ -18777,9 +19290,139 @@ public final class AQChatMsgProtocol {
         return this;
       }
 
+      private int msgType_ = 0;
+      /**
+       * <code>.chat_msg.MsgType msgType = 4;</code>
+       * @return The enum numeric value on the wire for msgType.
+       */
+      @java.lang.Override public int getMsgTypeValue() {
+        return msgType_;
+      }
+      /**
+       * <code>.chat_msg.MsgType msgType = 4;</code>
+       * @param value The enum numeric value on the wire for msgType to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMsgTypeValue(int value) {
+        
+        msgType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.chat_msg.MsgType msgType = 4;</code>
+       * @return The msgType.
+       */
+      @java.lang.Override
+      public com.howcode.aqchat.message.AQChatMsgProtocol.MsgType getMsgType() {
+        @SuppressWarnings("deprecation")
+        com.howcode.aqchat.message.AQChatMsgProtocol.MsgType result = com.howcode.aqchat.message.AQChatMsgProtocol.MsgType.valueOf(msgType_);
+        return result == null ? com.howcode.aqchat.message.AQChatMsgProtocol.MsgType.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.chat_msg.MsgType msgType = 4;</code>
+       * @param value The msgType to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMsgType(com.howcode.aqchat.message.AQChatMsgProtocol.MsgType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        msgType_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.chat_msg.MsgType msgType = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMsgType() {
+        
+        msgType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object ext_ = "";
+      /**
+       * <code>string ext = 5;</code>
+       * @return The ext.
+       */
+      public java.lang.String getExt() {
+        java.lang.Object ref = ext_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          ext_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string ext = 5;</code>
+       * @return The bytes for ext.
+       */
+      public com.google.protobuf.ByteString
+          getExtBytes() {
+        java.lang.Object ref = ext_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          ext_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string ext = 5;</code>
+       * @param value The ext to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExt(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        ext_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ext = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearExt() {
+        
+        ext_ = getDefaultInstance().getExt();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ext = 5;</code>
+       * @param value The bytes for ext to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExtBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        ext_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object createTime_ = "";
       /**
-       * <code>string createTime = 4;</code>
+       * <code>string createTime = 6;</code>
        * @return The createTime.
        */
       public java.lang.String getCreateTime() {
@@ -18795,7 +19438,7 @@ public final class AQChatMsgProtocol {
         }
       }
       /**
-       * <code>string createTime = 4;</code>
+       * <code>string createTime = 6;</code>
        * @return The bytes for createTime.
        */
       public com.google.protobuf.ByteString
@@ -18812,7 +19455,7 @@ public final class AQChatMsgProtocol {
         }
       }
       /**
-       * <code>string createTime = 4;</code>
+       * <code>string createTime = 6;</code>
        * @param value The createTime to set.
        * @return This builder for chaining.
        */
@@ -18827,7 +19470,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>string createTime = 4;</code>
+       * <code>string createTime = 6;</code>
        * @return This builder for chaining.
        */
       public Builder clearCreateTime() {
@@ -18837,7 +19480,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>string createTime = 4;</code>
+       * <code>string createTime = 6;</code>
        * @param value The bytes for createTime to set.
        * @return This builder for chaining.
        */
@@ -18849,49 +19492,6 @@ public final class AQChatMsgProtocol {
   checkByteStringIsUtf8(value);
         
         createTime_ = value;
-        onChanged();
-        return this;
-      }
-
-      private long msgId_ ;
-      /**
-       * <pre>
-       *消息id
-       * </pre>
-       *
-       * <code>int64 msgId = 5;</code>
-       * @return The msgId.
-       */
-      @java.lang.Override
-      public long getMsgId() {
-        return msgId_;
-      }
-      /**
-       * <pre>
-       *消息id
-       * </pre>
-       *
-       * <code>int64 msgId = 5;</code>
-       * @param value The msgId to set.
-       * @return This builder for chaining.
-       */
-      public Builder setMsgId(long value) {
-        
-        msgId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *消息id
-       * </pre>
-       *
-       * <code>int64 msgId = 5;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearMsgId() {
-        
-        msgId_ = 0L;
         onChanged();
         return this;
       }
@@ -23115,14 +23715,15 @@ public final class AQChatMsgProtocol {
       "\030\002 \001(\t\"A\n\rCreateRoomAck\022\016\n\006roomId\030\001 \001(\t\022" +
       "\016\n\006roomNo\030\002 \001(\005\022\020\n\010roomName\030\003 \001(\t\"\036\n\014Lea" +
       "veRoomCmd\022\016\n\006roomId\030\002 \001(\t\"\036\n\014LeaveRoomAc" +
-      "k\022\016\n\006roomId\030\002 \001(\t\"\\\n\nSendMsgCmd\022\r\n\005msgId" +
+      "k\022\016\n\006roomId\030\002 \001(\t\"i\n\nSendMsgCmd\022\r\n\005msgId" +
       "\030\001 \001(\003\022\016\n\006roomId\030\002 \001(\t\022\"\n\007msgType\030\003 \001(\0162" +
-      "\021.chat_msg.MsgType\022\013\n\003msg\030\004 \001(\t\"K\n\nSendM" +
-      "sgAck\022\r\n\005msgId\030\001 \001(\003\022\016\n\006userId\030\002 \001(\t\022\016\n\006" +
-      "roomId\030\003 \001(\t\022\016\n\006status\030\004 \001(\010\"\177\n\017Broadcas" +
-      "tMsgAck\022\034\n\004user\030\001 \001(\0132\016.chat_msg.User\022\016\n" +
-      "\006roomId\030\002 \001(\t\022\r\n\005msgId\030\003 \001(\t\022\"\n\007msgType\030" +
-      "\004 \001(\0162\021.chat_msg.MsgType\022\013\n\003msg\030\005 \001(\t\"<\n" +
+      "\021.chat_msg.MsgType\022\013\n\003msg\030\004 \001(\t\022\013\n\003ext\030\005" +
+      " \001(\t\"X\n\nSendMsgAck\022\r\n\005msgId\030\001 \001(\003\022\016\n\006use" +
+      "rId\030\002 \001(\t\022\016\n\006roomId\030\003 \001(\t\022\016\n\006status\030\004 \001(" +
+      "\010\022\013\n\003ext\030\005 \001(\t\"\214\001\n\017BroadcastMsgAck\022\034\n\004us" +
+      "er\030\001 \001(\0132\016.chat_msg.User\022\016\n\006roomId\030\002 \001(\t" +
+      "\022\r\n\005msgId\030\003 \001(\t\022\"\n\007msgType\030\004 \001(\0162\021.chat_" +
+      "msg.MsgType\022\013\n\003msg\030\005 \001(\t\022\013\n\003ext\030\006 \001(\t\"<\n" +
       "\004User\022\016\n\006userId\030\001 \001(\t\022\020\n\010userName\030\002 \001(\t\022" +
       "\022\n\nuserAvatar\030\003 \001(\t\")\n\014ExceptionMsg\022\014\n\004c" +
       "ode\030\001 \001(\005\022\013\n\003msg\030\002 \001(\t\":\n\nOfflineMsg\022\034\n\004" +
@@ -23137,35 +23738,35 @@ public final class AQChatMsgProtocol {
       "eNotify\022\034\n\004user\030\001 \001(\0132\016.chat_msg.User\022\016\n" +
       "\006roomId\030\002 \001(\t\"#\n\021SyncChatRecordCmd\022\016\n\006ro" +
       "omId\030\001 \001(\t\">\n\021SyncChatRecordAck\022)\n\013chatR" +
-      "ecords\030\001 \003(\0132\024.chat_msg.ChatRecord\"\202\001\n\nC" +
-      "hatRecord\022\034\n\004user\030\001 \001(\0132\016.chat_msg.User\022" +
-      "\"\n\007msgType\030\002 \001(\0162\021.chat_msg.MsgType\022\017\n\007m" +
-      "essage\030\003 \001(\t\022\022\n\ncreateTime\030\004 \001(\t\022\r\n\005msgI" +
-      "d\030\005 \001(\003\" \n\016RecoverUserCmd\022\016\n\006userId\030\001 \001(" +
-      "\t\"d\n\016RecoverUserAck\022\016\n\006userId\030\001 \001(\t\022\020\n\010u" +
-      "serName\030\002 \001(\t\022\022\n\nuserAvatar\030\003 \001(\t\022\034\n\004roo" +
-      "m\030\004 \001(\0132\016.chat_msg.Room\"8\n\004Room\022\016\n\006roomI" +
-      "d\030\001 \001(\t\022\016\n\006roomNo\030\002 \001(\005\022\020\n\010roomName\030\003 \001(" +
-      "\t\">\n\016JoinRoomNotify\022\034\n\004user\030\001 \001(\0132\016.chat" +
-      "_msg.User\022\016\n\006roomId\030\002 \001(\t\"?\n\017LeaveRoomNo" +
-      "tify\022\034\n\004user\030\001 \001(\0132\016.chat_msg.User\022\016\n\006ro" +
-      "omId\030\002 \001(\t*\240\004\n\nMsgCommand\022\022\n\016USER_LOGIN_" +
-      "CMD\020\000\022\022\n\016USER_LOGIN_ACK\020\001\022\022\n\016HEART_BEAT_" +
-      "CMD\020\002\022\022\n\016HEART_BEAT_ACK\020\003\022\021\n\rJOIN_ROOM_C" +
-      "MD\020\004\022\021\n\rJOIN_ROOM_ACK\020\005\022\023\n\017CREATE_ROOM_C" +
-      "MD\020\006\022\023\n\017CREATE_ROOM_ACK\020\007\022\022\n\016LEAVE_ROOM_" +
-      "CMD\020\010\022\022\n\016LEAVE_ROOM_ACK\020\t\022\020\n\014SEND_MSG_CM" +
-      "D\020\n\022\020\n\014SEND_MSG_ACK\020\013\022\025\n\021BROADCAST_MSG_A" +
-      "CK\020\014\022\021\n\rEXCEPTION_MSG\020\r\022\017\n\013OFFLINE_MSG\020\016" +
-      "\022\017\n\013GET_STS_CMD\020\017\022\017\n\013GET_STS_ACK\020\020\022\023\n\017US" +
-      "ER_LOGOUT_CMD\020\021\022\023\n\017USER_LOGOUT_ACK\020\022\022\022\n\016" +
-      "OFFLINE_NOTIFY\020\023\022\030\n\024SYNC_CHAT_RECORD_CMD" +
-      "\020\024\022\030\n\024SYNC_CHAT_RECORD_ACK\020\025\022\024\n\020RECOVER_" +
-      "USER_CMD\020\026\022\024\n\020RECOVER_USER_ACK\020\027\022\024\n\020JOIN" +
-      "_ROOM_NOTIFY\020\030\022\025\n\021LEAVE_ROOM_NOTIFY\020\031*>\n" +
-      "\007MsgType\022\010\n\004TEXT\020\000\022\t\n\005IMAGE\020\001\022\t\n\005VOICE\020\002" +
-      "\022\t\n\005VIDEO\020\003\022\010\n\004FILE\020\004B\034\n\032com.howcode.aqc" +
-      "hat.messageb\006proto3"
+      "ecords\030\001 \003(\0132\024.chat_msg.ChatRecord\"\217\001\n\nC" +
+      "hatRecord\022\r\n\005msgId\030\001 \001(\003\022\034\n\004user\030\002 \001(\0132\016" +
+      ".chat_msg.User\022\017\n\007message\030\003 \001(\t\022\"\n\007msgTy" +
+      "pe\030\004 \001(\0162\021.chat_msg.MsgType\022\013\n\003ext\030\005 \001(\t" +
+      "\022\022\n\ncreateTime\030\006 \001(\t\" \n\016RecoverUserCmd\022\016" +
+      "\n\006userId\030\001 \001(\t\"d\n\016RecoverUserAck\022\016\n\006user" +
+      "Id\030\001 \001(\t\022\020\n\010userName\030\002 \001(\t\022\022\n\nuserAvatar" +
+      "\030\003 \001(\t\022\034\n\004room\030\004 \001(\0132\016.chat_msg.Room\"8\n\004" +
+      "Room\022\016\n\006roomId\030\001 \001(\t\022\016\n\006roomNo\030\002 \001(\005\022\020\n\010" +
+      "roomName\030\003 \001(\t\">\n\016JoinRoomNotify\022\034\n\004user" +
+      "\030\001 \001(\0132\016.chat_msg.User\022\016\n\006roomId\030\002 \001(\t\"?" +
+      "\n\017LeaveRoomNotify\022\034\n\004user\030\001 \001(\0132\016.chat_m" +
+      "sg.User\022\016\n\006roomId\030\002 \001(\t*\240\004\n\nMsgCommand\022\022" +
+      "\n\016USER_LOGIN_CMD\020\000\022\022\n\016USER_LOGIN_ACK\020\001\022\022" +
+      "\n\016HEART_BEAT_CMD\020\002\022\022\n\016HEART_BEAT_ACK\020\003\022\021" +
+      "\n\rJOIN_ROOM_CMD\020\004\022\021\n\rJOIN_ROOM_ACK\020\005\022\023\n\017" +
+      "CREATE_ROOM_CMD\020\006\022\023\n\017CREATE_ROOM_ACK\020\007\022\022" +
+      "\n\016LEAVE_ROOM_CMD\020\010\022\022\n\016LEAVE_ROOM_ACK\020\t\022\020" +
+      "\n\014SEND_MSG_CMD\020\n\022\020\n\014SEND_MSG_ACK\020\013\022\025\n\021BR" +
+      "OADCAST_MSG_ACK\020\014\022\021\n\rEXCEPTION_MSG\020\r\022\017\n\013" +
+      "OFFLINE_MSG\020\016\022\017\n\013GET_STS_CMD\020\017\022\017\n\013GET_ST" +
+      "S_ACK\020\020\022\023\n\017USER_LOGOUT_CMD\020\021\022\023\n\017USER_LOG" +
+      "OUT_ACK\020\022\022\022\n\016OFFLINE_NOTIFY\020\023\022\030\n\024SYNC_CH" +
+      "AT_RECORD_CMD\020\024\022\030\n\024SYNC_CHAT_RECORD_ACK\020" +
+      "\025\022\024\n\020RECOVER_USER_CMD\020\026\022\024\n\020RECOVER_USER_" +
+      "ACK\020\027\022\024\n\020JOIN_ROOM_NOTIFY\020\030\022\025\n\021LEAVE_ROO" +
+      "M_NOTIFY\020\031*>\n\007MsgType\022\010\n\004TEXT\020\000\022\t\n\005IMAGE" +
+      "\020\001\022\t\n\005VOICE\020\002\022\t\n\005VIDEO\020\003\022\010\n\004FILE\020\004B\034\n\032co" +
+      "m.howcode.aqchat.messageb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -23236,19 +23837,19 @@ public final class AQChatMsgProtocol {
     internal_static_chat_msg_SendMsgCmd_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chat_msg_SendMsgCmd_descriptor,
-        new java.lang.String[] { "MsgId", "RoomId", "MsgType", "Msg", });
+        new java.lang.String[] { "MsgId", "RoomId", "MsgType", "Msg", "Ext", });
     internal_static_chat_msg_SendMsgAck_descriptor =
       getDescriptor().getMessageTypes().get(11);
     internal_static_chat_msg_SendMsgAck_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chat_msg_SendMsgAck_descriptor,
-        new java.lang.String[] { "MsgId", "UserId", "RoomId", "Status", });
+        new java.lang.String[] { "MsgId", "UserId", "RoomId", "Status", "Ext", });
     internal_static_chat_msg_BroadcastMsgAck_descriptor =
       getDescriptor().getMessageTypes().get(12);
     internal_static_chat_msg_BroadcastMsgAck_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chat_msg_BroadcastMsgAck_descriptor,
-        new java.lang.String[] { "User", "RoomId", "MsgId", "MsgType", "Msg", });
+        new java.lang.String[] { "User", "RoomId", "MsgId", "MsgType", "Msg", "Ext", });
     internal_static_chat_msg_User_descriptor =
       getDescriptor().getMessageTypes().get(13);
     internal_static_chat_msg_User_fieldAccessorTable = new
@@ -23314,7 +23915,7 @@ public final class AQChatMsgProtocol {
     internal_static_chat_msg_ChatRecord_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chat_msg_ChatRecord_descriptor,
-        new java.lang.String[] { "User", "MsgType", "Message", "CreateTime", "MsgId", });
+        new java.lang.String[] { "MsgId", "User", "Message", "MsgType", "Ext", "CreateTime", });
     internal_static_chat_msg_RecoverUserCmd_descriptor =
       getDescriptor().getMessageTypes().get(24);
     internal_static_chat_msg_RecoverUserCmd_fieldAccessorTable = new

@@ -16,5 +16,6 @@ public class MessageRecordDto {
     private String senderAvatar;
     private Integer messageType;
     private String messageContent;
+    private String messageExt;
     private String createTime;
 }

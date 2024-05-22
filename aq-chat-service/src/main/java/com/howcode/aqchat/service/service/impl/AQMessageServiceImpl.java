@@ -40,6 +40,7 @@ public class AQMessageServiceImpl implements IAQMessageService {
         aqMessage.setSenderId(messageDto.getSenderId());
         aqMessage.setMessageType(messageDto.getMessageType());
         aqMessage.setMessageContent(messageDto.getMessageContent());
+        aqMessage.setMessageExt(messageDto.getMessageExt());
         aqMessage.setCreateTime(messageDto.getCreateTime());
         messageMapper.insert(aqMessage);
     }
@@ -78,6 +79,7 @@ public class AQMessageServiceImpl implements IAQMessageService {
             messageRecordDto.setSenderAvatar(aqUser.getUserAvatar());
             messageRecordDto.setMessageType(m.getMessageType());
             messageRecordDto.setMessageContent(m.getMessageContent());
+            messageRecordDto.setMessageExt(m.getMessageExt());
             messageRecordDto.setCreateTime(sdf.format(m.getCreateTime()));
             return messageRecordDto;
         }).collect(Collectors.toList());

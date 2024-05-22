@@ -149,6 +149,7 @@ public class GlobalChannelHolder {
                 .setMsgId(messageDto.getMessageId().toString())
                 .setMsgType(AQChatMsgProtocol.MsgType.forNumber(messageDto.getMessageType()))
                 .setMsg(messageDto.getMessageContent())
+                .setExt(messageDto.getMessageExt())
                 .build();
         messageBroadcaster.broadcast(userInfo.getRoomId(), broadcastMsgAck);
     }

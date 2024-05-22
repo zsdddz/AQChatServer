@@ -81,6 +81,7 @@ public class SendMsgCmdHandler implements ICmdHandler<AQChatMsgProtocol.SendMsgC
         messageDto.setSenderId(userId);
         messageDto.setMessageType(cmd.getMsgType().getNumber());
         messageDto.setMessageContent(cmd.getMsg());
+        messageDto.setMessageExt(cmd.getExt());
         messageDto.setCreateTime(new Date());
         mqSendingAgent.sendMessageToRoom(messageDto);
         mqSendingAgent.storeMessages(messageDto);
@@ -91,6 +92,7 @@ public class SendMsgCmdHandler implements ICmdHandler<AQChatMsgProtocol.SendMsgC
                 .setUserId(userId)
                 .setStatus(true)
                 .setMsgId(msgId)
+                .setExt(cmd.getExt())
                 .build();
         ctx.writeAndFlush(result);
     }

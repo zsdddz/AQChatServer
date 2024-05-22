@@ -70,6 +70,7 @@ public class MessageConstructor {
                     .setUser(user)
                     .setMsgType(AQChatMsgProtocol.MsgType.forNumber(message.getMessageType()))
                     .setMessage(message.getMessageContent())
+                    .setExt(message.getMessageExt())
                     .setCreateTime(message.getCreateTime())
                     .build());
         });
