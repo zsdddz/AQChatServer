@@ -2,6 +2,8 @@ package com.howcode.aqchat.common.model;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @Author: ZhangWeinan
  * @Description:
@@ -12,4 +14,5 @@ public class RoomInfoDto {
     private String roomId;
     private Integer roomNo;
     private String roomName;
+    private List<UserGlobalInfoDto> roomMembers;
 }

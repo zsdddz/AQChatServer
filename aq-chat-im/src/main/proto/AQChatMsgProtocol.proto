@@ -189,7 +189,8 @@ message SyncChatRecordCmd{
   string roomId = 1;
 }
 message SyncChatRecordAck{
-  repeated ChatRecord chatRecords = 1;
+  string roomId = 1;
+  repeated ChatRecord chatRecords = 2;
 }
 message ChatRecord{
   //消息id
@@ -215,6 +216,7 @@ message Room{
   string roomId = 1;
   int32 roomNo = 2;
   string roomName = 3;
+  repeated User members = 4;
 }
 
 //加入房间通知

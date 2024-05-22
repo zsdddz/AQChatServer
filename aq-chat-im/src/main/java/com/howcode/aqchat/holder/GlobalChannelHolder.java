@@ -1,13 +1,9 @@
 package com.howcode.aqchat.holder;
 
-
-import com.howcode.aqchat.common.constant.AQRedisKeyPrefix;
 import com.howcode.aqchat.common.model.MessageDto;
 import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.common.model.RoomNotifyDto;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
-import com.howcode.aqchat.framework.redis.starter.RedisCacheHelper;
-import com.howcode.aqchat.holder.impl.AQUserHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageBroadcaster;
 import io.netty.channel.Channel;
@@ -39,10 +35,10 @@ public class GlobalChannelHolder {
     private MessageBroadcaster messageBroadcaster;
 
     @Resource
-    private RedisCacheHelper redisCacheHelper;
-
+    private IUserHolder userHolder;
+    
     @Resource
-    private AQUserHolder aqUserHolder;
+    private IRoomHolder roomHolder;
 
     public void put(String userId, NioSocketChannel nioSocketChannel) {
         CHANNELS.put(userId, nioSocketChannel);
@@ -97,24 +93,23 @@ public class GlobalChannelHolder {
     public void joinRoom(String roomId, String userId, Channel channel) {
         messageBroadcaster.joinRoom(roomId, userId, (NioSocketChannel) channel);
         //添加用户所在房间信息
-        UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(userId);
+        UserGlobalInfoDto userInfo = userHolder.getUserInfo(userId);
         userInfo.setRoomId(roomId);
-        aqUserHolder.saveUserInfo(userInfo);
+        userHolder.saveUserInfo(userInfo);
     }
 
     public void leaveRoom(String userId, Channel channel) {
         messageBroadcaster.leaveRoom(userId, (NioSocketChannel) channel);
         //删除用户所在房间信息
-        UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(userId);
+        UserGlobalInfoDto userInfo = userHolder.getUserInfo(userId);
         userInfo.setRoomId(null);
-        aqUserHolder.saveUserInfo(userInfo);
+        userHolder.saveUserInfo(userInfo);
     }
 
     public void isOrNoDissolveTheRoom(String roomId, Integer roomNo) {
         ChannelGroup channelGroup = messageBroadcaster.getChannelGroup(roomId);
         if (!messageBroadcaster.isTheRoomEmpty(roomId) && (null == channelGroup || channelGroup.isEmpty())) {
-            redisCacheHelper.deleteObject(AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo);
-            redisCacheHelper.deleteObject(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId);
+            roomHolder.removeRoomInfo(roomNo);
             //解散房间
             messageBroadcaster.removeChannelGroup(roomId);
         }
@@ -133,14 +128,14 @@ public class GlobalChannelHolder {
      * 获取房间信息
      */
     public RoomInfoDto getRoomInfo(String roomId) {
-        return redisCacheHelper.getCacheObject(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, RoomInfoDto.class);
+        return roomHolder.getRoomInfoById(roomId);
     }
 
     public void sendBroadcastMessage(MessageDto messageDto) {
         if (null == messageDto) {
             return;
         }
-        UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(messageDto.getSenderId());
+        UserGlobalInfoDto userInfo = userHolder.getUserInfo(messageDto.getSenderId());
         AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
         if (userBuilder == null) return;
         AQChatMsgProtocol.BroadcastMsgAck broadcastMsgAck = AQChatMsgProtocol.BroadcastMsgAck.newBuilder()
@@ -158,7 +153,7 @@ public class GlobalChannelHolder {
         if (null == userId) {
             return;
         }
-        UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(userId);
+        UserGlobalInfoDto userInfo = userHolder.getUserInfo(userId);
         if (null == userInfo || null == userInfo.getRoomId() ){
             LOGGER.info("[退出通知] 用户信息或者房间信息为空");
             return;
@@ -170,14 +165,14 @@ public class GlobalChannelHolder {
                 .setRoomId(userInfo.getRoomId())
                 .build();
         messageBroadcaster.broadcast(userInfo.getRoomId(), leaveRoomNotify);
-        aqUserHolder.removeUserInfo(userId);
+        userHolder.removeUserInfo(userId);
     }
 
     public void notifyJoinRoom(RoomNotifyDto roomNotifyDto) {
         if (null == roomNotifyDto) {
             return;
         }
-        UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(roomNotifyDto.getUserId());
+        UserGlobalInfoDto userInfo = userHolder.getUserInfo(roomNotifyDto.getUserId());
         AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
         if (userBuilder == null) return;
         AQChatMsgProtocol.JoinRoomNotify joinRoomNotify = AQChatMsgProtocol.JoinRoomNotify.newBuilder()
@@ -202,7 +197,7 @@ public class GlobalChannelHolder {
         if (null == roomNotifyDto) {
             return;
         }
-        UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(roomNotifyDto.getUserId());
+        UserGlobalInfoDto userInfo = userHolder.getUserInfo(roomNotifyDto.getUserId());
         AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
         if (userBuilder == null) return;
         AQChatMsgProtocol.LeaveRoomNotify leaveRoomNotify = AQChatMsgProtocol.LeaveRoomNotify.newBuilder()
@@ -216,7 +211,7 @@ public class GlobalChannelHolder {
         if (null == userId) {
             return;
         }
-        UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(userId);
+        UserGlobalInfoDto userInfo = userHolder.getUserInfo(userId);
         if (null == userInfo || null == userInfo.getRoomId() ){
             LOGGER.info("[离线消息] 用户信息或者房间信息为空");
             return;

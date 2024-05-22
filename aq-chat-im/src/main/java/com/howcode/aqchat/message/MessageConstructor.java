@@ -44,6 +44,17 @@ public class MessageConstructor {
         builder.setUserId(userGlobalInfoDto.getUserId());
         builder.setUserName(userGlobalInfoDto.getUserName());
         if (null != roomInfo) {
+            List<UserGlobalInfoDto> roomMembers = roomInfo.getRoomMembers();
+            if (null != roomMembers && !roomMembers.isEmpty()) {
+                roomMembers.forEach(user -> {
+                    AQChatMsgProtocol.User roomUser = AQChatMsgProtocol.User.newBuilder()
+                            .setUserId(user.getUserId())
+                            .setUserName(user.getUserName())
+                            .setUserAvatar(user.getUserAvatar())
+                            .build();
+                    room.addMembers(roomUser);
+                });
+            }
             room.setRoomId(roomInfo.getRoomId())
                     .setRoomNo(roomInfo.getRoomNo())
                     .setRoomName(roomInfo.getRoomName());

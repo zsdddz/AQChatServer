@@ -2,13 +2,12 @@ package com.howcode.aqchat.handler.impl;
 
 
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
-import com.howcode.aqchat.common.constant.AQRedisKeyPrefix;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.common.utils.IdProvider;
-import com.howcode.aqchat.framework.redis.starter.RedisCacheHelper;
 import com.howcode.aqchat.handler.ICmdHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
+import com.howcode.aqchat.holder.IRoomHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
 import io.netty.channel.ChannelHandlerContext;
@@ -18,6 +17,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: ZhangWeinan
@@ -30,7 +32,7 @@ public class CreateRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.Creat
 
     @Resource
     @Lazy
-    private RedisCacheHelper redisCacheHelper;
+    private IRoomHolder roomHolder;
 
     @Resource
     @Lazy
@@ -52,7 +54,7 @@ public class CreateRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.Creat
         String roomName = cmd.getRoomName();
         int roomNo = cmd.getRoomNo();
         //判断当前房间号是否已经存在
-        String roomNoIsExist = redisCacheHelper.getCacheObject(AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo, String.class);
+        String roomNoIsExist = roomHolder.getRoomId(roomNo);
         if (null != roomNoIsExist) {
             //房间号已经存在 返回错误信息
             AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.ROOM_EXIST);
@@ -61,17 +63,21 @@ public class CreateRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.Creat
         }
         //将房间号保存至redis
         String roomId = IdProvider.generateRoomId();
-        redisCacheHelper.setCacheObject(AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo, roomId);
+        roomHolder.saveNoAndId(roomNo, roomId);
         //将房间信息保存至redis
         RoomInfoDto roomInfoDto = new RoomInfoDto();
         roomInfoDto.setRoomId(roomId);
         roomInfoDto.setRoomNo(roomNo);
         roomInfoDto.setRoomName(roomName);
-        redisCacheHelper.setCacheObject(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomInfoDto.getRoomId(), roomInfoDto);
+        //将房间信息保存至redis
+        roomHolder.saveRoomInfo(roomId, roomInfoDto);
         //处理房间连接
         globalChannelHolder.createChannelGroup(roomInfoDto.getRoomId());
         //将创建者加入房间
         globalChannelHolder.joinRoom(roomInfoDto.getRoomId(), userId, ctx.channel());
+        //将用户保存至房间成员列表
+        roomHolder.saveRoomMember(roomId,userId);
+
         LOGGER.info("用户{}创建房间{}成功", userId, roomInfoDto.getRoomId());
         //返回创建房间成功消息
         AQChatMsgProtocol.CreateRoomAck createRoomAck = AQChatMsgProtocol.CreateRoomAck.newBuilder()

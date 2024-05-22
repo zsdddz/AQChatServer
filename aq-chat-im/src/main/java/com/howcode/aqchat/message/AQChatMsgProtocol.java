@@ -17491,25 +17491,37 @@ public final class AQChatMsgProtocol {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     * <code>string roomId = 1;</code>
+     * @return The roomId.
+     */
+    java.lang.String getRoomId();
+    /**
+     * <code>string roomId = 1;</code>
+     * @return The bytes for roomId.
+     */
+    com.google.protobuf.ByteString
+        getRoomIdBytes();
+
+    /**
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
      */
     java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord> 
         getChatRecordsList();
     /**
-     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
      */
     com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord getChatRecords(int index);
     /**
-     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
      */
     int getChatRecordsCount();
     /**
-     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
      */
     java.util.List<? extends com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecordOrBuilder> 
         getChatRecordsOrBuilderList();
     /**
-     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
      */
     com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecordOrBuilder getChatRecordsOrBuilder(
         int index);
@@ -17527,6 +17539,7 @@ public final class AQChatMsgProtocol {
       super(builder);
     }
     private SyncChatRecordAck() {
+      roomId_ = "";
       chatRecords_ = java.util.Collections.emptyList();
     }
 
@@ -17562,6 +17575,12 @@ public final class AQChatMsgProtocol {
               done = true;
               break;
             case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              roomId_ = s;
+              break;
+            }
+            case 18: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 chatRecords_ = new java.util.ArrayList<com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord>();
                 mutable_bitField0_ |= 0x00000001;
@@ -17605,17 +17624,55 @@ public final class AQChatMsgProtocol {
               com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck.Builder.class);
     }
 
-    public static final int CHATRECORDS_FIELD_NUMBER = 1;
+    public static final int ROOMID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object roomId_;
+    /**
+     * <code>string roomId = 1;</code>
+     * @return The roomId.
+     */
+    @java.lang.Override
+    public java.lang.String getRoomId() {
+      java.lang.Object ref = roomId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        roomId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string roomId = 1;</code>
+     * @return The bytes for roomId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getRoomIdBytes() {
+      java.lang.Object ref = roomId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        roomId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CHATRECORDS_FIELD_NUMBER = 2;
     private java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord> chatRecords_;
     /**
-     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
      */
     @java.lang.Override
     public java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord> getChatRecordsList() {
       return chatRecords_;
     }
     /**
-     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
      */
     @java.lang.Override
     public java.util.List<? extends com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecordOrBuilder> 
@@ -17623,21 +17680,21 @@ public final class AQChatMsgProtocol {
       return chatRecords_;
     }
     /**
-     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
      */
     @java.lang.Override
     public int getChatRecordsCount() {
       return chatRecords_.size();
     }
     /**
-     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
      */
     @java.lang.Override
     public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord getChatRecords(int index) {
       return chatRecords_.get(index);
     }
     /**
-     * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+     * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
      */
     @java.lang.Override
     public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecordOrBuilder getChatRecordsOrBuilder(
@@ -17659,8 +17716,11 @@ public final class AQChatMsgProtocol {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, roomId_);
+      }
       for (int i = 0; i < chatRecords_.size(); i++) {
-        output.writeMessage(1, chatRecords_.get(i));
+        output.writeMessage(2, chatRecords_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -17671,9 +17731,12 @@ public final class AQChatMsgProtocol {
       if (size != -1) return size;
 
       size = 0;
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, roomId_);
+      }
       for (int i = 0; i < chatRecords_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, chatRecords_.get(i));
+          .computeMessageSize(2, chatRecords_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -17690,6 +17753,8 @@ public final class AQChatMsgProtocol {
       }
       com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck other = (com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck) obj;
 
+      if (!getRoomId()
+          .equals(other.getRoomId())) return false;
       if (!getChatRecordsList()
           .equals(other.getChatRecordsList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
@@ -17703,6 +17768,8 @@ public final class AQChatMsgProtocol {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ROOMID_FIELD_NUMBER;
+      hash = (53 * hash) + getRoomId().hashCode();
       if (getChatRecordsCount() > 0) {
         hash = (37 * hash) + CHATRECORDS_FIELD_NUMBER;
         hash = (53 * hash) + getChatRecordsList().hashCode();
@@ -17841,6 +17908,8 @@ public final class AQChatMsgProtocol {
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        roomId_ = "";
+
         if (chatRecordsBuilder_ == null) {
           chatRecords_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
@@ -17874,6 +17943,7 @@ public final class AQChatMsgProtocol {
       public com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck buildPartial() {
         com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck result = new com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck(this);
         int from_bitField0_ = bitField0_;
+        result.roomId_ = roomId_;
         if (chatRecordsBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0)) {
             chatRecords_ = java.util.Collections.unmodifiableList(chatRecords_);
@@ -17931,6 +18001,10 @@ public final class AQChatMsgProtocol {
 
       public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck other) {
         if (other == com.howcode.aqchat.message.AQChatMsgProtocol.SyncChatRecordAck.getDefaultInstance()) return this;
+        if (!other.getRoomId().isEmpty()) {
+          roomId_ = other.roomId_;
+          onChanged();
+        }
         if (chatRecordsBuilder_ == null) {
           if (!other.chatRecords_.isEmpty()) {
             if (chatRecords_.isEmpty()) {
@@ -17987,6 +18061,82 @@ public final class AQChatMsgProtocol {
       }
       private int bitField0_;
 
+      private java.lang.Object roomId_ = "";
+      /**
+       * <code>string roomId = 1;</code>
+       * @return The roomId.
+       */
+      public java.lang.String getRoomId() {
+        java.lang.Object ref = roomId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          roomId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string roomId = 1;</code>
+       * @return The bytes for roomId.
+       */
+      public com.google.protobuf.ByteString
+          getRoomIdBytes() {
+        java.lang.Object ref = roomId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          roomId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string roomId = 1;</code>
+       * @param value The roomId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRoomId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        roomId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string roomId = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearRoomId() {
+        
+        roomId_ = getDefaultInstance().getRoomId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string roomId = 1;</code>
+       * @param value The bytes for roomId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRoomIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        roomId_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord> chatRecords_ =
         java.util.Collections.emptyList();
       private void ensureChatRecordsIsMutable() {
@@ -18000,7 +18150,7 @@ public final class AQChatMsgProtocol {
           com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecordOrBuilder> chatRecordsBuilder_;
 
       /**
-       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
        */
       public java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord> getChatRecordsList() {
         if (chatRecordsBuilder_ == null) {
@@ -18010,7 +18160,7 @@ public final class AQChatMsgProtocol {
         }
       }
       /**
-       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
        */
       public int getChatRecordsCount() {
         if (chatRecordsBuilder_ == null) {
@@ -18020,7 +18170,7 @@ public final class AQChatMsgProtocol {
         }
       }
       /**
-       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
        */
       public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord getChatRecords(int index) {
         if (chatRecordsBuilder_ == null) {
@@ -18030,7 +18180,7 @@ public final class AQChatMsgProtocol {
         }
       }
       /**
-       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
        */
       public Builder setChatRecords(
           int index, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord value) {
@@ -18047,7 +18197,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
        */
       public Builder setChatRecords(
           int index, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder builderForValue) {
@@ -18061,7 +18211,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
        */
       public Builder addChatRecords(com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord value) {
         if (chatRecordsBuilder_ == null) {
@@ -18077,7 +18227,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
        */
       public Builder addChatRecords(
           int index, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord value) {
@@ -18094,7 +18244,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
        */
       public Builder addChatRecords(
           com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder builderForValue) {
@@ -18108,7 +18258,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
        */
       public Builder addChatRecords(
           int index, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder builderForValue) {
@@ -18122,7 +18272,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
        */
       public Builder addAllChatRecords(
           java.lang.Iterable<? extends com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord> values) {
@@ -18137,7 +18287,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
        */
       public Builder clearChatRecords() {
         if (chatRecordsBuilder_ == null) {
@@ -18150,7 +18300,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
        */
       public Builder removeChatRecords(int index) {
         if (chatRecordsBuilder_ == null) {
@@ -18163,14 +18313,14 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
        */
       public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder getChatRecordsBuilder(
           int index) {
         return getChatRecordsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
        */
       public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecordOrBuilder getChatRecordsOrBuilder(
           int index) {
@@ -18180,7 +18330,7 @@ public final class AQChatMsgProtocol {
         }
       }
       /**
-       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
        */
       public java.util.List<? extends com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecordOrBuilder> 
            getChatRecordsOrBuilderList() {
@@ -18191,14 +18341,14 @@ public final class AQChatMsgProtocol {
         }
       }
       /**
-       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
        */
       public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder addChatRecordsBuilder() {
         return getChatRecordsFieldBuilder().addBuilder(
             com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.getDefaultInstance());
       }
       /**
-       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
        */
       public com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder addChatRecordsBuilder(
           int index) {
@@ -18206,7 +18356,7 @@ public final class AQChatMsgProtocol {
             index, com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.getDefaultInstance());
       }
       /**
-       * <code>repeated .chat_msg.ChatRecord chatRecords = 1;</code>
+       * <code>repeated .chat_msg.ChatRecord chatRecords = 2;</code>
        */
       public java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.Builder> 
            getChatRecordsBuilderList() {
@@ -21228,6 +21378,30 @@ public final class AQChatMsgProtocol {
      */
     com.google.protobuf.ByteString
         getRoomNameBytes();
+
+    /**
+     * <code>repeated .chat_msg.User members = 4;</code>
+     */
+    java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.User> 
+        getMembersList();
+    /**
+     * <code>repeated .chat_msg.User members = 4;</code>
+     */
+    com.howcode.aqchat.message.AQChatMsgProtocol.User getMembers(int index);
+    /**
+     * <code>repeated .chat_msg.User members = 4;</code>
+     */
+    int getMembersCount();
+    /**
+     * <code>repeated .chat_msg.User members = 4;</code>
+     */
+    java.util.List<? extends com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder> 
+        getMembersOrBuilderList();
+    /**
+     * <code>repeated .chat_msg.User members = 4;</code>
+     */
+    com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder getMembersOrBuilder(
+        int index);
   }
   /**
    * <pre>
@@ -21248,6 +21422,7 @@ public final class AQChatMsgProtocol {
     private Room() {
       roomId_ = "";
       roomName_ = "";
+      members_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -21270,6 +21445,7 @@ public final class AQChatMsgProtocol {
       if (extensionRegistry == null) {
         throw new java.lang.NullPointerException();
       }
+      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -21297,6 +21473,15 @@ public final class AQChatMsgProtocol {
               roomName_ = s;
               break;
             }
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                members_ = new java.util.ArrayList<com.howcode.aqchat.message.AQChatMsgProtocol.User>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              members_.add(
+                  input.readMessage(com.howcode.aqchat.message.AQChatMsgProtocol.User.parser(), extensionRegistry));
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -21312,6 +21497,9 @@ public final class AQChatMsgProtocol {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          members_ = java.util.Collections.unmodifiableList(members_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -21416,6 +21604,46 @@ public final class AQChatMsgProtocol {
       }
     }
 
+    public static final int MEMBERS_FIELD_NUMBER = 4;
+    private java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.User> members_;
+    /**
+     * <code>repeated .chat_msg.User members = 4;</code>
+     */
+    @java.lang.Override
+    public java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.User> getMembersList() {
+      return members_;
+    }
+    /**
+     * <code>repeated .chat_msg.User members = 4;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder> 
+        getMembersOrBuilderList() {
+      return members_;
+    }
+    /**
+     * <code>repeated .chat_msg.User members = 4;</code>
+     */
+    @java.lang.Override
+    public int getMembersCount() {
+      return members_.size();
+    }
+    /**
+     * <code>repeated .chat_msg.User members = 4;</code>
+     */
+    @java.lang.Override
+    public com.howcode.aqchat.message.AQChatMsgProtocol.User getMembers(int index) {
+      return members_.get(index);
+    }
+    /**
+     * <code>repeated .chat_msg.User members = 4;</code>
+     */
+    @java.lang.Override
+    public com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder getMembersOrBuilder(
+        int index) {
+      return members_.get(index);
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -21439,6 +21667,9 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomName_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, roomName_);
       }
+      for (int i = 0; i < members_.size(); i++) {
+        output.writeMessage(4, members_.get(i));
+      }
       unknownFields.writeTo(output);
     }
 
@@ -21457,6 +21688,10 @@ public final class AQChatMsgProtocol {
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomName_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, roomName_);
+      }
+      for (int i = 0; i < members_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, members_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -21479,6 +21714,8 @@ public final class AQChatMsgProtocol {
           != other.getRoomNo()) return false;
       if (!getRoomName()
           .equals(other.getRoomName())) return false;
+      if (!getMembersList()
+          .equals(other.getMembersList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -21496,6 +21733,10 @@ public final class AQChatMsgProtocol {
       hash = (53 * hash) + getRoomNo();
       hash = (37 * hash) + ROOMNAME_FIELD_NUMBER;
       hash = (53 * hash) + getRoomName().hashCode();
+      if (getMembersCount() > 0) {
+        hash = (37 * hash) + MEMBERS_FIELD_NUMBER;
+        hash = (53 * hash) + getMembersList().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -21628,6 +21869,7 @@ public final class AQChatMsgProtocol {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
+          getMembersFieldBuilder();
         }
       }
       @java.lang.Override
@@ -21639,6 +21881,12 @@ public final class AQChatMsgProtocol {
 
         roomName_ = "";
 
+        if (membersBuilder_ == null) {
+          members_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          membersBuilder_.clear();
+        }
         return this;
       }
 
@@ -21665,9 +21913,19 @@ public final class AQChatMsgProtocol {
       @java.lang.Override
       public com.howcode.aqchat.message.AQChatMsgProtocol.Room buildPartial() {
         com.howcode.aqchat.message.AQChatMsgProtocol.Room result = new com.howcode.aqchat.message.AQChatMsgProtocol.Room(this);
+        int from_bitField0_ = bitField0_;
         result.roomId_ = roomId_;
         result.roomNo_ = roomNo_;
         result.roomName_ = roomName_;
+        if (membersBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) != 0)) {
+            members_ = java.util.Collections.unmodifiableList(members_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.members_ = members_;
+        } else {
+          result.members_ = membersBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -21727,6 +21985,32 @@ public final class AQChatMsgProtocol {
           roomName_ = other.roomName_;
           onChanged();
         }
+        if (membersBuilder_ == null) {
+          if (!other.members_.isEmpty()) {
+            if (members_.isEmpty()) {
+              members_ = other.members_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureMembersIsMutable();
+              members_.addAll(other.members_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.members_.isEmpty()) {
+            if (membersBuilder_.isEmpty()) {
+              membersBuilder_.dispose();
+              membersBuilder_ = null;
+              members_ = other.members_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              membersBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getMembersFieldBuilder() : null;
+            } else {
+              membersBuilder_.addAllMessages(other.members_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -21755,6 +22039,7 @@ public final class AQChatMsgProtocol {
         }
         return this;
       }
+      private int bitField0_;
 
       private java.lang.Object roomId_ = "";
       /**
@@ -21937,6 +22222,246 @@ public final class AQChatMsgProtocol {
         roomName_ = value;
         onChanged();
         return this;
+      }
+
+      private java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.User> members_ =
+        java.util.Collections.emptyList();
+      private void ensureMembersIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          members_ = new java.util.ArrayList<com.howcode.aqchat.message.AQChatMsgProtocol.User>(members_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.howcode.aqchat.message.AQChatMsgProtocol.User, com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder, com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder> membersBuilder_;
+
+      /**
+       * <code>repeated .chat_msg.User members = 4;</code>
+       */
+      public java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.User> getMembersList() {
+        if (membersBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(members_);
+        } else {
+          return membersBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .chat_msg.User members = 4;</code>
+       */
+      public int getMembersCount() {
+        if (membersBuilder_ == null) {
+          return members_.size();
+        } else {
+          return membersBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .chat_msg.User members = 4;</code>
+       */
+      public com.howcode.aqchat.message.AQChatMsgProtocol.User getMembers(int index) {
+        if (membersBuilder_ == null) {
+          return members_.get(index);
+        } else {
+          return membersBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .chat_msg.User members = 4;</code>
+       */
+      public Builder setMembers(
+          int index, com.howcode.aqchat.message.AQChatMsgProtocol.User value) {
+        if (membersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMembersIsMutable();
+          members_.set(index, value);
+          onChanged();
+        } else {
+          membersBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .chat_msg.User members = 4;</code>
+       */
+      public Builder setMembers(
+          int index, com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder builderForValue) {
+        if (membersBuilder_ == null) {
+          ensureMembersIsMutable();
+          members_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          membersBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .chat_msg.User members = 4;</code>
+       */
+      public Builder addMembers(com.howcode.aqchat.message.AQChatMsgProtocol.User value) {
+        if (membersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMembersIsMutable();
+          members_.add(value);
+          onChanged();
+        } else {
+          membersBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .chat_msg.User members = 4;</code>
+       */
+      public Builder addMembers(
+          int index, com.howcode.aqchat.message.AQChatMsgProtocol.User value) {
+        if (membersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMembersIsMutable();
+          members_.add(index, value);
+          onChanged();
+        } else {
+          membersBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .chat_msg.User members = 4;</code>
+       */
+      public Builder addMembers(
+          com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder builderForValue) {
+        if (membersBuilder_ == null) {
+          ensureMembersIsMutable();
+          members_.add(builderForValue.build());
+          onChanged();
+        } else {
+          membersBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .chat_msg.User members = 4;</code>
+       */
+      public Builder addMembers(
+          int index, com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder builderForValue) {
+        if (membersBuilder_ == null) {
+          ensureMembersIsMutable();
+          members_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          membersBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .chat_msg.User members = 4;</code>
+       */
+      public Builder addAllMembers(
+          java.lang.Iterable<? extends com.howcode.aqchat.message.AQChatMsgProtocol.User> values) {
+        if (membersBuilder_ == null) {
+          ensureMembersIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, members_);
+          onChanged();
+        } else {
+          membersBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .chat_msg.User members = 4;</code>
+       */
+      public Builder clearMembers() {
+        if (membersBuilder_ == null) {
+          members_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          membersBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .chat_msg.User members = 4;</code>
+       */
+      public Builder removeMembers(int index) {
+        if (membersBuilder_ == null) {
+          ensureMembersIsMutable();
+          members_.remove(index);
+          onChanged();
+        } else {
+          membersBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .chat_msg.User members = 4;</code>
+       */
+      public com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder getMembersBuilder(
+          int index) {
+        return getMembersFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .chat_msg.User members = 4;</code>
+       */
+      public com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder getMembersOrBuilder(
+          int index) {
+        if (membersBuilder_ == null) {
+          return members_.get(index);  } else {
+          return membersBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .chat_msg.User members = 4;</code>
+       */
+      public java.util.List<? extends com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder> 
+           getMembersOrBuilderList() {
+        if (membersBuilder_ != null) {
+          return membersBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(members_);
+        }
+      }
+      /**
+       * <code>repeated .chat_msg.User members = 4;</code>
+       */
+      public com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder addMembersBuilder() {
+        return getMembersFieldBuilder().addBuilder(
+            com.howcode.aqchat.message.AQChatMsgProtocol.User.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .chat_msg.User members = 4;</code>
+       */
+      public com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder addMembersBuilder(
+          int index) {
+        return getMembersFieldBuilder().addBuilder(
+            index, com.howcode.aqchat.message.AQChatMsgProtocol.User.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .chat_msg.User members = 4;</code>
+       */
+      public java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder> 
+           getMembersBuilderList() {
+        return getMembersFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.howcode.aqchat.message.AQChatMsgProtocol.User, com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder, com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder> 
+          getMembersFieldBuilder() {
+        if (membersBuilder_ == null) {
+          membersBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.howcode.aqchat.message.AQChatMsgProtocol.User, com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder, com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder>(
+                  members_,
+                  ((bitField0_ & 0x00000001) != 0),
+                  getParentForChildren(),
+                  isClean());
+          members_ = null;
+        }
+        return membersBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -23737,36 +24262,38 @@ public final class AQChatMsgProtocol {
       "\rUserLogoutAck\022\016\n\006userId\030\001 \001(\t\"=\n\rOfflin" +
       "eNotify\022\034\n\004user\030\001 \001(\0132\016.chat_msg.User\022\016\n" +
       "\006roomId\030\002 \001(\t\"#\n\021SyncChatRecordCmd\022\016\n\006ro" +
-      "omId\030\001 \001(\t\">\n\021SyncChatRecordAck\022)\n\013chatR" +
-      "ecords\030\001 \003(\0132\024.chat_msg.ChatRecord\"\217\001\n\nC" +
-      "hatRecord\022\r\n\005msgId\030\001 \001(\003\022\034\n\004user\030\002 \001(\0132\016" +
-      ".chat_msg.User\022\017\n\007message\030\003 \001(\t\022\"\n\007msgTy" +
-      "pe\030\004 \001(\0162\021.chat_msg.MsgType\022\013\n\003ext\030\005 \001(\t" +
-      "\022\022\n\ncreateTime\030\006 \001(\t\" \n\016RecoverUserCmd\022\016" +
-      "\n\006userId\030\001 \001(\t\"d\n\016RecoverUserAck\022\016\n\006user" +
-      "Id\030\001 \001(\t\022\020\n\010userName\030\002 \001(\t\022\022\n\nuserAvatar" +
-      "\030\003 \001(\t\022\034\n\004room\030\004 \001(\0132\016.chat_msg.Room\"8\n\004" +
-      "Room\022\016\n\006roomId\030\001 \001(\t\022\016\n\006roomNo\030\002 \001(\005\022\020\n\010" +
-      "roomName\030\003 \001(\t\">\n\016JoinRoomNotify\022\034\n\004user" +
-      "\030\001 \001(\0132\016.chat_msg.User\022\016\n\006roomId\030\002 \001(\t\"?" +
-      "\n\017LeaveRoomNotify\022\034\n\004user\030\001 \001(\0132\016.chat_m" +
-      "sg.User\022\016\n\006roomId\030\002 \001(\t*\240\004\n\nMsgCommand\022\022" +
-      "\n\016USER_LOGIN_CMD\020\000\022\022\n\016USER_LOGIN_ACK\020\001\022\022" +
-      "\n\016HEART_BEAT_CMD\020\002\022\022\n\016HEART_BEAT_ACK\020\003\022\021" +
-      "\n\rJOIN_ROOM_CMD\020\004\022\021\n\rJOIN_ROOM_ACK\020\005\022\023\n\017" +
-      "CREATE_ROOM_CMD\020\006\022\023\n\017CREATE_ROOM_ACK\020\007\022\022" +
-      "\n\016LEAVE_ROOM_CMD\020\010\022\022\n\016LEAVE_ROOM_ACK\020\t\022\020" +
-      "\n\014SEND_MSG_CMD\020\n\022\020\n\014SEND_MSG_ACK\020\013\022\025\n\021BR" +
-      "OADCAST_MSG_ACK\020\014\022\021\n\rEXCEPTION_MSG\020\r\022\017\n\013" +
-      "OFFLINE_MSG\020\016\022\017\n\013GET_STS_CMD\020\017\022\017\n\013GET_ST" +
-      "S_ACK\020\020\022\023\n\017USER_LOGOUT_CMD\020\021\022\023\n\017USER_LOG" +
-      "OUT_ACK\020\022\022\022\n\016OFFLINE_NOTIFY\020\023\022\030\n\024SYNC_CH" +
-      "AT_RECORD_CMD\020\024\022\030\n\024SYNC_CHAT_RECORD_ACK\020" +
-      "\025\022\024\n\020RECOVER_USER_CMD\020\026\022\024\n\020RECOVER_USER_" +
-      "ACK\020\027\022\024\n\020JOIN_ROOM_NOTIFY\020\030\022\025\n\021LEAVE_ROO" +
-      "M_NOTIFY\020\031*>\n\007MsgType\022\010\n\004TEXT\020\000\022\t\n\005IMAGE" +
-      "\020\001\022\t\n\005VOICE\020\002\022\t\n\005VIDEO\020\003\022\010\n\004FILE\020\004B\034\n\032co" +
-      "m.howcode.aqchat.messageb\006proto3"
+      "omId\030\001 \001(\t\"N\n\021SyncChatRecordAck\022\016\n\006roomI" +
+      "d\030\001 \001(\t\022)\n\013chatRecords\030\002 \003(\0132\024.chat_msg." +
+      "ChatRecord\"\217\001\n\nChatRecord\022\r\n\005msgId\030\001 \001(\003" +
+      "\022\034\n\004user\030\002 \001(\0132\016.chat_msg.User\022\017\n\007messag" +
+      "e\030\003 \001(\t\022\"\n\007msgType\030\004 \001(\0162\021.chat_msg.MsgT" +
+      "ype\022\013\n\003ext\030\005 \001(\t\022\022\n\ncreateTime\030\006 \001(\t\" \n\016" +
+      "RecoverUserCmd\022\016\n\006userId\030\001 \001(\t\"d\n\016Recove" +
+      "rUserAck\022\016\n\006userId\030\001 \001(\t\022\020\n\010userName\030\002 \001" +
+      "(\t\022\022\n\nuserAvatar\030\003 \001(\t\022\034\n\004room\030\004 \001(\0132\016.c" +
+      "hat_msg.Room\"Y\n\004Room\022\016\n\006roomId\030\001 \001(\t\022\016\n\006" +
+      "roomNo\030\002 \001(\005\022\020\n\010roomName\030\003 \001(\t\022\037\n\007member" +
+      "s\030\004 \003(\0132\016.chat_msg.User\">\n\016JoinRoomNotif" +
+      "y\022\034\n\004user\030\001 \001(\0132\016.chat_msg.User\022\016\n\006roomI" +
+      "d\030\002 \001(\t\"?\n\017LeaveRoomNotify\022\034\n\004user\030\001 \001(\013" +
+      "2\016.chat_msg.User\022\016\n\006roomId\030\002 \001(\t*\240\004\n\nMsg" +
+      "Command\022\022\n\016USER_LOGIN_CMD\020\000\022\022\n\016USER_LOGI" +
+      "N_ACK\020\001\022\022\n\016HEART_BEAT_CMD\020\002\022\022\n\016HEART_BEA" +
+      "T_ACK\020\003\022\021\n\rJOIN_ROOM_CMD\020\004\022\021\n\rJOIN_ROOM_" +
+      "ACK\020\005\022\023\n\017CREATE_ROOM_CMD\020\006\022\023\n\017CREATE_ROO" +
+      "M_ACK\020\007\022\022\n\016LEAVE_ROOM_CMD\020\010\022\022\n\016LEAVE_ROO" +
+      "M_ACK\020\t\022\020\n\014SEND_MSG_CMD\020\n\022\020\n\014SEND_MSG_AC" +
+      "K\020\013\022\025\n\021BROADCAST_MSG_ACK\020\014\022\021\n\rEXCEPTION_" +
+      "MSG\020\r\022\017\n\013OFFLINE_MSG\020\016\022\017\n\013GET_STS_CMD\020\017\022" +
+      "\017\n\013GET_STS_ACK\020\020\022\023\n\017USER_LOGOUT_CMD\020\021\022\023\n" +
+      "\017USER_LOGOUT_ACK\020\022\022\022\n\016OFFLINE_NOTIFY\020\023\022\030" +
+      "\n\024SYNC_CHAT_RECORD_CMD\020\024\022\030\n\024SYNC_CHAT_RE" +
+      "CORD_ACK\020\025\022\024\n\020RECOVER_USER_CMD\020\026\022\024\n\020RECO" +
+      "VER_USER_ACK\020\027\022\024\n\020JOIN_ROOM_NOTIFY\020\030\022\025\n\021" +
+      "LEAVE_ROOM_NOTIFY\020\031*>\n\007MsgType\022\010\n\004TEXT\020\000" +
+      "\022\t\n\005IMAGE\020\001\022\t\n\005VOICE\020\002\022\t\n\005VIDEO\020\003\022\010\n\004FIL" +
+      "E\020\004B\034\n\032com.howcode.aqchat.messageb\006proto" +
+      "3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -23909,7 +24436,7 @@ public final class AQChatMsgProtocol {
     internal_static_chat_msg_SyncChatRecordAck_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chat_msg_SyncChatRecordAck_descriptor,
-        new java.lang.String[] { "ChatRecords", });
+        new java.lang.String[] { "RoomId", "ChatRecords", });
     internal_static_chat_msg_ChatRecord_descriptor =
       getDescriptor().getMessageTypes().get(23);
     internal_static_chat_msg_ChatRecord_fieldAccessorTable = new
@@ -23933,7 +24460,7 @@ public final class AQChatMsgProtocol {
     internal_static_chat_msg_Room_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chat_msg_Room_descriptor,
-        new java.lang.String[] { "RoomId", "RoomNo", "RoomName", });
+        new java.lang.String[] { "RoomId", "RoomNo", "RoomName", "Members", });
     internal_static_chat_msg_JoinRoomNotify_descriptor =
       getDescriptor().getMessageTypes().get(27);
     internal_static_chat_msg_JoinRoomNotify_fieldAccessorTable = new

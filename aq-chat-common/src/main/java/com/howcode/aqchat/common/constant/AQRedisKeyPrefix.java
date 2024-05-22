@@ -20,6 +20,14 @@ public interface AQRedisKeyPrefix {
      */
     String AQ_ROOM_PREFIX = "AQChat:room:room:";
     /**
+     * 房间信息缓存前缀
+     */
+    String AQ_ROOM_INFO_PREFIX = "info";
+    /**
+     * 房间成员缓存前缀
+     */
+    String AQ_ROOM_MEMBER_PREFIX = "member";
+    /**
      * 阿里云临时凭证缓存
      */
     String ALI_OSS_STS = "AQChat:aliOssSts";

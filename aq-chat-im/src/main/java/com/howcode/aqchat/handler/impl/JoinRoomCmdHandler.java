@@ -1,12 +1,11 @@
 package com.howcode.aqchat.handler.impl;
 
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
-import com.howcode.aqchat.common.constant.AQRedisKeyPrefix;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.RoomInfoDto;
-import com.howcode.aqchat.framework.redis.starter.RedisCacheHelper;
 import com.howcode.aqchat.handler.ICmdHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
+import com.howcode.aqchat.holder.IRoomHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
 import com.howcode.aqchat.mq.MqSendingAgent;
@@ -29,7 +28,8 @@ public class JoinRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.JoinRoo
     private GlobalChannelHolder globalChannelHolder;
     @Resource
     @Lazy
-    private RedisCacheHelper redisCacheHelper;
+    private IRoomHolder roomHolder;
+
     @Resource
     @Lazy
     private MqSendingAgent mqSendingAgent;
@@ -58,7 +58,7 @@ public class JoinRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.JoinRoo
 
         int roomNo = cmd.getRoomNo();
         //判断房间号是否存在
-        roomId = redisCacheHelper.getCacheObject(AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo, String.class);
+        roomId = roomHolder.getRoomId(roomNo);
         if (null == roomId) {
             //房间号不存在 返回错误信息
             AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.ROOM_NOT_EXIST);
