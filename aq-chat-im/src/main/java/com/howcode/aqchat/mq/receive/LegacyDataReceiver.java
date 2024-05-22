@@ -49,14 +49,18 @@ public class LegacyDataReceiver implements InitializingBean {
                     LOGGER.info("mq收到消息[离线遗留]:{}", userId);
                     // 广播用户退出消息
                     if (!userId.isEmpty()) {
-                        UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(userId);
-                        if (userInfo == null){
-                            //清理遗留信息
-                            LOGGER.info("用户离线时间超过系统限制，开始清理遗留信息");
-                            String roomId = globalChannelHolder.getRoomId(userId);
-                            globalChannelHolder.removeByBroadcaster(userId);
-                            LOGGER.info(roomId);
-                            globalChannelHolder.dissolveTheRoomByLogout(roomId);
+                        try {
+                            UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(userId);
+                            if (userInfo == null){
+                                //清理遗留信息
+                                LOGGER.info("用户离线时间超过系统限制，开始清理遗留信息");
+                                String roomId = globalChannelHolder.getRoomId(userId);
+                                globalChannelHolder.removeByBroadcaster(userId);
+                                LOGGER.info(roomId);
+                                globalChannelHolder.dissolveTheRoomByLogout(roomId);
+                            }
+                        }catch (Exception e){
+                            LOGGER.error("[离线遗留] MQ 处理异常",e);
                         }
                     }
                 }
