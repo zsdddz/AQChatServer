@@ -53,14 +53,14 @@ public class HearBeatHandler extends ChannelInboundHandlerAdapter implements Ini
             if (event.state() == IdleState.ALL_IDLE) {
                 Long lastReadTime = (Long) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.HEART_BEAT_TIME)).get();
                 long now = System.currentTimeMillis();
-                if (lastReadTime != null && now - lastReadTime > heartBeatTime) {
+                if (lastReadTime == null || now - lastReadTime > heartBeatTime) {
                     //获取用户id
                     String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
-                    if (null == userId){
+                    if (null == userId) {
                         return;
                     }
                     // 下线
-                    Logger.info("用户{}心跳超时，发送离线消息",userId);
+                    Logger.info("用户{}心跳超时，发送离线消息", userId);
                     //构建离线消息
                     AQChatMsgProtocol.OfflineMsg.Builder builder = AQChatMsgProtocol.OfflineMsg.newBuilder();
                     AQChatMsgProtocol.User.Builder userBuilder = AQChatMsgProtocol.User.newBuilder();
@@ -69,7 +69,7 @@ public class HearBeatHandler extends ChannelInboundHandlerAdapter implements Ini
                     userBuilder.setUserAvatar(userInfo.getUserAvatar());
                     userBuilder.setUserName(userInfo.getUserName());
                     builder.setUser(userBuilder.build());
-                    builder.setRoomId(channelHolder.getRoomId(userId));
+                    builder.setRoomId(channelHolder.getRoomId(userId) == null ? "0" : channelHolder.getRoomId(userId));
                     ctx.writeAndFlush(builder.build());
                 }
             }
