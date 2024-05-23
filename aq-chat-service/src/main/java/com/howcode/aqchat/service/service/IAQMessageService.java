@@ -20,9 +20,11 @@ public interface IAQMessageService {
 
     /**
      * 获取房间消息列表
-     * @param roomId 房间ID
+     *
+     * @param roomId       房间ID
+     * @param joinRoomTime
      * @return 房间消息列表
      */
-    List<MessageRecordDto> getMessageList(String roomId);
+    List<MessageRecordDto> getMessageList(String roomId, Long joinRoomTime);
 
 }

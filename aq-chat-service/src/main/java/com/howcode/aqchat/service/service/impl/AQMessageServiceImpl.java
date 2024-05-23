@@ -2,7 +2,6 @@ package com.howcode.aqchat.service.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
-import com.howcode.aqchat.common.constant.AQChatMQConstant;
 import com.howcode.aqchat.common.model.MessageDto;
 import com.howcode.aqchat.common.model.MessageRecordDto;
 import com.howcode.aqchat.service.dao.mapper.IAQMessageMapper;
@@ -13,8 +12,8 @@ import com.howcode.aqchat.service.service.IAQUserService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,9 +45,12 @@ public class AQMessageServiceImpl implements IAQMessageService {
     }
 
     @Override
-    public List<MessageRecordDto> getMessageList(String roomId) {
+    public List<MessageRecordDto> getMessageList(String roomId, Long joinRoomTime) {
         //查询房间最后100条消息
+        joinRoomTime = (joinRoomTime == null) ? System.currentTimeMillis() : joinRoomTime;
+        System.out.println(new Date(joinRoomTime));
         LambdaQueryWrapper<AqMessage> query = new LambdaQueryWrapper<AqMessage>().eq(AqMessage::getRoomId, roomId)
+                .ge(AqMessage::getCreateTime,new Date(joinRoomTime))
                 .orderByDesc(AqMessage::getCreateTime)
                 .last(AQBusinessConstant.LIMIT);
         List<AqMessage> aqMessages = messageMapper.selectList(query);

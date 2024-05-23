@@ -103,6 +103,7 @@ public class GlobalChannelHolder {
         //删除用户所在房间信息
         UserGlobalInfoDto userInfo = userHolder.getUserInfo(userId);
         userInfo.setRoomId(null);
+        userInfo.setJoinRoomTime(null);
         userHolder.saveUserInfo(userInfo);
     }
 

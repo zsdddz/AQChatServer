@@ -31,4 +31,11 @@ public interface IUserHolder {
     void removeUserInfo(String userId);
 
     void offline(String userId);
+
+    //设置加入房间时间
+    void setJoinRoomTime(String userId, Long joinRoomTime);
+
+    //获取加入房间时间
+    Long getJoinRoomTime(String userId);
+
 }

@@ -6,6 +6,7 @@ import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IRoomHolder;
+import com.howcode.aqchat.holder.IUserHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
 import com.howcode.aqchat.mq.MqSendingAgent;
@@ -33,6 +34,10 @@ public class JoinRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol
     @Resource
     @Lazy
     private MqSendingAgent mqSendingAgent;
+    @Resource
+    @Lazy
+    private IUserHolder userHolder;
+
 
     @Override
     public void handle(ChannelHandlerContext ctx, AQChatMsgProtocol.JoinRoomCmd cmd) {
@@ -66,6 +71,7 @@ public class JoinRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol
         ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.ROOM_ID)).set(roomId);
         //将用户加入房间
         globalChannelHolder.joinRoom(roomId, userId, ctx.channel());
+        userHolder.setJoinRoomTime(userId, System.currentTimeMillis());
         mqSendingAgent.sendJoinRoomMsg(userId, roomId);
         //返回加入房间成功
         RoomInfoDto roomInfoDto = globalChannelHolder.getRoomInfo(roomId);

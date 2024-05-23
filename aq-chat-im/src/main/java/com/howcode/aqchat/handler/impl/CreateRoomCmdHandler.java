@@ -8,6 +8,7 @@ import com.howcode.aqchat.common.utils.IdProvider;
 import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IRoomHolder;
+import com.howcode.aqchat.holder.IUserHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
 import com.howcode.aqchat.mq.MqSendingAgent;
@@ -32,13 +33,15 @@ public class CreateRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtoc
     @Resource
     @Lazy
     private IRoomHolder roomHolder;
-
     @Resource
     @Lazy
     private GlobalChannelHolder globalChannelHolder;
     @Resource
     @Lazy
     private MqSendingAgent mqSendingAgent;
+    @Resource
+    @Lazy
+    private IUserHolder userHolder;
 
     @Override
     public void handle(ChannelHandlerContext ctx, AQChatMsgProtocol.CreateRoomCmd cmd) {
@@ -77,6 +80,7 @@ public class CreateRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtoc
         roomInfoDto.setRoomNo(roomNo);
         roomInfoDto.setRoomName(roomName);
         ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.ROOM_ID)).set(roomId);
+        userHolder.setJoinRoomTime(userId, System.currentTimeMillis());
         //将房间信息保存至redis
         roomHolder.saveRoomInfo(roomId, roomInfoDto);
         //处理房间连接

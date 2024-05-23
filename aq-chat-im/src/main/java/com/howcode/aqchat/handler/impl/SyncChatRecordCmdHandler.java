@@ -3,8 +3,10 @@ package com.howcode.aqchat.handler.impl;
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.MessageRecordDto;
+import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.handler.ICmdHandler;
+import com.howcode.aqchat.holder.IUserHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
 import com.howcode.aqchat.service.service.IAQMessageService;
@@ -29,6 +31,9 @@ public class SyncChatRecordCmdHandler extends AbstractCmdBaseHandler<AQChatMsgPr
     @Resource
     @Lazy
     private IAQMessageService messageService;
+    @Resource
+    @Lazy
+    private IUserHolder userHolder;
 
     @Override
     public void handle(ChannelHandlerContext ctx, AQChatMsgProtocol.SyncChatRecordCmd cmd) {
@@ -47,7 +52,8 @@ public class SyncChatRecordCmdHandler extends AbstractCmdBaseHandler<AQChatMsgPr
             LOGGER.error("SyncChatRecordCmdHandler handle error, user not in room or Illegal operation");
             return;
         }
-        List<MessageRecordDto> messageList = messageService.getMessageList(roomId);
+        UserGlobalInfoDto userInfo = userHolder.getUserInfo(userId);
+        List<MessageRecordDto> messageList = messageService.getMessageList(roomId,userInfo.getJoinRoomTime());
         if (null == messageList || messageList.isEmpty()) {
             LOGGER.info("SyncChatRecordCmdHandler handle, messageList is empty");
             return;

@@ -47,4 +47,17 @@ public class AQUserHolder implements IUserHolder {
                 AQBusinessConstant.USER_OFFLINE_CACHE_TIME,
                 TimeUnit.SECONDS);
     }
+
+    @Override
+    public void setJoinRoomTime(String userId, Long joinRoomTime) {
+        UserGlobalInfoDto userInfo = getUserInfo(userId);
+        userInfo.setJoinRoomTime(joinRoomTime);
+        saveUserInfo(userInfo);
+    }
+
+    @Override
+    public Long getJoinRoomTime(String userId) {
+        UserGlobalInfoDto userInfo = getUserInfo(userId);
+        return userInfo.getJoinRoomTime();
+    }
 }

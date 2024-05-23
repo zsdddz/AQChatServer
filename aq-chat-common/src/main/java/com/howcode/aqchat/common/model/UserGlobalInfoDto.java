@@ -13,4 +13,6 @@ public class UserGlobalInfoDto {
     private String userName;
     private String userAvatar;
     private String roomId;
+    //加入房间时间
+    private Long joinRoomTime;
 }

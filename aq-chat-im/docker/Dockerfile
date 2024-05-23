@@ -1,6 +1,7 @@
 FROM openjdk:17-jdk-alpine
 VOLUME /tmp
 ADD aq-chat-im-docker.jar app.jar
+ENV TZ=Asia/Shanghai
 ENV JAVA_OPTS="\
 -server \
 -Xmx1g \
