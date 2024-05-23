@@ -36,7 +36,7 @@ public class MessageEncoder extends MessageToMessageEncoder<GeneratedMessageV3> 
         LOGGER.info("返回消息编码器: msgClazz = {}, msgCommand = {}", msg.getClass().getSimpleName(), msgCommand);
         byte[] msgBody = msg.toByteArray();
         ByteBuf byteBuf = ctx.alloc().buffer();
-        byteBuf.writeShort((short) msgBody.length);
+        byteBuf.writeInt(msgBody.length);
         byteBuf.writeShort((short) msgCommand);
         byteBuf.writeBytes(msgBody);
         list.add(new BinaryWebSocketFrame(byteBuf));

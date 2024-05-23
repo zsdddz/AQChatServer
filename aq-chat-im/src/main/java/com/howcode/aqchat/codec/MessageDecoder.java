@@ -38,7 +38,7 @@ public class MessageDecoder extends MessageToMessageDecoder<BinaryWebSocketFrame
             return;
         }
         byteBuf.markReaderIndex();
-        short msgLength = byteBuf.readShort();
+        int msgLength = byteBuf.readInt();
         short command = byteBuf.readShort();
         if (byteBuf.readableBytes() < msgLength) {
             byteBuf.resetReaderIndex();
