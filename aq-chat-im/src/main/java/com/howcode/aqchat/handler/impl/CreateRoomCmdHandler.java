@@ -10,6 +10,7 @@ import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IRoomHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
+import com.howcode.aqchat.mq.MqSendingAgent;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
@@ -35,6 +36,9 @@ public class CreateRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtoc
     @Resource
     @Lazy
     private GlobalChannelHolder globalChannelHolder;
+    @Resource
+    @Lazy
+    private MqSendingAgent mqSendingAgent;
 
     @Override
     public void handle(ChannelHandlerContext ctx, AQChatMsgProtocol.CreateRoomCmd cmd) {
@@ -79,8 +83,8 @@ public class CreateRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtoc
         globalChannelHolder.createChannelGroup(roomInfoDto.getRoomId());
         //将创建者加入房间
         globalChannelHolder.joinRoom(roomInfoDto.getRoomId(), userId, ctx.channel());
-        //将用户保存至房间成员列表
-        roomHolder.saveRoomMember(roomId, userId);
+        //mq发送加入房间消息
+        mqSendingAgent.sendJoinRoomMsg(userId, roomInfoDto.getRoomId());
 
         LOGGER.info("用户{}创建房间{}成功", userId, roomInfoDto.getRoomId());
         //返回创建房间成功消息
