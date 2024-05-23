@@ -3,8 +3,7 @@ package com.howcode.aqchat.handler.impl;
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.MessageDto;
-import com.howcode.aqchat.common.utils.IdProvider;
-import com.howcode.aqchat.handler.ICmdHandler;
+import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
@@ -25,7 +24,7 @@ import java.util.Date;
  * @date 2024-04-24 14:08
  */
 @Component
-public class SendMsgCmdHandler implements ICmdHandler<AQChatMsgProtocol.SendMsgCmd> {
+public class SendMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.SendMsgCmd> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SendMsgCmdHandler.class);
     @Resource
@@ -42,7 +41,7 @@ public class SendMsgCmdHandler implements ICmdHandler<AQChatMsgProtocol.SendMsgC
         }
         long msgId = cmd.getMsgId();
         // 判断消息Id是否为空
-        if (msgId == 0) {
+        if (msgId <= 0) {
             // 错误消息
             AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.MESSAGE_ID_ERROR);
             ctx.writeAndFlush(exceptionMsg);
@@ -50,19 +49,15 @@ public class SendMsgCmdHandler implements ICmdHandler<AQChatMsgProtocol.SendMsgC
         }
 
         // 获取用户Id
-        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
+        String userId = verifyLogin(ctx);
         if (null == userId) {
             // 用户未登录
-            AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_NOT_LOGIN);
-            ctx.writeAndFlush(exceptionMsg);
             return;
         }
         // 判断用户是否在房间中
-        String roomId = globalChannelHolder.getRoomId(userId);
+        String roomId = verifyJoinRoom(ctx);
         if (null == roomId || !roomId.equals(cmd.getRoomId())) {
             // 用户未加入房间
-            AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_NOT_IN_ROOM);
-            ctx.writeAndFlush(exceptionMsg);
             return;
         }
 

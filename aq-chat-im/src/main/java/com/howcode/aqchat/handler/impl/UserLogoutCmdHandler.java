@@ -2,6 +2,7 @@ package com.howcode.aqchat.handler.impl;
 
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
+import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.handler.ICmdHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
@@ -22,7 +23,7 @@ import org.springframework.stereotype.Component;
  * @date 2024-04-26 22:28
  */
 @Component
-public class UserLogoutCmdHandler implements ICmdHandler<AQChatMsgProtocol.UserLogoutCmd> {
+public class UserLogoutCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.UserLogoutCmd> {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserLogoutCmdHandler.class);
     @Resource
     @Lazy
@@ -37,20 +38,21 @@ public class UserLogoutCmdHandler implements ICmdHandler<AQChatMsgProtocol.UserL
             return;
         }
         //获取用户id
-        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
+        String userId = verifyLogin(ctx);
         if (userId == null) {
-            ctx.writeAndFlush(MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_NOT_LOGIN));
             ctx.close();
             return;
         }
         //退出
         if (!userId.equals(cmd.getUserId())) {
             //用户id不匹配
+            LOGGER.error("[非法操作]用户id不匹配，强制断开客户端连接");
             ctx.writeAndFlush(MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_ID_NOT_MATCH));
             return;
         }
         //清除登录属性
         ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).set(null);
+        ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.ROOM_ID)).set(null);
         //mq发送用户退出房间消息
         mqSendingAgent.sendLeaveRoomMsg(userId,globalChannelHolder.getRoomId(userId));
         //mq发送用户退出消息

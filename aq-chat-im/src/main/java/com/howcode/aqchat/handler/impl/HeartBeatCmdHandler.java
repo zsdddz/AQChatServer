@@ -2,6 +2,7 @@ package com.howcode.aqchat.handler.impl;
 
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
+import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.handler.ICmdHandler;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Component;
  * @date 2024-04-21 23:19
  */
 @Component
-public class HeartBeatCmdHandler implements ICmdHandler<AQChatMsgProtocol.HeartBeatCmd> {
+public class HeartBeatCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.HeartBeatCmd> {
     private static final Logger LOGGER = LoggerFactory.getLogger(HeartBeatCmdHandler.class);
 
     @Override
@@ -26,10 +27,10 @@ public class HeartBeatCmdHandler implements ICmdHandler<AQChatMsgProtocol.HeartB
             return;
         }
        //获取userId
-        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
+        String userId = verifyLogin(ctx);
         if (null == userId) {
-            //未登录  构建异常消息
-            ctx.writeAndFlush(MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_NOT_LOGIN));
+            //未登录
+            LOGGER.error("HeartBeatCmdHandler handle error, user not login");
             return;
         }
         LOGGER.info("用户{}发送心跳", userId);

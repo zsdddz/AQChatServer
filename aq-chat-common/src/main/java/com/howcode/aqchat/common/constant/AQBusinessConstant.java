@@ -25,6 +25,10 @@ public interface AQBusinessConstant {
      */
     String USER_ID = "userId";
     /**
+     * roomId
+     */
+    String ROOM_ID = "roomId";
+    /**
      * 服务器回复客户端心跳标志
      */
     String HEART_BEAT_ACK = "AQChat-Ack";

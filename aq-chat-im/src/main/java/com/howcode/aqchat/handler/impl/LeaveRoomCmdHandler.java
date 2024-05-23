@@ -3,7 +3,7 @@ package com.howcode.aqchat.handler.impl;
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.RoomInfoDto;
-import com.howcode.aqchat.handler.ICmdHandler;
+import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
  * @date 2024-04-24 14:06
  */
 @Component
-public class LeaveRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.LeaveRoomCmd> {
+public class LeaveRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.LeaveRoomCmd> {
     @Resource
     @Lazy
     private GlobalChannelHolder globalChannelHolder;
@@ -32,32 +32,36 @@ public class LeaveRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.LeaveR
         if (ctx == null || cmd == null) {
             return;
         }
-        // 获取用户Idq
-        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
+        // 验证用户是否登录
+        String userId = verifyLogin(ctx);
         if (null == userId) {
             // 用户未登录
-            AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_NOT_LOGIN);
-            ctx.writeAndFlush(exceptionMsg);
             return;
         }
         // 获取房间Id
-        String roomId = cmd.getRoomId();
+        String roomId = verifyJoinRoom(ctx);
+        String cmdRoomId = cmd.getRoomId();
+        if (null == roomId || !roomId.equals(cmdRoomId)) {
+            // 用户不在房间中
+            return;
+        }
         // 判断房间是否存在
-        RoomInfoDto roomInfoDto = globalChannelHolder.getRoomInfo(roomId);
+        RoomInfoDto roomInfoDto = globalChannelHolder.getRoomInfo(cmdRoomId);
         if (null == roomInfoDto) {
             // 房间不存在
             AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.ROOM_NOT_EXIST);
             ctx.writeAndFlush(exceptionMsg);
             return;
         }
+        ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.ROOM_ID)).set(null);
         globalChannelHolder.leaveRoom(userId,ctx.channel());
-        mqSendingAgent.sendLeaveRoomMsg(userId,roomId);
+        mqSendingAgent.sendLeaveRoomMsg(userId,cmdRoomId);
         //判断房间是否为空 如果为空则解散房间
-        globalChannelHolder.dissolveTheRoomByLogout(roomId);
+        globalChannelHolder.dissolveTheRoomByLogout(cmdRoomId);
         //返回离开房间成功
         AQChatMsgProtocol.LeaveRoomAck leaveRoomAck = AQChatMsgProtocol.LeaveRoomAck
                 .newBuilder()
-                .setRoomId(roomId)
+                .setRoomId(cmdRoomId)
                 .build();
         ctx.writeAndFlush(leaveRoomAck);
     }

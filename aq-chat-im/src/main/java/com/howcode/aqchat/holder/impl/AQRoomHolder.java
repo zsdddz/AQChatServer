@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +55,15 @@ public class AQRoomHolder implements IRoomHolder {
             LOGGER.error("[获取房间信息]房间不存在");
             return null;
         }
+        return roomInfo;
+    }
+
+    @Override
+    public RoomInfoDto getRoomAllInfoById(String roomId) {
+        RoomInfoDto roomInfo = getRoomInfoById(roomId);
+        if (null == roomInfo) {
+            return null;
+        }
         //获取房间成员
         List<UserGlobalInfoDto> roomMembers = getRoomMembers(roomId);
         roomInfo.setRoomMembers(roomMembers);
@@ -92,7 +102,11 @@ public class AQRoomHolder implements IRoomHolder {
             LOGGER.error("[获取房间成员]房间成员不存在");
             return null;
         }
-        return (List<UserGlobalInfoDto>) roomMembers.values();
+        List<UserGlobalInfoDto> userGlobalInfoDtoList = new ArrayList<>();
+        for (Map.Entry<String, UserGlobalInfoDto> entry : roomMembers.entrySet()) {
+            userGlobalInfoDtoList.add(entry.getValue());
+        }
+        return userGlobalInfoDtoList;
     }
 
     @Override

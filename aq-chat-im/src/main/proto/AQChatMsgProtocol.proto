@@ -48,6 +48,10 @@ enum MsgCommand{
   JOIN_ROOM_NOTIFY = 24;
   //离开房间通知
   LEAVE_ROOM_NOTIFY = 25;
+
+  //同步房间成员列表
+  SYNC_ROOM_MEMBERS_CMD = 26;
+  SYNC_ROOM_MEMBERS_ACK = 27;
 }
 
 //用户登录
@@ -228,4 +232,13 @@ message JoinRoomNotify{
 message LeaveRoomNotify{
   User user = 1;
   string roomId = 2;
+}
+
+//同步房间成员列表
+message SyncRoomMembersCmd{
+  string roomId = 1;
+}
+message SyncRoomMembersAck{
+  string roomId = 1;
+  repeated User members = 2;
 }

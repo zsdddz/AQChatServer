@@ -3,7 +3,7 @@ package com.howcode.aqchat.handler.impl;
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.RoomInfoDto;
-import com.howcode.aqchat.handler.ICmdHandler;
+import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IRoomHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
  * @date 2024-04-22 11:23
  */
 @Component
-public class JoinRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.JoinRoomCmd> {
+public class JoinRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.JoinRoomCmd> {
 
     @Resource
     @Lazy
@@ -40,15 +40,13 @@ public class JoinRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.JoinRoo
             return;
         }
         // 获取用户Id
-        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
+        String userId = verifyLogin(ctx);
         if (null == userId) {
             // 用户未登录
-            AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_NOT_LOGIN);
-            ctx.writeAndFlush(exceptionMsg);
             return;
         }
         // 判断用户是否已经在房间中
-        String roomId = globalChannelHolder.getRoomId(userId);
+        String roomId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.ROOM_ID)).get();
         if (null != roomId) {
             //用户已经在房间中
             AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_ALREADY_IN_ROOM);
@@ -65,6 +63,7 @@ public class JoinRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.JoinRoo
             ctx.writeAndFlush(exceptionMsg);
             return;
         }
+        ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.ROOM_ID)).set(roomId);
         //将用户加入房间
         globalChannelHolder.joinRoom(roomId, userId, ctx.channel());
         mqSendingAgent.sendJoinRoomMsg(userId, roomId);

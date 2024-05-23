@@ -35,6 +35,12 @@ public interface IRoomHolder {
     RoomInfoDto getRoomInfoById(String roomId);
 
     /**
+     * 根据房间id获取房间全部信息
+     * @param roomId 房间id
+     */
+    RoomInfoDto getRoomAllInfoById(String roomId);
+
+    /**
      * 删除房间信息
      * @param roomNo 房间号
      */

@@ -5,7 +5,7 @@ import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.enums.MsgTypeEnum;
 import com.howcode.aqchat.common.model.AliOssStsDto;
-import com.howcode.aqchat.handler.ICmdHandler;
+import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
 import com.howcode.aqchat.service.hepler.AliOssProvider;
@@ -26,7 +26,7 @@ import java.util.Date;
  * @date 2024-04-25 13:55
  */
 @Component
-public class GetStsCmdHandler implements ICmdHandler<AQChatMsgProtocol.GetStsCmd> {
+public class GetStsCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.GetStsCmd> {
     private static final Logger LOGGER = LoggerFactory.getLogger(GetStsCmdHandler.class);
     @Resource
     @Lazy
@@ -38,10 +38,9 @@ public class GetStsCmdHandler implements ICmdHandler<AQChatMsgProtocol.GetStsCmd
             return;
         }
         //获取userId判断是否登录
-        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
+        String userId = verifyLogin(ctx);
         if (null == userId) {
-            AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_NOT_LOGIN);
-            ctx.writeAndFlush(exceptionMsg);
+            LOGGER.error("GetStsCmdHandler handle error, user not login");
             return;
         }
         //获取阿里云临时凭证

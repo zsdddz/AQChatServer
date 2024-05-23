@@ -1,11 +1,15 @@
 package com.howcode.aqchat.handler.impl;
 
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
+import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.MessageRecordDto;
+import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.handler.ICmdHandler;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
 import com.howcode.aqchat.service.service.IAQMessageService;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +24,7 @@ import java.util.List;
  * @date 2024-04-27 13:26
  */
 @Component
-public class SyncChatRecordCmdHandler implements ICmdHandler<AQChatMsgProtocol.SyncChatRecordCmd> {
+public class SyncChatRecordCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.SyncChatRecordCmd> {
     private static final Logger LOGGER = LoggerFactory.getLogger(SyncChatRecordCmdHandler.class);
     @Resource
     @Lazy
@@ -32,7 +36,17 @@ public class SyncChatRecordCmdHandler implements ICmdHandler<AQChatMsgProtocol.S
             LOGGER.error("SyncChatRecordCmdHandler handle error, ctx or cmd is null");
             return;
         }
-        String roomId = cmd.getRoomId();
+        String userId = verifyLogin(ctx);
+        if (null == userId) {
+            LOGGER.error("SyncChatRecordCmdHandler handle error, user not login");
+            return;
+        }
+        String roomId = verifyJoinRoom(ctx);
+        String cmdRoomId = cmd.getRoomId();
+        if (null == roomId || !roomId.equals(cmdRoomId)) {
+            LOGGER.error("SyncChatRecordCmdHandler handle error, user not in room or Illegal operation");
+            return;
+        }
         List<MessageRecordDto> messageList = messageService.getMessageList(roomId);
         if (null == messageList || messageList.isEmpty()) {
             LOGGER.info("SyncChatRecordCmdHandler handle, messageList is empty");

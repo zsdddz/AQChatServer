@@ -5,7 +5,7 @@ import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.common.utils.IdProvider;
-import com.howcode.aqchat.handler.ICmdHandler;
+import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IRoomHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
@@ -18,8 +18,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @Author: ZhangWeinan
@@ -27,7 +25,7 @@ import java.util.Map;
  * @date 2024-04-23 23:48
  */
 @Component
-public class CreateRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.CreateRoomCmd> {
+public class CreateRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.CreateRoomCmd> {
     private static final Logger LOGGER = LoggerFactory.getLogger(CreateRoomCmdHandler.class);
 
     @Resource
@@ -44,10 +42,15 @@ public class CreateRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.Creat
             return;
         }
         //判断用户是否登录
-        String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
+        String userId = verifyLogin(ctx);
         if (null == userId) {
-            //用户未登录
-            AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_NOT_LOGIN);
+            LOGGER.error("CreateRoomCmdHandler handle error, user not login");
+            return;
+        }
+        String roomId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.ROOM_ID)).get();
+        if (null != roomId) {
+            //用户已经在房间中
+            AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_ALREADY_IN_ROOM);
             ctx.writeAndFlush(exceptionMsg);
             return;
         }
@@ -62,13 +65,14 @@ public class CreateRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.Creat
             return;
         }
         //将房间号保存至redis
-        String roomId = IdProvider.generateRoomId();
+        roomId = IdProvider.generateRoomId();
         roomHolder.saveNoAndId(roomNo, roomId);
         //将房间信息保存至redis
         RoomInfoDto roomInfoDto = new RoomInfoDto();
         roomInfoDto.setRoomId(roomId);
         roomInfoDto.setRoomNo(roomNo);
         roomInfoDto.setRoomName(roomName);
+        ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.ROOM_ID)).set(roomId);
         //将房间信息保存至redis
         roomHolder.saveRoomInfo(roomId, roomInfoDto);
         //处理房间连接
@@ -76,7 +80,7 @@ public class CreateRoomCmdHandler implements ICmdHandler<AQChatMsgProtocol.Creat
         //将创建者加入房间
         globalChannelHolder.joinRoom(roomInfoDto.getRoomId(), userId, ctx.channel());
         //将用户保存至房间成员列表
-        roomHolder.saveRoomMember(roomId,userId);
+        roomHolder.saveRoomMember(roomId, userId);
 
         LOGGER.info("用户{}创建房间{}成功", userId, roomInfoDto.getRoomId());
         //返回创建房间成功消息

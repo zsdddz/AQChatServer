@@ -131,6 +131,10 @@ public class GlobalChannelHolder {
         return roomHolder.getRoomInfoById(roomId);
     }
 
+    public RoomInfoDto getRoomAllInfo(String roomId) {
+        return roomHolder.getRoomAllInfoById(roomId);
+    }
+
     public void sendBroadcastMessage(MessageDto messageDto) {
         if (null == messageDto) {
             return;

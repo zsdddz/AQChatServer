@@ -5,7 +5,7 @@ import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.common.utils.IdProvider;
-import com.howcode.aqchat.handler.ICmdHandler;
+import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IUserHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
  * @date 2024-04-20 18:58
  */
 @Component
-public class UserLoginCmdHandler implements ICmdHandler<AQChatMsgProtocol.UserLoginCmd> {
+public class UserLoginCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.UserLoginCmd> {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserLoginCmdHandler.class);
 
     @Resource
