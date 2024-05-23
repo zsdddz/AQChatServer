@@ -35,7 +35,7 @@ public abstract class AbstractCmdBaseHandler<T extends GeneratedMessageV3> imple
     public String verifyJoinRoom(ChannelHandlerContext ctx) {
         String roomId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.ROOM_ID)).get();
         if (null == roomId) {
-            //用户已经在房间中
+            //用户不在房间中
             AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.USER_NOT_IN_ROOM);
             ctx.writeAndFlush(exceptionMsg);
             return null;
