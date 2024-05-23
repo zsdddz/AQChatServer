@@ -8,6 +8,7 @@ import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,17 +45,8 @@ public class MessageConstructor {
         builder.setUserId(userGlobalInfoDto.getUserId());
         builder.setUserName(userGlobalInfoDto.getUserName());
         if (null != roomInfo) {
-            List<UserGlobalInfoDto> roomMembers = roomInfo.getRoomMembers();
-            if (null != roomMembers && !roomMembers.isEmpty()) {
-                roomMembers.forEach(user -> {
-                    AQChatMsgProtocol.User roomUser = AQChatMsgProtocol.User.newBuilder()
-                            .setUserId(user.getUserId())
-                            .setUserName(user.getUserName())
-                            .setUserAvatar(user.getUserAvatar())
-                            .build();
-                    room.addMembers(roomUser);
-                });
-            }
+            List<AQChatMsgProtocol.User> users = buildUsers(roomInfo);
+            users.forEach(room::addMembers);
             room.setRoomId(roomInfo.getRoomId())
                     .setRoomNo(roomInfo.getRoomNo())
                     .setRoomName(roomInfo.getRoomName());
@@ -86,5 +78,31 @@ public class MessageConstructor {
                     .build());
         });
         return builder.build();
+    }
+
+    public static AQChatMsgProtocol.SyncRoomMembersAck buildSyncRoomMembersAck(RoomInfoDto roomInfoDto) {
+        AQChatMsgProtocol.SyncRoomMembersAck.Builder builder = AQChatMsgProtocol.SyncRoomMembersAck.newBuilder();
+        if (null != roomInfoDto) {
+            List<AQChatMsgProtocol.User> users = buildUsers(roomInfoDto);
+            users.forEach(builder::addMembers);
+            builder.setRoomId(roomInfoDto.getRoomId());
+        }
+        return builder.build();
+    }
+
+    private static List<AQChatMsgProtocol.User> buildUsers(RoomInfoDto roomInfoDto) {
+        List<UserGlobalInfoDto> roomMembers = roomInfoDto.getRoomMembers();
+        List<AQChatMsgProtocol.User> userList = new ArrayList<>();
+        if (null != roomMembers && !roomMembers.isEmpty()) {
+            roomMembers.forEach(user -> {
+                AQChatMsgProtocol.User roomUser = AQChatMsgProtocol.User.newBuilder()
+                        .setUserId(user.getUserId())
+                        .setUserName(user.getUserName())
+                        .setUserAvatar(user.getUserAvatar())
+                        .build();
+                userList.add(roomUser);
+            });
+        }
+        return userList;
     }
 }
