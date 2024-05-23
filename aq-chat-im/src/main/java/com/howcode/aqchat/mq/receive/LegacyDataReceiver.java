@@ -4,7 +4,8 @@ import com.howcode.aqchat.common.constant.AQChatMQConstant;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.framework.mq.starter.config.RocketMQConfig;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
-import com.howcode.aqchat.holder.impl.AQUserHolder;
+import com.howcode.aqchat.holder.IRoomHolder;
+import com.howcode.aqchat.holder.IUserHolder;
 import jakarta.annotation.Resource;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -30,7 +31,9 @@ public class LegacyDataReceiver implements InitializingBean {
     @Resource
     private GlobalChannelHolder globalChannelHolder;
     @Resource
-    private AQUserHolder aqUserHolder;
+    private IUserHolder userHolder;
+    @Resource
+    private IRoomHolder roomHolder;
 
     /**
      * 初始化消费者
@@ -50,13 +53,13 @@ public class LegacyDataReceiver implements InitializingBean {
                     // 广播用户退出消息
                     if (!userId.isEmpty()) {
                         try {
-                            UserGlobalInfoDto userInfo = aqUserHolder.getUserInfo(userId);
+                            UserGlobalInfoDto userInfo = userHolder.getUserInfo(userId);
                             if (userInfo == null){
                                 //清理遗留信息
                                 LOGGER.info("用户离线时间超过系统限制，开始清理遗留信息");
                                 String roomId = globalChannelHolder.getRoomId(userId);
+                                roomHolder.removeRoomMember(roomId,userId);
                                 globalChannelHolder.removeByBroadcaster(userId);
-                                LOGGER.info(roomId);
                                 globalChannelHolder.dissolveTheRoomByLogout(roomId);
                             }
                         }catch (Exception e){

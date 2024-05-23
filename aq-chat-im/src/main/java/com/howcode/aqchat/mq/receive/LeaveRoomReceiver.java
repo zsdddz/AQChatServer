@@ -5,6 +5,7 @@ import com.howcode.aqchat.common.constant.AQChatMQConstant;
 import com.howcode.aqchat.common.model.RoomNotifyDto;
 import com.howcode.aqchat.framework.mq.starter.config.RocketMQConfig;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
+import com.howcode.aqchat.holder.IRoomHolder;
 import jakarta.annotation.Resource;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -29,6 +30,8 @@ public class LeaveRoomReceiver implements InitializingBean {
     private RocketMQConfig rocketMQConfig;
     @Resource
     private GlobalChannelHolder globalChannelHolder;
+    @Resource
+    private IRoomHolder roomHolder;
 
     /**
      * 初始化消费者
@@ -49,6 +52,7 @@ public class LeaveRoomReceiver implements InitializingBean {
                     if (!msgStr.isEmpty()) {
                         try {
                             RoomNotifyDto roomNotifyDto = JSONObject.parseObject(msgStr, RoomNotifyDto.class);
+                            roomHolder.removeRoomMember(roomNotifyDto.getRoomId(),roomNotifyDto.getUserId());
                             globalChannelHolder.notifyLeaveRoom(roomNotifyDto);
                         }catch (Exception e){
                             LOGGER.error("离开房间MQ失败",e);

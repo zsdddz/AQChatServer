@@ -1,10 +1,13 @@
 package com.howcode.aqchat.mq.receive;
 
 import com.alibaba.fastjson.JSONObject;
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.constant.AQChatMQConstant;
 import com.howcode.aqchat.common.model.MessageDto;
 import com.howcode.aqchat.framework.mq.starter.config.RocketMQConfig;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
+import com.howcode.aqchat.holder.IRoomHolder;
+import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -30,7 +33,8 @@ public class LogoutMessageReceiver implements InitializingBean {
     private RocketMQConfig rocketMQConfig;
     @Resource
     private GlobalChannelHolder globalChannelHolder;
-
+    @Resource
+    private IRoomHolder roomHolder;
     /**
      * 初始化消费者
      */
@@ -49,6 +53,10 @@ public class LogoutMessageReceiver implements InitializingBean {
                     // 广播用户退出消息
                     try {
                         if (!userId.isEmpty()) {
+                            String roomId = globalChannelHolder.getRoomId(userId);
+                            if (null != roomId){
+                                roomHolder.removeRoomMember(roomId,userId);
+                            }
                             globalChannelHolder.notifyLogout(userId);
                         }
                     }catch (Exception e){

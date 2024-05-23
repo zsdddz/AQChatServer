@@ -81,17 +81,18 @@ public class AQRoomHolder implements IRoomHolder {
     public void saveRoomMember(String roomId, String userId) {
         //判断map是否存在
         Map<String, UserGlobalInfoDto> roomMembers = redisCacheHelper.getCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_MEMBER_PREFIX);
-        if (null == roomMembers) {
+        UserGlobalInfoDto userInfo = redisCacheHelper.getCacheObject(AQRedisKeyPrefix.AQ_USER_INFO_PREFIX + userId, UserGlobalInfoDto.class);
+        if (null == roomMembers && null != userInfo) {
             //不存在则创建
             roomMembers = new HashMap<>();
-            UserGlobalInfoDto userInfo = redisCacheHelper.getCacheObject(AQRedisKeyPrefix.AQ_USER_INFO_PREFIX + userId, UserGlobalInfoDto.class);
             roomMembers.put(userId, userInfo);
             redisCacheHelper.setCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_MEMBER_PREFIX, roomMembers);
-        } else {
+        } else if (null != userInfo) {
             //存在则添加
-            UserGlobalInfoDto userInfo = redisCacheHelper.getCacheObject(AQRedisKeyPrefix.AQ_USER_INFO_PREFIX + userId, UserGlobalInfoDto.class);
             roomMembers.put(userId, userInfo);
             redisCacheHelper.setCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_MEMBER_PREFIX, roomMembers);
+        }else {
+            LOGGER.error("[保存房间成员]用户信息不存在");
         }
     }
 

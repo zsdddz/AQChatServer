@@ -5,6 +5,7 @@ import com.howcode.aqchat.common.constant.AQChatMQConstant;
 import com.howcode.aqchat.common.model.RoomNotifyDto;
 import com.howcode.aqchat.framework.mq.starter.config.RocketMQConfig;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
+import com.howcode.aqchat.holder.IRoomHolder;
 import jakarta.annotation.Resource;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -30,7 +31,8 @@ public class JoinRoomReceiver implements InitializingBean {
     private RocketMQConfig rocketMQConfig;
     @Resource
     private GlobalChannelHolder globalChannelHolder;
-
+    @Resource
+    private IRoomHolder roomHolder;
     /**
      * 初始化消费者
      */
@@ -49,6 +51,8 @@ public class JoinRoomReceiver implements InitializingBean {
                     // 广播用户加入房间
                     if (!msgStr.isEmpty()){
                         RoomNotifyDto roomNotifyDto = JSONObject.parseObject(msgStr, RoomNotifyDto.class);
+                        //加入成员列表
+                        roomHolder.saveRoomMember(roomNotifyDto.getRoomId(),roomNotifyDto.getUserId());
                         globalChannelHolder.notifyJoinRoom(roomNotifyDto);
                     }
 
