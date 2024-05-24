@@ -5,6 +5,7 @@ import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.MessageDto;
 import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
+import com.howcode.aqchat.holder.IMessageHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
 import com.howcode.aqchat.mq.MqSendingAgent;
@@ -33,6 +34,9 @@ public class SendMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.
     @Resource
     @Lazy
     private MqSendingAgent mqSendingAgent;
+    @Resource
+    @Lazy
+    private IMessageHolder messageHolder;
 
     @Override
     public void handle(ChannelHandlerContext ctx, AQChatMsgProtocol.SendMsgCmd cmd) {
@@ -69,6 +73,13 @@ public class SendMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.
             ctx.writeAndFlush(exceptionMsg);
             return;
         }
+        //判断消息是否已发送
+        if (messageHolder.isExistMessageId(msgId)) {
+            LOGGER.info("当前消息已发送: msgId = {}", msgId);
+            AQChatMsgProtocol.SendMsgAck msgAck = MessageConstructor.buildSendMsgAck(roomId, userId, msgId,cmd.getExt());
+            ctx.writeAndFlush(msgAck);
+            return;
+        }
         // 发送消息
         MessageDto messageDto = new MessageDto();
         messageDto.setMessageId(msgId);
@@ -80,15 +91,9 @@ public class SendMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.
         messageDto.setCreateTime(new Date());
         mqSendingAgent.sendMessageToRoom(messageDto);
         mqSendingAgent.storeMessages(messageDto);
-
+        messageHolder.putMessageId(msgId);
         //返回消息发送成功
-        AQChatMsgProtocol.SendMsgAck result = AQChatMsgProtocol.SendMsgAck.newBuilder()
-                .setRoomId(roomId)
-                .setUserId(userId)
-                .setStatus(true)
-                .setMsgId(msgId)
-                .setExt(cmd.getExt())
-                .build();
+        AQChatMsgProtocol.SendMsgAck result = MessageConstructor.buildSendMsgAck(roomId, userId, msgId,cmd.getExt());
         ctx.writeAndFlush(result);
     }
 }

@@ -105,4 +105,14 @@ public class MessageConstructor {
         }
         return userList;
     }
+
+    public static AQChatMsgProtocol.SendMsgAck buildSendMsgAck(String roomId, String userId, long msgId, String ext) {
+return AQChatMsgProtocol.SendMsgAck.newBuilder()
+                .setRoomId(roomId)
+                .setUserId(userId)
+                .setStatus(true)
+                .setMsgId(msgId)
+                .setExt(ext)
+                .build();
+    }
 }
