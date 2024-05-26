@@ -1,6 +1,5 @@
 package com.howcode.aqchat.handler.impl;
 
-import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.MessageDto;
 import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
@@ -10,7 +9,6 @@ import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
 import com.howcode.aqchat.mq.MqSendingAgent;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,9 +72,9 @@ public class SendMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.
             return;
         }
         //判断消息是否已发送
-        if (messageHolder.isExistMessageId(msgId)) {
+        if (messageHolder.isExistMessageId(roomId, msgId)) {
             LOGGER.info("当前消息已发送: msgId = {}", msgId);
-            AQChatMsgProtocol.SendMsgAck msgAck = MessageConstructor.buildSendMsgAck(roomId, userId, msgId,cmd.getExt());
+            AQChatMsgProtocol.SendMsgAck msgAck = MessageConstructor.buildSendMsgAck(roomId, userId, msgId, cmd.getExt());
             ctx.writeAndFlush(msgAck);
             return;
         }
@@ -91,9 +89,9 @@ public class SendMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.
         messageDto.setCreateTime(new Date());
         mqSendingAgent.sendMessageToRoom(messageDto);
         mqSendingAgent.storeMessages(messageDto);
-        messageHolder.putMessageId(msgId);
+        messageHolder.putMessageId(roomId, msgId);
         //返回消息发送成功
-        AQChatMsgProtocol.SendMsgAck result = MessageConstructor.buildSendMsgAck(roomId, userId, msgId,cmd.getExt());
+        AQChatMsgProtocol.SendMsgAck result = MessageConstructor.buildSendMsgAck(roomId, userId, msgId, cmd.getExt());
         ctx.writeAndFlush(result);
     }
 }

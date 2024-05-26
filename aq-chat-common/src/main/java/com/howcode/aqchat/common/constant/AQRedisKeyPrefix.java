@@ -7,24 +7,20 @@ package com.howcode.aqchat.common.constant;
  */
 public interface AQRedisKeyPrefix {
 
-    /**
-     * 系统名称
-     */
-    String AQ_SYSTEM_NAME = "AQChat";
-
+    String SYS_NAME = "AQChat";
     /**
      * 用户登录信息前缀
      */
-    String AQ_USER_INFO_PREFIX = AQ_SYSTEM_NAME + ":userInfo:";
+    String AQ_USER_INFO_PREFIX = SYS_NAME + ":userInfo:";
 
     /**
      * 房间号缓存前缀
      */
-    String AQ_ROOM_NO_PREFIX = AQ_SYSTEM_NAME + ":room:roomNo:";
+    String AQ_ROOM_NO_PREFIX = SYS_NAME + ":room:roomNo:";
     /**
      * 房间缓存前缀
      */
-    String AQ_ROOM_PREFIX = AQ_SYSTEM_NAME + ":room:room:";
+    String AQ_ROOM_PREFIX = SYS_NAME + ":room:room:";
     /**
      * 房间信息缓存前缀
      */
@@ -34,12 +30,11 @@ public interface AQRedisKeyPrefix {
      */
     String AQ_ROOM_MEMBER_PREFIX = "member";
     /**
+     * 房间消息缓存前缀
+     */
+    String AQ_ROOM_MESSAGE_PREFIX = "message";
+    /**
      * 阿里云临时凭证缓存
      */
-    String ALI_OSS_STS = AQ_SYSTEM_NAME + ":aliOssSts";
-
-    /**
-     * 消息id缓存
-     */
-    String AQ_MESSAGE_ID = AQ_SYSTEM_NAME + ":messageId";
+    String ALI_OSS_STS = SYS_NAME + ":aliOssSts";
 }

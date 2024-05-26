@@ -38,11 +38,6 @@ public interface AQBusinessConstant {
      */
     long USER_INFO_CACHE_TIME = 60 * 60 * 24;
     /**
-     * 信息id缓存时长 单位秒 24小时
-     */
-    long MESSAGE_ID_CACHE_TIME = 60 * 60 * 24;
-
-    /**
      * 用户离线后缓存时间  9分钟
      */
     long USER_OFFLINE_CACHE_TIME = 60 * 9;

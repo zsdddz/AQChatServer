@@ -1,13 +1,13 @@
 package com.howcode.aqchat.holder.impl;
 
-import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.constant.AQRedisKeyPrefix;
 import com.howcode.aqchat.framework.redis.starter.RedisCacheHelper;
 import com.howcode.aqchat.holder.IMessageHolder;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author: ZhangWeinan
@@ -21,15 +21,23 @@ public class AQMessageHolder implements IMessageHolder {
     private RedisCacheHelper redisCacheHelper;
 
     @Override
-    public void putMessageId(long msgId) {
-        redisCacheHelper.setCacheObject(AQRedisKeyPrefix.AQ_MESSAGE_ID + msgId,
-                0,
-                AQBusinessConstant.MESSAGE_ID_CACHE_TIME,
-                TimeUnit.SECONDS);
+    public void putMessageId(String roomId, long msgId) {
+        List<String> messageIds = redisCacheHelper.getCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId,AQRedisKeyPrefix.AQ_ROOM_MESSAGE_PREFIX);
+        if (null == messageIds) {
+            messageIds = new ArrayList<>();
+            messageIds.add(msgId + "");
+        } else {
+            messageIds.add(msgId + "");
+        }
+        redisCacheHelper.setCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_MESSAGE_PREFIX, messageIds);
     }
 
     @Override
-    public boolean isExistMessageId(long msgId) {
-        return null != redisCacheHelper.getCacheObject(AQRedisKeyPrefix.AQ_MESSAGE_ID + msgId, Integer.class);
+    public boolean isExistMessageId(String roomId, long msgId) {
+        List<String> messageIds = redisCacheHelper.getCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId,AQRedisKeyPrefix.AQ_ROOM_MESSAGE_PREFIX);
+        if (null == messageIds) {
+            return false;
+        }
+        return messageIds.contains(msgId + "");
     }
 }

@@ -8,8 +8,8 @@ package com.howcode.aqchat.holder;
 public interface IMessageHolder {
 
     //存储消息id
-    void putMessageId(long msgId);
+    void putMessageId(String roomId, long msgId);
 
     //判断消息id是否存在
-    boolean isExistMessageId(long msgId);
+    boolean isExistMessageId(String roomId, long msgId);
 }
