@@ -56,8 +56,6 @@ public class UserLogoutCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtoc
         mqSendingAgent.sendLeaveRoomMsg(userId,globalChannelHolder.getRoomId(userId));
         //mq发送用户退出消息
         mqSendingAgent.sendLogoutMessage(userId);
-        //退出
-        globalChannelHolder.logout(userId);
         LOGGER.info("用户{}退出", userId);
         ctx.writeAndFlush(MessageConstructor.buildUserLogoutAck(userId));
     }
