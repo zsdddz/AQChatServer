@@ -52,6 +52,17 @@ enum MsgCommand{
   //同步房间成员列表
   SYNC_ROOM_MEMBERS_CMD = 26;
   SYNC_ROOM_MEMBERS_ACK = 27;
+
+  //撤回消息
+  RECALL_MSG_CMD = 28;
+  RECALL_MSG_ACK = 29;
+
+  //撤回消息通知
+  RECALL_MSG_NOTIFY = 30;
+
+  //艾特消息通知
+  AT_MSG_NOTIFY = 31;
+
 }
 
 //用户登录
@@ -241,4 +252,32 @@ message SyncRoomMembersCmd{
 message SyncRoomMembersAck{
   string roomId = 1;
   repeated User members = 2;
+}
+
+//撤回消息
+message RecallMsgCmd{
+  string roomId = 1;
+  int64 msgId = 2;
+}
+
+message RecallMsgAck{
+  string roomId = 1;
+  int64 msgId = 2;
+  string userId = 3;
+  bool status = 4;
+}
+
+//撤回消息通知
+message RecallMsgNotify{
+  string roomId = 1;
+  int64 msgId = 2;
+  string userId = 3;
+}
+
+//艾特消息通知
+message AtMsgNotify{
+  string roomId = 1;
+  int64 msgId = 2;
+  string userId = 3; //发送人id
+  string atUserId = 4; //被艾特人id
 }
