@@ -20,7 +20,7 @@ public interface AQRedisKeyPrefix {
     /**
      * 房间缓存前缀
      */
-    String AQ_ROOM_PREFIX = SYS_NAME + ":room:room:";
+    String AQ_ROOM_PREFIX = SYS_NAME + ":room:roomData:";
     /**
      * 房间信息缓存前缀
      */
