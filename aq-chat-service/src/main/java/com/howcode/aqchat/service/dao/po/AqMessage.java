@@ -27,6 +27,8 @@ public class AqMessage {
     private String messageContent;
     @TableField("message_ext")
     private String messageExt;
+    @TableField("status")
+    private Integer status;
     @TableField("create_time")
     private Date createTime;
 }

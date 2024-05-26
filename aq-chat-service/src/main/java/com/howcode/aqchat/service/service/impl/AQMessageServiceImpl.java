@@ -2,6 +2,7 @@ package com.howcode.aqchat.service.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
+import com.howcode.aqchat.common.enums.MessageStatusEnum;
 import com.howcode.aqchat.common.model.MessageDto;
 import com.howcode.aqchat.common.model.MessageRecordDto;
 import com.howcode.aqchat.service.dao.mapper.IAQMessageMapper;
@@ -51,6 +52,7 @@ public class AQMessageServiceImpl implements IAQMessageService {
         System.out.println(new Date(joinRoomTime));
         LambdaQueryWrapper<AqMessage> query = new LambdaQueryWrapper<AqMessage>().eq(AqMessage::getRoomId, roomId)
                 .ge(AqMessage::getCreateTime,new Date(joinRoomTime))
+                .eq(AqMessage::getStatus, MessageStatusEnum.SHOW.getCode())
                 .orderByDesc(AqMessage::getCreateTime)
                 .last(AQBusinessConstant.LIMIT);
         List<AqMessage> aqMessages = messageMapper.selectList(query);
