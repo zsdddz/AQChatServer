@@ -59,6 +59,14 @@ public class AQMessageServiceImpl implements IAQMessageService {
         return convertMessageList(aqMessages);
     }
 
+    @Override
+    public void updateMessageVisible(Long msgId) {
+        AqMessage aqMessage = new AqMessage();
+        aqMessage.setMessageId(msgId);
+        aqMessage.setStatus(MessageStatusEnum.HIDE.getCode());
+        messageMapper.updateById(aqMessage);
+    }
+
     private List<MessageRecordDto> convertMessageList(List<AqMessage> aqMessages) {
         //格式化时间
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

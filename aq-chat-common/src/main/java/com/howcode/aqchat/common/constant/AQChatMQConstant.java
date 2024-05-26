@@ -33,8 +33,11 @@ public class AQChatMQConstant {
          * 用户退出的消费者组
          */
         String USER_LOGOUT_CONSUMER_GROUP = "user_logout_consumer_group";
+
+
         String JOIN_ROOM_CONSUMER_GROUP = "join_room_consumer_group";
         String LEAVE_ROOM_CONSUMER_GROUP = "leave_room_consumer_group";
+        String RECALL_MESSAGE_CONSUMER_GROUP = "recall_message_consumer_group";
     }
     /**
      * MQ的topic
@@ -69,5 +72,9 @@ public class AQChatMQConstant {
          * 加入房间的topic
          */
         String JOIN_ROOM_TOPIC = "join_room_topic";
+        /**
+         * 撤回消息的topic
+         */
+        String RECALL_MESSAGE_TOPIC = "recall_message_topic";
     }
 }

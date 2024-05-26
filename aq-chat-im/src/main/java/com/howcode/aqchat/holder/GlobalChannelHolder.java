@@ -1,11 +1,9 @@
 package com.howcode.aqchat.holder;
 
-import com.howcode.aqchat.common.model.MessageDto;
-import com.howcode.aqchat.common.model.RoomInfoDto;
-import com.howcode.aqchat.common.model.RoomNotifyDto;
-import com.howcode.aqchat.common.model.UserGlobalInfoDto;
+import com.howcode.aqchat.common.model.*;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageBroadcaster;
+import com.howcode.aqchat.message.MessageConstructor;
 import io.netty.channel.Channel;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
@@ -232,5 +230,13 @@ public class GlobalChannelHolder {
 
     public void removeByBroadcaster(String userId) {
         messageBroadcaster.remove(userId);
+    }
+
+    public void notifyRecallMessage(RecallMessageDto recallMessageDto) {
+        if (null == recallMessageDto) {
+            return;
+        }
+        AQChatMsgProtocol.RecallMsgNotify recallMsgNotify = MessageConstructor.buildRecallMsgNotify(recallMessageDto);
+        messageBroadcaster.broadcast(recallMessageDto.getRoomId(), recallMsgNotify);
     }
 }

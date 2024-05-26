@@ -2,6 +2,7 @@ package com.howcode.aqchat.mq;
 
 import com.alibaba.fastjson.JSONObject;
 import com.howcode.aqchat.common.constant.AQChatMQConstant;
+import com.howcode.aqchat.common.model.RecallMessageDto;
 import com.howcode.aqchat.common.model.RoomNotifyDto;
 import com.howcode.aqchat.common.model.MessageDto;
 import jakarta.annotation.Resource;
@@ -121,6 +122,21 @@ public class MqSendingAgent {
             LOGGER.info("发送用户加入房间消息成功");
         } catch (Exception e) {
             LOGGER.error("发送用户加入房间消息失败", e);
+        }
+    }
+
+    public void sendRecallMessage(String roomId, Long msgId, String userId) {
+        if (null == roomId || null == msgId) {
+            LOGGER.error("房间id或者消息id为空");
+            return;
+        }
+        Message message = new Message();
+        message.setTopic(AQChatMQConstant.MQTopic.RECALL_MESSAGE_TOPIC);
+        message.setBody(JSONObject.toJSONString(new RecallMessageDto(roomId, msgId, userId)).getBytes());
+        try {
+            mqProducer.send(message);
+        } catch (Exception e) {
+            LOGGER.error("发送撤回消息失败", e);
         }
     }
 }

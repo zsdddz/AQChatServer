@@ -1,10 +1,7 @@
 package com.howcode.aqchat.message;
 
 import com.howcode.aqchat.common.enums.AQChatEnum;
-import com.howcode.aqchat.common.model.AliOssStsDto;
-import com.howcode.aqchat.common.model.MessageRecordDto;
-import com.howcode.aqchat.common.model.RoomInfoDto;
-import com.howcode.aqchat.common.model.UserGlobalInfoDto;
+import com.howcode.aqchat.common.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -107,12 +104,29 @@ public class MessageConstructor {
     }
 
     public static AQChatMsgProtocol.SendMsgAck buildSendMsgAck(String roomId, String userId, long msgId, String ext) {
-return AQChatMsgProtocol.SendMsgAck.newBuilder()
+        return AQChatMsgProtocol.SendMsgAck.newBuilder()
                 .setRoomId(roomId)
                 .setUserId(userId)
                 .setStatus(true)
                 .setMsgId(msgId)
                 .setExt(ext)
+                .build();
+    }
+
+    public static AQChatMsgProtocol.RecallMsgAck buildRecallMsgAck(Long msgId, String roomId, String userId) {
+        return AQChatMsgProtocol.RecallMsgAck.newBuilder()
+                .setMsgId(msgId)
+                .setRoomId(roomId)
+                .setUserId(userId)
+                .setStatus(true)
+                .build();
+    }
+
+    public static AQChatMsgProtocol.RecallMsgNotify buildRecallMsgNotify(RecallMessageDto recallMessageDto) {
+        return AQChatMsgProtocol.RecallMsgNotify.newBuilder()
+                .setUserId(recallMessageDto.getUserId())
+                .setRoomId(recallMessageDto.getRoomId())
+                .setMsgId(recallMessageDto.getMsgId())
                 .build();
     }
 }

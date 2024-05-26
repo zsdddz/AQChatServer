@@ -27,4 +27,5 @@ public interface IAQMessageService {
      */
     List<MessageRecordDto> getMessageList(String roomId, Long joinRoomTime);
 
+    void updateMessageVisible( Long msgId);
 }
