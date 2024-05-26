@@ -6,7 +6,7 @@ import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
-import com.howcode.aqchat.holder.impl.AQUserHolder;
+import com.howcode.aqchat.holder.IUserHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
 import com.howcode.aqchat.mq.MqSendingAgent;
@@ -30,7 +30,7 @@ public class RecoverUserCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProto
     private static final Logger LOGGER = LoggerFactory.getLogger(RecoverUserCmdHandler.class);
     @Resource
     @Lazy
-    private AQUserHolder aqUserHolder;
+    private IUserHolder aqUserHolder;
     @Resource
     @Lazy
     private GlobalChannelHolder globalChannelHolder;

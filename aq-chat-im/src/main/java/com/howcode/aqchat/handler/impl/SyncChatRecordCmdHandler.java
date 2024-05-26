@@ -1,17 +1,13 @@
 package com.howcode.aqchat.handler.impl;
 
-import com.howcode.aqchat.common.constant.AQBusinessConstant;
-import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.MessageRecordDto;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
-import com.howcode.aqchat.handler.ICmdHandler;
 import com.howcode.aqchat.holder.IUserHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
 import com.howcode.aqchat.service.service.IAQMessageService;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

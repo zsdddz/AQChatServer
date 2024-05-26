@@ -3,7 +3,6 @@ package com.howcode.aqchat.handler.impl;
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
-import com.howcode.aqchat.handler.ICmdHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
