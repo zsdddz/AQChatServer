@@ -52,10 +52,52 @@ AQChat 一个极速、便捷的匿名在线即时聊天室。
 ```shell
 git clone https://gitee.com/howcode/aq-chat-server.git
 ```
-修改配置文件`application.yml`中的数据库、Redis、RocketMQ、阿里云OSS等配置
+修改配置文件`application.yml`中的数据库、Redis、RocketMQ、阿里云OSS等配置信息
 
-2. 打包项目
+
+2. 项目运行
+启动类位于 `aq-chat-im`模块下 
+
+com.howcode.aqchat.AQChatApplication类
+
+
+3. 打包项目
 进入`aq-chat-im`模块，执行以下命令
+>注意:打包需要docker环境，打包完成后会生成对应的jar包以及docker镜像
+
 ```shell
 mvn clean package -Dmaven.test.skip=true
 ```
+运行后日志位于容器下`/tmp/logs`目录下
+
+## 更新日志
+
+### 2024.05.26
+
+- ✨ 消息撤回功能
+
+### 2024.05.24
+
+- ✅ 失败消息重发功能
+- ✨ 房间成员离线通知
+
+### 2024.05.23
+
+- ✅ 房间成员列表
+- ✨ 刷新页面仅同步加入房间后的消息
+
+### 2024.05.18
+
+- ✨ 成员退出房间通知
+
+### 2024.05.11
+
+- ✅ 刷新页面恢复用户登录
+- ✅ 刷新页面同步聊天信息
+- ✨ 退出登录
+
+### 更前
+- ✅ 发送消息
+- ✨ 成员加入房间通知
+- ✅ 房间号输入加入房间
+- ✅ 创建房间
