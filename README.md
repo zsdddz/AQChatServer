@@ -60,6 +60,7 @@ git clone https://gitee.com/howcode/aq-chat-server.git
 
 com.howcode.aqchat.AQChatApplication类
 
+启动成功默认连接路径为 `IP:9090`
 
 3. 打包项目
 进入`aq-chat-im`模块，执行以下命令
