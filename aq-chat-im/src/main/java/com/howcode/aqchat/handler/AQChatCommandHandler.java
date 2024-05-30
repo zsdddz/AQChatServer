@@ -2,9 +2,12 @@ package com.howcode.aqchat.handler;
 
 import com.google.protobuf.GeneratedMessageV3;
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
+import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IUserHolder;
+import com.howcode.aqchat.message.AQChatMsgProtocol;
+import com.howcode.aqchat.message.MessageConstructor;
 import com.howcode.aqchat.mq.MqSendingAgent;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -67,7 +70,14 @@ public class AQChatCommandHandler extends SimpleChannelInboundHandler<Object> {
         if (msg instanceof GeneratedMessageV3){
             ICmdHandler<? extends GeneratedMessageV3> commandHandler = commandHandlerFactory.getCommandHandler(msg.getClass());
             if (commandHandler != null){
-                commandHandler.handle(channelHandlerContext, castToMessage(msg));
+                try {
+                    commandHandler.handle(channelHandlerContext, castToMessage(msg));
+                }catch (Exception e){
+                    LOGGER.error("处理消息异常",e);
+                    AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.UNKNOW_ERROR);
+                    channelHandlerContext.writeAndFlush(exceptionMsg);
+                }
+
             }
         }
     }
