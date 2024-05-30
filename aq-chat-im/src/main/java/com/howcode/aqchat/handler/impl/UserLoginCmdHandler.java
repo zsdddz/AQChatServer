@@ -58,8 +58,6 @@ public class UserLoginCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtoco
         String userName = cmd.getUserName();
         String userAvatar = cmd.getUserAvatar();
         userId = IdProvider.generateUserId();
-        //添加userId到channel
-        ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).set(userId);
 
         //将登录信息保存至redis
         UserGlobalInfoDto userGlobalInfoDto = new UserGlobalInfoDto();
@@ -73,7 +71,8 @@ public class UserLoginCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtoco
 
         //添加用户channel
         globalChannelHolder.put(userId, (NioSocketChannel) ctx.channel());
-
+        //添加userId到channel
+        ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).set(userId);
         LOGGER.info("UserLoginCmdHandler handle, user login success, userId:{}", userId);
         AQChatMsgProtocol.UserLoginAck.Builder builder = AQChatMsgProtocol.UserLoginAck.newBuilder();
         AQChatMsgProtocol.UserLoginAck userLoginAck = builder.setUserId(userId)
