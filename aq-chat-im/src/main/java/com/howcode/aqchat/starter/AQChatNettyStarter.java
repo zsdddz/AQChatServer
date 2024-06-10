@@ -3,6 +3,7 @@ package com.howcode.aqchat.starter;
 import com.howcode.aqchat.codec.MessageDecoder;
 import com.howcode.aqchat.codec.MessageEncoder;
 import com.howcode.aqchat.common.config.AQChatConfig;
+import com.howcode.aqchat.common.utils.ThreadPoolUtil;
 import com.howcode.aqchat.handler.AQChatCommandHandler;
 import com.howcode.aqchat.handler.HearBeatHandler;
 import io.netty.bootstrap.ServerBootstrap;
@@ -43,6 +44,8 @@ public class AQChatNettyStarter implements InitializingBean {
     private AQChatCommandHandler aqChatCommandHandler;
     @Resource
     private HearBeatHandler hearBeatHandler;
+    @Resource
+    private ThreadPoolUtil threadPoolUtil;
 
     private void startImApplication() throws InterruptedException {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup(aqChatConfig.getBossThreadSize());
@@ -65,10 +68,12 @@ public class AQChatNettyStarter implements InitializingBean {
                     }
                 });
         Runtime.getRuntime().addShutdownHook(new Thread(()->{
-            LOGGER.info("JVM关闭钩子触发，开始关闭Netty服务...");
+            LOGGER.info("JVM关闭钩子触发，开始关闭Netty服务以及线程池...");
             bossGroup.shutdownGracefully();
             workGroup.shutdownGracefully();
             LOGGER.info("Netty服务关闭完成");
+            threadPoolUtil.shutdown();
+            LOGGER.info("线程池关闭完成");
         }));
 
         ChannelFuture channelFuture = bootstrap.bind(aqChatConfig.getWebSocketPort()).sync();

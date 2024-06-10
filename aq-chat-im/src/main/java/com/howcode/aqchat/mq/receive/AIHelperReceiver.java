@@ -11,6 +11,7 @@ import com.howcode.aqchat.common.enums.MsgTypeEnum;
 import com.howcode.aqchat.common.model.AIMessageDto;
 import com.howcode.aqchat.common.model.MessageDto;
 import com.howcode.aqchat.common.model.RoomNotifyDto;
+import com.howcode.aqchat.common.utils.ThreadPoolUtil;
 import com.howcode.aqchat.framework.mq.starter.config.RocketMQConfig;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IRoomHolder;
@@ -50,6 +51,8 @@ public class AIHelperReceiver implements InitializingBean {
     private IAiService aiService;
     @Resource
     private IAQMessageService messageService;
+    @Resource
+    private ThreadPoolUtil threadPoolUtil;
 
     /**
      * 初始化消费者
@@ -66,33 +69,36 @@ public class AIHelperReceiver implements InitializingBean {
                 for (MessageExt messageExt : messageExtList) {
                     String msgStr = new String(messageExt.getBody());
                     LOGGER.info("mq收到消息[AI助手]:{}", msgStr);
-                    // AI助手处理消息
-                    if (!msgStr.isEmpty()) {
-                        MessageDto messageDto = JSONObject.parseObject(msgStr, MessageDto.class);
-                        StringBuilder fullContent = new StringBuilder();
-                        try {
-                            aiService.streamCallWithMessage(messageDto.getMessageContent(), aiResult -> {
+                    threadPoolUtil.submitTask(()->{
+                        // AI助手处理消息
+                        if (!msgStr.isEmpty()) {
+                            MessageDto messageDto = JSONObject.parseObject(msgStr, MessageDto.class);
+                            StringBuilder fullContent = new StringBuilder();
+                            try {
+                                aiService.streamCallWithMessage(messageDto.getMessageContent(), aiResult -> {
+                                    AIMessageDto aiMessageDto = new AIMessageDto();
+                                    aiMessageDto.setMessageId(messageDto.getMessageId());
+                                    aiMessageDto.setRoomId(messageDto.getRoomId());
+                                    aiMessageDto.setContent(aiResult.getContent());
+                                    aiMessageDto.setStatus(aiResult.getStatus());
+                                    globalChannelHolder.sendBroadcastAIMessage(aiMessageDto);
+                                    fullContent.append(aiResult.getContent());
+                                });
+                            } catch (Exception e) {
+                                LOGGER.error("AI助手处理消息失败", e);
+                                //发送失败消息
                                 AIMessageDto aiMessageDto = new AIMessageDto();
                                 aiMessageDto.setMessageId(messageDto.getMessageId());
                                 aiMessageDto.setRoomId(messageDto.getRoomId());
-                                aiMessageDto.setContent(aiResult.getContent());
-                                aiMessageDto.setStatus(aiResult.getStatus());
+                                aiMessageDto.setStatus(AIMessageStatusEnum.FAIL.getCode());
                                 globalChannelHolder.sendBroadcastAIMessage(aiMessageDto);
-                                fullContent.append(aiResult.getContent());
-                            });
-                        } catch (Exception e) {
-                            LOGGER.error("AI助手处理消息失败", e);
-                            //发送失败消息
-                            AIMessageDto aiMessageDto = new AIMessageDto();
-                            aiMessageDto.setMessageId(messageDto.getMessageId());
-                            aiMessageDto.setRoomId(messageDto.getRoomId());
-                            aiMessageDto.setStatus(AIMessageStatusEnum.FAIL.getCode());
-                            globalChannelHolder.sendBroadcastAIMessage(aiMessageDto);
-                        } finally {
-                            MessageDto storeMessage = buildStoreMessage(messageDto, fullContent);
-                            messageService.saveMessage(storeMessage);
+                            } finally {
+                                LOGGER.info("开始存储AI回复消息");
+                                MessageDto storeMessage = buildStoreMessage(messageDto, fullContent);
+                                messageService.saveMessage(storeMessage);
+                            }
                         }
-                    }
+                    });
                 }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             });
