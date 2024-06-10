@@ -20,20 +20,22 @@ AQChat 一个极速、便捷的匿名在线即时聊天室。
 | aqchat-framework | AQChat项目框架模块，包含对中间件的封装和配置     |
 | aqchat-im        | AQChat项目IM核心模块，负责通讯协议以及和前端的连接 |
 | aqchat-service   | AQChat项目业务逻辑层，包含业务逻辑的实现       |
+| aqchat-ai        | AQChat项目AI相关功能模块，负责接入AI大模型    |
 
 
 ### 项目环境
-| 环境       | 版本       |
-|----------|----------|
-| JDK      | 17     |
-| Netty    | 4.1.89.Final   |
-| SpringBoot | 3.2.5    |
-| Mybatis-Plus|3.5.5|
-| Protobuf | 3        |
-| MySQL    | 8.0.34   |
-| Redis    | 6.0.8    |
-| RocketMQ | 4.4.0    |
-| 阿里云OSS  |          |
+| 环境           | 版本           |
+|--------------|--------------|
+| JDK          | 17           |
+| Netty        | 4.1.89.Final |
+| SpringBoot   | 3.2.5        |
+| Mybatis-Plus | 3.5.5        |
+| Protobuf     | 3            |
+| MySQL        | 8.0.34       |
+| Redis        | 6.0.8        |
+| RocketMQ     | 4.4.0        |
+| OSS       | 阿里云OSS       |
+| AI大模型        | 通义千问MAX      |
 
 ### 项目截图
 <img src="https://aqchat.oss-cn-shenzhen.aliyuncs.com/demo/1715433579465.png" width="500">
