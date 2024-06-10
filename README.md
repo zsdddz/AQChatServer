@@ -48,30 +48,14 @@ AQChat 一个极速、便捷的匿名在线即时聊天室。
 <img src="https://aqchat.oss-cn-shenzhen.aliyuncs.com/demo/20240511212754.jpg" height="500">
 <img src="https://aqchat.oss-cn-shenzhen.aliyuncs.com/demo/20240511212801.jpg" height="500">
 
+# 部署文档
 
-### 项目部署
-1. 克隆项目到本地
-```shell
-git clone https://gitee.com/howcode/aq-chat-server.git
-```
-修改配置文件`application.yml`中的数据库、Redis、RocketMQ、阿里云OSS等配置信息
+![戴戴的Linux](https://gitee.com/StephenJose_Dai/dockerhaschat/raw/master/daidailinux.jpg)
 
+- 微信扫一扫二维码关注公众号
+- 发送aqchat可获取AQChat部署教程
+- 发送aqchatonekey可获取AQChat一键部署脚本
 
-2. 项目运行
-启动类位于 `aq-chat-im`模块下 
-
-com.howcode.aqchat.AQChatApplication类
-
-启动成功默认连接路径为 `IP:9090`,可先使用在线websocket测试网页测试连接是否正常
-
-3. 打包项目
-进入`aq-chat-im`模块，执行以下命令
->注意:打包需要docker环境，打包完成后会生成对应的jar包以及docker镜像
-
-```shell
-mvn clean package -Dmaven.test.skip=true
-```
-运行后日志位于容器下`/tmp/logs`目录下
 
 ## 更新日志
 
