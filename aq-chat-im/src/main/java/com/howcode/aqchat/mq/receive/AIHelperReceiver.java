@@ -3,12 +3,17 @@ package com.howcode.aqchat.mq.receive;
 import com.alibaba.fastjson.JSONObject;
 import com.howcode.aqchat.ai.IAiService;
 import com.howcode.aqchat.common.constant.AQChatMQConstant;
+import com.howcode.aqchat.common.enums.AIMessageStatusEnum;
+import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
+import com.howcode.aqchat.common.enums.MessageStatusEnum;
 import com.howcode.aqchat.common.model.AIMessageDto;
 import com.howcode.aqchat.common.model.MessageDto;
 import com.howcode.aqchat.common.model.RoomNotifyDto;
 import com.howcode.aqchat.framework.mq.starter.config.RocketMQConfig;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IRoomHolder;
+import com.howcode.aqchat.message.AQChatMsgProtocol;
+import com.howcode.aqchat.message.MessageConstructor;
 import jakarta.annotation.Resource;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -55,13 +60,22 @@ public class AIHelperReceiver implements InitializingBean {
                     // AI助手处理消息
                     if (!msgStr.isEmpty()){
                         MessageDto messageDto = JSONObject.parseObject(msgStr, MessageDto.class);
-                        aiService.streamCallWithMessage(messageDto.getMessageContent(),aiResult -> {
+                        try {
+                            aiService.streamCallWithMessage(messageDto.getMessageContent(),aiResult -> {
+                                AIMessageDto aiMessageDto = new AIMessageDto();
+                                aiMessageDto.setRoomId(messageDto.getRoomId());
+                                aiMessageDto.setContent(aiResult.getContent());
+                                aiMessageDto.setStatus(aiResult.getStatus());
+                                globalChannelHolder.sendBroadcastAIMessage(aiMessageDto);
+                            });
+                        }catch (Exception e){
+                            LOGGER.error("AI助手处理消息失败",e);
+                            //发送失败消息
                             AIMessageDto aiMessageDto = new AIMessageDto();
                             aiMessageDto.setRoomId(messageDto.getRoomId());
-                            aiMessageDto.setContent(aiResult.getContent());
-                            aiMessageDto.setStatus(aiResult.getStatus());
+                            aiMessageDto.setStatus(AIMessageStatusEnum.FAIL.getCode());
                             globalChannelHolder.sendBroadcastAIMessage(aiMessageDto);
-                        });
+                        }
                     }
                 }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;

@@ -13,6 +13,7 @@ import com.howcode.aqchat.ai.AIResult;
 import com.howcode.aqchat.ai.IAiService;
 import com.howcode.aqchat.ai.model.QWResult;
 import com.howcode.aqchat.common.config.AQChatConfig;
+import com.howcode.aqchat.common.enums.AIMessageStatusEnum;
 import io.reactivex.Flowable;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
@@ -61,7 +62,7 @@ public class QWAiService implements IAiService {
             String finishReason = r.getOutput().getChoices().get(0).getFinishReason();
             QWResult qwResult = new QWResult();
             qwResult.setContent(content);
-            qwResult.setStatus("stop".equals(finishReason) ? 1 : 0);
+            qwResult.setStatus("stop".equals(finishReason) ? AIMessageStatusEnum.END.getCode() : AIMessageStatusEnum.WAIT.getCode());
             consumer.accept(qwResult);
         });
         LOGGER.info("Stream call with message completed");
