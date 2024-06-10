@@ -19,6 +19,10 @@ CREATE TABLE `aq_message`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of aq_message
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for aq_user
 -- ----------------------------
 DROP TABLE IF EXISTS `aq_user`;
@@ -28,5 +32,10 @@ CREATE TABLE `aq_user`  (
                             `user_avatar` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户头像',
                             PRIMARY KEY (`user_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of aq_user
+-- ----------------------------
+INSERT INTO `aq_user` VALUES ('AQChatHelper', 'AQChat助手', 'https://aqchat.oss-cn-shenzhen.aliyuncs.com/avatar/AQChatAI.png');
 
 SET FOREIGN_KEY_CHECKS = 1;
