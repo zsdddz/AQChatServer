@@ -63,6 +63,8 @@ enum MsgCommand{
   //艾特消息通知
   AT_MSG_NOTIFY = 31;
 
+  //流式消息通知
+  STREAM_MSG_NOTIFY = 32;
 }
 
 //用户登录
@@ -280,4 +282,12 @@ message AtMsgNotify{
   int64 msgId = 2;
   string userId = 3; //发送人id
   string atUserId = 4; //被艾特人id
+}
+
+//流式消息通知
+message StreamMsgNotify{
+  string roomId = 1;
+  int64 msgId = 2;
+  User user = 3;
+  int32 streamType = 4; //流类型 0-开始 1-中间 2-结束
 }

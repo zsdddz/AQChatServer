@@ -20,6 +20,7 @@ public class AQChatConfig {
     private Long heartBeatTime;
     private AliOssConfig aliOssConfig;
     private AliOssStsConfig aliOssStsConfig;
+    private AiConfig aiConfig;
 
     @Data
     public static class AliOssConfig {
@@ -36,5 +37,11 @@ public class AQChatConfig {
         private String roleSessionName;
         private String roleArn;
         private Long durationSeconds;
+    }
+
+    @Data
+    public static class AiConfig {
+        private String apiKey;
+        private String model;
     }
 }
