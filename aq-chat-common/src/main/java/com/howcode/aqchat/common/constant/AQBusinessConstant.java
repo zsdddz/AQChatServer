@@ -53,7 +53,7 @@ public interface AQBusinessConstant {
     String LIMIT = "limit 100";
 
     /**
-     * 艾特机器人助手
+     * 艾特
      */
     String AT = "@";
     /**
