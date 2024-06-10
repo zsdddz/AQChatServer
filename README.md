@@ -1,10 +1,10 @@
 # AQChatServer
 
 ### 介绍
-AQChat 一个极速、便捷的匿名在线即时聊天室。
+AQChat 一个极速、便捷的匿名在线即时AI聊天室。
 <br/>
 <br/>
-对标游戏后端开发，采用Netty作为通讯框架，支持高并发，高性能的即时通讯。全程无需HTTP协议，支持文本、图片、文件、音频、视频的发送和接收。
+✨已接入AI，对标游戏后端开发，采用Netty作为通讯框架，支持高并发，高性能的即时通讯。全程无需HTTP协议，支持文本、图片、文件、音频、视频的发送和接收。
 <br/>
 <br/>
 本项目为服务端代码，WEB端代码请查看：<a href="https://gitee.com/howcode/aq-chat">AQChat</a>，移动端代码请查看<a href="https://gitee.com/ghosthhf/aqchat-mobile">AQChat-Mobile</a>
