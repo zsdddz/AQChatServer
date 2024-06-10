@@ -162,6 +162,7 @@ public class GlobalChannelHolder {
             LOGGER.info("[退出通知] 用户信息或者房间信息为空");
             return;
         }
+        userHolder.removeUserInfo(userId);
         AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
         if (userBuilder == null) return;
         AQChatMsgProtocol.LeaveRoomNotify leaveRoomNotify = AQChatMsgProtocol.LeaveRoomNotify.newBuilder()
@@ -169,7 +170,6 @@ public class GlobalChannelHolder {
                 .setRoomId(userInfo.getRoomId())
                 .build();
         messageBroadcaster.broadcast(userInfo.getRoomId(), leaveRoomNotify);
-        userHolder.removeUserInfo(userId);
     }
 
     public void notifyJoinRoom(RoomNotifyDto roomNotifyDto) {
