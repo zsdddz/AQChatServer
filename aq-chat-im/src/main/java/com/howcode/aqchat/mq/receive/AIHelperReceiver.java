@@ -63,6 +63,7 @@ public class AIHelperReceiver implements InitializingBean {
                         try {
                             aiService.streamCallWithMessage(messageDto.getMessageContent(),aiResult -> {
                                 AIMessageDto aiMessageDto = new AIMessageDto();
+                                aiMessageDto.setMessageId(messageDto.getMessageId());
                                 aiMessageDto.setRoomId(messageDto.getRoomId());
                                 aiMessageDto.setContent(aiResult.getContent());
                                 aiMessageDto.setStatus(aiResult.getStatus());
@@ -72,6 +73,7 @@ public class AIHelperReceiver implements InitializingBean {
                             LOGGER.error("AI助手处理消息失败",e);
                             //发送失败消息
                             AIMessageDto aiMessageDto = new AIMessageDto();
+                            aiMessageDto.setMessageId(messageDto.getMessageId());
                             aiMessageDto.setRoomId(messageDto.getRoomId());
                             aiMessageDto.setStatus(AIMessageStatusEnum.FAIL.getCode());
                             globalChannelHolder.sendBroadcastAIMessage(aiMessageDto);
