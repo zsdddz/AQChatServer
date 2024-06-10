@@ -29,5 +29,10 @@
             <artifactId>dashscope-sdk-java</artifactId>
             <version>2.13.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.howcode</groupId>
+            <artifactId>aq-chat-framework-redis-starter</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 </project>

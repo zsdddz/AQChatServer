@@ -246,7 +246,7 @@ public class GlobalChannelHolder {
             return;
         }
         //构造ai助手消息
-        UserGlobalInfoDto userInfo = constructAIUserInfo();
+        UserGlobalInfoDto userInfo = userHolder.getUserInfo(AQBusinessConstant.AI_HELPER_ID);
         AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
         AQChatMsgProtocol.StreamMsgNotify streamMsgNotify = AQChatMsgProtocol.StreamMsgNotify.newBuilder()
                 .setUser(userBuilder)
@@ -256,13 +256,5 @@ public class GlobalChannelHolder {
                 .setStreamType(aiMessageDto.getStatus())
                 .build();
         messageBroadcaster.broadcast(aiMessageDto.getRoomId(),streamMsgNotify);
-    }
-
-    private UserGlobalInfoDto constructAIUserInfo() {
-        UserGlobalInfoDto userInfo = new UserGlobalInfoDto();
-        userInfo.setUserId(AQBusinessConstant.AI_HELPER_ID);
-        userInfo.setUserName(AQBusinessConstant.AI_HELPER_NAME);
-        userInfo.setUserAvatar(AQBusinessConstant.AI_HELPER_AVATAR);
-        return userInfo;
     }
 }

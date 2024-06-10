@@ -87,6 +87,8 @@ public class CreateRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtoc
         globalChannelHolder.createChannelGroup(roomInfoDto.getRoomId());
         //将创建者加入房间
         globalChannelHolder.joinRoom(roomInfoDto.getRoomId(), userId, ctx.channel());
+        //AI助手加入房间
+        roomHolder.saveRoomMember(roomId, AQBusinessConstant.AI_HELPER_ID);
         //mq发送加入房间消息
         mqSendingAgent.sendJoinRoomMsg(userId, roomInfoDto.getRoomId());
 

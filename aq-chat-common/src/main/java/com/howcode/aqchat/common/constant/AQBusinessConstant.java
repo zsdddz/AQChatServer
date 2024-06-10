@@ -68,5 +68,5 @@ public interface AQBusinessConstant {
     /**
      * 机器人助手头像
      */
-    String AI_HELPER_AVATAR = "https://aqchat.oss-cn-hangzhou.aliyuncs.com/ai_avatar.png";
+    String AI_HELPER_AVATAR = "https://aqchat.oss-cn-shenzhen.aliyuncs.com/avatar/AQChatAI.png";
 }
