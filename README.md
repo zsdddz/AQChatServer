@@ -14,13 +14,13 @@ AQChat 一个极速、便捷的匿名在线即时聊天室。
 
 
 ### 项目架构说明
-| 模块               | 说明                            |
-|------------------|-------------------------------|
-| aqchat-common    | AQChat项目公共模块，包含一些工具类和常量       |
-| aqchat-framework | AQChat项目框架模块，包含对中间件的封装和配置     |
+| 模块               | 说明                        |
+|------------------|---------------------------|
+| aqchat-common    | AQChat项目公共模块，包含一些工具类和常量   |
+| aqchat-framework | AQChat项目框架模块，包含对中间件的封装和配置 |
 | aqchat-im        | AQChat项目IM核心模块，负责通讯协议以及和前端的连接 |
-| aqchat-service   | AQChat项目业务逻辑层，包含业务逻辑的实现       |
-| aqchat-ai        | AQChat项目AI相关功能模块，负责接入AI大模型    |
+| aqchat-service   | AQChat项目业务逻辑层，包含业务逻辑的实现   |
+| aqchat-ai        | AQChat项目AI功能模块，负责接入AI大模型  |
 
 
 ### 项目环境
