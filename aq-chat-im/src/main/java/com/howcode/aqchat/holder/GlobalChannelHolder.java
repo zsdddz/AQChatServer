@@ -1,5 +1,6 @@
 package com.howcode.aqchat.holder;
 
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.model.*;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageBroadcaster;
@@ -238,5 +239,30 @@ public class GlobalChannelHolder {
         }
         AQChatMsgProtocol.RecallMsgNotify recallMsgNotify = MessageConstructor.buildRecallMsgNotify(recallMessageDto);
         messageBroadcaster.broadcast(recallMessageDto.getRoomId(), recallMsgNotify);
+    }
+
+    public void sendBroadcastAIMessage(AIMessageDto aiMessageDto) {
+        if (null == aiMessageDto) {
+            return;
+        }
+        //构造ai助手消息
+        UserGlobalInfoDto userInfo = constructAIUserInfo();
+        AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
+        AQChatMsgProtocol.StreamMsgNotify streamMsgNotify = AQChatMsgProtocol.StreamMsgNotify.newBuilder()
+                .setUser(userBuilder)
+                .setMsgId(aiMessageDto.getMessageId())
+                .setRoomId(aiMessageDto.getRoomId())
+                .setContent(aiMessageDto.getContent())
+                .setStreamType(aiMessageDto.getStatus())
+                .build();
+        messageBroadcaster.broadcast(aiMessageDto.getRoomId(),streamMsgNotify);
+    }
+
+    private UserGlobalInfoDto constructAIUserInfo() {
+        UserGlobalInfoDto userInfo = new UserGlobalInfoDto();
+        userInfo.setUserId(AQBusinessConstant.AI_HELPER_ID);
+        userInfo.setUserName(AQBusinessConstant.AI_HELPER_NAME);
+        userInfo.setUserAvatar(AQBusinessConstant.AI_HELPER_AVATAR);
+        return userInfo;
     }
 }

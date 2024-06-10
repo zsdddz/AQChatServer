@@ -38,6 +38,7 @@ public class AQChatMQConstant {
         String JOIN_ROOM_CONSUMER_GROUP = "join_room_consumer_group";
         String LEAVE_ROOM_CONSUMER_GROUP = "leave_room_consumer_group";
         String RECALL_MESSAGE_CONSUMER_GROUP = "recall_message_consumer_group";
+        String AI_HELPER_CONSUMER_GROUP = "ai_helper_consumer_group";
     }
     /**
      * MQ的topic
@@ -76,5 +77,9 @@ public class AQChatMQConstant {
          * 撤回消息的topic
          */
         String RECALL_MESSAGE_TOPIC = "recall_message_topic";
+        /**
+         * 机器人助手的topic
+         */
+        String AI_HELPER_TOPIC = "ai_helper_topic";
     }
 }

@@ -289,5 +289,6 @@ message StreamMsgNotify{
   string roomId = 1;
   int64 msgId = 2;
   User user = 3;
-  int32 streamType = 4; //流类型 0-开始 1-中间 2-结束
+  int32 streamType = 4; //流类型 0-开始 1--结束
+  string content = 5;
 }

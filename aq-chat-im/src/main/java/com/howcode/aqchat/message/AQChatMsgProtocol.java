@@ -29058,13 +29058,25 @@ public final class AQChatMsgProtocol {
 
     /**
      * <pre>
-     *流类型 0-开始 1-中间 2-结束
+     *流类型 0-开始 1--结束
      * </pre>
      *
      * <code>int32 streamType = 4;</code>
      * @return The streamType.
      */
     int getStreamType();
+
+    /**
+     * <code>string content = 5;</code>
+     * @return The content.
+     */
+    java.lang.String getContent();
+    /**
+     * <code>string content = 5;</code>
+     * @return The bytes for content.
+     */
+    com.google.protobuf.ByteString
+        getContentBytes();
   }
   /**
    * <pre>
@@ -29084,6 +29096,7 @@ public final class AQChatMsgProtocol {
     }
     private StreamMsgNotify() {
       roomId_ = "";
+      content_ = "";
     }
 
     @java.lang.Override
@@ -29143,6 +29156,12 @@ public final class AQChatMsgProtocol {
             case 32: {
 
               streamType_ = input.readInt32();
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              content_ = s;
               break;
             }
             default: {
@@ -29256,7 +29275,7 @@ public final class AQChatMsgProtocol {
     private int streamType_;
     /**
      * <pre>
-     *流类型 0-开始 1-中间 2-结束
+     *流类型 0-开始 1--结束
      * </pre>
      *
      * <code>int32 streamType = 4;</code>
@@ -29265,6 +29284,44 @@ public final class AQChatMsgProtocol {
     @java.lang.Override
     public int getStreamType() {
       return streamType_;
+    }
+
+    public static final int CONTENT_FIELD_NUMBER = 5;
+    private volatile java.lang.Object content_;
+    /**
+     * <code>string content = 5;</code>
+     * @return The content.
+     */
+    @java.lang.Override
+    public java.lang.String getContent() {
+      java.lang.Object ref = content_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        content_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string content = 5;</code>
+     * @return The bytes for content.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getContentBytes() {
+      java.lang.Object ref = content_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        content_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private byte memoizedIsInitialized = -1;
@@ -29293,6 +29350,9 @@ public final class AQChatMsgProtocol {
       if (streamType_ != 0) {
         output.writeInt32(4, streamType_);
       }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(content_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, content_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -29316,6 +29376,9 @@ public final class AQChatMsgProtocol {
       if (streamType_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, streamType_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(content_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, content_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -29343,6 +29406,8 @@ public final class AQChatMsgProtocol {
       }
       if (getStreamType()
           != other.getStreamType()) return false;
+      if (!getContent()
+          .equals(other.getContent())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -29365,6 +29430,8 @@ public final class AQChatMsgProtocol {
       }
       hash = (37 * hash) + STREAMTYPE_FIELD_NUMBER;
       hash = (53 * hash) + getStreamType();
+      hash = (37 * hash) + CONTENT_FIELD_NUMBER;
+      hash = (53 * hash) + getContent().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -29514,6 +29581,8 @@ public final class AQChatMsgProtocol {
         }
         streamType_ = 0;
 
+        content_ = "";
+
         return this;
       }
 
@@ -29548,6 +29617,7 @@ public final class AQChatMsgProtocol {
           result.user_ = userBuilder_.build();
         }
         result.streamType_ = streamType_;
+        result.content_ = content_;
         onBuilt();
         return result;
       }
@@ -29608,6 +29678,10 @@ public final class AQChatMsgProtocol {
         }
         if (other.getStreamType() != 0) {
           setStreamType(other.getStreamType());
+        }
+        if (!other.getContent().isEmpty()) {
+          content_ = other.content_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -29867,7 +29941,7 @@ public final class AQChatMsgProtocol {
       private int streamType_ ;
       /**
        * <pre>
-       *流类型 0-开始 1-中间 2-结束
+       *流类型 0-开始 1--结束
        * </pre>
        *
        * <code>int32 streamType = 4;</code>
@@ -29879,7 +29953,7 @@ public final class AQChatMsgProtocol {
       }
       /**
        * <pre>
-       *流类型 0-开始 1-中间 2-结束
+       *流类型 0-开始 1--结束
        * </pre>
        *
        * <code>int32 streamType = 4;</code>
@@ -29894,7 +29968,7 @@ public final class AQChatMsgProtocol {
       }
       /**
        * <pre>
-       *流类型 0-开始 1-中间 2-结束
+       *流类型 0-开始 1--结束
        * </pre>
        *
        * <code>int32 streamType = 4;</code>
@@ -29903,6 +29977,82 @@ public final class AQChatMsgProtocol {
       public Builder clearStreamType() {
         
         streamType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object content_ = "";
+      /**
+       * <code>string content = 5;</code>
+       * @return The content.
+       */
+      public java.lang.String getContent() {
+        java.lang.Object ref = content_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          content_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string content = 5;</code>
+       * @return The bytes for content.
+       */
+      public com.google.protobuf.ByteString
+          getContentBytes() {
+        java.lang.Object ref = content_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          content_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string content = 5;</code>
+       * @param value The content to set.
+       * @return This builder for chaining.
+       */
+      public Builder setContent(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        content_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string content = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearContent() {
+        
+        content_ = getDefaultInstance().getContent();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string content = 5;</code>
+       * @param value The bytes for content to set.
+       * @return This builder for chaining.
+       */
+      public Builder setContentBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        content_ = value;
         onChanged();
         return this;
       }
@@ -30206,30 +30356,30 @@ public final class AQChatMsgProtocol {
       "Notify\022\016\n\006roomId\030\001 \001(\t\022\r\n\005msgId\030\002 \001(\003\022\016\n" +
       "\006userId\030\003 \001(\t\"N\n\013AtMsgNotify\022\016\n\006roomId\030\001" +
       " \001(\t\022\r\n\005msgId\030\002 \001(\003\022\016\n\006userId\030\003 \001(\t\022\020\n\010a" +
-      "tUserId\030\004 \001(\t\"b\n\017StreamMsgNotify\022\016\n\006room" +
+      "tUserId\030\004 \001(\t\"s\n\017StreamMsgNotify\022\016\n\006room" +
       "Id\030\001 \001(\t\022\r\n\005msgId\030\002 \001(\003\022\034\n\004user\030\003 \001(\0132\016." +
-      "chat_msg.User\022\022\n\nstreamType\030\004 \001(\005*\277\005\n\nMs" +
-      "gCommand\022\022\n\016USER_LOGIN_CMD\020\000\022\022\n\016USER_LOG" +
-      "IN_ACK\020\001\022\022\n\016HEART_BEAT_CMD\020\002\022\022\n\016HEART_BE" +
-      "AT_ACK\020\003\022\021\n\rJOIN_ROOM_CMD\020\004\022\021\n\rJOIN_ROOM" +
-      "_ACK\020\005\022\023\n\017CREATE_ROOM_CMD\020\006\022\023\n\017CREATE_RO" +
-      "OM_ACK\020\007\022\022\n\016LEAVE_ROOM_CMD\020\010\022\022\n\016LEAVE_RO" +
-      "OM_ACK\020\t\022\020\n\014SEND_MSG_CMD\020\n\022\020\n\014SEND_MSG_A" +
-      "CK\020\013\022\025\n\021BROADCAST_MSG_ACK\020\014\022\021\n\rEXCEPTION" +
-      "_MSG\020\r\022\017\n\013OFFLINE_MSG\020\016\022\017\n\013GET_STS_CMD\020\017" +
-      "\022\017\n\013GET_STS_ACK\020\020\022\023\n\017USER_LOGOUT_CMD\020\021\022\023" +
-      "\n\017USER_LOGOUT_ACK\020\022\022\022\n\016OFFLINE_NOTIFY\020\023\022" +
-      "\030\n\024SYNC_CHAT_RECORD_CMD\020\024\022\030\n\024SYNC_CHAT_R" +
-      "ECORD_ACK\020\025\022\024\n\020RECOVER_USER_CMD\020\026\022\024\n\020REC" +
-      "OVER_USER_ACK\020\027\022\024\n\020JOIN_ROOM_NOTIFY\020\030\022\025\n" +
-      "\021LEAVE_ROOM_NOTIFY\020\031\022\031\n\025SYNC_ROOM_MEMBER" +
-      "S_CMD\020\032\022\031\n\025SYNC_ROOM_MEMBERS_ACK\020\033\022\022\n\016RE" +
-      "CALL_MSG_CMD\020\034\022\022\n\016RECALL_MSG_ACK\020\035\022\025\n\021RE" +
-      "CALL_MSG_NOTIFY\020\036\022\021\n\rAT_MSG_NOTIFY\020\037\022\025\n\021" +
-      "STREAM_MSG_NOTIFY\020 *>\n\007MsgType\022\010\n\004TEXT\020\000" +
-      "\022\t\n\005IMAGE\020\001\022\t\n\005VOICE\020\002\022\t\n\005VIDEO\020\003\022\010\n\004FIL" +
-      "E\020\004B\034\n\032com.howcode.aqchat.messageb\006proto" +
-      "3"
+      "chat_msg.User\022\022\n\nstreamType\030\004 \001(\005\022\017\n\007con" +
+      "tent\030\005 \001(\t*\277\005\n\nMsgCommand\022\022\n\016USER_LOGIN_" +
+      "CMD\020\000\022\022\n\016USER_LOGIN_ACK\020\001\022\022\n\016HEART_BEAT_" +
+      "CMD\020\002\022\022\n\016HEART_BEAT_ACK\020\003\022\021\n\rJOIN_ROOM_C" +
+      "MD\020\004\022\021\n\rJOIN_ROOM_ACK\020\005\022\023\n\017CREATE_ROOM_C" +
+      "MD\020\006\022\023\n\017CREATE_ROOM_ACK\020\007\022\022\n\016LEAVE_ROOM_" +
+      "CMD\020\010\022\022\n\016LEAVE_ROOM_ACK\020\t\022\020\n\014SEND_MSG_CM" +
+      "D\020\n\022\020\n\014SEND_MSG_ACK\020\013\022\025\n\021BROADCAST_MSG_A" +
+      "CK\020\014\022\021\n\rEXCEPTION_MSG\020\r\022\017\n\013OFFLINE_MSG\020\016" +
+      "\022\017\n\013GET_STS_CMD\020\017\022\017\n\013GET_STS_ACK\020\020\022\023\n\017US" +
+      "ER_LOGOUT_CMD\020\021\022\023\n\017USER_LOGOUT_ACK\020\022\022\022\n\016" +
+      "OFFLINE_NOTIFY\020\023\022\030\n\024SYNC_CHAT_RECORD_CMD" +
+      "\020\024\022\030\n\024SYNC_CHAT_RECORD_ACK\020\025\022\024\n\020RECOVER_" +
+      "USER_CMD\020\026\022\024\n\020RECOVER_USER_ACK\020\027\022\024\n\020JOIN" +
+      "_ROOM_NOTIFY\020\030\022\025\n\021LEAVE_ROOM_NOTIFY\020\031\022\031\n" +
+      "\025SYNC_ROOM_MEMBERS_CMD\020\032\022\031\n\025SYNC_ROOM_ME" +
+      "MBERS_ACK\020\033\022\022\n\016RECALL_MSG_CMD\020\034\022\022\n\016RECAL" +
+      "L_MSG_ACK\020\035\022\025\n\021RECALL_MSG_NOTIFY\020\036\022\021\n\rAT" +
+      "_MSG_NOTIFY\020\037\022\025\n\021STREAM_MSG_NOTIFY\020 *>\n\007" +
+      "MsgType\022\010\n\004TEXT\020\000\022\t\n\005IMAGE\020\001\022\t\n\005VOICE\020\002\022" +
+      "\t\n\005VIDEO\020\003\022\010\n\004FILE\020\004B\034\n\032com.howcode.aqch" +
+      "at.messageb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -30450,7 +30600,7 @@ public final class AQChatMsgProtocol {
     internal_static_chat_msg_StreamMsgNotify_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chat_msg_StreamMsgNotify_descriptor,
-        new java.lang.String[] { "RoomId", "MsgId", "User", "StreamType", });
+        new java.lang.String[] { "RoomId", "MsgId", "User", "StreamType", "Content", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
