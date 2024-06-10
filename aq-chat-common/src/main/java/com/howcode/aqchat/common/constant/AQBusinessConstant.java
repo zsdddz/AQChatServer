@@ -51,4 +51,22 @@ public interface AQBusinessConstant {
     String UPLOAD_PATH_DATE_FORMAT = "yyyy-MM-dd";
 
     String LIMIT = "limit 100";
+
+    /**
+     * 艾特
+     */
+    String AT = "@";
+    /**
+     * 机器人助手Id
+     */
+    String AI_HELPER_ID = "AQChatHelper";
+
+    /**
+     * 机器人助手名称
+     */
+    String AI_HELPER_NAME = "AQChat助手";
+    /**
+     * 机器人助手头像
+     */
+    String AI_HELPER_AVATAR = "https://aqchat.oss-cn-shenzhen.aliyuncs.com/avatar/AQChatAI.png";
 }

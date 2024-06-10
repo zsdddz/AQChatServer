@@ -1,5 +1,6 @@
 package com.howcode.aqchat.holder;
 
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.model.*;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageBroadcaster;
@@ -161,6 +162,7 @@ public class GlobalChannelHolder {
             LOGGER.info("[退出通知] 用户信息或者房间信息为空");
             return;
         }
+        userHolder.removeUserInfo(userId);
         AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
         if (userBuilder == null) return;
         AQChatMsgProtocol.LeaveRoomNotify leaveRoomNotify = AQChatMsgProtocol.LeaveRoomNotify.newBuilder()
@@ -168,7 +170,6 @@ public class GlobalChannelHolder {
                 .setRoomId(userInfo.getRoomId())
                 .build();
         messageBroadcaster.broadcast(userInfo.getRoomId(), leaveRoomNotify);
-        userHolder.removeUserInfo(userId);
     }
 
     public void notifyJoinRoom(RoomNotifyDto roomNotifyDto) {
@@ -238,5 +239,22 @@ public class GlobalChannelHolder {
         }
         AQChatMsgProtocol.RecallMsgNotify recallMsgNotify = MessageConstructor.buildRecallMsgNotify(recallMessageDto);
         messageBroadcaster.broadcast(recallMessageDto.getRoomId(), recallMsgNotify);
+    }
+
+    public void sendBroadcastAIMessage(AIMessageDto aiMessageDto) {
+        if (null == aiMessageDto) {
+            return;
+        }
+        //构造ai助手消息
+        UserGlobalInfoDto userInfo = userHolder.getUserInfo(AQBusinessConstant.AI_HELPER_ID);
+        AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
+        AQChatMsgProtocol.StreamMsgNotify streamMsgNotify = AQChatMsgProtocol.StreamMsgNotify.newBuilder()
+                .setUser(userBuilder)
+                .setMsgId(aiMessageDto.getMessageId())
+                .setRoomId(aiMessageDto.getRoomId())
+                .setContent(aiMessageDto.getContent())
+                .setStreamType(aiMessageDto.getStatus())
+                .build();
+        messageBroadcaster.broadcast(aiMessageDto.getRoomId(),streamMsgNotify);
     }
 }

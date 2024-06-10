@@ -1,7 +1,9 @@
 package com.howcode.aqchat.handler.impl;
 
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.MessageDto;
+import com.howcode.aqchat.common.utils.IdProvider;
 import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IMessageHolder;
@@ -88,6 +90,15 @@ public class SendMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.
         messageDto.setMessageExt(cmd.getExt());
         messageDto.setCreateTime(new Date());
         mqSendingAgent.sendMessageToRoom(messageDto);
+        //判断是否@了AI
+        String messageExt = messageDto.getMessageExt();
+        if ((AQBusinessConstant.AT + AQBusinessConstant.AI_HELPER_ID).equals(messageExt)) {
+            //覆盖消息Id
+            messageDto.setMessageId(IdProvider.nextId());
+            //修改消息内容 去掉@AI
+            messageDto.setMessageContent(messageDto.getMessageContent().replace((AQBusinessConstant.AT + AQBusinessConstant.AI_HELPER_NAME), ""));
+            mqSendingAgent.aiHelper(messageDto);
+        }
         mqSendingAgent.storeMessages(messageDto);
         messageHolder.putMessageId(roomId, msgId);
         //返回消息发送成功

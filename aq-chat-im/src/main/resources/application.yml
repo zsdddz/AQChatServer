@@ -4,24 +4,27 @@ aq-chat:
   workThreadSize: 8
   heartBeatTime: 10000
   aliOssConfig:
-    endpoint: oss-cn-shenzhen.aliyuncs.com
+    endpoint:
   aliOssStsConfig:
     accessKeyId:
     accessKeySecret:
-    bucketName:
-    endpoint: sts.cn-hangzhou.aliyuncs.com
+    bucketName: aqchat
+    endpoint:
     regionId: cn-hangzhou
-    roleSessionName: aqchat-oss-sts
+    roleSessionName:
     roleArn:
     durationSeconds: 3600
   rocketmq:
     producer:
-      nameSever: 127.0.0.1:9876
+      nameSever: 127.0.0.1
       groupName: AQChat
       retryTimes: 3
       sendTimeOut: 3000
     consumer:
-      nameSever: 127.0.0.1:9876
+      nameSever: 127.0.0.1
+  aiConfig:
+    apiKey:
+    model: qwen-max
 
 
 spring:
@@ -32,8 +35,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/aqchat?useUnicode=true&characterEncoding=UTF-8
-    username: root
-    password: root
+    username: aqchat
+    password:
 
   data:
     redis:

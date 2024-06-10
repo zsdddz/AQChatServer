@@ -13,6 +13,7 @@
         <module>aq-chat-framework</module>
         <module>aq-chat-service</module>
         <module>aq-chat-im</module>
+        <module>aq-chat-ai</module>
     </modules>
 
     <properties>

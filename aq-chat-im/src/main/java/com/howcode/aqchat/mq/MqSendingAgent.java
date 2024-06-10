@@ -139,4 +139,19 @@ public class MqSendingAgent {
             LOGGER.error("发送撤回消息失败", e);
         }
     }
+
+    public void aiHelper(MessageDto messageDto) {
+        if (null == messageDto) {
+            LOGGER.error("消息为空");
+            return;
+        }
+        Message message = new Message();
+        message.setTopic(AQChatMQConstant.MQTopic.AI_HELPER_TOPIC);
+        message.setBody(JSONObject.toJSONString(messageDto).getBytes());
+        try {
+            mqProducer.send(message);
+        } catch (Exception e) {
+            LOGGER.error("发送AI消息失败", e);
+        }
+    }
 }
