@@ -158,11 +158,11 @@ public class GlobalChannelHolder {
             return;
         }
         UserGlobalInfoDto userInfo = userHolder.getUserInfo(userId);
+        userHolder.removeUserInfo(userId);
         if (null == userInfo || null == userInfo.getRoomId() ){
             LOGGER.info("[退出通知] 用户信息或者房间信息为空");
             return;
         }
-        userHolder.removeUserInfo(userId);
         AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
         if (userBuilder == null) return;
         AQChatMsgProtocol.LeaveRoomNotify leaveRoomNotify = AQChatMsgProtocol.LeaveRoomNotify.newBuilder()
