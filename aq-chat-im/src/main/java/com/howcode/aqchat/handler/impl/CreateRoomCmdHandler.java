@@ -3,6 +3,7 @@ package com.howcode.aqchat.handler.impl;
 
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
+import com.howcode.aqchat.common.enums.SwitchStatusEnum;
 import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.common.utils.IdProvider;
 import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
@@ -79,6 +80,7 @@ public class CreateRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtoc
         roomInfoDto.setRoomId(roomId);
         roomInfoDto.setRoomNo(roomNo);
         roomInfoDto.setRoomName(roomName);
+        roomInfoDto.setHistory(cmd.getHistory());
         ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.ROOM_ID)).set(roomId);
         userHolder.setJoinRoomTime(userId, System.currentTimeMillis());
         //将房间信息保存至redis
@@ -87,6 +89,11 @@ public class CreateRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtoc
         globalChannelHolder.createChannelGroup(roomInfoDto.getRoomId());
         //将创建者加入房间
         globalChannelHolder.joinRoom(roomInfoDto.getRoomId(), userId, ctx.channel());
+        //判断是否开启AI助手
+        if (cmd.getAi() == SwitchStatusEnum.OPEN.getCode()){
+            roomHolder.saveRoomMember(roomId, AQBusinessConstant.AI_HELPER_ID);
+        }
+
         //mq发送加入房间消息
         mqSendingAgent.sendJoinRoomMsg(userId, roomInfoDto.getRoomId());
 

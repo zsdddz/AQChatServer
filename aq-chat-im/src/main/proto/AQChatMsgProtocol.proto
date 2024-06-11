@@ -100,6 +100,10 @@ message JoinRoomAck{
 message CreateRoomCmd{
   int32 roomNo = 1;
   string roomName = 2;
+  //是否支持查看历史消息 0-不支持 1-支持
+  int32 history = 3;
+  //是否开启AI助手 0-不开启 1-开启
+  int32 ai = 4;
 }
 message CreateRoomAck{
   string roomId = 1;
