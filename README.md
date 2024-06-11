@@ -4,13 +4,23 @@
 AQChat 一个已接入AI✨的极速、便捷的匿名在线即时AI聊天室。
 <br/>
 <br/>
-对标游戏后端开发，采用Netty作为通讯框架，支持高并发，高性能的即时通讯。全程无需HTTP协议，支持文本、图片、文件、音频、视频的发送和接收。
+- 对标游戏后端开发，采用Netty作为通讯框架，支持高并发，高性能的即时通讯
+- 全程无需HTTP协议，支持文本、图片、文件、音频、视频的发送和接收
+- 消息提醒
+- 消息撤回重新编辑
+- 艾特成员/AI助手
+- ······
 <br/>
-<br/>
-本项目为服务端代码，WEB端代码请查看：<a href="https://gitee.com/howcode/aq-chat">AQChat</a>，移动端代码请查看<a href="https://gitee.com/ghosthhf/aqchat-mobile">AQChat-Mobile</a>
+### 其他仓库
 
+>本项目为服务端代码
 
-项目地址：https://aqchat.run 【pc端访问默认访问WEB端地址,移动端访问跳转移动端地址】
+WEB端：<a href="https://gitee.com/howcode/aq-chat">AQChat</a><br/>
+移动端:<a href="https://gitee.com/ghosthhf/aqchat-mobile">AQChat-Mobile</a>
+
+### 项目预览
+项目演示地址：https://www.aqchat.run 
+>pc端访问默认访问WEB端地址,移动端访问跳转移动端地址
 
 
 ### 项目架构说明
