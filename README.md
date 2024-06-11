@@ -16,8 +16,8 @@ AQChat 一个已接入AI✨的极速、便捷的匿名在线即时AI聊天室。
 
 >本项目为服务端代码
 
-WEB端：<a href="https://gitee.com/howcode/aq-chat">AQChat</a><br/>
-移动端:<a href="https://gitee.com/ghosthhf/aqchat-mobile">AQChat-Mobile</a>
+WEB端: <a href="https://gitee.com/howcode/aq-chat">AQChat</a><br/>
+移动端: <a href="https://gitee.com/ghosthhf/aqchat-mobile">AQChat-Mobile</a>
 
 ### 项目预览
 项目演示地址：https://www.aqchat.run 
