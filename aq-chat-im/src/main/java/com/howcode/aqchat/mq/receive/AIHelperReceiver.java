@@ -96,6 +96,7 @@ public class AIHelperReceiver implements InitializingBean {
                                 LOGGER.info("开始存储AI回复消息");
                                 MessageDto storeMessage = buildStoreMessage(messageDto, fullContent);
                                 messageService.saveMessage(storeMessage);
+                                LOGGER.info("AI回复消息存储成功");
                             }
                         }
                     });

@@ -14,6 +14,7 @@ import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -93,11 +94,14 @@ public class SendMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.
         //判断是否@了AI
         String messageExt = messageDto.getMessageExt();
         if ((AQBusinessConstant.AT + AQBusinessConstant.AI_HELPER_ID).equals(messageExt)) {
+            //拷贝一份消息
+            MessageDto aiMessageDto = new MessageDto();
+            BeanUtils.copyProperties(messageDto, aiMessageDto);
             //覆盖消息Id
-            messageDto.setMessageId(IdProvider.nextId());
+            aiMessageDto.setMessageId(IdProvider.nextId());
             //修改消息内容 去掉@AI
-            messageDto.setMessageContent(messageDto.getMessageContent().replace((AQBusinessConstant.AT + AQBusinessConstant.AI_HELPER_NAME), ""));
-            mqSendingAgent.aiHelper(messageDto);
+            aiMessageDto.setMessageContent(messageDto.getMessageContent().replace((AQBusinessConstant.AT + AQBusinessConstant.AI_HELPER_NAME), ""));
+            mqSendingAgent.aiHelper(aiMessageDto);
         }
         mqSendingAgent.storeMessages(messageDto);
         messageHolder.putMessageId(roomId, msgId);
