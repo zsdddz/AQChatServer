@@ -39,7 +39,7 @@ public class RecallMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtoco
             LOGGER.warn("[非法操作] 用户使用非法参数");
             return;
         }
-        Long msgId = cmd.getMsgId();
+        String msgId = cmd.getMsgId();
         mqSendingAgent.sendRecallMessage(roomId, msgId, userId);
         AQChatMsgProtocol.RecallMsgAck ack = MessageConstructor.buildRecallMsgAck(msgId, roomId, userId);
         ctx.writeAndFlush(ack);

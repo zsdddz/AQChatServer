@@ -7,7 +7,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `aq_message`;
 CREATE TABLE `aq_message`  (
-                               `message_id` bigint NOT NULL COMMENT '消息id',
+                               `message_id` varchar(128) NOT NULL COMMENT '消息id',
                                `room_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '房间id',
                                `sender_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '用户id',
                                `message_type` int NOT NULL DEFAULT 0 COMMENT '消息类型',

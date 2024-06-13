@@ -69,7 +69,7 @@ public class AQMessageServiceImpl implements IAQMessageService {
     }
 
     @Override
-    public void updateMessageVisible(Long msgId) {
+    public void updateMessageVisible(String msgId) {
         AqMessage aqMessage = new AqMessage();
         aqMessage.setMessageId(msgId);
         aqMessage.setStatus(MessageStatusEnum.HIDE.getCode());

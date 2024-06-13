@@ -11,7 +11,7 @@ import java.util.Date;
  */
 @Data
 public class MessageDto {
-    private Long messageId;
+    private String messageId;
     private String roomId;
     private String senderId;
     private Integer messageType;

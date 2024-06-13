@@ -16,7 +16,7 @@ import java.util.Date;
 @TableName("aq_message")
 public class AqMessage {
     @TableId
-    private Long messageId;
+    private String messageId;
     @TableField("room_id")
     private String roomId;
     @TableField("sender_id")

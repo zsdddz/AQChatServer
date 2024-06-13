@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @Data
 public class AIMessageDto {
-    private Long messageId;
+    private String messageId;
     private String roomId;
     private String content;
     private int status;

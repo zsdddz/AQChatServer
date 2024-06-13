@@ -44,9 +44,9 @@ public class SendMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.
         if (ctx == null || cmd == null) {
             return;
         }
-        long msgId = cmd.getMsgId();
+        String msgId = cmd.getMsgId();
         // 判断消息Id是否为空
-        if (msgId <= 0) {
+        if (msgId.isEmpty()) {
             // 错误消息
             AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.MESSAGE_ID_ERROR);
             ctx.writeAndFlush(exceptionMsg);
@@ -98,7 +98,7 @@ public class SendMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.
             MessageDto aiMessageDto = new MessageDto();
             BeanUtils.copyProperties(messageDto, aiMessageDto);
             //覆盖消息Id
-            aiMessageDto.setMessageId(IdProvider.nextId());
+            aiMessageDto.setMessageId(IdProvider.nextId()+"");
             //修改消息内容 去掉@AI
             aiMessageDto.setMessageContent(messageDto.getMessageContent().replace((AQBusinessConstant.AT + AQBusinessConstant.AI_HELPER_NAME), ""));
             mqSendingAgent.aiHelper(aiMessageDto);

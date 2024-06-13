@@ -125,7 +125,7 @@ public class MqSendingAgent {
         }
     }
 
-    public void sendRecallMessage(String roomId, Long msgId, String userId) {
+    public void sendRecallMessage(String roomId, String msgId, String userId) {
         if (null == roomId || null == msgId) {
             LOGGER.error("房间id或者消息id为空");
             return;
