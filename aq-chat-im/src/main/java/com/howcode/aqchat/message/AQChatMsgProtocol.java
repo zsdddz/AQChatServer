@@ -4007,6 +4007,12 @@ public final class AQChatMsgProtocol {
      */
     com.google.protobuf.ByteString
         getRoomNameBytes();
+
+    /**
+     * <code>int32 ai = 4;</code>
+     * @return The ai.
+     */
+    int getAi();
   }
   /**
    * Protobuf type {@code chat_msg.JoinRoomAck}
@@ -4070,6 +4076,11 @@ public final class AQChatMsgProtocol {
               java.lang.String s = input.readStringRequireUtf8();
 
               roomName_ = s;
+              break;
+            }
+            case 32: {
+
+              ai_ = input.readInt32();
               break;
             }
             default: {
@@ -4191,6 +4202,17 @@ public final class AQChatMsgProtocol {
       }
     }
 
+    public static final int AI_FIELD_NUMBER = 4;
+    private int ai_;
+    /**
+     * <code>int32 ai = 4;</code>
+     * @return The ai.
+     */
+    @java.lang.Override
+    public int getAi() {
+      return ai_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -4214,6 +4236,9 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomName_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, roomName_);
       }
+      if (ai_ != 0) {
+        output.writeInt32(4, ai_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -4232,6 +4257,10 @@ public final class AQChatMsgProtocol {
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomName_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, roomName_);
+      }
+      if (ai_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, ai_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4254,6 +4283,8 @@ public final class AQChatMsgProtocol {
           != other.getRoomNo()) return false;
       if (!getRoomName()
           .equals(other.getRoomName())) return false;
+      if (getAi()
+          != other.getAi()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -4271,6 +4302,8 @@ public final class AQChatMsgProtocol {
       hash = (53 * hash) + getRoomNo();
       hash = (37 * hash) + ROOMNAME_FIELD_NUMBER;
       hash = (53 * hash) + getRoomName().hashCode();
+      hash = (37 * hash) + AI_FIELD_NUMBER;
+      hash = (53 * hash) + getAi();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -4410,6 +4443,8 @@ public final class AQChatMsgProtocol {
 
         roomName_ = "";
 
+        ai_ = 0;
+
         return this;
       }
 
@@ -4439,6 +4474,7 @@ public final class AQChatMsgProtocol {
         result.roomId_ = roomId_;
         result.roomNo_ = roomNo_;
         result.roomName_ = roomName_;
+        result.ai_ = ai_;
         onBuilt();
         return result;
       }
@@ -4497,6 +4533,9 @@ public final class AQChatMsgProtocol {
         if (!other.getRoomName().isEmpty()) {
           roomName_ = other.roomName_;
           onChanged();
+        }
+        if (other.getAi() != 0) {
+          setAi(other.getAi());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -4706,6 +4745,37 @@ public final class AQChatMsgProtocol {
   checkByteStringIsUtf8(value);
         
         roomName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int ai_ ;
+      /**
+       * <code>int32 ai = 4;</code>
+       * @return The ai.
+       */
+      @java.lang.Override
+      public int getAi() {
+        return ai_;
+      }
+      /**
+       * <code>int32 ai = 4;</code>
+       * @param value The ai to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAi(int value) {
+        
+        ai_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 ai = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAi() {
+        
+        ai_ = 0;
         onChanged();
         return this;
       }
@@ -5621,6 +5691,12 @@ public final class AQChatMsgProtocol {
      */
     com.google.protobuf.ByteString
         getRoomNameBytes();
+
+    /**
+     * <code>int32 ai = 4;</code>
+     * @return The ai.
+     */
+    int getAi();
   }
   /**
    * Protobuf type {@code chat_msg.CreateRoomAck}
@@ -5684,6 +5760,11 @@ public final class AQChatMsgProtocol {
               java.lang.String s = input.readStringRequireUtf8();
 
               roomName_ = s;
+              break;
+            }
+            case 32: {
+
+              ai_ = input.readInt32();
               break;
             }
             default: {
@@ -5805,6 +5886,17 @@ public final class AQChatMsgProtocol {
       }
     }
 
+    public static final int AI_FIELD_NUMBER = 4;
+    private int ai_;
+    /**
+     * <code>int32 ai = 4;</code>
+     * @return The ai.
+     */
+    @java.lang.Override
+    public int getAi() {
+      return ai_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -5828,6 +5920,9 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomName_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, roomName_);
       }
+      if (ai_ != 0) {
+        output.writeInt32(4, ai_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -5846,6 +5941,10 @@ public final class AQChatMsgProtocol {
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomName_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, roomName_);
+      }
+      if (ai_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, ai_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -5868,6 +5967,8 @@ public final class AQChatMsgProtocol {
           != other.getRoomNo()) return false;
       if (!getRoomName()
           .equals(other.getRoomName())) return false;
+      if (getAi()
+          != other.getAi()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -5885,6 +5986,8 @@ public final class AQChatMsgProtocol {
       hash = (53 * hash) + getRoomNo();
       hash = (37 * hash) + ROOMNAME_FIELD_NUMBER;
       hash = (53 * hash) + getRoomName().hashCode();
+      hash = (37 * hash) + AI_FIELD_NUMBER;
+      hash = (53 * hash) + getAi();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -6024,6 +6127,8 @@ public final class AQChatMsgProtocol {
 
         roomName_ = "";
 
+        ai_ = 0;
+
         return this;
       }
 
@@ -6053,6 +6158,7 @@ public final class AQChatMsgProtocol {
         result.roomId_ = roomId_;
         result.roomNo_ = roomNo_;
         result.roomName_ = roomName_;
+        result.ai_ = ai_;
         onBuilt();
         return result;
       }
@@ -6111,6 +6217,9 @@ public final class AQChatMsgProtocol {
         if (!other.getRoomName().isEmpty()) {
           roomName_ = other.roomName_;
           onChanged();
+        }
+        if (other.getAi() != 0) {
+          setAi(other.getAi());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -6320,6 +6429,37 @@ public final class AQChatMsgProtocol {
   checkByteStringIsUtf8(value);
         
         roomName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int ai_ ;
+      /**
+       * <code>int32 ai = 4;</code>
+       * @return The ai.
+       */
+      @java.lang.Override
+      public int getAi() {
+        return ai_;
+      }
+      /**
+       * <code>int32 ai = 4;</code>
+       * @param value The ai to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAi(int value) {
+        
+        ai_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 ai = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAi() {
+        
+        ai_ = 0;
         onChanged();
         return this;
       }
@@ -30484,83 +30624,83 @@ public final class AQChatMsgProtocol {
       "\t\022\020\n\010userName\030\002 \001(\t\022\022\n\nuserAvatar\030\003 \001(\t\"" +
       "\034\n\014HeartBeatCmd\022\014\n\004ping\030\001 \001(\t\"\034\n\014HeartBe" +
       "atAck\022\014\n\004pong\030\001 \001(\t\"\035\n\013JoinRoomCmd\022\016\n\006ro" +
-      "omNo\030\002 \001(\005\"?\n\013JoinRoomAck\022\016\n\006roomId\030\001 \001(" +
-      "\t\022\016\n\006roomNo\030\002 \001(\005\022\020\n\010roomName\030\003 \001(\t\"N\n\rC" +
-      "reateRoomCmd\022\016\n\006roomNo\030\001 \001(\005\022\020\n\010roomName" +
-      "\030\002 \001(\t\022\017\n\007history\030\003 \001(\005\022\n\n\002ai\030\004 \001(\005\"A\n\rC" +
-      "reateRoomAck\022\016\n\006roomId\030\001 \001(\t\022\016\n\006roomNo\030\002" +
-      " \001(\005\022\020\n\010roomName\030\003 \001(\t\"\036\n\014LeaveRoomCmd\022\016" +
-      "\n\006roomId\030\002 \001(\t\"\036\n\014LeaveRoomAck\022\016\n\006roomId" +
-      "\030\002 \001(\t\"i\n\nSendMsgCmd\022\r\n\005msgId\030\001 \001(\003\022\016\n\006r" +
-      "oomId\030\002 \001(\t\022\"\n\007msgType\030\003 \001(\0162\021.chat_msg." +
-      "MsgType\022\013\n\003msg\030\004 \001(\t\022\013\n\003ext\030\005 \001(\t\"X\n\nSen" +
-      "dMsgAck\022\r\n\005msgId\030\001 \001(\003\022\016\n\006userId\030\002 \001(\t\022\016" +
-      "\n\006roomId\030\003 \001(\t\022\016\n\006status\030\004 \001(\010\022\013\n\003ext\030\005 " +
-      "\001(\t\"\214\001\n\017BroadcastMsgAck\022\034\n\004user\030\001 \001(\0132\016." +
-      "chat_msg.User\022\016\n\006roomId\030\002 \001(\t\022\r\n\005msgId\030\003" +
-      " \001(\t\022\"\n\007msgType\030\004 \001(\0162\021.chat_msg.MsgType" +
-      "\022\013\n\003msg\030\005 \001(\t\022\013\n\003ext\030\006 \001(\t\"<\n\004User\022\016\n\006us" +
-      "erId\030\001 \001(\t\022\020\n\010userName\030\002 \001(\t\022\022\n\nuserAvat" +
-      "ar\030\003 \001(\t\")\n\014ExceptionMsg\022\014\n\004code\030\001 \001(\005\022\013" +
-      "\n\003msg\030\002 \001(\t\":\n\nOfflineMsg\022\034\n\004user\030\001 \001(\0132" +
-      "\016.chat_msg.User\022\016\n\006roomId\030\002 \001(\t\"/\n\tGetSt" +
-      "sCmd\022\"\n\007msgType\030\001 \001(\0162\021.chat_msg.MsgType" +
-      "\"\226\001\n\tGetStsAck\022\023\n\013accessKeyId\030\001 \001(\t\022\027\n\017a" +
-      "ccessKeySecret\030\002 \001(\t\022\025\n\rsecurityToken\030\003 " +
-      "\001(\t\022\016\n\006region\030\004 \001(\t\022\016\n\006bucket\030\005 \001(\t\022\022\n\nu" +
-      "ploadPath\030\006 \001(\t\022\020\n\010endpoint\030\007 \001(\t\"\037\n\rUse" +
-      "rLogoutCmd\022\016\n\006userId\030\001 \001(\t\"\037\n\rUserLogout" +
-      "Ack\022\016\n\006userId\030\001 \001(\t\"=\n\rOfflineNotify\022\034\n\004" +
-      "user\030\001 \001(\0132\016.chat_msg.User\022\016\n\006roomId\030\002 \001" +
-      "(\t\"#\n\021SyncChatRecordCmd\022\016\n\006roomId\030\001 \001(\t\"" +
-      "N\n\021SyncChatRecordAck\022\016\n\006roomId\030\001 \001(\t\022)\n\013" +
-      "chatRecords\030\002 \003(\0132\024.chat_msg.ChatRecord\"" +
-      "\217\001\n\nChatRecord\022\r\n\005msgId\030\001 \001(\003\022\034\n\004user\030\002 " +
-      "\001(\0132\016.chat_msg.User\022\017\n\007message\030\003 \001(\t\022\"\n\007" +
-      "msgType\030\004 \001(\0162\021.chat_msg.MsgType\022\013\n\003ext\030" +
-      "\005 \001(\t\022\022\n\ncreateTime\030\006 \001(\t\" \n\016RecoverUser" +
-      "Cmd\022\016\n\006userId\030\001 \001(\t\"d\n\016RecoverUserAck\022\016\n" +
-      "\006userId\030\001 \001(\t\022\020\n\010userName\030\002 \001(\t\022\022\n\nuserA" +
-      "vatar\030\003 \001(\t\022\034\n\004room\030\004 \001(\0132\016.chat_msg.Roo" +
-      "m\"Y\n\004Room\022\016\n\006roomId\030\001 \001(\t\022\016\n\006roomNo\030\002 \001(" +
-      "\005\022\020\n\010roomName\030\003 \001(\t\022\037\n\007members\030\004 \003(\0132\016.c" +
-      "hat_msg.User\">\n\016JoinRoomNotify\022\034\n\004user\030\001" +
-      " \001(\0132\016.chat_msg.User\022\016\n\006roomId\030\002 \001(\t\"?\n\017" +
-      "LeaveRoomNotify\022\034\n\004user\030\001 \001(\0132\016.chat_msg" +
-      ".User\022\016\n\006roomId\030\002 \001(\t\"$\n\022SyncRoomMembers" +
-      "Cmd\022\016\n\006roomId\030\001 \001(\t\"E\n\022SyncRoomMembersAc" +
-      "k\022\016\n\006roomId\030\001 \001(\t\022\037\n\007members\030\002 \003(\0132\016.cha" +
-      "t_msg.User\"-\n\014RecallMsgCmd\022\016\n\006roomId\030\001 \001" +
-      "(\t\022\r\n\005msgId\030\002 \001(\003\"M\n\014RecallMsgAck\022\016\n\006roo" +
-      "mId\030\001 \001(\t\022\r\n\005msgId\030\002 \001(\003\022\016\n\006userId\030\003 \001(\t" +
-      "\022\016\n\006status\030\004 \001(\010\"@\n\017RecallMsgNotify\022\016\n\006r" +
-      "oomId\030\001 \001(\t\022\r\n\005msgId\030\002 \001(\003\022\016\n\006userId\030\003 \001" +
-      "(\t\"N\n\013AtMsgNotify\022\016\n\006roomId\030\001 \001(\t\022\r\n\005msg" +
-      "Id\030\002 \001(\003\022\016\n\006userId\030\003 \001(\t\022\020\n\010atUserId\030\004 \001" +
-      "(\t\"s\n\017StreamMsgNotify\022\016\n\006roomId\030\001 \001(\t\022\r\n" +
-      "\005msgId\030\002 \001(\003\022\034\n\004user\030\003 \001(\0132\016.chat_msg.Us" +
-      "er\022\022\n\nstreamType\030\004 \001(\005\022\017\n\007content\030\005 \001(\t*" +
-      "\277\005\n\nMsgCommand\022\022\n\016USER_LOGIN_CMD\020\000\022\022\n\016US" +
-      "ER_LOGIN_ACK\020\001\022\022\n\016HEART_BEAT_CMD\020\002\022\022\n\016HE" +
-      "ART_BEAT_ACK\020\003\022\021\n\rJOIN_ROOM_CMD\020\004\022\021\n\rJOI" +
-      "N_ROOM_ACK\020\005\022\023\n\017CREATE_ROOM_CMD\020\006\022\023\n\017CRE" +
-      "ATE_ROOM_ACK\020\007\022\022\n\016LEAVE_ROOM_CMD\020\010\022\022\n\016LE" +
-      "AVE_ROOM_ACK\020\t\022\020\n\014SEND_MSG_CMD\020\n\022\020\n\014SEND" +
-      "_MSG_ACK\020\013\022\025\n\021BROADCAST_MSG_ACK\020\014\022\021\n\rEXC" +
-      "EPTION_MSG\020\r\022\017\n\013OFFLINE_MSG\020\016\022\017\n\013GET_STS" +
-      "_CMD\020\017\022\017\n\013GET_STS_ACK\020\020\022\023\n\017USER_LOGOUT_C" +
-      "MD\020\021\022\023\n\017USER_LOGOUT_ACK\020\022\022\022\n\016OFFLINE_NOT" +
-      "IFY\020\023\022\030\n\024SYNC_CHAT_RECORD_CMD\020\024\022\030\n\024SYNC_" +
-      "CHAT_RECORD_ACK\020\025\022\024\n\020RECOVER_USER_CMD\020\026\022" +
-      "\024\n\020RECOVER_USER_ACK\020\027\022\024\n\020JOIN_ROOM_NOTIF" +
-      "Y\020\030\022\025\n\021LEAVE_ROOM_NOTIFY\020\031\022\031\n\025SYNC_ROOM_" +
-      "MEMBERS_CMD\020\032\022\031\n\025SYNC_ROOM_MEMBERS_ACK\020\033" +
-      "\022\022\n\016RECALL_MSG_CMD\020\034\022\022\n\016RECALL_MSG_ACK\020\035" +
-      "\022\025\n\021RECALL_MSG_NOTIFY\020\036\022\021\n\rAT_MSG_NOTIFY" +
-      "\020\037\022\025\n\021STREAM_MSG_NOTIFY\020 *>\n\007MsgType\022\010\n\004" +
-      "TEXT\020\000\022\t\n\005IMAGE\020\001\022\t\n\005VOICE\020\002\022\t\n\005VIDEO\020\003\022" +
-      "\010\n\004FILE\020\004B\034\n\032com.howcode.aqchat.messageb" +
-      "\006proto3"
+      "omNo\030\002 \001(\005\"K\n\013JoinRoomAck\022\016\n\006roomId\030\001 \001(" +
+      "\t\022\016\n\006roomNo\030\002 \001(\005\022\020\n\010roomName\030\003 \001(\t\022\n\n\002a" +
+      "i\030\004 \001(\005\"N\n\rCreateRoomCmd\022\016\n\006roomNo\030\001 \001(\005" +
+      "\022\020\n\010roomName\030\002 \001(\t\022\017\n\007history\030\003 \001(\005\022\n\n\002a" +
+      "i\030\004 \001(\005\"M\n\rCreateRoomAck\022\016\n\006roomId\030\001 \001(\t" +
+      "\022\016\n\006roomNo\030\002 \001(\005\022\020\n\010roomName\030\003 \001(\t\022\n\n\002ai" +
+      "\030\004 \001(\005\"\036\n\014LeaveRoomCmd\022\016\n\006roomId\030\002 \001(\t\"\036" +
+      "\n\014LeaveRoomAck\022\016\n\006roomId\030\002 \001(\t\"i\n\nSendMs" +
+      "gCmd\022\r\n\005msgId\030\001 \001(\003\022\016\n\006roomId\030\002 \001(\t\022\"\n\007m" +
+      "sgType\030\003 \001(\0162\021.chat_msg.MsgType\022\013\n\003msg\030\004" +
+      " \001(\t\022\013\n\003ext\030\005 \001(\t\"X\n\nSendMsgAck\022\r\n\005msgId" +
+      "\030\001 \001(\003\022\016\n\006userId\030\002 \001(\t\022\016\n\006roomId\030\003 \001(\t\022\016" +
+      "\n\006status\030\004 \001(\010\022\013\n\003ext\030\005 \001(\t\"\214\001\n\017Broadcas" +
+      "tMsgAck\022\034\n\004user\030\001 \001(\0132\016.chat_msg.User\022\016\n" +
+      "\006roomId\030\002 \001(\t\022\r\n\005msgId\030\003 \001(\t\022\"\n\007msgType\030" +
+      "\004 \001(\0162\021.chat_msg.MsgType\022\013\n\003msg\030\005 \001(\t\022\013\n" +
+      "\003ext\030\006 \001(\t\"<\n\004User\022\016\n\006userId\030\001 \001(\t\022\020\n\010us" +
+      "erName\030\002 \001(\t\022\022\n\nuserAvatar\030\003 \001(\t\")\n\014Exce" +
+      "ptionMsg\022\014\n\004code\030\001 \001(\005\022\013\n\003msg\030\002 \001(\t\":\n\nO" +
+      "fflineMsg\022\034\n\004user\030\001 \001(\0132\016.chat_msg.User\022" +
+      "\016\n\006roomId\030\002 \001(\t\"/\n\tGetStsCmd\022\"\n\007msgType\030" +
+      "\001 \001(\0162\021.chat_msg.MsgType\"\226\001\n\tGetStsAck\022\023" +
+      "\n\013accessKeyId\030\001 \001(\t\022\027\n\017accessKeySecret\030\002" +
+      " \001(\t\022\025\n\rsecurityToken\030\003 \001(\t\022\016\n\006region\030\004 " +
+      "\001(\t\022\016\n\006bucket\030\005 \001(\t\022\022\n\nuploadPath\030\006 \001(\t\022" +
+      "\020\n\010endpoint\030\007 \001(\t\"\037\n\rUserLogoutCmd\022\016\n\006us" +
+      "erId\030\001 \001(\t\"\037\n\rUserLogoutAck\022\016\n\006userId\030\001 " +
+      "\001(\t\"=\n\rOfflineNotify\022\034\n\004user\030\001 \001(\0132\016.cha" +
+      "t_msg.User\022\016\n\006roomId\030\002 \001(\t\"#\n\021SyncChatRe" +
+      "cordCmd\022\016\n\006roomId\030\001 \001(\t\"N\n\021SyncChatRecor" +
+      "dAck\022\016\n\006roomId\030\001 \001(\t\022)\n\013chatRecords\030\002 \003(" +
+      "\0132\024.chat_msg.ChatRecord\"\217\001\n\nChatRecord\022\r" +
+      "\n\005msgId\030\001 \001(\003\022\034\n\004user\030\002 \001(\0132\016.chat_msg.U" +
+      "ser\022\017\n\007message\030\003 \001(\t\022\"\n\007msgType\030\004 \001(\0162\021." +
+      "chat_msg.MsgType\022\013\n\003ext\030\005 \001(\t\022\022\n\ncreateT" +
+      "ime\030\006 \001(\t\" \n\016RecoverUserCmd\022\016\n\006userId\030\001 " +
+      "\001(\t\"d\n\016RecoverUserAck\022\016\n\006userId\030\001 \001(\t\022\020\n" +
+      "\010userName\030\002 \001(\t\022\022\n\nuserAvatar\030\003 \001(\t\022\034\n\004r" +
+      "oom\030\004 \001(\0132\016.chat_msg.Room\"Y\n\004Room\022\016\n\006roo" +
+      "mId\030\001 \001(\t\022\016\n\006roomNo\030\002 \001(\005\022\020\n\010roomName\030\003 " +
+      "\001(\t\022\037\n\007members\030\004 \003(\0132\016.chat_msg.User\">\n\016" +
+      "JoinRoomNotify\022\034\n\004user\030\001 \001(\0132\016.chat_msg." +
+      "User\022\016\n\006roomId\030\002 \001(\t\"?\n\017LeaveRoomNotify\022" +
+      "\034\n\004user\030\001 \001(\0132\016.chat_msg.User\022\016\n\006roomId\030" +
+      "\002 \001(\t\"$\n\022SyncRoomMembersCmd\022\016\n\006roomId\030\001 " +
+      "\001(\t\"E\n\022SyncRoomMembersAck\022\016\n\006roomId\030\001 \001(" +
+      "\t\022\037\n\007members\030\002 \003(\0132\016.chat_msg.User\"-\n\014Re" +
+      "callMsgCmd\022\016\n\006roomId\030\001 \001(\t\022\r\n\005msgId\030\002 \001(" +
+      "\003\"M\n\014RecallMsgAck\022\016\n\006roomId\030\001 \001(\t\022\r\n\005msg" +
+      "Id\030\002 \001(\003\022\016\n\006userId\030\003 \001(\t\022\016\n\006status\030\004 \001(\010" +
+      "\"@\n\017RecallMsgNotify\022\016\n\006roomId\030\001 \001(\t\022\r\n\005m" +
+      "sgId\030\002 \001(\003\022\016\n\006userId\030\003 \001(\t\"N\n\013AtMsgNotif" +
+      "y\022\016\n\006roomId\030\001 \001(\t\022\r\n\005msgId\030\002 \001(\003\022\016\n\006user" +
+      "Id\030\003 \001(\t\022\020\n\010atUserId\030\004 \001(\t\"s\n\017StreamMsgN" +
+      "otify\022\016\n\006roomId\030\001 \001(\t\022\r\n\005msgId\030\002 \001(\003\022\034\n\004" +
+      "user\030\003 \001(\0132\016.chat_msg.User\022\022\n\nstreamType" +
+      "\030\004 \001(\005\022\017\n\007content\030\005 \001(\t*\277\005\n\nMsgCommand\022\022" +
+      "\n\016USER_LOGIN_CMD\020\000\022\022\n\016USER_LOGIN_ACK\020\001\022\022" +
+      "\n\016HEART_BEAT_CMD\020\002\022\022\n\016HEART_BEAT_ACK\020\003\022\021" +
+      "\n\rJOIN_ROOM_CMD\020\004\022\021\n\rJOIN_ROOM_ACK\020\005\022\023\n\017" +
+      "CREATE_ROOM_CMD\020\006\022\023\n\017CREATE_ROOM_ACK\020\007\022\022" +
+      "\n\016LEAVE_ROOM_CMD\020\010\022\022\n\016LEAVE_ROOM_ACK\020\t\022\020" +
+      "\n\014SEND_MSG_CMD\020\n\022\020\n\014SEND_MSG_ACK\020\013\022\025\n\021BR" +
+      "OADCAST_MSG_ACK\020\014\022\021\n\rEXCEPTION_MSG\020\r\022\017\n\013" +
+      "OFFLINE_MSG\020\016\022\017\n\013GET_STS_CMD\020\017\022\017\n\013GET_ST" +
+      "S_ACK\020\020\022\023\n\017USER_LOGOUT_CMD\020\021\022\023\n\017USER_LOG" +
+      "OUT_ACK\020\022\022\022\n\016OFFLINE_NOTIFY\020\023\022\030\n\024SYNC_CH" +
+      "AT_RECORD_CMD\020\024\022\030\n\024SYNC_CHAT_RECORD_ACK\020" +
+      "\025\022\024\n\020RECOVER_USER_CMD\020\026\022\024\n\020RECOVER_USER_" +
+      "ACK\020\027\022\024\n\020JOIN_ROOM_NOTIFY\020\030\022\025\n\021LEAVE_ROO" +
+      "M_NOTIFY\020\031\022\031\n\025SYNC_ROOM_MEMBERS_CMD\020\032\022\031\n" +
+      "\025SYNC_ROOM_MEMBERS_ACK\020\033\022\022\n\016RECALL_MSG_C" +
+      "MD\020\034\022\022\n\016RECALL_MSG_ACK\020\035\022\025\n\021RECALL_MSG_N" +
+      "OTIFY\020\036\022\021\n\rAT_MSG_NOTIFY\020\037\022\025\n\021STREAM_MSG" +
+      "_NOTIFY\020 *>\n\007MsgType\022\010\n\004TEXT\020\000\022\t\n\005IMAGE\020" +
+      "\001\022\t\n\005VOICE\020\002\022\t\n\005VIDEO\020\003\022\010\n\004FILE\020\004B\034\n\032com" +
+      ".howcode.aqchat.messageb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -30601,7 +30741,7 @@ public final class AQChatMsgProtocol {
     internal_static_chat_msg_JoinRoomAck_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chat_msg_JoinRoomAck_descriptor,
-        new java.lang.String[] { "RoomId", "RoomNo", "RoomName", });
+        new java.lang.String[] { "RoomId", "RoomNo", "RoomName", "Ai", });
     internal_static_chat_msg_CreateRoomCmd_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_chat_msg_CreateRoomCmd_fieldAccessorTable = new
@@ -30613,7 +30753,7 @@ public final class AQChatMsgProtocol {
     internal_static_chat_msg_CreateRoomAck_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chat_msg_CreateRoomAck_descriptor,
-        new java.lang.String[] { "RoomId", "RoomNo", "RoomName", });
+        new java.lang.String[] { "RoomId", "RoomNo", "RoomName", "Ai", });
     internal_static_chat_msg_LeaveRoomCmd_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_chat_msg_LeaveRoomCmd_fieldAccessorTable = new

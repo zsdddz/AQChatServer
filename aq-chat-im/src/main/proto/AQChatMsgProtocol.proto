@@ -95,6 +95,7 @@ message JoinRoomAck{
   string roomId = 1;
   int32 roomNo = 2;
   string roomName = 3;
+  int32 ai = 4;
 }
 //新建房间
 message CreateRoomCmd{
@@ -109,6 +110,7 @@ message CreateRoomAck{
   string roomId = 1;
   int32 roomNo = 2;
   string roomName = 3;
+  int32 ai = 4;
 }
 //离开房间
 message LeaveRoomCmd{

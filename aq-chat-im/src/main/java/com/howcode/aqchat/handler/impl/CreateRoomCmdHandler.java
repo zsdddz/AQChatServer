@@ -81,6 +81,7 @@ public class CreateRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtoc
         roomInfoDto.setRoomNo(roomNo);
         roomInfoDto.setRoomName(roomName);
         roomInfoDto.setHistory(cmd.getHistory());
+        roomInfoDto.setAi(cmd.getAi());
         ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.ROOM_ID)).set(roomId);
         userHolder.setJoinRoomTime(userId, System.currentTimeMillis());
         //将房间信息保存至redis
@@ -103,6 +104,7 @@ public class CreateRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtoc
                 .setRoomId(roomInfoDto.getRoomId())
                 .setRoomName(roomName)
                 .setRoomNo(roomNo)
+                .setAi(roomInfoDto.getAi())
                 .build();
         ctx.writeAndFlush(createRoomAck);
     }

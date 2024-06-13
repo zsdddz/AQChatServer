@@ -16,5 +16,6 @@ public class RoomInfoDto {
     private String roomName;
     //是否支持历史消息 0不支持 1支持
     private int history;
+    private int ai;
     private List<UserGlobalInfoDto> roomMembers;
 }
