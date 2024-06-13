@@ -46,7 +46,8 @@ public class MessageConstructor {
             users.forEach(room::addMembers);
             room.setRoomId(roomInfo.getRoomId())
                     .setRoomNo(roomInfo.getRoomNo())
-                    .setRoomName(roomInfo.getRoomName());
+                    .setRoomName(roomInfo.getRoomName())
+                    .setAi(roomInfo.getAi());
             builder.setRoom(room);
         }
         builder.setUserAvatar(userGlobalInfoDto.getUserAvatar());
