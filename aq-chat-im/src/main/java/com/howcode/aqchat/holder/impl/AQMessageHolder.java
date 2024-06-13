@@ -21,23 +21,23 @@ public class AQMessageHolder implements IMessageHolder {
     private RedisCacheHelper redisCacheHelper;
 
     @Override
-    public void putMessageId(String roomId, long msgId) {
+    public void putMessageId(String roomId, String msgId) {
         List<String> messageIds = redisCacheHelper.getCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId,AQRedisKeyPrefix.AQ_ROOM_MESSAGE_PREFIX);
         if (null == messageIds) {
             messageIds = new ArrayList<>();
-            messageIds.add(msgId + "");
+            messageIds.add(msgId);
         } else {
-            messageIds.add(msgId + "");
+            messageIds.add(msgId);
         }
         redisCacheHelper.setCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_MESSAGE_PREFIX, messageIds);
     }
 
     @Override
-    public boolean isExistMessageId(String roomId, long msgId) {
+    public boolean isExistMessageId(String roomId, String msgId) {
         List<String> messageIds = redisCacheHelper.getCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId,AQRedisKeyPrefix.AQ_ROOM_MESSAGE_PREFIX);
         if (null == messageIds) {
             return false;
         }
-        return messageIds.contains(msgId + "");
+        return messageIds.contains(msgId);
     }
 }

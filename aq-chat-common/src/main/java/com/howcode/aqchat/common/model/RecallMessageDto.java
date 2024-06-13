@@ -14,6 +14,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RecallMessageDto {
     private String roomId;
-    private Long msgId;
+    private String msgId;
     private String userId;
 }

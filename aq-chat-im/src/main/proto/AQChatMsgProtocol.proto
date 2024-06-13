@@ -95,16 +95,22 @@ message JoinRoomAck{
   string roomId = 1;
   int32 roomNo = 2;
   string roomName = 3;
+  int32 ai = 4;
 }
 //新建房间
 message CreateRoomCmd{
   int32 roomNo = 1;
   string roomName = 2;
+  //是否支持查看历史消息 0-不支持 1-支持
+  int32 history = 3;
+  //是否开启AI助手 0-不开启 1-开启
+  int32 ai = 4;
 }
 message CreateRoomAck{
   string roomId = 1;
   int32 roomNo = 2;
   string roomName = 3;
+  int32 ai = 4;
 }
 //离开房间
 message LeaveRoomCmd{
@@ -117,7 +123,7 @@ message LeaveRoomAck{
 //发送消息
 message SendMsgCmd{
   //消息id
-  int64 msgId = 1;
+  string msgId = 1;
   string roomId = 2;
   MsgType msgType = 3;
   string msg = 4;
@@ -126,7 +132,7 @@ message SendMsgCmd{
 //发送消息响应 是否成功
 message SendMsgAck{
   //消息id
-  int64 msgId = 1;
+  string msgId = 1;
   string userId = 2;
   string roomId = 3;
   bool status = 4;
@@ -211,7 +217,7 @@ message SyncChatRecordAck{
 }
 message ChatRecord{
   //消息id
-  int64 msgId = 1;
+  string msgId = 1;
   User user = 2;
   string message = 3;
   MsgType msgType = 4;
@@ -233,7 +239,8 @@ message Room{
   string roomId = 1;
   int32 roomNo = 2;
   string roomName = 3;
-  repeated User members = 4;
+  int32 ai = 4;
+  repeated User members = 5;
 }
 
 //加入房间通知
@@ -259,12 +266,12 @@ message SyncRoomMembersAck{
 //撤回消息
 message RecallMsgCmd{
   string roomId = 1;
-  int64 msgId = 2;
+  string msgId = 2;
 }
 
 message RecallMsgAck{
   string roomId = 1;
-  int64 msgId = 2;
+  string msgId = 2;
   string userId = 3;
   bool status = 4;
 }
@@ -272,14 +279,14 @@ message RecallMsgAck{
 //撤回消息通知
 message RecallMsgNotify{
   string roomId = 1;
-  int64 msgId = 2;
+  string msgId = 2;
   string userId = 3;
 }
 
 //艾特消息通知
 message AtMsgNotify{
   string roomId = 1;
-  int64 msgId = 2;
+  string msgId = 2;
   string userId = 3; //发送人id
   string atUserId = 4; //被艾特人id
 }
@@ -287,7 +294,7 @@ message AtMsgNotify{
 //流式消息通知
 message StreamMsgNotify{
   string roomId = 1;
-  int64 msgId = 2;
+  string msgId = 2;
   User user = 3;
   int32 streamType = 4; //流类型 0-开始 1--结束
   string content = 5;

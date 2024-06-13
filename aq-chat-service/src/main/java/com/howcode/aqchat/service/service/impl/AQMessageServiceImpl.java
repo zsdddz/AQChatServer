@@ -2,9 +2,13 @@ package com.howcode.aqchat.service.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
+import com.howcode.aqchat.common.constant.AQRedisKeyPrefix;
 import com.howcode.aqchat.common.enums.MessageStatusEnum;
+import com.howcode.aqchat.common.enums.SwitchStatusEnum;
 import com.howcode.aqchat.common.model.MessageDto;
 import com.howcode.aqchat.common.model.MessageRecordDto;
+import com.howcode.aqchat.common.model.RoomInfoDto;
+import com.howcode.aqchat.framework.redis.starter.RedisCacheHelper;
 import com.howcode.aqchat.service.dao.mapper.IAQMessageMapper;
 import com.howcode.aqchat.service.dao.po.AqMessage;
 import com.howcode.aqchat.service.dao.po.AqUser;
@@ -31,6 +35,8 @@ public class AQMessageServiceImpl implements IAQMessageService {
     private IAQMessageMapper messageMapper;
     @Resource
     private IAQUserService userService;
+    @Resource
+    private RedisCacheHelper redisCacheHelper;
 
     @Override
     public void saveMessage(MessageDto messageDto) {
@@ -49,10 +55,13 @@ public class AQMessageServiceImpl implements IAQMessageService {
     public List<MessageRecordDto> getMessageList(String roomId, Long joinRoomTime) {
         //查询房间最后100条消息
         joinRoomTime = (joinRoomTime == null) ? System.currentTimeMillis() : joinRoomTime;
-        System.out.println(new Date(joinRoomTime));
-        LambdaQueryWrapper<AqMessage> query = new LambdaQueryWrapper<AqMessage>().eq(AqMessage::getRoomId, roomId)
-                .ge(AqMessage::getCreateTime,new Date(joinRoomTime))
-                .eq(AqMessage::getStatus, MessageStatusEnum.SHOW.getCode())
+        LambdaQueryWrapper<AqMessage> query = new LambdaQueryWrapper<AqMessage>()
+                .eq(AqMessage::getRoomId, roomId);
+        RoomInfoDto roomInfo = redisCacheHelper.getCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_INFO_PREFIX);
+        if (roomInfo != null && roomInfo.getHistory() == SwitchStatusEnum.CLOSE.getCode()) {
+            query.ge(AqMessage::getCreateTime, new Date(joinRoomTime));
+        }
+        query.eq(AqMessage::getStatus, MessageStatusEnum.SHOW.getCode())
                 .orderByDesc(AqMessage::getCreateTime)
                 .last(AQBusinessConstant.LIMIT);
         List<AqMessage> aqMessages = messageMapper.selectList(query);
@@ -60,7 +69,7 @@ public class AQMessageServiceImpl implements IAQMessageService {
     }
 
     @Override
-    public void updateMessageVisible(Long msgId) {
+    public void updateMessageVisible(String msgId) {
         AqMessage aqMessage = new AqMessage();
         aqMessage.setMessageId(msgId);
         aqMessage.setStatus(MessageStatusEnum.HIDE.getCode());

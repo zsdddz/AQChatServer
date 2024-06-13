@@ -46,7 +46,8 @@ public class MessageConstructor {
             users.forEach(room::addMembers);
             room.setRoomId(roomInfo.getRoomId())
                     .setRoomNo(roomInfo.getRoomNo())
-                    .setRoomName(roomInfo.getRoomName());
+                    .setRoomName(roomInfo.getRoomName())
+                    .setAi(roomInfo.getAi());
             builder.setRoom(room);
         }
         builder.setUserAvatar(userGlobalInfoDto.getUserAvatar());
@@ -103,7 +104,7 @@ public class MessageConstructor {
         return userList;
     }
 
-    public static AQChatMsgProtocol.SendMsgAck buildSendMsgAck(String roomId, String userId, long msgId, String ext) {
+    public static AQChatMsgProtocol.SendMsgAck buildSendMsgAck(String roomId, String userId, String msgId, String ext) {
         return AQChatMsgProtocol.SendMsgAck.newBuilder()
                 .setRoomId(roomId)
                 .setUserId(userId)
@@ -113,7 +114,7 @@ public class MessageConstructor {
                 .build();
     }
 
-    public static AQChatMsgProtocol.RecallMsgAck buildRecallMsgAck(Long msgId, String roomId, String userId) {
+    public static AQChatMsgProtocol.RecallMsgAck buildRecallMsgAck(String msgId, String roomId, String userId) {
         return AQChatMsgProtocol.RecallMsgAck.newBuilder()
                 .setMsgId(msgId)
                 .setRoomId(roomId)

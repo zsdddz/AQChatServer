@@ -64,7 +64,7 @@ public interface AQBusinessConstant {
     /**
      * 机器人助手名称
      */
-    String AI_HELPER_NAME = "AQChat助手";
+    String AI_HELPER_NAME = "小Q";
     /**
      * 机器人助手头像
      */

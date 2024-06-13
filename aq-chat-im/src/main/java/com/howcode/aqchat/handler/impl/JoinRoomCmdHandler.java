@@ -79,6 +79,7 @@ public class JoinRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol
                 .setRoomId(roomId)
                 .setRoomNo(roomInfoDto.getRoomNo())
                 .setRoomName(roomInfoDto.getRoomName())
+                .setAi(roomInfoDto.getAi())
                 .build();
         ctx.writeAndFlush(joinRoomAck);
 

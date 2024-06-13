@@ -5,7 +5,8 @@ package com.howcode.aqchat.common.enums;
  * @Description:
  * @date 2024-04-25 14:16
  */
-public enum MsgTypeEnum implements AQChatEnum{
+public enum MsgTypeEnum implements AQChatEnum {
+    TEXT(0, "text"),
     IMAGE(1, "image"),
     VOICE(2, "voice"),
     VIDEO(3, "video"),
@@ -29,6 +30,7 @@ public enum MsgTypeEnum implements AQChatEnum{
     public String getMessage() {
         return message;
     }
+
     /**
      * 通过code 获取枚举名字
      */

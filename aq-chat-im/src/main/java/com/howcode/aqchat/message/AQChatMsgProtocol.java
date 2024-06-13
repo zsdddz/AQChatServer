@@ -4007,6 +4007,12 @@ public final class AQChatMsgProtocol {
      */
     com.google.protobuf.ByteString
         getRoomNameBytes();
+
+    /**
+     * <code>int32 ai = 4;</code>
+     * @return The ai.
+     */
+    int getAi();
   }
   /**
    * Protobuf type {@code chat_msg.JoinRoomAck}
@@ -4070,6 +4076,11 @@ public final class AQChatMsgProtocol {
               java.lang.String s = input.readStringRequireUtf8();
 
               roomName_ = s;
+              break;
+            }
+            case 32: {
+
+              ai_ = input.readInt32();
               break;
             }
             default: {
@@ -4191,6 +4202,17 @@ public final class AQChatMsgProtocol {
       }
     }
 
+    public static final int AI_FIELD_NUMBER = 4;
+    private int ai_;
+    /**
+     * <code>int32 ai = 4;</code>
+     * @return The ai.
+     */
+    @java.lang.Override
+    public int getAi() {
+      return ai_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -4214,6 +4236,9 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomName_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, roomName_);
       }
+      if (ai_ != 0) {
+        output.writeInt32(4, ai_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -4232,6 +4257,10 @@ public final class AQChatMsgProtocol {
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomName_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, roomName_);
+      }
+      if (ai_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, ai_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4254,6 +4283,8 @@ public final class AQChatMsgProtocol {
           != other.getRoomNo()) return false;
       if (!getRoomName()
           .equals(other.getRoomName())) return false;
+      if (getAi()
+          != other.getAi()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -4271,6 +4302,8 @@ public final class AQChatMsgProtocol {
       hash = (53 * hash) + getRoomNo();
       hash = (37 * hash) + ROOMNAME_FIELD_NUMBER;
       hash = (53 * hash) + getRoomName().hashCode();
+      hash = (37 * hash) + AI_FIELD_NUMBER;
+      hash = (53 * hash) + getAi();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -4410,6 +4443,8 @@ public final class AQChatMsgProtocol {
 
         roomName_ = "";
 
+        ai_ = 0;
+
         return this;
       }
 
@@ -4439,6 +4474,7 @@ public final class AQChatMsgProtocol {
         result.roomId_ = roomId_;
         result.roomNo_ = roomNo_;
         result.roomName_ = roomName_;
+        result.ai_ = ai_;
         onBuilt();
         return result;
       }
@@ -4497,6 +4533,9 @@ public final class AQChatMsgProtocol {
         if (!other.getRoomName().isEmpty()) {
           roomName_ = other.roomName_;
           onChanged();
+        }
+        if (other.getAi() != 0) {
+          setAi(other.getAi());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -4709,6 +4748,37 @@ public final class AQChatMsgProtocol {
         onChanged();
         return this;
       }
+
+      private int ai_ ;
+      /**
+       * <code>int32 ai = 4;</code>
+       * @return The ai.
+       */
+      @java.lang.Override
+      public int getAi() {
+        return ai_;
+      }
+      /**
+       * <code>int32 ai = 4;</code>
+       * @param value The ai to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAi(int value) {
+        
+        ai_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 ai = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAi() {
+        
+        ai_ = 0;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -4783,6 +4853,26 @@ public final class AQChatMsgProtocol {
      */
     com.google.protobuf.ByteString
         getRoomNameBytes();
+
+    /**
+     * <pre>
+     *是否支持查看历史消息 0-不支持 1-支持
+     * </pre>
+     *
+     * <code>int32 history = 3;</code>
+     * @return The history.
+     */
+    int getHistory();
+
+    /**
+     * <pre>
+     *是否开启AI助手 0-不开启 1-开启
+     * </pre>
+     *
+     * <code>int32 ai = 4;</code>
+     * @return The ai.
+     */
+    int getAi();
   }
   /**
    * <pre>
@@ -4843,6 +4933,16 @@ public final class AQChatMsgProtocol {
               java.lang.String s = input.readStringRequireUtf8();
 
               roomName_ = s;
+              break;
+            }
+            case 24: {
+
+              history_ = input.readInt32();
+              break;
+            }
+            case 32: {
+
+              ai_ = input.readInt32();
               break;
             }
             default: {
@@ -4926,6 +5026,36 @@ public final class AQChatMsgProtocol {
       }
     }
 
+    public static final int HISTORY_FIELD_NUMBER = 3;
+    private int history_;
+    /**
+     * <pre>
+     *是否支持查看历史消息 0-不支持 1-支持
+     * </pre>
+     *
+     * <code>int32 history = 3;</code>
+     * @return The history.
+     */
+    @java.lang.Override
+    public int getHistory() {
+      return history_;
+    }
+
+    public static final int AI_FIELD_NUMBER = 4;
+    private int ai_;
+    /**
+     * <pre>
+     *是否开启AI助手 0-不开启 1-开启
+     * </pre>
+     *
+     * <code>int32 ai = 4;</code>
+     * @return The ai.
+     */
+    @java.lang.Override
+    public int getAi() {
+      return ai_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -4946,6 +5076,12 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomName_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, roomName_);
       }
+      if (history_ != 0) {
+        output.writeInt32(3, history_);
+      }
+      if (ai_ != 0) {
+        output.writeInt32(4, ai_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -4961,6 +5097,14 @@ public final class AQChatMsgProtocol {
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomName_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, roomName_);
+      }
+      if (history_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, history_);
+      }
+      if (ai_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, ai_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4981,6 +5125,10 @@ public final class AQChatMsgProtocol {
           != other.getRoomNo()) return false;
       if (!getRoomName()
           .equals(other.getRoomName())) return false;
+      if (getHistory()
+          != other.getHistory()) return false;
+      if (getAi()
+          != other.getAi()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -4996,6 +5144,10 @@ public final class AQChatMsgProtocol {
       hash = (53 * hash) + getRoomNo();
       hash = (37 * hash) + ROOMNAME_FIELD_NUMBER;
       hash = (53 * hash) + getRoomName().hashCode();
+      hash = (37 * hash) + HISTORY_FIELD_NUMBER;
+      hash = (53 * hash) + getHistory();
+      hash = (37 * hash) + AI_FIELD_NUMBER;
+      hash = (53 * hash) + getAi();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -5137,6 +5289,10 @@ public final class AQChatMsgProtocol {
 
         roomName_ = "";
 
+        history_ = 0;
+
+        ai_ = 0;
+
         return this;
       }
 
@@ -5165,6 +5321,8 @@ public final class AQChatMsgProtocol {
         com.howcode.aqchat.message.AQChatMsgProtocol.CreateRoomCmd result = new com.howcode.aqchat.message.AQChatMsgProtocol.CreateRoomCmd(this);
         result.roomNo_ = roomNo_;
         result.roomName_ = roomName_;
+        result.history_ = history_;
+        result.ai_ = ai_;
         onBuilt();
         return result;
       }
@@ -5219,6 +5377,12 @@ public final class AQChatMsgProtocol {
         if (!other.getRoomName().isEmpty()) {
           roomName_ = other.roomName_;
           onChanged();
+        }
+        if (other.getHistory() != 0) {
+          setHistory(other.getHistory());
+        }
+        if (other.getAi() != 0) {
+          setAi(other.getAi());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -5355,6 +5519,92 @@ public final class AQChatMsgProtocol {
         onChanged();
         return this;
       }
+
+      private int history_ ;
+      /**
+       * <pre>
+       *是否支持查看历史消息 0-不支持 1-支持
+       * </pre>
+       *
+       * <code>int32 history = 3;</code>
+       * @return The history.
+       */
+      @java.lang.Override
+      public int getHistory() {
+        return history_;
+      }
+      /**
+       * <pre>
+       *是否支持查看历史消息 0-不支持 1-支持
+       * </pre>
+       *
+       * <code>int32 history = 3;</code>
+       * @param value The history to set.
+       * @return This builder for chaining.
+       */
+      public Builder setHistory(int value) {
+        
+        history_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *是否支持查看历史消息 0-不支持 1-支持
+       * </pre>
+       *
+       * <code>int32 history = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearHistory() {
+        
+        history_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int ai_ ;
+      /**
+       * <pre>
+       *是否开启AI助手 0-不开启 1-开启
+       * </pre>
+       *
+       * <code>int32 ai = 4;</code>
+       * @return The ai.
+       */
+      @java.lang.Override
+      public int getAi() {
+        return ai_;
+      }
+      /**
+       * <pre>
+       *是否开启AI助手 0-不开启 1-开启
+       * </pre>
+       *
+       * <code>int32 ai = 4;</code>
+       * @param value The ai to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAi(int value) {
+        
+        ai_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *是否开启AI助手 0-不开启 1-开启
+       * </pre>
+       *
+       * <code>int32 ai = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAi() {
+        
+        ai_ = 0;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -5441,6 +5691,12 @@ public final class AQChatMsgProtocol {
      */
     com.google.protobuf.ByteString
         getRoomNameBytes();
+
+    /**
+     * <code>int32 ai = 4;</code>
+     * @return The ai.
+     */
+    int getAi();
   }
   /**
    * Protobuf type {@code chat_msg.CreateRoomAck}
@@ -5504,6 +5760,11 @@ public final class AQChatMsgProtocol {
               java.lang.String s = input.readStringRequireUtf8();
 
               roomName_ = s;
+              break;
+            }
+            case 32: {
+
+              ai_ = input.readInt32();
               break;
             }
             default: {
@@ -5625,6 +5886,17 @@ public final class AQChatMsgProtocol {
       }
     }
 
+    public static final int AI_FIELD_NUMBER = 4;
+    private int ai_;
+    /**
+     * <code>int32 ai = 4;</code>
+     * @return The ai.
+     */
+    @java.lang.Override
+    public int getAi() {
+      return ai_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -5648,6 +5920,9 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomName_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, roomName_);
       }
+      if (ai_ != 0) {
+        output.writeInt32(4, ai_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -5666,6 +5941,10 @@ public final class AQChatMsgProtocol {
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomName_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, roomName_);
+      }
+      if (ai_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, ai_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -5688,6 +5967,8 @@ public final class AQChatMsgProtocol {
           != other.getRoomNo()) return false;
       if (!getRoomName()
           .equals(other.getRoomName())) return false;
+      if (getAi()
+          != other.getAi()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -5705,6 +5986,8 @@ public final class AQChatMsgProtocol {
       hash = (53 * hash) + getRoomNo();
       hash = (37 * hash) + ROOMNAME_FIELD_NUMBER;
       hash = (53 * hash) + getRoomName().hashCode();
+      hash = (37 * hash) + AI_FIELD_NUMBER;
+      hash = (53 * hash) + getAi();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -5844,6 +6127,8 @@ public final class AQChatMsgProtocol {
 
         roomName_ = "";
 
+        ai_ = 0;
+
         return this;
       }
 
@@ -5873,6 +6158,7 @@ public final class AQChatMsgProtocol {
         result.roomId_ = roomId_;
         result.roomNo_ = roomNo_;
         result.roomName_ = roomName_;
+        result.ai_ = ai_;
         onBuilt();
         return result;
       }
@@ -5931,6 +6217,9 @@ public final class AQChatMsgProtocol {
         if (!other.getRoomName().isEmpty()) {
           roomName_ = other.roomName_;
           onChanged();
+        }
+        if (other.getAi() != 0) {
+          setAi(other.getAi());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -6140,6 +6429,37 @@ public final class AQChatMsgProtocol {
   checkByteStringIsUtf8(value);
         
         roomName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int ai_ ;
+      /**
+       * <code>int32 ai = 4;</code>
+       * @return The ai.
+       */
+      @java.lang.Override
+      public int getAi() {
+        return ai_;
+      }
+      /**
+       * <code>int32 ai = 4;</code>
+       * @param value The ai to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAi(int value) {
+        
+        ai_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 ai = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAi() {
+        
+        ai_ = 0;
         onChanged();
         return this;
       }
@@ -7349,10 +7669,20 @@ public final class AQChatMsgProtocol {
      *消息id
      * </pre>
      *
-     * <code>int64 msgId = 1;</code>
+     * <code>string msgId = 1;</code>
      * @return The msgId.
      */
-    long getMsgId();
+    java.lang.String getMsgId();
+    /**
+     * <pre>
+     *消息id
+     * </pre>
+     *
+     * <code>string msgId = 1;</code>
+     * @return The bytes for msgId.
+     */
+    com.google.protobuf.ByteString
+        getMsgIdBytes();
 
     /**
      * <code>string roomId = 2;</code>
@@ -7418,6 +7748,7 @@ public final class AQChatMsgProtocol {
       super(builder);
     }
     private SendMsgCmd() {
+      msgId_ = "";
       roomId_ = "";
       msgType_ = 0;
       msg_ = "";
@@ -7454,9 +7785,10 @@ public final class AQChatMsgProtocol {
             case 0:
               done = true;
               break;
-            case 8: {
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
 
-              msgId_ = input.readInt64();
+              msgId_ = s;
               break;
             }
             case 18: {
@@ -7516,18 +7848,49 @@ public final class AQChatMsgProtocol {
     }
 
     public static final int MSGID_FIELD_NUMBER = 1;
-    private long msgId_;
+    private volatile java.lang.Object msgId_;
     /**
      * <pre>
      *消息id
      * </pre>
      *
-     * <code>int64 msgId = 1;</code>
+     * <code>string msgId = 1;</code>
      * @return The msgId.
      */
     @java.lang.Override
-    public long getMsgId() {
-      return msgId_;
+    public java.lang.String getMsgId() {
+      java.lang.Object ref = msgId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        msgId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *消息id
+     * </pre>
+     *
+     * <code>string msgId = 1;</code>
+     * @return The bytes for msgId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getMsgIdBytes() {
+      java.lang.Object ref = msgId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        msgId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int ROOMID_FIELD_NUMBER = 2;
@@ -7677,8 +8040,8 @@ public final class AQChatMsgProtocol {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (msgId_ != 0L) {
-        output.writeInt64(1, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msgId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, msgId_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, roomId_);
@@ -7701,9 +8064,8 @@ public final class AQChatMsgProtocol {
       if (size != -1) return size;
 
       size = 0;
-      if (msgId_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msgId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, msgId_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, roomId_);
@@ -7733,8 +8095,8 @@ public final class AQChatMsgProtocol {
       }
       com.howcode.aqchat.message.AQChatMsgProtocol.SendMsgCmd other = (com.howcode.aqchat.message.AQChatMsgProtocol.SendMsgCmd) obj;
 
-      if (getMsgId()
-          != other.getMsgId()) return false;
+      if (!getMsgId()
+          .equals(other.getMsgId())) return false;
       if (!getRoomId()
           .equals(other.getRoomId())) return false;
       if (msgType_ != other.msgType_) return false;
@@ -7754,8 +8116,7 @@ public final class AQChatMsgProtocol {
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + MSGID_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getMsgId());
+      hash = (53 * hash) + getMsgId().hashCode();
       hash = (37 * hash) + ROOMID_FIELD_NUMBER;
       hash = (53 * hash) + getRoomId().hashCode();
       hash = (37 * hash) + MSGTYPE_FIELD_NUMBER;
@@ -7901,7 +8262,7 @@ public final class AQChatMsgProtocol {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        msgId_ = 0L;
+        msgId_ = "";
 
         roomId_ = "";
 
@@ -7990,8 +8351,9 @@ public final class AQChatMsgProtocol {
 
       public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.SendMsgCmd other) {
         if (other == com.howcode.aqchat.message.AQChatMsgProtocol.SendMsgCmd.getDefaultInstance()) return this;
-        if (other.getMsgId() != 0L) {
-          setMsgId(other.getMsgId());
+        if (!other.getMsgId().isEmpty()) {
+          msgId_ = other.msgId_;
+          onChanged();
         }
         if (!other.getRoomId().isEmpty()) {
           roomId_ = other.roomId_;
@@ -8037,30 +8399,63 @@ public final class AQChatMsgProtocol {
         return this;
       }
 
-      private long msgId_ ;
+      private java.lang.Object msgId_ = "";
       /**
        * <pre>
        *消息id
        * </pre>
        *
-       * <code>int64 msgId = 1;</code>
+       * <code>string msgId = 1;</code>
        * @return The msgId.
        */
-      @java.lang.Override
-      public long getMsgId() {
-        return msgId_;
+      public java.lang.String getMsgId() {
+        java.lang.Object ref = msgId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          msgId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
        * <pre>
        *消息id
        * </pre>
        *
-       * <code>int64 msgId = 1;</code>
+       * <code>string msgId = 1;</code>
+       * @return The bytes for msgId.
+       */
+      public com.google.protobuf.ByteString
+          getMsgIdBytes() {
+        java.lang.Object ref = msgId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          msgId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *消息id
+       * </pre>
+       *
+       * <code>string msgId = 1;</code>
        * @param value The msgId to set.
        * @return This builder for chaining.
        */
-      public Builder setMsgId(long value) {
-        
+      public Builder setMsgId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
         msgId_ = value;
         onChanged();
         return this;
@@ -8070,12 +8465,32 @@ public final class AQChatMsgProtocol {
        *消息id
        * </pre>
        *
-       * <code>int64 msgId = 1;</code>
+       * <code>string msgId = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearMsgId() {
         
-        msgId_ = 0L;
+        msgId_ = getDefaultInstance().getMsgId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *消息id
+       * </pre>
+       *
+       * <code>string msgId = 1;</code>
+       * @param value The bytes for msgId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMsgIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        msgId_ = value;
         onChanged();
         return this;
       }
@@ -8423,10 +8838,20 @@ public final class AQChatMsgProtocol {
      *消息id
      * </pre>
      *
-     * <code>int64 msgId = 1;</code>
+     * <code>string msgId = 1;</code>
      * @return The msgId.
      */
-    long getMsgId();
+    java.lang.String getMsgId();
+    /**
+     * <pre>
+     *消息id
+     * </pre>
+     *
+     * <code>string msgId = 1;</code>
+     * @return The bytes for msgId.
+     */
+    com.google.protobuf.ByteString
+        getMsgIdBytes();
 
     /**
      * <code>string userId = 2;</code>
@@ -8487,6 +8912,7 @@ public final class AQChatMsgProtocol {
       super(builder);
     }
     private SendMsgAck() {
+      msgId_ = "";
       userId_ = "";
       roomId_ = "";
       ext_ = "";
@@ -8522,9 +8948,10 @@ public final class AQChatMsgProtocol {
             case 0:
               done = true;
               break;
-            case 8: {
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
 
-              msgId_ = input.readInt64();
+              msgId_ = s;
               break;
             }
             case 18: {
@@ -8583,18 +9010,49 @@ public final class AQChatMsgProtocol {
     }
 
     public static final int MSGID_FIELD_NUMBER = 1;
-    private long msgId_;
+    private volatile java.lang.Object msgId_;
     /**
      * <pre>
      *消息id
      * </pre>
      *
-     * <code>int64 msgId = 1;</code>
+     * <code>string msgId = 1;</code>
      * @return The msgId.
      */
     @java.lang.Override
-    public long getMsgId() {
-      return msgId_;
+    public java.lang.String getMsgId() {
+      java.lang.Object ref = msgId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        msgId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *消息id
+     * </pre>
+     *
+     * <code>string msgId = 1;</code>
+     * @return The bytes for msgId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getMsgIdBytes() {
+      java.lang.Object ref = msgId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        msgId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int USERID_FIELD_NUMBER = 2;
@@ -8736,8 +9194,8 @@ public final class AQChatMsgProtocol {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (msgId_ != 0L) {
-        output.writeInt64(1, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msgId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, msgId_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, userId_);
@@ -8760,9 +9218,8 @@ public final class AQChatMsgProtocol {
       if (size != -1) return size;
 
       size = 0;
-      if (msgId_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msgId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, msgId_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, userId_);
@@ -8792,8 +9249,8 @@ public final class AQChatMsgProtocol {
       }
       com.howcode.aqchat.message.AQChatMsgProtocol.SendMsgAck other = (com.howcode.aqchat.message.AQChatMsgProtocol.SendMsgAck) obj;
 
-      if (getMsgId()
-          != other.getMsgId()) return false;
+      if (!getMsgId()
+          .equals(other.getMsgId())) return false;
       if (!getUserId()
           .equals(other.getUserId())) return false;
       if (!getRoomId()
@@ -8814,8 +9271,7 @@ public final class AQChatMsgProtocol {
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + MSGID_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getMsgId());
+      hash = (53 * hash) + getMsgId().hashCode();
       hash = (37 * hash) + USERID_FIELD_NUMBER;
       hash = (53 * hash) + getUserId().hashCode();
       hash = (37 * hash) + ROOMID_FIELD_NUMBER;
@@ -8962,7 +9418,7 @@ public final class AQChatMsgProtocol {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        msgId_ = 0L;
+        msgId_ = "";
 
         userId_ = "";
 
@@ -9051,8 +9507,9 @@ public final class AQChatMsgProtocol {
 
       public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.SendMsgAck other) {
         if (other == com.howcode.aqchat.message.AQChatMsgProtocol.SendMsgAck.getDefaultInstance()) return this;
-        if (other.getMsgId() != 0L) {
-          setMsgId(other.getMsgId());
+        if (!other.getMsgId().isEmpty()) {
+          msgId_ = other.msgId_;
+          onChanged();
         }
         if (!other.getUserId().isEmpty()) {
           userId_ = other.userId_;
@@ -9098,30 +9555,63 @@ public final class AQChatMsgProtocol {
         return this;
       }
 
-      private long msgId_ ;
+      private java.lang.Object msgId_ = "";
       /**
        * <pre>
        *消息id
        * </pre>
        *
-       * <code>int64 msgId = 1;</code>
+       * <code>string msgId = 1;</code>
        * @return The msgId.
        */
-      @java.lang.Override
-      public long getMsgId() {
-        return msgId_;
+      public java.lang.String getMsgId() {
+        java.lang.Object ref = msgId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          msgId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
        * <pre>
        *消息id
        * </pre>
        *
-       * <code>int64 msgId = 1;</code>
+       * <code>string msgId = 1;</code>
+       * @return The bytes for msgId.
+       */
+      public com.google.protobuf.ByteString
+          getMsgIdBytes() {
+        java.lang.Object ref = msgId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          msgId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *消息id
+       * </pre>
+       *
+       * <code>string msgId = 1;</code>
        * @param value The msgId to set.
        * @return This builder for chaining.
        */
-      public Builder setMsgId(long value) {
-        
+      public Builder setMsgId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
         msgId_ = value;
         onChanged();
         return this;
@@ -9131,12 +9621,32 @@ public final class AQChatMsgProtocol {
        *消息id
        * </pre>
        *
-       * <code>int64 msgId = 1;</code>
+       * <code>string msgId = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearMsgId() {
         
-        msgId_ = 0L;
+        msgId_ = getDefaultInstance().getMsgId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *消息id
+       * </pre>
+       *
+       * <code>string msgId = 1;</code>
+       * @param value The bytes for msgId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMsgIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        msgId_ = value;
         onChanged();
         return this;
       }
@@ -18541,10 +19051,20 @@ public final class AQChatMsgProtocol {
      *消息id
      * </pre>
      *
-     * <code>int64 msgId = 1;</code>
+     * <code>string msgId = 1;</code>
      * @return The msgId.
      */
-    long getMsgId();
+    java.lang.String getMsgId();
+    /**
+     * <pre>
+     *消息id
+     * </pre>
+     *
+     * <code>string msgId = 1;</code>
+     * @return The bytes for msgId.
+     */
+    com.google.protobuf.ByteString
+        getMsgIdBytes();
 
     /**
      * <code>.chat_msg.User user = 2;</code>
@@ -18621,6 +19141,7 @@ public final class AQChatMsgProtocol {
       super(builder);
     }
     private ChatRecord() {
+      msgId_ = "";
       message_ = "";
       msgType_ = 0;
       ext_ = "";
@@ -18657,9 +19178,10 @@ public final class AQChatMsgProtocol {
             case 0:
               done = true;
               break;
-            case 8: {
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
 
-              msgId_ = input.readInt64();
+              msgId_ = s;
               break;
             }
             case 18: {
@@ -18732,18 +19254,49 @@ public final class AQChatMsgProtocol {
     }
 
     public static final int MSGID_FIELD_NUMBER = 1;
-    private long msgId_;
+    private volatile java.lang.Object msgId_;
     /**
      * <pre>
      *消息id
      * </pre>
      *
-     * <code>int64 msgId = 1;</code>
+     * <code>string msgId = 1;</code>
      * @return The msgId.
      */
     @java.lang.Override
-    public long getMsgId() {
-      return msgId_;
+    public java.lang.String getMsgId() {
+      java.lang.Object ref = msgId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        msgId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *消息id
+     * </pre>
+     *
+     * <code>string msgId = 1;</code>
+     * @return The bytes for msgId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getMsgIdBytes() {
+      java.lang.Object ref = msgId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        msgId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int USER_FIELD_NUMBER = 2;
@@ -18919,8 +19472,8 @@ public final class AQChatMsgProtocol {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (msgId_ != 0L) {
-        output.writeInt64(1, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msgId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, msgId_);
       }
       if (user_ != null) {
         output.writeMessage(2, getUser());
@@ -18946,9 +19499,8 @@ public final class AQChatMsgProtocol {
       if (size != -1) return size;
 
       size = 0;
-      if (msgId_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msgId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, msgId_);
       }
       if (user_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -18982,8 +19534,8 @@ public final class AQChatMsgProtocol {
       }
       com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord other = (com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord) obj;
 
-      if (getMsgId()
-          != other.getMsgId()) return false;
+      if (!getMsgId()
+          .equals(other.getMsgId())) return false;
       if (hasUser() != other.hasUser()) return false;
       if (hasUser()) {
         if (!getUser()
@@ -19008,8 +19560,7 @@ public final class AQChatMsgProtocol {
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + MSGID_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getMsgId());
+      hash = (53 * hash) + getMsgId().hashCode();
       if (hasUser()) {
         hash = (37 * hash) + USER_FIELD_NUMBER;
         hash = (53 * hash) + getUser().hashCode();
@@ -19155,7 +19706,7 @@ public final class AQChatMsgProtocol {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        msgId_ = 0L;
+        msgId_ = "";
 
         if (userBuilder_ == null) {
           user_ = null;
@@ -19255,8 +19806,9 @@ public final class AQChatMsgProtocol {
 
       public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord other) {
         if (other == com.howcode.aqchat.message.AQChatMsgProtocol.ChatRecord.getDefaultInstance()) return this;
-        if (other.getMsgId() != 0L) {
-          setMsgId(other.getMsgId());
+        if (!other.getMsgId().isEmpty()) {
+          msgId_ = other.msgId_;
+          onChanged();
         }
         if (other.hasUser()) {
           mergeUser(other.getUser());
@@ -19305,30 +19857,63 @@ public final class AQChatMsgProtocol {
         return this;
       }
 
-      private long msgId_ ;
+      private java.lang.Object msgId_ = "";
       /**
        * <pre>
        *消息id
        * </pre>
        *
-       * <code>int64 msgId = 1;</code>
+       * <code>string msgId = 1;</code>
        * @return The msgId.
        */
-      @java.lang.Override
-      public long getMsgId() {
-        return msgId_;
+      public java.lang.String getMsgId() {
+        java.lang.Object ref = msgId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          msgId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
        * <pre>
        *消息id
        * </pre>
        *
-       * <code>int64 msgId = 1;</code>
+       * <code>string msgId = 1;</code>
+       * @return The bytes for msgId.
+       */
+      public com.google.protobuf.ByteString
+          getMsgIdBytes() {
+        java.lang.Object ref = msgId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          msgId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *消息id
+       * </pre>
+       *
+       * <code>string msgId = 1;</code>
        * @param value The msgId to set.
        * @return This builder for chaining.
        */
-      public Builder setMsgId(long value) {
-        
+      public Builder setMsgId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
         msgId_ = value;
         onChanged();
         return this;
@@ -19338,12 +19923,32 @@ public final class AQChatMsgProtocol {
        *消息id
        * </pre>
        *
-       * <code>int64 msgId = 1;</code>
+       * <code>string msgId = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearMsgId() {
         
-        msgId_ = 0L;
+        msgId_ = getDefaultInstance().getMsgId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *消息id
+       * </pre>
+       *
+       * <code>string msgId = 1;</code>
+       * @param value The bytes for msgId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMsgIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        msgId_ = value;
         onChanged();
         return this;
       }
@@ -21483,25 +22088,31 @@ public final class AQChatMsgProtocol {
         getRoomNameBytes();
 
     /**
-     * <code>repeated .chat_msg.User members = 4;</code>
+     * <code>int32 ai = 4;</code>
+     * @return The ai.
+     */
+    int getAi();
+
+    /**
+     * <code>repeated .chat_msg.User members = 5;</code>
      */
     java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.User> 
         getMembersList();
     /**
-     * <code>repeated .chat_msg.User members = 4;</code>
+     * <code>repeated .chat_msg.User members = 5;</code>
      */
     com.howcode.aqchat.message.AQChatMsgProtocol.User getMembers(int index);
     /**
-     * <code>repeated .chat_msg.User members = 4;</code>
+     * <code>repeated .chat_msg.User members = 5;</code>
      */
     int getMembersCount();
     /**
-     * <code>repeated .chat_msg.User members = 4;</code>
+     * <code>repeated .chat_msg.User members = 5;</code>
      */
     java.util.List<? extends com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder> 
         getMembersOrBuilderList();
     /**
-     * <code>repeated .chat_msg.User members = 4;</code>
+     * <code>repeated .chat_msg.User members = 5;</code>
      */
     com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder getMembersOrBuilder(
         int index);
@@ -21576,7 +22187,12 @@ public final class AQChatMsgProtocol {
               roomName_ = s;
               break;
             }
-            case 34: {
+            case 32: {
+
+              ai_ = input.readInt32();
+              break;
+            }
+            case 42: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 members_ = new java.util.ArrayList<com.howcode.aqchat.message.AQChatMsgProtocol.User>();
                 mutable_bitField0_ |= 0x00000001;
@@ -21707,17 +22323,28 @@ public final class AQChatMsgProtocol {
       }
     }
 
-    public static final int MEMBERS_FIELD_NUMBER = 4;
+    public static final int AI_FIELD_NUMBER = 4;
+    private int ai_;
+    /**
+     * <code>int32 ai = 4;</code>
+     * @return The ai.
+     */
+    @java.lang.Override
+    public int getAi() {
+      return ai_;
+    }
+
+    public static final int MEMBERS_FIELD_NUMBER = 5;
     private java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.User> members_;
     /**
-     * <code>repeated .chat_msg.User members = 4;</code>
+     * <code>repeated .chat_msg.User members = 5;</code>
      */
     @java.lang.Override
     public java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.User> getMembersList() {
       return members_;
     }
     /**
-     * <code>repeated .chat_msg.User members = 4;</code>
+     * <code>repeated .chat_msg.User members = 5;</code>
      */
     @java.lang.Override
     public java.util.List<? extends com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder> 
@@ -21725,21 +22352,21 @@ public final class AQChatMsgProtocol {
       return members_;
     }
     /**
-     * <code>repeated .chat_msg.User members = 4;</code>
+     * <code>repeated .chat_msg.User members = 5;</code>
      */
     @java.lang.Override
     public int getMembersCount() {
       return members_.size();
     }
     /**
-     * <code>repeated .chat_msg.User members = 4;</code>
+     * <code>repeated .chat_msg.User members = 5;</code>
      */
     @java.lang.Override
     public com.howcode.aqchat.message.AQChatMsgProtocol.User getMembers(int index) {
       return members_.get(index);
     }
     /**
-     * <code>repeated .chat_msg.User members = 4;</code>
+     * <code>repeated .chat_msg.User members = 5;</code>
      */
     @java.lang.Override
     public com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder getMembersOrBuilder(
@@ -21770,8 +22397,11 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomName_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, roomName_);
       }
+      if (ai_ != 0) {
+        output.writeInt32(4, ai_);
+      }
       for (int i = 0; i < members_.size(); i++) {
-        output.writeMessage(4, members_.get(i));
+        output.writeMessage(5, members_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -21792,9 +22422,13 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomName_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, roomName_);
       }
+      if (ai_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, ai_);
+      }
       for (int i = 0; i < members_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, members_.get(i));
+          .computeMessageSize(5, members_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -21817,6 +22451,8 @@ public final class AQChatMsgProtocol {
           != other.getRoomNo()) return false;
       if (!getRoomName()
           .equals(other.getRoomName())) return false;
+      if (getAi()
+          != other.getAi()) return false;
       if (!getMembersList()
           .equals(other.getMembersList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
@@ -21836,6 +22472,8 @@ public final class AQChatMsgProtocol {
       hash = (53 * hash) + getRoomNo();
       hash = (37 * hash) + ROOMNAME_FIELD_NUMBER;
       hash = (53 * hash) + getRoomName().hashCode();
+      hash = (37 * hash) + AI_FIELD_NUMBER;
+      hash = (53 * hash) + getAi();
       if (getMembersCount() > 0) {
         hash = (37 * hash) + MEMBERS_FIELD_NUMBER;
         hash = (53 * hash) + getMembersList().hashCode();
@@ -21984,6 +22622,8 @@ public final class AQChatMsgProtocol {
 
         roomName_ = "";
 
+        ai_ = 0;
+
         if (membersBuilder_ == null) {
           members_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
@@ -22020,6 +22660,7 @@ public final class AQChatMsgProtocol {
         result.roomId_ = roomId_;
         result.roomNo_ = roomNo_;
         result.roomName_ = roomName_;
+        result.ai_ = ai_;
         if (membersBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0)) {
             members_ = java.util.Collections.unmodifiableList(members_);
@@ -22087,6 +22728,9 @@ public final class AQChatMsgProtocol {
         if (!other.getRoomName().isEmpty()) {
           roomName_ = other.roomName_;
           onChanged();
+        }
+        if (other.getAi() != 0) {
+          setAi(other.getAi());
         }
         if (membersBuilder_ == null) {
           if (!other.members_.isEmpty()) {
@@ -22327,6 +22971,37 @@ public final class AQChatMsgProtocol {
         return this;
       }
 
+      private int ai_ ;
+      /**
+       * <code>int32 ai = 4;</code>
+       * @return The ai.
+       */
+      @java.lang.Override
+      public int getAi() {
+        return ai_;
+      }
+      /**
+       * <code>int32 ai = 4;</code>
+       * @param value The ai to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAi(int value) {
+        
+        ai_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 ai = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAi() {
+        
+        ai_ = 0;
+        onChanged();
+        return this;
+      }
+
       private java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.User> members_ =
         java.util.Collections.emptyList();
       private void ensureMembersIsMutable() {
@@ -22340,7 +23015,7 @@ public final class AQChatMsgProtocol {
           com.howcode.aqchat.message.AQChatMsgProtocol.User, com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder, com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder> membersBuilder_;
 
       /**
-       * <code>repeated .chat_msg.User members = 4;</code>
+       * <code>repeated .chat_msg.User members = 5;</code>
        */
       public java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.User> getMembersList() {
         if (membersBuilder_ == null) {
@@ -22350,7 +23025,7 @@ public final class AQChatMsgProtocol {
         }
       }
       /**
-       * <code>repeated .chat_msg.User members = 4;</code>
+       * <code>repeated .chat_msg.User members = 5;</code>
        */
       public int getMembersCount() {
         if (membersBuilder_ == null) {
@@ -22360,7 +23035,7 @@ public final class AQChatMsgProtocol {
         }
       }
       /**
-       * <code>repeated .chat_msg.User members = 4;</code>
+       * <code>repeated .chat_msg.User members = 5;</code>
        */
       public com.howcode.aqchat.message.AQChatMsgProtocol.User getMembers(int index) {
         if (membersBuilder_ == null) {
@@ -22370,7 +23045,7 @@ public final class AQChatMsgProtocol {
         }
       }
       /**
-       * <code>repeated .chat_msg.User members = 4;</code>
+       * <code>repeated .chat_msg.User members = 5;</code>
        */
       public Builder setMembers(
           int index, com.howcode.aqchat.message.AQChatMsgProtocol.User value) {
@@ -22387,7 +23062,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>repeated .chat_msg.User members = 4;</code>
+       * <code>repeated .chat_msg.User members = 5;</code>
        */
       public Builder setMembers(
           int index, com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder builderForValue) {
@@ -22401,7 +23076,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>repeated .chat_msg.User members = 4;</code>
+       * <code>repeated .chat_msg.User members = 5;</code>
        */
       public Builder addMembers(com.howcode.aqchat.message.AQChatMsgProtocol.User value) {
         if (membersBuilder_ == null) {
@@ -22417,7 +23092,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>repeated .chat_msg.User members = 4;</code>
+       * <code>repeated .chat_msg.User members = 5;</code>
        */
       public Builder addMembers(
           int index, com.howcode.aqchat.message.AQChatMsgProtocol.User value) {
@@ -22434,7 +23109,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>repeated .chat_msg.User members = 4;</code>
+       * <code>repeated .chat_msg.User members = 5;</code>
        */
       public Builder addMembers(
           com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder builderForValue) {
@@ -22448,7 +23123,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>repeated .chat_msg.User members = 4;</code>
+       * <code>repeated .chat_msg.User members = 5;</code>
        */
       public Builder addMembers(
           int index, com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder builderForValue) {
@@ -22462,7 +23137,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>repeated .chat_msg.User members = 4;</code>
+       * <code>repeated .chat_msg.User members = 5;</code>
        */
       public Builder addAllMembers(
           java.lang.Iterable<? extends com.howcode.aqchat.message.AQChatMsgProtocol.User> values) {
@@ -22477,7 +23152,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>repeated .chat_msg.User members = 4;</code>
+       * <code>repeated .chat_msg.User members = 5;</code>
        */
       public Builder clearMembers() {
         if (membersBuilder_ == null) {
@@ -22490,7 +23165,7 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>repeated .chat_msg.User members = 4;</code>
+       * <code>repeated .chat_msg.User members = 5;</code>
        */
       public Builder removeMembers(int index) {
         if (membersBuilder_ == null) {
@@ -22503,14 +23178,14 @@ public final class AQChatMsgProtocol {
         return this;
       }
       /**
-       * <code>repeated .chat_msg.User members = 4;</code>
+       * <code>repeated .chat_msg.User members = 5;</code>
        */
       public com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder getMembersBuilder(
           int index) {
         return getMembersFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .chat_msg.User members = 4;</code>
+       * <code>repeated .chat_msg.User members = 5;</code>
        */
       public com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder getMembersOrBuilder(
           int index) {
@@ -22520,7 +23195,7 @@ public final class AQChatMsgProtocol {
         }
       }
       /**
-       * <code>repeated .chat_msg.User members = 4;</code>
+       * <code>repeated .chat_msg.User members = 5;</code>
        */
       public java.util.List<? extends com.howcode.aqchat.message.AQChatMsgProtocol.UserOrBuilder> 
            getMembersOrBuilderList() {
@@ -22531,14 +23206,14 @@ public final class AQChatMsgProtocol {
         }
       }
       /**
-       * <code>repeated .chat_msg.User members = 4;</code>
+       * <code>repeated .chat_msg.User members = 5;</code>
        */
       public com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder addMembersBuilder() {
         return getMembersFieldBuilder().addBuilder(
             com.howcode.aqchat.message.AQChatMsgProtocol.User.getDefaultInstance());
       }
       /**
-       * <code>repeated .chat_msg.User members = 4;</code>
+       * <code>repeated .chat_msg.User members = 5;</code>
        */
       public com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder addMembersBuilder(
           int index) {
@@ -22546,7 +23221,7 @@ public final class AQChatMsgProtocol {
             index, com.howcode.aqchat.message.AQChatMsgProtocol.User.getDefaultInstance());
       }
       /**
-       * <code>repeated .chat_msg.User members = 4;</code>
+       * <code>repeated .chat_msg.User members = 5;</code>
        */
       public java.util.List<com.howcode.aqchat.message.AQChatMsgProtocol.User.Builder> 
            getMembersBuilderList() {
@@ -25713,10 +26388,16 @@ public final class AQChatMsgProtocol {
         getRoomIdBytes();
 
     /**
-     * <code>int64 msgId = 2;</code>
+     * <code>string msgId = 2;</code>
      * @return The msgId.
      */
-    long getMsgId();
+    java.lang.String getMsgId();
+    /**
+     * <code>string msgId = 2;</code>
+     * @return The bytes for msgId.
+     */
+    com.google.protobuf.ByteString
+        getMsgIdBytes();
   }
   /**
    * <pre>
@@ -25736,6 +26417,7 @@ public final class AQChatMsgProtocol {
     }
     private RecallMsgCmd() {
       roomId_ = "";
+      msgId_ = "";
     }
 
     @java.lang.Override
@@ -25774,9 +26456,10 @@ public final class AQChatMsgProtocol {
               roomId_ = s;
               break;
             }
-            case 16: {
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
 
-              msgId_ = input.readInt64();
+              msgId_ = s;
               break;
             }
             default: {
@@ -25850,14 +26533,41 @@ public final class AQChatMsgProtocol {
     }
 
     public static final int MSGID_FIELD_NUMBER = 2;
-    private long msgId_;
+    private volatile java.lang.Object msgId_;
     /**
-     * <code>int64 msgId = 2;</code>
+     * <code>string msgId = 2;</code>
      * @return The msgId.
      */
     @java.lang.Override
-    public long getMsgId() {
-      return msgId_;
+    public java.lang.String getMsgId() {
+      java.lang.Object ref = msgId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        msgId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string msgId = 2;</code>
+     * @return The bytes for msgId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getMsgIdBytes() {
+      java.lang.Object ref = msgId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        msgId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private byte memoizedIsInitialized = -1;
@@ -25877,8 +26587,8 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, roomId_);
       }
-      if (msgId_ != 0L) {
-        output.writeInt64(2, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msgId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, msgId_);
       }
       unknownFields.writeTo(output);
     }
@@ -25892,9 +26602,8 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, roomId_);
       }
-      if (msgId_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msgId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, msgId_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -25913,8 +26622,8 @@ public final class AQChatMsgProtocol {
 
       if (!getRoomId()
           .equals(other.getRoomId())) return false;
-      if (getMsgId()
-          != other.getMsgId()) return false;
+      if (!getMsgId()
+          .equals(other.getMsgId())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -25929,8 +26638,7 @@ public final class AQChatMsgProtocol {
       hash = (37 * hash) + ROOMID_FIELD_NUMBER;
       hash = (53 * hash) + getRoomId().hashCode();
       hash = (37 * hash) + MSGID_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getMsgId());
+      hash = (53 * hash) + getMsgId().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -26070,7 +26778,7 @@ public final class AQChatMsgProtocol {
         super.clear();
         roomId_ = "";
 
-        msgId_ = 0L;
+        msgId_ = "";
 
         return this;
       }
@@ -26152,8 +26860,9 @@ public final class AQChatMsgProtocol {
           roomId_ = other.roomId_;
           onChanged();
         }
-        if (other.getMsgId() != 0L) {
-          setMsgId(other.getMsgId());
+        if (!other.getMsgId().isEmpty()) {
+          msgId_ = other.msgId_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -26260,33 +26969,78 @@ public final class AQChatMsgProtocol {
         return this;
       }
 
-      private long msgId_ ;
+      private java.lang.Object msgId_ = "";
       /**
-       * <code>int64 msgId = 2;</code>
+       * <code>string msgId = 2;</code>
        * @return The msgId.
        */
-      @java.lang.Override
-      public long getMsgId() {
-        return msgId_;
+      public java.lang.String getMsgId() {
+        java.lang.Object ref = msgId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          msgId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>int64 msgId = 2;</code>
+       * <code>string msgId = 2;</code>
+       * @return The bytes for msgId.
+       */
+      public com.google.protobuf.ByteString
+          getMsgIdBytes() {
+        java.lang.Object ref = msgId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          msgId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string msgId = 2;</code>
        * @param value The msgId to set.
        * @return This builder for chaining.
        */
-      public Builder setMsgId(long value) {
-        
+      public Builder setMsgId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
         msgId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>int64 msgId = 2;</code>
+       * <code>string msgId = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearMsgId() {
         
-        msgId_ = 0L;
+        msgId_ = getDefaultInstance().getMsgId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string msgId = 2;</code>
+       * @param value The bytes for msgId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMsgIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        msgId_ = value;
         onChanged();
         return this;
       }
@@ -26360,10 +27114,16 @@ public final class AQChatMsgProtocol {
         getRoomIdBytes();
 
     /**
-     * <code>int64 msgId = 2;</code>
+     * <code>string msgId = 2;</code>
      * @return The msgId.
      */
-    long getMsgId();
+    java.lang.String getMsgId();
+    /**
+     * <code>string msgId = 2;</code>
+     * @return The bytes for msgId.
+     */
+    com.google.protobuf.ByteString
+        getMsgIdBytes();
 
     /**
      * <code>string userId = 3;</code>
@@ -26397,6 +27157,7 @@ public final class AQChatMsgProtocol {
     }
     private RecallMsgAck() {
       roomId_ = "";
+      msgId_ = "";
       userId_ = "";
     }
 
@@ -26436,9 +27197,10 @@ public final class AQChatMsgProtocol {
               roomId_ = s;
               break;
             }
-            case 16: {
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
 
-              msgId_ = input.readInt64();
+              msgId_ = s;
               break;
             }
             case 26: {
@@ -26523,14 +27285,41 @@ public final class AQChatMsgProtocol {
     }
 
     public static final int MSGID_FIELD_NUMBER = 2;
-    private long msgId_;
+    private volatile java.lang.Object msgId_;
     /**
-     * <code>int64 msgId = 2;</code>
+     * <code>string msgId = 2;</code>
      * @return The msgId.
      */
     @java.lang.Override
-    public long getMsgId() {
-      return msgId_;
+    public java.lang.String getMsgId() {
+      java.lang.Object ref = msgId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        msgId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string msgId = 2;</code>
+     * @return The bytes for msgId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getMsgIdBytes() {
+      java.lang.Object ref = msgId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        msgId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int USERID_FIELD_NUMBER = 3;
@@ -26599,8 +27388,8 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, roomId_);
       }
-      if (msgId_ != 0L) {
-        output.writeInt64(2, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msgId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, msgId_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, userId_);
@@ -26620,9 +27409,8 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, roomId_);
       }
-      if (msgId_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msgId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, msgId_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, userId_);
@@ -26648,8 +27436,8 @@ public final class AQChatMsgProtocol {
 
       if (!getRoomId()
           .equals(other.getRoomId())) return false;
-      if (getMsgId()
-          != other.getMsgId()) return false;
+      if (!getMsgId()
+          .equals(other.getMsgId())) return false;
       if (!getUserId()
           .equals(other.getUserId())) return false;
       if (getStatus()
@@ -26668,8 +27456,7 @@ public final class AQChatMsgProtocol {
       hash = (37 * hash) + ROOMID_FIELD_NUMBER;
       hash = (53 * hash) + getRoomId().hashCode();
       hash = (37 * hash) + MSGID_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getMsgId());
+      hash = (53 * hash) + getMsgId().hashCode();
       hash = (37 * hash) + USERID_FIELD_NUMBER;
       hash = (53 * hash) + getUserId().hashCode();
       hash = (37 * hash) + STATUS_FIELD_NUMBER;
@@ -26810,7 +27597,7 @@ public final class AQChatMsgProtocol {
         super.clear();
         roomId_ = "";
 
-        msgId_ = 0L;
+        msgId_ = "";
 
         userId_ = "";
 
@@ -26898,8 +27685,9 @@ public final class AQChatMsgProtocol {
           roomId_ = other.roomId_;
           onChanged();
         }
-        if (other.getMsgId() != 0L) {
-          setMsgId(other.getMsgId());
+        if (!other.getMsgId().isEmpty()) {
+          msgId_ = other.msgId_;
+          onChanged();
         }
         if (!other.getUserId().isEmpty()) {
           userId_ = other.userId_;
@@ -27013,33 +27801,78 @@ public final class AQChatMsgProtocol {
         return this;
       }
 
-      private long msgId_ ;
+      private java.lang.Object msgId_ = "";
       /**
-       * <code>int64 msgId = 2;</code>
+       * <code>string msgId = 2;</code>
        * @return The msgId.
        */
-      @java.lang.Override
-      public long getMsgId() {
-        return msgId_;
+      public java.lang.String getMsgId() {
+        java.lang.Object ref = msgId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          msgId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>int64 msgId = 2;</code>
+       * <code>string msgId = 2;</code>
+       * @return The bytes for msgId.
+       */
+      public com.google.protobuf.ByteString
+          getMsgIdBytes() {
+        java.lang.Object ref = msgId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          msgId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string msgId = 2;</code>
        * @param value The msgId to set.
        * @return This builder for chaining.
        */
-      public Builder setMsgId(long value) {
-        
+      public Builder setMsgId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
         msgId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>int64 msgId = 2;</code>
+       * <code>string msgId = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearMsgId() {
         
-        msgId_ = 0L;
+        msgId_ = getDefaultInstance().getMsgId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string msgId = 2;</code>
+       * @param value The bytes for msgId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMsgIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        msgId_ = value;
         onChanged();
         return this;
       }
@@ -27220,10 +28053,16 @@ public final class AQChatMsgProtocol {
         getRoomIdBytes();
 
     /**
-     * <code>int64 msgId = 2;</code>
+     * <code>string msgId = 2;</code>
      * @return The msgId.
      */
-    long getMsgId();
+    java.lang.String getMsgId();
+    /**
+     * <code>string msgId = 2;</code>
+     * @return The bytes for msgId.
+     */
+    com.google.protobuf.ByteString
+        getMsgIdBytes();
 
     /**
      * <code>string userId = 3;</code>
@@ -27255,6 +28094,7 @@ public final class AQChatMsgProtocol {
     }
     private RecallMsgNotify() {
       roomId_ = "";
+      msgId_ = "";
       userId_ = "";
     }
 
@@ -27294,9 +28134,10 @@ public final class AQChatMsgProtocol {
               roomId_ = s;
               break;
             }
-            case 16: {
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
 
-              msgId_ = input.readInt64();
+              msgId_ = s;
               break;
             }
             case 26: {
@@ -27376,14 +28217,41 @@ public final class AQChatMsgProtocol {
     }
 
     public static final int MSGID_FIELD_NUMBER = 2;
-    private long msgId_;
+    private volatile java.lang.Object msgId_;
     /**
-     * <code>int64 msgId = 2;</code>
+     * <code>string msgId = 2;</code>
      * @return The msgId.
      */
     @java.lang.Override
-    public long getMsgId() {
-      return msgId_;
+    public java.lang.String getMsgId() {
+      java.lang.Object ref = msgId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        msgId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string msgId = 2;</code>
+     * @return The bytes for msgId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getMsgIdBytes() {
+      java.lang.Object ref = msgId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        msgId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int USERID_FIELD_NUMBER = 3;
@@ -27441,8 +28309,8 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, roomId_);
       }
-      if (msgId_ != 0L) {
-        output.writeInt64(2, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msgId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, msgId_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, userId_);
@@ -27459,9 +28327,8 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, roomId_);
       }
-      if (msgId_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msgId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, msgId_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, userId_);
@@ -27483,8 +28350,8 @@ public final class AQChatMsgProtocol {
 
       if (!getRoomId()
           .equals(other.getRoomId())) return false;
-      if (getMsgId()
-          != other.getMsgId()) return false;
+      if (!getMsgId()
+          .equals(other.getMsgId())) return false;
       if (!getUserId()
           .equals(other.getUserId())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
@@ -27501,8 +28368,7 @@ public final class AQChatMsgProtocol {
       hash = (37 * hash) + ROOMID_FIELD_NUMBER;
       hash = (53 * hash) + getRoomId().hashCode();
       hash = (37 * hash) + MSGID_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getMsgId());
+      hash = (53 * hash) + getMsgId().hashCode();
       hash = (37 * hash) + USERID_FIELD_NUMBER;
       hash = (53 * hash) + getUserId().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
@@ -27644,7 +28510,7 @@ public final class AQChatMsgProtocol {
         super.clear();
         roomId_ = "";
 
-        msgId_ = 0L;
+        msgId_ = "";
 
         userId_ = "";
 
@@ -27729,8 +28595,9 @@ public final class AQChatMsgProtocol {
           roomId_ = other.roomId_;
           onChanged();
         }
-        if (other.getMsgId() != 0L) {
-          setMsgId(other.getMsgId());
+        if (!other.getMsgId().isEmpty()) {
+          msgId_ = other.msgId_;
+          onChanged();
         }
         if (!other.getUserId().isEmpty()) {
           userId_ = other.userId_;
@@ -27841,33 +28708,78 @@ public final class AQChatMsgProtocol {
         return this;
       }
 
-      private long msgId_ ;
+      private java.lang.Object msgId_ = "";
       /**
-       * <code>int64 msgId = 2;</code>
+       * <code>string msgId = 2;</code>
        * @return The msgId.
        */
-      @java.lang.Override
-      public long getMsgId() {
-        return msgId_;
+      public java.lang.String getMsgId() {
+        java.lang.Object ref = msgId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          msgId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>int64 msgId = 2;</code>
+       * <code>string msgId = 2;</code>
+       * @return The bytes for msgId.
+       */
+      public com.google.protobuf.ByteString
+          getMsgIdBytes() {
+        java.lang.Object ref = msgId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          msgId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string msgId = 2;</code>
        * @param value The msgId to set.
        * @return This builder for chaining.
        */
-      public Builder setMsgId(long value) {
-        
+      public Builder setMsgId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
         msgId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>int64 msgId = 2;</code>
+       * <code>string msgId = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearMsgId() {
         
-        msgId_ = 0L;
+        msgId_ = getDefaultInstance().getMsgId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string msgId = 2;</code>
+       * @param value The bytes for msgId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMsgIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        msgId_ = value;
         onChanged();
         return this;
       }
@@ -28017,10 +28929,16 @@ public final class AQChatMsgProtocol {
         getRoomIdBytes();
 
     /**
-     * <code>int64 msgId = 2;</code>
+     * <code>string msgId = 2;</code>
      * @return The msgId.
      */
-    long getMsgId();
+    java.lang.String getMsgId();
+    /**
+     * <code>string msgId = 2;</code>
+     * @return The bytes for msgId.
+     */
+    com.google.protobuf.ByteString
+        getMsgIdBytes();
 
     /**
      * <pre>
@@ -28080,6 +28998,7 @@ public final class AQChatMsgProtocol {
     }
     private AtMsgNotify() {
       roomId_ = "";
+      msgId_ = "";
       userId_ = "";
       atUserId_ = "";
     }
@@ -28120,9 +29039,10 @@ public final class AQChatMsgProtocol {
               roomId_ = s;
               break;
             }
-            case 16: {
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
 
-              msgId_ = input.readInt64();
+              msgId_ = s;
               break;
             }
             case 26: {
@@ -28208,14 +29128,41 @@ public final class AQChatMsgProtocol {
     }
 
     public static final int MSGID_FIELD_NUMBER = 2;
-    private long msgId_;
+    private volatile java.lang.Object msgId_;
     /**
-     * <code>int64 msgId = 2;</code>
+     * <code>string msgId = 2;</code>
      * @return The msgId.
      */
     @java.lang.Override
-    public long getMsgId() {
-      return msgId_;
+    public java.lang.String getMsgId() {
+      java.lang.Object ref = msgId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        msgId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string msgId = 2;</code>
+     * @return The bytes for msgId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getMsgIdBytes() {
+      java.lang.Object ref = msgId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        msgId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int USERID_FIELD_NUMBER = 3;
@@ -28327,8 +29274,8 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, roomId_);
       }
-      if (msgId_ != 0L) {
-        output.writeInt64(2, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msgId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, msgId_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, userId_);
@@ -28348,9 +29295,8 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, roomId_);
       }
-      if (msgId_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msgId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, msgId_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, userId_);
@@ -28375,8 +29321,8 @@ public final class AQChatMsgProtocol {
 
       if (!getRoomId()
           .equals(other.getRoomId())) return false;
-      if (getMsgId()
-          != other.getMsgId()) return false;
+      if (!getMsgId()
+          .equals(other.getMsgId())) return false;
       if (!getUserId()
           .equals(other.getUserId())) return false;
       if (!getAtUserId()
@@ -28395,8 +29341,7 @@ public final class AQChatMsgProtocol {
       hash = (37 * hash) + ROOMID_FIELD_NUMBER;
       hash = (53 * hash) + getRoomId().hashCode();
       hash = (37 * hash) + MSGID_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getMsgId());
+      hash = (53 * hash) + getMsgId().hashCode();
       hash = (37 * hash) + USERID_FIELD_NUMBER;
       hash = (53 * hash) + getUserId().hashCode();
       hash = (37 * hash) + ATUSERID_FIELD_NUMBER;
@@ -28540,7 +29485,7 @@ public final class AQChatMsgProtocol {
         super.clear();
         roomId_ = "";
 
-        msgId_ = 0L;
+        msgId_ = "";
 
         userId_ = "";
 
@@ -28628,8 +29573,9 @@ public final class AQChatMsgProtocol {
           roomId_ = other.roomId_;
           onChanged();
         }
-        if (other.getMsgId() != 0L) {
-          setMsgId(other.getMsgId());
+        if (!other.getMsgId().isEmpty()) {
+          msgId_ = other.msgId_;
+          onChanged();
         }
         if (!other.getUserId().isEmpty()) {
           userId_ = other.userId_;
@@ -28744,33 +29690,78 @@ public final class AQChatMsgProtocol {
         return this;
       }
 
-      private long msgId_ ;
+      private java.lang.Object msgId_ = "";
       /**
-       * <code>int64 msgId = 2;</code>
+       * <code>string msgId = 2;</code>
        * @return The msgId.
        */
-      @java.lang.Override
-      public long getMsgId() {
-        return msgId_;
+      public java.lang.String getMsgId() {
+        java.lang.Object ref = msgId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          msgId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>int64 msgId = 2;</code>
+       * <code>string msgId = 2;</code>
+       * @return The bytes for msgId.
+       */
+      public com.google.protobuf.ByteString
+          getMsgIdBytes() {
+        java.lang.Object ref = msgId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          msgId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string msgId = 2;</code>
        * @param value The msgId to set.
        * @return This builder for chaining.
        */
-      public Builder setMsgId(long value) {
-        
+      public Builder setMsgId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
         msgId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>int64 msgId = 2;</code>
+       * <code>string msgId = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearMsgId() {
         
-        msgId_ = 0L;
+        msgId_ = getDefaultInstance().getMsgId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string msgId = 2;</code>
+       * @param value The bytes for msgId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMsgIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        msgId_ = value;
         onChanged();
         return this;
       }
@@ -29036,10 +30027,16 @@ public final class AQChatMsgProtocol {
         getRoomIdBytes();
 
     /**
-     * <code>int64 msgId = 2;</code>
+     * <code>string msgId = 2;</code>
      * @return The msgId.
      */
-    long getMsgId();
+    java.lang.String getMsgId();
+    /**
+     * <code>string msgId = 2;</code>
+     * @return The bytes for msgId.
+     */
+    com.google.protobuf.ByteString
+        getMsgIdBytes();
 
     /**
      * <code>.chat_msg.User user = 3;</code>
@@ -29096,6 +30093,7 @@ public final class AQChatMsgProtocol {
     }
     private StreamMsgNotify() {
       roomId_ = "";
+      msgId_ = "";
       content_ = "";
     }
 
@@ -29135,9 +30133,10 @@ public final class AQChatMsgProtocol {
               roomId_ = s;
               break;
             }
-            case 16: {
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
 
-              msgId_ = input.readInt64();
+              msgId_ = s;
               break;
             }
             case 26: {
@@ -29235,14 +30234,41 @@ public final class AQChatMsgProtocol {
     }
 
     public static final int MSGID_FIELD_NUMBER = 2;
-    private long msgId_;
+    private volatile java.lang.Object msgId_;
     /**
-     * <code>int64 msgId = 2;</code>
+     * <code>string msgId = 2;</code>
      * @return The msgId.
      */
     @java.lang.Override
-    public long getMsgId() {
-      return msgId_;
+    public java.lang.String getMsgId() {
+      java.lang.Object ref = msgId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        msgId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string msgId = 2;</code>
+     * @return The bytes for msgId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getMsgIdBytes() {
+      java.lang.Object ref = msgId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        msgId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int USER_FIELD_NUMBER = 3;
@@ -29341,8 +30367,8 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, roomId_);
       }
-      if (msgId_ != 0L) {
-        output.writeInt64(2, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msgId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, msgId_);
       }
       if (user_ != null) {
         output.writeMessage(3, getUser());
@@ -29365,9 +30391,8 @@ public final class AQChatMsgProtocol {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roomId_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, roomId_);
       }
-      if (msgId_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msgId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, msgId_);
       }
       if (user_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -29397,8 +30422,8 @@ public final class AQChatMsgProtocol {
 
       if (!getRoomId()
           .equals(other.getRoomId())) return false;
-      if (getMsgId()
-          != other.getMsgId()) return false;
+      if (!getMsgId()
+          .equals(other.getMsgId())) return false;
       if (hasUser() != other.hasUser()) return false;
       if (hasUser()) {
         if (!getUser()
@@ -29422,8 +30447,7 @@ public final class AQChatMsgProtocol {
       hash = (37 * hash) + ROOMID_FIELD_NUMBER;
       hash = (53 * hash) + getRoomId().hashCode();
       hash = (37 * hash) + MSGID_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getMsgId());
+      hash = (53 * hash) + getMsgId().hashCode();
       if (hasUser()) {
         hash = (37 * hash) + USER_FIELD_NUMBER;
         hash = (53 * hash) + getUser().hashCode();
@@ -29571,7 +30595,7 @@ public final class AQChatMsgProtocol {
         super.clear();
         roomId_ = "";
 
-        msgId_ = 0L;
+        msgId_ = "";
 
         if (userBuilder_ == null) {
           user_ = null;
@@ -29670,8 +30694,9 @@ public final class AQChatMsgProtocol {
           roomId_ = other.roomId_;
           onChanged();
         }
-        if (other.getMsgId() != 0L) {
-          setMsgId(other.getMsgId());
+        if (!other.getMsgId().isEmpty()) {
+          msgId_ = other.msgId_;
+          onChanged();
         }
         if (other.hasUser()) {
           mergeUser(other.getUser());
@@ -29788,33 +30813,78 @@ public final class AQChatMsgProtocol {
         return this;
       }
 
-      private long msgId_ ;
+      private java.lang.Object msgId_ = "";
       /**
-       * <code>int64 msgId = 2;</code>
+       * <code>string msgId = 2;</code>
        * @return The msgId.
        */
-      @java.lang.Override
-      public long getMsgId() {
-        return msgId_;
+      public java.lang.String getMsgId() {
+        java.lang.Object ref = msgId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          msgId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>int64 msgId = 2;</code>
+       * <code>string msgId = 2;</code>
+       * @return The bytes for msgId.
+       */
+      public com.google.protobuf.ByteString
+          getMsgIdBytes() {
+        java.lang.Object ref = msgId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          msgId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string msgId = 2;</code>
        * @param value The msgId to set.
        * @return This builder for chaining.
        */
-      public Builder setMsgId(long value) {
-        
+      public Builder setMsgId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
         msgId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>int64 msgId = 2;</code>
+       * <code>string msgId = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearMsgId() {
         
-        msgId_ = 0L;
+        msgId_ = getDefaultInstance().getMsgId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string msgId = 2;</code>
+       * @param value The bytes for msgId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMsgIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        msgId_ = value;
         onChanged();
         return this;
       }
@@ -30304,82 +31374,84 @@ public final class AQChatMsgProtocol {
       "\t\022\020\n\010userName\030\002 \001(\t\022\022\n\nuserAvatar\030\003 \001(\t\"" +
       "\034\n\014HeartBeatCmd\022\014\n\004ping\030\001 \001(\t\"\034\n\014HeartBe" +
       "atAck\022\014\n\004pong\030\001 \001(\t\"\035\n\013JoinRoomCmd\022\016\n\006ro" +
-      "omNo\030\002 \001(\005\"?\n\013JoinRoomAck\022\016\n\006roomId\030\001 \001(" +
-      "\t\022\016\n\006roomNo\030\002 \001(\005\022\020\n\010roomName\030\003 \001(\t\"1\n\rC" +
-      "reateRoomCmd\022\016\n\006roomNo\030\001 \001(\005\022\020\n\010roomName" +
-      "\030\002 \001(\t\"A\n\rCreateRoomAck\022\016\n\006roomId\030\001 \001(\t\022" +
-      "\016\n\006roomNo\030\002 \001(\005\022\020\n\010roomName\030\003 \001(\t\"\036\n\014Lea" +
-      "veRoomCmd\022\016\n\006roomId\030\002 \001(\t\"\036\n\014LeaveRoomAc" +
-      "k\022\016\n\006roomId\030\002 \001(\t\"i\n\nSendMsgCmd\022\r\n\005msgId" +
-      "\030\001 \001(\003\022\016\n\006roomId\030\002 \001(\t\022\"\n\007msgType\030\003 \001(\0162" +
-      "\021.chat_msg.MsgType\022\013\n\003msg\030\004 \001(\t\022\013\n\003ext\030\005" +
-      " \001(\t\"X\n\nSendMsgAck\022\r\n\005msgId\030\001 \001(\003\022\016\n\006use" +
-      "rId\030\002 \001(\t\022\016\n\006roomId\030\003 \001(\t\022\016\n\006status\030\004 \001(" +
-      "\010\022\013\n\003ext\030\005 \001(\t\"\214\001\n\017BroadcastMsgAck\022\034\n\004us" +
-      "er\030\001 \001(\0132\016.chat_msg.User\022\016\n\006roomId\030\002 \001(\t" +
-      "\022\r\n\005msgId\030\003 \001(\t\022\"\n\007msgType\030\004 \001(\0162\021.chat_" +
-      "msg.MsgType\022\013\n\003msg\030\005 \001(\t\022\013\n\003ext\030\006 \001(\t\"<\n" +
-      "\004User\022\016\n\006userId\030\001 \001(\t\022\020\n\010userName\030\002 \001(\t\022" +
-      "\022\n\nuserAvatar\030\003 \001(\t\")\n\014ExceptionMsg\022\014\n\004c" +
-      "ode\030\001 \001(\005\022\013\n\003msg\030\002 \001(\t\":\n\nOfflineMsg\022\034\n\004" +
-      "user\030\001 \001(\0132\016.chat_msg.User\022\016\n\006roomId\030\002 \001" +
-      "(\t\"/\n\tGetStsCmd\022\"\n\007msgType\030\001 \001(\0162\021.chat_" +
-      "msg.MsgType\"\226\001\n\tGetStsAck\022\023\n\013accessKeyId" +
-      "\030\001 \001(\t\022\027\n\017accessKeySecret\030\002 \001(\t\022\025\n\rsecur" +
-      "ityToken\030\003 \001(\t\022\016\n\006region\030\004 \001(\t\022\016\n\006bucket" +
-      "\030\005 \001(\t\022\022\n\nuploadPath\030\006 \001(\t\022\020\n\010endpoint\030\007" +
-      " \001(\t\"\037\n\rUserLogoutCmd\022\016\n\006userId\030\001 \001(\t\"\037\n" +
-      "\rUserLogoutAck\022\016\n\006userId\030\001 \001(\t\"=\n\rOfflin" +
-      "eNotify\022\034\n\004user\030\001 \001(\0132\016.chat_msg.User\022\016\n" +
-      "\006roomId\030\002 \001(\t\"#\n\021SyncChatRecordCmd\022\016\n\006ro" +
-      "omId\030\001 \001(\t\"N\n\021SyncChatRecordAck\022\016\n\006roomI" +
-      "d\030\001 \001(\t\022)\n\013chatRecords\030\002 \003(\0132\024.chat_msg." +
-      "ChatRecord\"\217\001\n\nChatRecord\022\r\n\005msgId\030\001 \001(\003" +
-      "\022\034\n\004user\030\002 \001(\0132\016.chat_msg.User\022\017\n\007messag" +
-      "e\030\003 \001(\t\022\"\n\007msgType\030\004 \001(\0162\021.chat_msg.MsgT" +
-      "ype\022\013\n\003ext\030\005 \001(\t\022\022\n\ncreateTime\030\006 \001(\t\" \n\016" +
-      "RecoverUserCmd\022\016\n\006userId\030\001 \001(\t\"d\n\016Recove" +
-      "rUserAck\022\016\n\006userId\030\001 \001(\t\022\020\n\010userName\030\002 \001" +
-      "(\t\022\022\n\nuserAvatar\030\003 \001(\t\022\034\n\004room\030\004 \001(\0132\016.c" +
-      "hat_msg.Room\"Y\n\004Room\022\016\n\006roomId\030\001 \001(\t\022\016\n\006" +
-      "roomNo\030\002 \001(\005\022\020\n\010roomName\030\003 \001(\t\022\037\n\007member" +
-      "s\030\004 \003(\0132\016.chat_msg.User\">\n\016JoinRoomNotif" +
-      "y\022\034\n\004user\030\001 \001(\0132\016.chat_msg.User\022\016\n\006roomI" +
-      "d\030\002 \001(\t\"?\n\017LeaveRoomNotify\022\034\n\004user\030\001 \001(\013" +
-      "2\016.chat_msg.User\022\016\n\006roomId\030\002 \001(\t\"$\n\022Sync" +
-      "RoomMembersCmd\022\016\n\006roomId\030\001 \001(\t\"E\n\022SyncRo" +
-      "omMembersAck\022\016\n\006roomId\030\001 \001(\t\022\037\n\007members\030" +
-      "\002 \003(\0132\016.chat_msg.User\"-\n\014RecallMsgCmd\022\016\n" +
-      "\006roomId\030\001 \001(\t\022\r\n\005msgId\030\002 \001(\003\"M\n\014RecallMs" +
-      "gAck\022\016\n\006roomId\030\001 \001(\t\022\r\n\005msgId\030\002 \001(\003\022\016\n\006u" +
-      "serId\030\003 \001(\t\022\016\n\006status\030\004 \001(\010\"@\n\017RecallMsg" +
-      "Notify\022\016\n\006roomId\030\001 \001(\t\022\r\n\005msgId\030\002 \001(\003\022\016\n" +
-      "\006userId\030\003 \001(\t\"N\n\013AtMsgNotify\022\016\n\006roomId\030\001" +
-      " \001(\t\022\r\n\005msgId\030\002 \001(\003\022\016\n\006userId\030\003 \001(\t\022\020\n\010a" +
-      "tUserId\030\004 \001(\t\"s\n\017StreamMsgNotify\022\016\n\006room" +
-      "Id\030\001 \001(\t\022\r\n\005msgId\030\002 \001(\003\022\034\n\004user\030\003 \001(\0132\016." +
-      "chat_msg.User\022\022\n\nstreamType\030\004 \001(\005\022\017\n\007con" +
-      "tent\030\005 \001(\t*\277\005\n\nMsgCommand\022\022\n\016USER_LOGIN_" +
-      "CMD\020\000\022\022\n\016USER_LOGIN_ACK\020\001\022\022\n\016HEART_BEAT_" +
-      "CMD\020\002\022\022\n\016HEART_BEAT_ACK\020\003\022\021\n\rJOIN_ROOM_C" +
-      "MD\020\004\022\021\n\rJOIN_ROOM_ACK\020\005\022\023\n\017CREATE_ROOM_C" +
-      "MD\020\006\022\023\n\017CREATE_ROOM_ACK\020\007\022\022\n\016LEAVE_ROOM_" +
-      "CMD\020\010\022\022\n\016LEAVE_ROOM_ACK\020\t\022\020\n\014SEND_MSG_CM" +
-      "D\020\n\022\020\n\014SEND_MSG_ACK\020\013\022\025\n\021BROADCAST_MSG_A" +
-      "CK\020\014\022\021\n\rEXCEPTION_MSG\020\r\022\017\n\013OFFLINE_MSG\020\016" +
-      "\022\017\n\013GET_STS_CMD\020\017\022\017\n\013GET_STS_ACK\020\020\022\023\n\017US" +
-      "ER_LOGOUT_CMD\020\021\022\023\n\017USER_LOGOUT_ACK\020\022\022\022\n\016" +
-      "OFFLINE_NOTIFY\020\023\022\030\n\024SYNC_CHAT_RECORD_CMD" +
-      "\020\024\022\030\n\024SYNC_CHAT_RECORD_ACK\020\025\022\024\n\020RECOVER_" +
-      "USER_CMD\020\026\022\024\n\020RECOVER_USER_ACK\020\027\022\024\n\020JOIN" +
-      "_ROOM_NOTIFY\020\030\022\025\n\021LEAVE_ROOM_NOTIFY\020\031\022\031\n" +
-      "\025SYNC_ROOM_MEMBERS_CMD\020\032\022\031\n\025SYNC_ROOM_ME" +
-      "MBERS_ACK\020\033\022\022\n\016RECALL_MSG_CMD\020\034\022\022\n\016RECAL" +
-      "L_MSG_ACK\020\035\022\025\n\021RECALL_MSG_NOTIFY\020\036\022\021\n\rAT" +
-      "_MSG_NOTIFY\020\037\022\025\n\021STREAM_MSG_NOTIFY\020 *>\n\007" +
-      "MsgType\022\010\n\004TEXT\020\000\022\t\n\005IMAGE\020\001\022\t\n\005VOICE\020\002\022" +
-      "\t\n\005VIDEO\020\003\022\010\n\004FILE\020\004B\034\n\032com.howcode.aqch" +
-      "at.messageb\006proto3"
+      "omNo\030\002 \001(\005\"K\n\013JoinRoomAck\022\016\n\006roomId\030\001 \001(" +
+      "\t\022\016\n\006roomNo\030\002 \001(\005\022\020\n\010roomName\030\003 \001(\t\022\n\n\002a" +
+      "i\030\004 \001(\005\"N\n\rCreateRoomCmd\022\016\n\006roomNo\030\001 \001(\005" +
+      "\022\020\n\010roomName\030\002 \001(\t\022\017\n\007history\030\003 \001(\005\022\n\n\002a" +
+      "i\030\004 \001(\005\"M\n\rCreateRoomAck\022\016\n\006roomId\030\001 \001(\t" +
+      "\022\016\n\006roomNo\030\002 \001(\005\022\020\n\010roomName\030\003 \001(\t\022\n\n\002ai" +
+      "\030\004 \001(\005\"\036\n\014LeaveRoomCmd\022\016\n\006roomId\030\002 \001(\t\"\036" +
+      "\n\014LeaveRoomAck\022\016\n\006roomId\030\002 \001(\t\"i\n\nSendMs" +
+      "gCmd\022\r\n\005msgId\030\001 \001(\t\022\016\n\006roomId\030\002 \001(\t\022\"\n\007m" +
+      "sgType\030\003 \001(\0162\021.chat_msg.MsgType\022\013\n\003msg\030\004" +
+      " \001(\t\022\013\n\003ext\030\005 \001(\t\"X\n\nSendMsgAck\022\r\n\005msgId" +
+      "\030\001 \001(\t\022\016\n\006userId\030\002 \001(\t\022\016\n\006roomId\030\003 \001(\t\022\016" +
+      "\n\006status\030\004 \001(\010\022\013\n\003ext\030\005 \001(\t\"\214\001\n\017Broadcas" +
+      "tMsgAck\022\034\n\004user\030\001 \001(\0132\016.chat_msg.User\022\016\n" +
+      "\006roomId\030\002 \001(\t\022\r\n\005msgId\030\003 \001(\t\022\"\n\007msgType\030" +
+      "\004 \001(\0162\021.chat_msg.MsgType\022\013\n\003msg\030\005 \001(\t\022\013\n" +
+      "\003ext\030\006 \001(\t\"<\n\004User\022\016\n\006userId\030\001 \001(\t\022\020\n\010us" +
+      "erName\030\002 \001(\t\022\022\n\nuserAvatar\030\003 \001(\t\")\n\014Exce" +
+      "ptionMsg\022\014\n\004code\030\001 \001(\005\022\013\n\003msg\030\002 \001(\t\":\n\nO" +
+      "fflineMsg\022\034\n\004user\030\001 \001(\0132\016.chat_msg.User\022" +
+      "\016\n\006roomId\030\002 \001(\t\"/\n\tGetStsCmd\022\"\n\007msgType\030" +
+      "\001 \001(\0162\021.chat_msg.MsgType\"\226\001\n\tGetStsAck\022\023" +
+      "\n\013accessKeyId\030\001 \001(\t\022\027\n\017accessKeySecret\030\002" +
+      " \001(\t\022\025\n\rsecurityToken\030\003 \001(\t\022\016\n\006region\030\004 " +
+      "\001(\t\022\016\n\006bucket\030\005 \001(\t\022\022\n\nuploadPath\030\006 \001(\t\022" +
+      "\020\n\010endpoint\030\007 \001(\t\"\037\n\rUserLogoutCmd\022\016\n\006us" +
+      "erId\030\001 \001(\t\"\037\n\rUserLogoutAck\022\016\n\006userId\030\001 " +
+      "\001(\t\"=\n\rOfflineNotify\022\034\n\004user\030\001 \001(\0132\016.cha" +
+      "t_msg.User\022\016\n\006roomId\030\002 \001(\t\"#\n\021SyncChatRe" +
+      "cordCmd\022\016\n\006roomId\030\001 \001(\t\"N\n\021SyncChatRecor" +
+      "dAck\022\016\n\006roomId\030\001 \001(\t\022)\n\013chatRecords\030\002 \003(" +
+      "\0132\024.chat_msg.ChatRecord\"\217\001\n\nChatRecord\022\r" +
+      "\n\005msgId\030\001 \001(\t\022\034\n\004user\030\002 \001(\0132\016.chat_msg.U" +
+      "ser\022\017\n\007message\030\003 \001(\t\022\"\n\007msgType\030\004 \001(\0162\021." +
+      "chat_msg.MsgType\022\013\n\003ext\030\005 \001(\t\022\022\n\ncreateT" +
+      "ime\030\006 \001(\t\" \n\016RecoverUserCmd\022\016\n\006userId\030\001 " +
+      "\001(\t\"d\n\016RecoverUserAck\022\016\n\006userId\030\001 \001(\t\022\020\n" +
+      "\010userName\030\002 \001(\t\022\022\n\nuserAvatar\030\003 \001(\t\022\034\n\004r" +
+      "oom\030\004 \001(\0132\016.chat_msg.Room\"e\n\004Room\022\016\n\006roo" +
+      "mId\030\001 \001(\t\022\016\n\006roomNo\030\002 \001(\005\022\020\n\010roomName\030\003 " +
+      "\001(\t\022\n\n\002ai\030\004 \001(\005\022\037\n\007members\030\005 \003(\0132\016.chat_" +
+      "msg.User\">\n\016JoinRoomNotify\022\034\n\004user\030\001 \001(\013" +
+      "2\016.chat_msg.User\022\016\n\006roomId\030\002 \001(\t\"?\n\017Leav" +
+      "eRoomNotify\022\034\n\004user\030\001 \001(\0132\016.chat_msg.Use" +
+      "r\022\016\n\006roomId\030\002 \001(\t\"$\n\022SyncRoomMembersCmd\022" +
+      "\016\n\006roomId\030\001 \001(\t\"E\n\022SyncRoomMembersAck\022\016\n" +
+      "\006roomId\030\001 \001(\t\022\037\n\007members\030\002 \003(\0132\016.chat_ms" +
+      "g.User\"-\n\014RecallMsgCmd\022\016\n\006roomId\030\001 \001(\t\022\r" +
+      "\n\005msgId\030\002 \001(\t\"M\n\014RecallMsgAck\022\016\n\006roomId\030" +
+      "\001 \001(\t\022\r\n\005msgId\030\002 \001(\t\022\016\n\006userId\030\003 \001(\t\022\016\n\006" +
+      "status\030\004 \001(\010\"@\n\017RecallMsgNotify\022\016\n\006roomI" +
+      "d\030\001 \001(\t\022\r\n\005msgId\030\002 \001(\t\022\016\n\006userId\030\003 \001(\t\"N" +
+      "\n\013AtMsgNotify\022\016\n\006roomId\030\001 \001(\t\022\r\n\005msgId\030\002" +
+      " \001(\t\022\016\n\006userId\030\003 \001(\t\022\020\n\010atUserId\030\004 \001(\t\"s" +
+      "\n\017StreamMsgNotify\022\016\n\006roomId\030\001 \001(\t\022\r\n\005msg" +
+      "Id\030\002 \001(\t\022\034\n\004user\030\003 \001(\0132\016.chat_msg.User\022\022" +
+      "\n\nstreamType\030\004 \001(\005\022\017\n\007content\030\005 \001(\t*\277\005\n\n" +
+      "MsgCommand\022\022\n\016USER_LOGIN_CMD\020\000\022\022\n\016USER_L" +
+      "OGIN_ACK\020\001\022\022\n\016HEART_BEAT_CMD\020\002\022\022\n\016HEART_" +
+      "BEAT_ACK\020\003\022\021\n\rJOIN_ROOM_CMD\020\004\022\021\n\rJOIN_RO" +
+      "OM_ACK\020\005\022\023\n\017CREATE_ROOM_CMD\020\006\022\023\n\017CREATE_" +
+      "ROOM_ACK\020\007\022\022\n\016LEAVE_ROOM_CMD\020\010\022\022\n\016LEAVE_" +
+      "ROOM_ACK\020\t\022\020\n\014SEND_MSG_CMD\020\n\022\020\n\014SEND_MSG" +
+      "_ACK\020\013\022\025\n\021BROADCAST_MSG_ACK\020\014\022\021\n\rEXCEPTI" +
+      "ON_MSG\020\r\022\017\n\013OFFLINE_MSG\020\016\022\017\n\013GET_STS_CMD" +
+      "\020\017\022\017\n\013GET_STS_ACK\020\020\022\023\n\017USER_LOGOUT_CMD\020\021" +
+      "\022\023\n\017USER_LOGOUT_ACK\020\022\022\022\n\016OFFLINE_NOTIFY\020" +
+      "\023\022\030\n\024SYNC_CHAT_RECORD_CMD\020\024\022\030\n\024SYNC_CHAT" +
+      "_RECORD_ACK\020\025\022\024\n\020RECOVER_USER_CMD\020\026\022\024\n\020R" +
+      "ECOVER_USER_ACK\020\027\022\024\n\020JOIN_ROOM_NOTIFY\020\030\022" +
+      "\025\n\021LEAVE_ROOM_NOTIFY\020\031\022\031\n\025SYNC_ROOM_MEMB" +
+      "ERS_CMD\020\032\022\031\n\025SYNC_ROOM_MEMBERS_ACK\020\033\022\022\n\016" +
+      "RECALL_MSG_CMD\020\034\022\022\n\016RECALL_MSG_ACK\020\035\022\025\n\021" +
+      "RECALL_MSG_NOTIFY\020\036\022\021\n\rAT_MSG_NOTIFY\020\037\022\025" +
+      "\n\021STREAM_MSG_NOTIFY\020 *>\n\007MsgType\022\010\n\004TEXT" +
+      "\020\000\022\t\n\005IMAGE\020\001\022\t\n\005VOICE\020\002\022\t\n\005VIDEO\020\003\022\010\n\004F" +
+      "ILE\020\004B\034\n\032com.howcode.aqchat.messageb\006pro" +
+      "to3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -30420,19 +31492,19 @@ public final class AQChatMsgProtocol {
     internal_static_chat_msg_JoinRoomAck_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chat_msg_JoinRoomAck_descriptor,
-        new java.lang.String[] { "RoomId", "RoomNo", "RoomName", });
+        new java.lang.String[] { "RoomId", "RoomNo", "RoomName", "Ai", });
     internal_static_chat_msg_CreateRoomCmd_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_chat_msg_CreateRoomCmd_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chat_msg_CreateRoomCmd_descriptor,
-        new java.lang.String[] { "RoomNo", "RoomName", });
+        new java.lang.String[] { "RoomNo", "RoomName", "History", "Ai", });
     internal_static_chat_msg_CreateRoomAck_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_chat_msg_CreateRoomAck_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chat_msg_CreateRoomAck_descriptor,
-        new java.lang.String[] { "RoomId", "RoomNo", "RoomName", });
+        new java.lang.String[] { "RoomId", "RoomNo", "RoomName", "Ai", });
     internal_static_chat_msg_LeaveRoomCmd_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_chat_msg_LeaveRoomCmd_fieldAccessorTable = new
@@ -30546,7 +31618,7 @@ public final class AQChatMsgProtocol {
     internal_static_chat_msg_Room_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chat_msg_Room_descriptor,
-        new java.lang.String[] { "RoomId", "RoomNo", "RoomName", "Members", });
+        new java.lang.String[] { "RoomId", "RoomNo", "RoomName", "Ai", "Members", });
     internal_static_chat_msg_JoinRoomNotify_descriptor =
       getDescriptor().getMessageTypes().get(27);
     internal_static_chat_msg_JoinRoomNotify_fieldAccessorTable = new
