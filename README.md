@@ -49,7 +49,7 @@ WEB端: <a href="https://gitee.com/howcode/aq-chat">AQChat</a><br/>
 | AI大模型        | 通义千问MAX      |
 
 ### 项目截图
-<img src="https://aqchat.oss-cn-shenzhen.aliyuncs.com/demo/1715433579465.png" width="500">
+<img src="https://typora-record.oss-cn-shenzhen.aliyuncs.com/img/20240613_203832.gif">
 <img src="https://aqchat.oss-cn-shenzhen.aliyuncs.com/demo/1715433594150.png" width="500">
 <img src="https://aqchat.oss-cn-shenzhen.aliyuncs.com/demo/1715433609771.png" width="500">
 <img src="https://aqchat.oss-cn-shenzhen.aliyuncs.com/demo/1715433659944.png" width="500">
