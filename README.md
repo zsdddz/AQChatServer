@@ -73,6 +73,10 @@ WEB端: <a href="https://gitee.com/howcode/aq-chat">AQChat</a><br/>
 
 ## 更新日志
 
+### 2024.06.16
+
+- 支持无AI启动
+
 ### 2024.06.10
 
 - ✨ AI大模型接入
