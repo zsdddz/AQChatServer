@@ -67,6 +67,9 @@ WEB端: <a href="https://gitee.com/howcode/aq-chat">AQChat</a><br/>
 - 发送aqchat可获取AQChat部署教程
 - 发送aqchatonekey可获取AQChat一键部署脚本
 
+## 部署可能会用到的平台文档
+<a href="https://help.aliyun.com/zh/oss/developer-reference/use-temporary-access-credentials-provided-by-sts-to-access-oss">使用STS临时访问凭证访问OSS</a><br/>
+<a href="https://bailian.console.aliyun.com/">大模型服务平台百炼</a>
 
 ## 更新日志
 

@@ -1,16 +1,16 @@
 aq-chat:
-  websocketPort: 9090
-  bossThreadSize: 1
-  workThreadSize: 8
-  heartBeatTime: 10000
-  aliOssConfig: #OSS控制台查看
-    endpoint: 
-  aliOssStsConfig: #前往阿里sts文档获取以下配置
+  websocketPort: 9090 #服务端口
+  bossThreadSize: 1 # boss线程数
+  workThreadSize: 8 # work线程数
+  heartBeatTime: 10000 #心跳时间 10s
+  aliOssConfig: #该配置前往阿里OSS获取 oss下的endpoint为OSS的endpoint 区别于STS的endpoint
+    endpoint: oss-cn-shenzhen.aliyuncs.com
+  aliOssStsConfig: #其下为空配置前往阿里STS临时访问OSS文档获取(项目md文档中)，有配置则为默认配置
     accessKeyId:
     accessKeySecret:
-    bucketName: aqchat
-    endpoint:
-    regionId: cn-hangzhou
+    bucketName:
+    endpoint: sts.cn-hangzhou.aliyuncs.com #默认为cn-hangzhou
+    regionId: cn-hangzhou #默认为cn-hangzhou
     roleSessionName:
     roleArn:
     durationSeconds: 3600
@@ -22,7 +22,7 @@ aq-chat:
       sendTimeOut: 3000
     consumer:
       nameSever: 127.0.0.1:9876
-  aiConfig: #前往阿里百炼平台获取
+  aiConfig: #该配置前往阿里百炼平台获取(项目md文档中)
     apiKey:
     model: qwen-max #模型名称
 
@@ -35,8 +35,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/aqchat?useUnicode=true&characterEncoding=UTF-8
-    username: aqchat
-    password:
+    username: root
+    password: root
 
   data:
     redis:
