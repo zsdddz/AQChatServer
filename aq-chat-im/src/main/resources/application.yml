@@ -3,9 +3,9 @@ aq-chat:
   bossThreadSize: 1
   workThreadSize: 8
   heartBeatTime: 10000
-  aliOssConfig:
-    endpoint:
-  aliOssStsConfig:
+  aliOssConfig: #OSS控制台查看
+    endpoint: 
+  aliOssStsConfig: #前往阿里sts文档获取以下配置
     accessKeyId:
     accessKeySecret:
     bucketName: aqchat
@@ -16,15 +16,15 @@ aq-chat:
     durationSeconds: 3600
   rocketmq:
     producer:
-      nameSever: 127.0.0.1
+      nameSever: 127.0.0.1:9876
       groupName: AQChat
       retryTimes: 3
       sendTimeOut: 3000
     consumer:
-      nameSever: 127.0.0.1
-  aiConfig:
+      nameSever: 127.0.0.1:9876
+  aiConfig: #前往阿里百炼平台获取
     apiKey:
-    model: qwen-max
+    model: qwen-max #模型名称
 
 
 spring:
