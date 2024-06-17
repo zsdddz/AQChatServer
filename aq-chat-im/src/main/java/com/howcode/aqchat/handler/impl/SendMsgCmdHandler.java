@@ -4,6 +4,7 @@ import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.MessageDto;
 import com.howcode.aqchat.common.utils.IdProvider;
+import com.howcode.aqchat.common.utils.SafeUtil;
 import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IMessageHolder;
@@ -81,13 +82,15 @@ public class SendMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.
             ctx.writeAndFlush(msgAck);
             return;
         }
+        //xss过滤
+        String clean = SafeUtil.clean(cmd.getMsg());
         // 发送消息
         MessageDto messageDto = new MessageDto();
         messageDto.setMessageId(msgId);
         messageDto.setRoomId(roomId);
         messageDto.setSenderId(userId);
         messageDto.setMessageType(cmd.getMsgType().getNumber());
-        messageDto.setMessageContent(cmd.getMsg());
+        messageDto.setMessageContent(clean);
         messageDto.setMessageExt(cmd.getExt());
         messageDto.setCreateTime(new Date());
         mqSendingAgent.sendMessageToRoom(messageDto);
