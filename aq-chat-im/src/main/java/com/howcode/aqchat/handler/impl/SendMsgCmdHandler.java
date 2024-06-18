@@ -83,14 +83,14 @@ public class SendMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.
             return;
         }
         //xss过滤
-        String clean = SafeUtil.clean(cmd.getMsg());
+//        String clean = SafeUtil.clean(cmd.getMsg());
         // 发送消息
         MessageDto messageDto = new MessageDto();
         messageDto.setMessageId(msgId);
         messageDto.setRoomId(roomId);
         messageDto.setSenderId(userId);
         messageDto.setMessageType(cmd.getMsgType().getNumber());
-        messageDto.setMessageContent(clean);
+        messageDto.setMessageContent(cmd.getMsg());
         messageDto.setMessageExt(cmd.getExt());
         messageDto.setCreateTime(new Date());
         mqSendingAgent.sendMessageToRoom(messageDto);
