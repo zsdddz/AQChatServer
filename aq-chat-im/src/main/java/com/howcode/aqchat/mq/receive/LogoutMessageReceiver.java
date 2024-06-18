@@ -28,6 +28,7 @@ public class LogoutMessageReceiver implements InitializingBean {
     private RocketMQConfig rocketMQConfig;
     @Resource
     private GlobalChannelHolder globalChannelHolder;
+
     /**
      * 初始化消费者
      */
@@ -43,15 +44,10 @@ public class LogoutMessageReceiver implements InitializingBean {
                 for (MessageExt messageExt : messageExtList) {
                     String userId = new String(messageExt.getBody());
                     LOGGER.info("mq收到消息[退出登录]:{}", userId);
-                    // 广播用户退出消息
                     try {
-                        if (!userId.isEmpty()) {
-                            globalChannelHolder.notifyLogout(userId);
-                            //退出
-                            globalChannelHolder.logout(userId);
-                        }
-                    }catch (Exception e){
-                        LOGGER.error("退出登录MQ异常",e);
+                        globalChannelHolder.logout(userId);
+                    } catch (Exception e) {
+                        LOGGER.error("退出登录MQ异常", e);
                     }
                 }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;

@@ -64,6 +64,10 @@ public class GlobalChannelHolder {
      * @param userId
      */
     public void logout(String userId) {
+        if (null == userId) {
+            return;
+        }
+        userHolder.removeUserInfo(userId);
         NioSocketChannel nioSocketChannel = getUserChannel(userId);
         String roomId = messageBroadcaster.leaveRoom(userId, nioSocketChannel);
         dissolveTheRoomByLogout(roomId);
@@ -145,31 +149,12 @@ public class GlobalChannelHolder {
         AQChatMsgProtocol.BroadcastMsgAck broadcastMsgAck = AQChatMsgProtocol.BroadcastMsgAck.newBuilder()
                 .setRoomId(messageDto.getRoomId())
                 .setUser(userBuilder.build())
-                .setMsgId(messageDto.getMessageId().toString())
+                .setMsgId(messageDto.getMessageId())
                 .setMsgType(AQChatMsgProtocol.MsgType.forNumber(messageDto.getMessageType()))
                 .setMsg(messageDto.getMessageContent())
                 .setExt(messageDto.getMessageExt())
                 .build();
         messageBroadcaster.broadcast(userInfo.getRoomId(), broadcastMsgAck);
-    }
-
-    public void notifyLogout(String userId) {
-        if (null == userId) {
-            return;
-        }
-        UserGlobalInfoDto userInfo = userHolder.getUserInfo(userId);
-        userHolder.removeUserInfo(userId);
-        if (null == userInfo || null == userInfo.getRoomId() ){
-            LOGGER.info("[退出通知] 用户信息或者房间信息为空");
-            return;
-        }
-        AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
-        if (userBuilder == null) return;
-        AQChatMsgProtocol.LeaveRoomNotify leaveRoomNotify = AQChatMsgProtocol.LeaveRoomNotify.newBuilder()
-                .setUser(userBuilder)
-                .setRoomId(userInfo.getRoomId())
-                .build();
-        messageBroadcaster.broadcast(userInfo.getRoomId(), leaveRoomNotify);
     }
 
     public void notifyJoinRoom(RoomNotifyDto roomNotifyDto) {
