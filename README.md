@@ -71,6 +71,10 @@ WEB端: <a href="https://gitee.com/howcode/aq-chat">AQChat</a><br/>
 
 # 部署文档
 
+- 项目启动类位于`aq-chat-im`模块下 `com.howcode.aqchat.AQChatApplication`类
+  - 启动前保证配置文件（aq-chat-im/src/main/resources/application.yml）中必填的配置补充完整
+
+
 ![戴戴的Linux](https://gitee.com/StephenJose_Dai/dockerhaschat/raw/master/daidailinux.jpg)
 
 - 微信扫一扫二维码关注公众号
