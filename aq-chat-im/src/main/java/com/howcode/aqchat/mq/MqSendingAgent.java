@@ -72,6 +72,8 @@ public class MqSendingAgent {
         Message message = new Message();
         message.setTopic(AQChatMQConstant.MQTopic.USER_LOGOUT_TOPIC);
         message.setBody(userId.getBytes());
+        //留出通知时间
+        message.setDelayTimeLevel(1);
         try {
             mqProducer.send(message);
         } catch (Exception e) {
