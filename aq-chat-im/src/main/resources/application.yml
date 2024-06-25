@@ -2,7 +2,6 @@ aq-chat:
   websocketPort: 9090 #服务端口
   bossThreadSize: 1 # boss线程数
   workThreadSize: 8 # work线程数
-  heartBeatTime: 10000 #心跳时间 10s
   aliOssConfig: #该配置前往阿里OSS获取 oss下的endpoint为OSS的endpoint 区别于STS的endpoint
     endpoint: oss-cn-shenzhen.aliyuncs.com
   aliOssStsConfig: #其下为空配置前往阿里STS临时访问OSS文档获取(项目md文档中)，有配置则为默认配置

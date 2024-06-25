@@ -17,7 +17,6 @@ public class AQChatConfig {
     private int webSocketPort;
     private int bossThreadSize;
     private int workThreadSize;
-    private Long heartBeatTime;
     private AliOssConfig aliOssConfig;
     private AliOssStsConfig aliOssStsConfig;
     private AiConfig aiConfig;
