@@ -87,6 +87,10 @@ WEB端: <a href="https://github.com/zsdddz/AQChat">AQChat</a><br/>
 
 # 更新日志
 
+### 2024.06.25
+
+- 🩹 修复未感知用户断开
+
 ### 2024.06.18
 
 - 🩹 修复房间内退出登录多次通知问题

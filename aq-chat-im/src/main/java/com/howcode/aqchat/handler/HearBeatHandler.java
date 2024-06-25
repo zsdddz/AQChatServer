@@ -31,36 +31,21 @@ public class HearBeatHandler extends ChannelInboundHandlerAdapter implements Ini
 
     private static final Logger Logger = LoggerFactory.getLogger(HearBeatHandler.class);
 
-    private Long heartBeatTime = 3000L;
-
-    @Resource
-    private AQChatConfig aqChatConfig;
-
     @Resource
     private GlobalChannelHolder channelHolder;
 
     @Resource
     private IUserHolder userHolder;
 
-    private void init() {
-        heartBeatTime = aqChatConfig.getHeartBeatTime();
-    }
-
-
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         if (evt instanceof IdleStateEvent event) {
             if (event.state() == IdleState.ALL_IDLE) {
-                Long lastReadTime = (Long) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.HEART_BEAT_TIME)).get();
-                long now = System.currentTimeMillis();
-                if (lastReadTime == null || now - lastReadTime > heartBeatTime) {
-                    //获取用户id
-                    String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
-                    if (null == userId) {
-                        return;
-                    }
+                //获取用户id
+                String userId = (String) ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.USER_ID)).get();
+                if (null != userId) {
                     // 下线
-                    Logger.info("用户{}心跳超时，发送离线消息", userId);
+                    Logger.info("用户{}心跳超时10分钟，发送离线消息并断开连接", userId);
                     //构建离线消息
                     AQChatMsgProtocol.OfflineMsg.Builder builder = AQChatMsgProtocol.OfflineMsg.newBuilder();
                     AQChatMsgProtocol.User.Builder userBuilder = AQChatMsgProtocol.User.newBuilder();
@@ -72,13 +57,16 @@ public class HearBeatHandler extends ChannelInboundHandlerAdapter implements Ini
                     builder.setRoomId(channelHolder.getRoomId(userId) == null ? "0" : channelHolder.getRoomId(userId));
                     ctx.writeAndFlush(builder.build());
                 }
+                //超时关闭连接
+                ctx.channel().close();
             }
+        } else {
+            super.userEventTriggered(ctx,evt);
         }
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        init();
-        Logger.info("HearBeatHandler init Success, heartBeatTime: {}ms", heartBeatTime);
+        Logger.info("HearBeatHandler init Success");
     }
 }
