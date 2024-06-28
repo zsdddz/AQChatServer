@@ -2,7 +2,7 @@
 <p align="center">
 	<img alt="logo" height="50" src="https://docs.aqchat.run/aqchat.svg">
 </p>
-<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">AQChatServer</h1>
+<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">AQChat</h1>
 <h4 align="center">一个已接入AI✨的极速、便捷的匿名在线即时AI聊天室。</h4>
 <p align="center">
 	<a href="https://gitee.com/howcode/aq-chat-server"><img src="https://gitee.com/howcode/aq-chat-server/badge/star.svg"></a>
