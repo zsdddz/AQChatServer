@@ -5,9 +5,9 @@
 <h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">AQChat</h1>
 <h4 align="center">一个已接入AI✨的极速、便捷的匿名在线即时AI聊天室。</h4>
 <p align="center">
-	<a href="https://gitee.com/howcode/aq-chat-server"><img src="https://gitee.com/howcode/aq-chat-server/badge/star.svg"></a>
-    <a href="https://gitee.com/howcode/aq-chat-server"><img src="https://gitee.com/howcode/aq-chat-server/badge/fork.svg"></a>
-    <a href="https://gitee.com/howcode/aq-chat-server"><img src="https://img.shields.io/badge/License-Apache--2.0-brightgreen.svg"></a>
+	<a href="https://github.com/zsdddz/aq-chat-server"><img src="https://img.shields.io/github/stars/zsdddz/aqchatserver"></a>
+    <a href="https://github.com/zsdddz/aq-chat-server"><img src="https://img.shields.io/github/forks/zsdddz/aqchatserver"></a>
+    <a href="https://github.com/zsdddz/aq-chat-server"><img src="https://img.shields.io/badge/License-Apache--2.0-brightgreen.svg"></a>
 </p>
 
 [官网文档](https://docs.aqchat.run/)
