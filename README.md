@@ -1,4 +1,20 @@
-# AQChatServer
+
+<p align="center">
+	<img alt="logo" height="50" src="https://docs.aqchat.run/aqchat.svg">
+</p>
+<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">AQChat</h1>
+<h4 align="center">一个已接入AI✨的极速、便捷的匿名在线即时AI聊天室。</h4>
+<p align="center">
+	<a href="https://gitee.com/howcode/aq-chat-server"><img src="https://gitee.com/howcode/aq-chat-server/badge/star.svg"></a>
+    <a href="https://gitee.com/howcode/aq-chat-server"><img src="https://gitee.com/howcode/aq-chat-server/badge/fork.svg"></a>
+    <a href="https://gitee.com/howcode/aq-chat-server"><img src="https://img.shields.io/badge/License-Apache--2.0-brightgreen.svg"></a>
+</p>
+
+[官网文档](https://docs.aqchat.run/)
+
+```
+无偿开源！你们的Star是我的动力！
+```
 
 ### 介绍
 AQChat 一个已接入AI✨的极速、便捷的匿名在线即时AI聊天室。
@@ -73,13 +89,7 @@ WEB端: <a href="https://github.com/zsdddz/AQChat">AQChat</a><br/>
 
 - 项目启动类位于`aq-chat-im`模块下 `com.howcode.aqchat.AQChatApplication`类
   - 启动前保证配置文件（aq-chat-im/src/main/resources/application.yml）中必填的配置补充完整
-
-
-![戴戴的Linux](https://gitee.com/StephenJose_Dai/dockerhaschat/raw/master/daidailinux.jpg)
-
-- 微信扫一扫二维码关注公众号
-- 发送aqchat可获取AQChat部署教程
-- 发送aqchatonekey可获取AQChat一键部署脚本
+- 查看顶部官网文档
 
 ## 部署可能会用到的平台文档
 <a href="https://help.aliyun.com/zh/oss/developer-reference/use-temporary-access-credentials-provided-by-sts-to-access-oss">使用STS临时访问凭证访问OSS</a><br/>
