@@ -1,10 +1,7 @@
 package com.howcode.aqchat.handler.impl;
 
-import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
 import com.howcode.aqchat.common.model.MessageDto;
-import com.howcode.aqchat.common.utils.IdProvider;
-import com.howcode.aqchat.common.utils.SafeUtil;
 import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.handler.at.HandlerFactory;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
@@ -16,8 +13,6 @@ import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -32,16 +27,12 @@ public class SendMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SendMsgCmdHandler.class);
     @Resource
-    @Lazy
     private GlobalChannelHolder globalChannelHolder;
     @Resource
-    @Lazy
     private MqSendingAgent mqSendingAgent;
     @Resource
-    @Lazy
     private IMessageHolder messageHolder;
     @Resource
-    @Lazy
     private HandlerFactory handlerFactory;
 
     @Override
