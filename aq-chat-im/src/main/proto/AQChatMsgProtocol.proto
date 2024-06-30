@@ -370,5 +370,5 @@ message AiReplyMsgAck {
   string msg = 4;
   string ext = 5;
   MsgType msgType = 6;
-  int32 status = 7; //0-成功 1-失败
+  int32 status = 7; //1-成功
 }
