@@ -1,8 +1,8 @@
-package com.howcode;
+package com.howcode.aqchat.framework.giteeai.starter;
 
-import com.howcode.factory.ModelFactory;
-import com.howcode.handler.MessageHandler;
-import com.howcode.session.Message;
+import com.howcode.aqchat.framework.giteeai.starter.factory.ModelFactory;
+import com.howcode.aqchat.framework.giteeai.starter.handler.MessageHandler;
+import com.howcode.aqchat.framework.giteeai.starter.session.Message;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 

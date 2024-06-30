@@ -1,11 +1,11 @@
-package com.howcode.model.impl;
+package com.howcode.aqchat.framework.giteeai.starter.model.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.howcode.config.GiteeAIConfiguration;
-import com.howcode.http.GiteeAIHttpDelegate;
-import com.howcode.http.parameter.GeneralParameters;
-import com.howcode.http.parameter.GeneralParametersBuilder;
-import com.howcode.model.TTIModel;
+import com.howcode.aqchat.framework.giteeai.starter.config.GiteeAIConfiguration;
+import com.howcode.aqchat.framework.giteeai.starter.http.GiteeAIHttpDelegate;
+import com.howcode.aqchat.framework.giteeai.starter.http.parameter.GeneralParameters;
+import com.howcode.aqchat.framework.giteeai.starter.http.parameter.GeneralParametersBuilder;
+import com.howcode.aqchat.framework.giteeai.starter.model.TTIModel;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.howcode.session;
+package com.howcode.aqchat.framework.giteeai.starter.session;
 
 
 /**

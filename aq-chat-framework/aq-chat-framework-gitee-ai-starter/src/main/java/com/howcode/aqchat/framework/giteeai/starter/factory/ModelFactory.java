@@ -1,10 +1,10 @@
-package com.howcode.factory;
+package com.howcode.aqchat.framework.giteeai.starter.factory;
 
-import com.howcode.config.GiteeAIConfiguration;
-import com.howcode.constants.AIModel;
-import com.howcode.model.ChatModel;
-import com.howcode.model.TTIModel;
-import com.howcode.model.TTVModel;
+import com.howcode.aqchat.framework.giteeai.starter.config.GiteeAIConfiguration;
+import com.howcode.aqchat.framework.giteeai.starter.constants.AIModel;
+import com.howcode.aqchat.framework.giteeai.starter.model.ChatModel;
+import com.howcode.aqchat.framework.giteeai.starter.model.TTIModel;
+import com.howcode.aqchat.framework.giteeai.starter.model.TTVModel;
 import jakarta.annotation.Resource;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

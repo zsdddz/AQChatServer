@@ -1,4 +1,4 @@
-package com.howcode.model;
+package com.howcode.aqchat.framework.giteeai.starter.model;
 
 /**
  * @Description

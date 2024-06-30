@@ -1,4 +1,4 @@
-package com.howcode.constants;
+package com.howcode.aqchat.framework.giteeai.starter.constants;
 
 import java.util.HashMap;
 import java.util.Map;

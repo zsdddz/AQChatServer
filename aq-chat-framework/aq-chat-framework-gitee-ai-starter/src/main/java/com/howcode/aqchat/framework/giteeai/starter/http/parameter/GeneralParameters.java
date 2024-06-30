@@ -1,6 +1,8 @@
-package com.howcode.http.parameter;
+package com.howcode.aqchat.framework.giteeai.starter.http.parameter;
 
-import com.howcode.session.Message;
+
+
+import com.howcode.aqchat.framework.giteeai.starter.session.Message;
 
 import java.util.List;
 

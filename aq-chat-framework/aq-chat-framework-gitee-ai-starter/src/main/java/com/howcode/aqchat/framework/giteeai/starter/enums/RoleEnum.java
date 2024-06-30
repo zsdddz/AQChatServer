@@ -1,4 +1,4 @@
-package com.howcode.enums;
+package com.howcode.aqchat.framework.giteeai.starter.enums;
 
 /**
  * @Description

@@ -1,7 +1,9 @@
-package com.howcode.model;
+package com.howcode.aqchat.framework.giteeai.starter.model;
 
-import com.howcode.handler.MessageHandler;
-import com.howcode.session.Message;
+
+
+import com.howcode.aqchat.framework.giteeai.starter.handler.MessageHandler;
+import com.howcode.aqchat.framework.giteeai.starter.session.Message;
 
 import java.util.List;
 

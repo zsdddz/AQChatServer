@@ -1,4 +1,4 @@
-package com.howcode.handler;
+package com.howcode.aqchat.framework.giteeai.starter.handler;
 
 /**
  * @Description

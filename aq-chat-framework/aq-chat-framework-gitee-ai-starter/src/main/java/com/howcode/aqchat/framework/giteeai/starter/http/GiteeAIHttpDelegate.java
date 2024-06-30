@@ -1,12 +1,14 @@
-package com.howcode.http;
+package com.howcode.aqchat.framework.giteeai.starter.http;
 
-import com.howcode.handler.MessageHandler;
+
+
+import com.howcode.aqchat.framework.giteeai.starter.handler.MessageHandler;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.function.Consumer;
+
 
 /**
  * @Description

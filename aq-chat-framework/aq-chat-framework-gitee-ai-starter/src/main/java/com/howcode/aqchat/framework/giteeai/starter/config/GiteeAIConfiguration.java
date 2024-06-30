@@ -1,6 +1,7 @@
-package com.howcode.config;
+package com.howcode.aqchat.framework.giteeai.starter.config;
 
-import com.howcode.constants.AIModel;
+
+import com.howcode.aqchat.framework.giteeai.starter.constants.AIModel;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -17,6 +18,19 @@ public class GiteeAIConfiguration {
     private String tTIModelUrl;
     private String TTVModel;
     private String tTVModelUrl;
+
+    @Override
+    public String toString() {
+        return "GiteeAIConfiguration{" +
+                "bearer='" + bearer + '\'' +
+                ", ChatModel='" + ChatModel + '\'' +
+                ", chatModelUrl='" + chatModelUrl + '\'' +
+                ", TTIModel='" + TTIModel + '\'' +
+                ", tTIModelUrl='" + tTIModelUrl + '\'' +
+                ", TTVModel='" + TTVModel + '\'' +
+                ", tTVModelUrl='" + tTVModelUrl + '\'' +
+                '}';
+    }
 
     public String getBearer() {
         return bearer;

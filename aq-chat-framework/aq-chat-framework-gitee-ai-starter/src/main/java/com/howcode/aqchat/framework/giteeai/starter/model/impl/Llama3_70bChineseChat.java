@@ -1,21 +1,21 @@
-package com.howcode.model.impl;
+package com.howcode.aqchat.framework.giteeai.starter.model.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.howcode.config.GiteeAIConfiguration;
-import com.howcode.constants.AIModel;
-import com.howcode.enums.RoleEnum;
-import com.howcode.handler.MessageHandler;
-import com.howcode.http.GiteeAIHttpDelegate;
-import com.howcode.http.parameter.GeneralParameters;
-import com.howcode.http.parameter.GeneralParametersBuilder;
-import com.howcode.model.ChatModel;
-import com.howcode.session.Message;
+import com.howcode.aqchat.framework.giteeai.starter.config.GiteeAIConfiguration;
+import com.howcode.aqchat.framework.giteeai.starter.enums.RoleEnum;
+import com.howcode.aqchat.framework.giteeai.starter.handler.MessageHandler;
+import com.howcode.aqchat.framework.giteeai.starter.http.GiteeAIHttpDelegate;
+import com.howcode.aqchat.framework.giteeai.starter.http.parameter.GeneralParameters;
+import com.howcode.aqchat.framework.giteeai.starter.http.parameter.GeneralParametersBuilder;
+import com.howcode.aqchat.framework.giteeai.starter.model.ChatModel;
+import com.howcode.aqchat.framework.giteeai.starter.session.Message;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * @Description
