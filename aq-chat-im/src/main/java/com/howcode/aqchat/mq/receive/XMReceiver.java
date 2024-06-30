@@ -111,7 +111,11 @@ public class XMReceiver implements InitializingBean {
         storeMessage.setSenderId(AQBusinessConstant.XM_ID);
         storeMessage.setRoomId(messageDto.getRoomId());
         storeMessage.setCreateTime(new Date());
-        storeMessage.setMessageExt(AQBusinessConstant.AT + messageDto.getSenderId());
+        int lastIndex = fullContent.toString().lastIndexOf('/');
+        if (lastIndex != -1) {
+            String fileName = fullContent.substring(lastIndex + 1);
+            storeMessage.setMessageExt(fileName);
+        }
         storeMessage.setMessageContent(fullContent.toString());
         return storeMessage;
     }
