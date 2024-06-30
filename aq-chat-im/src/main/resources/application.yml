@@ -22,9 +22,14 @@ aq-chat:
     consumer:
       nameSever: 127.0.0.1:9876
   aiConfig: #该配置前往阿里百炼平台获取(项目md文档中)
-    apiKey:
-    model: qwen-max #模型名称
-
+    baiLianConfig: #该配置前往阿里百炼平台获取(项目md文档中)
+      apiKey:
+      model: qwen-max #模型名称
+    giteeConfig:
+      bearer:  #接口密钥
+      chatModel:  #对话模型
+      ttiModel: #图片生成模型
+      ttvModel:  #语音合成模型
 
 spring:
   application:
