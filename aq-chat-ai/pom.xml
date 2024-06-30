@@ -34,6 +34,11 @@
             <artifactId>aq-chat-framework-redis-starter</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.howcode</groupId>
+            <artifactId>aq-chat-framework-gitee-ai-starter</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>

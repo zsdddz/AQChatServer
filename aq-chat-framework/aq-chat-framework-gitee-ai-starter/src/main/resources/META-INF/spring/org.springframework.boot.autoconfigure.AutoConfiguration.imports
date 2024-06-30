@@ -1,0 +1,3 @@
+com.howcode.config.GiteeAIConfiguration
+com.howcode.GiteeAIClient
+com.howcode.DefaultGiteeAIClient

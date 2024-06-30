@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package ai_msg;
+option java_package = "com.howcode.aqchat.message";
+
+enum MsgCommand {
+  //开启AI空间类型房间
+  OPEN_AI_ROOM_CMD = 0;
+  OPEN_AI_ROOM_CMD_ACK = 1;
+
+  //关闭AI空间类型房间
+  CLOSE_AI_ROOM_CMD = 2;
+  CLOSE_AI_ROOM_CMD_ACK = 3;
+
+  //发送消息
+  SEND_MSG_CMD = 4;
+  SEND_MSG_CMD_ACK = 5;
+
+  //AI回复消息
+  AI_REPLY_MSG_ACK = 6;
+
+  //AI回复消息（流式）
+  AI_REPLY_MSG_STREAM_ACK = 7;
+
+}
+
+//开启AI空间类型房间
+message OpenAiRoomCmd {
+  string userId = 1;
+}
+message OpenAiRoomCmdAck {
+  int32 roomId = 1;
+  repeated Assistant assistants = 2;
+}
+
+message Assistant{
+  string userId = 1;
+  string name = 2;
+  string avatar = 3;
+}
+
+//关闭AI空间类型房间
+message CloseAiRoomCmd {
+  int32 roomId = 1;
+}
+message CloseAiRoomCmdAck {
+  int32 roomId = 1;
+}
+
+//发送消息
+message SendMsgCmd {
+  int32 roomId = 1;
+  string userId = 2;
+  string  msgId = 3;
+  string msg = 4;
+  string ext = 5;
+}
+message SendMsgCmdAck {
+  string msgId = 1;
+  int32 status = 2;
+}
+
+//AI回复消息
+message AiReplyMsgAck {
+  int32 roomId = 1;
+  string userId = 2;
+  string msgId = 3;
+  string msg = 4;
+  string ext = 5;
+  MsgType msgType = 6;
+}
+
+//AI回复消息（流式）
+message AiReplyMsgStreamAck {
+  int32 roomId = 1;
+  string userId = 2;
+  string msgId = 3;
+  string msg = 4;
+  string ext = 5;
+  MsgType msgType = 6;
+}
+
+
+enum MsgType {
+  TEXT = 0;
+  IMAGE = 1;
+  VOICE = 2;
+}
