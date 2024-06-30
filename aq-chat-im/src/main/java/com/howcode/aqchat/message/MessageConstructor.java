@@ -1,5 +1,6 @@
 package com.howcode.aqchat.message;
 
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatEnum;
 import com.howcode.aqchat.common.model.*;
 import org.slf4j.Logger;
@@ -128,6 +129,22 @@ public class MessageConstructor {
                 .setUserId(recallMessageDto.getUserId())
                 .setRoomId(recallMessageDto.getRoomId())
                 .setMsgId(recallMessageDto.getMsgId())
+                .build();
+    }
+
+    public static AQChatMsgProtocol.OpenAiRoomCmdAck buildOpenAiRoomCmdAck(String roomId, List<UserGlobalInfoDto> aiList) {
+        List<AQChatMsgProtocol.Assistant> assistants = new ArrayList<>();
+        aiList.forEach(ai -> {
+            AQChatMsgProtocol.Assistant assistant = AQChatMsgProtocol.Assistant.newBuilder()
+                    .setUserId(ai.getUserId())
+                    .setName(ai.getUserName())
+                    .setAvatar(ai.getUserAvatar())
+                    .build();
+            assistants.add(assistant);
+        });
+        return AQChatMsgProtocol.OpenAiRoomCmdAck.newBuilder()
+                .setRoomId(roomId)
+                .addAllAssistants(assistants)
                 .build();
     }
 }

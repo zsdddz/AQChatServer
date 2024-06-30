@@ -226,12 +226,12 @@ public class GlobalChannelHolder {
         messageBroadcaster.broadcast(recallMessageDto.getRoomId(), recallMsgNotify);
     }
 
-    public void sendBroadcastAIMessage(AIMessageDto aiMessageDto) {
+    public void sendBroadcastAIMessage(AIMessageDto aiMessageDto,String aiId){
         if (null == aiMessageDto) {
             return;
         }
         //构造ai助手消息
-        UserGlobalInfoDto userInfo = userHolder.getUserInfo(AQBusinessConstant.AI_HELPER_ID);
+        UserGlobalInfoDto userInfo = userHolder.getUserInfo(aiId);
         AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
         AQChatMsgProtocol.StreamMsgNotify streamMsgNotify = AQChatMsgProtocol.StreamMsgNotify.newBuilder()
                 .setUser(userBuilder)
@@ -241,5 +241,22 @@ public class GlobalChannelHolder {
                 .setStreamType(aiMessageDto.getStatus())
                 .build();
         messageBroadcaster.broadcast(aiMessageDto.getRoomId(),streamMsgNotify);
+    }
+
+    public void sendAIMessage(AIMessageDto aiMessageDto,String aiId,int msgType) {
+        if (null == aiMessageDto) {
+            return;
+        }
+        //构造ai助手消息
+        UserGlobalInfoDto userInfo = userHolder.getUserInfo(aiId);
+        AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
+        AQChatMsgProtocol.AiReplyMsgAck imageMsgNotify = AQChatMsgProtocol.AiReplyMsgAck.newBuilder()
+                .setUser(userBuilder)
+                .setMsgId(aiMessageDto.getMessageId())
+                .setRoomId(aiMessageDto.getRoomId())
+                .setMsgType(AQChatMsgProtocol.MsgType.forNumber(msgType))
+                .setStatus(aiMessageDto.getStatus())
+                .build();
+        messageBroadcaster.broadcast(aiMessageDto.getRoomId(),imageMsgNotify);
     }
 }

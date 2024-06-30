@@ -1,5 +1,6 @@
 package com.howcode.aqchat.holder.impl;
 
+import com.howcode.aqchat.ai.parameter.MessageRecord;
 import com.howcode.aqchat.common.constant.AQRedisKeyPrefix;
 import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
@@ -78,6 +79,11 @@ public class AQRoomHolder implements IRoomHolder {
     }
 
     @Override
+    public void removeRoomInfo(String roomId) {
+        redisCacheHelper.deleteObject(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId);
+    }
+
+    @Override
     public void saveRoomMember(String roomId, String userId) {
         //判断map是否存在
         Map<String, UserGlobalInfoDto> roomMembers = redisCacheHelper.getCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_MEMBER_PREFIX);
@@ -126,5 +132,25 @@ public class AQRoomHolder implements IRoomHolder {
         //移除成员
         roomMembers.remove(userId);
         redisCacheHelper.setCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_MEMBER_PREFIX, roomMembers);
+    }
+
+    @Override
+    public List<MessageRecord> getRoomConversationRecords(String roomId) {
+        return redisCacheHelper.getCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_CONVERSATION_PREFIX);
+
+    }
+
+    @Override
+    public void addRoomConversationRecord(String roomId, MessageRecord userRecord) {
+        List<MessageRecord> messageRecords = redisCacheHelper.getCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_CONVERSATION_PREFIX);
+        if (null == messageRecords && null != userRecord) {
+            messageRecords = new ArrayList<>();
+            messageRecords.add(userRecord);
+            redisCacheHelper.setCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_CONVERSATION_PREFIX, messageRecords);
+        }else if (null != userRecord){
+            messageRecords.add(userRecord);
+            redisCacheHelper.setCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_CONVERSATION_PREFIX, messageRecords);
+        }
+        LOGGER.error("[添加房间消息记录]消息为空");
     }
 }

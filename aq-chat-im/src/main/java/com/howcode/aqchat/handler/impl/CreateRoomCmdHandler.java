@@ -3,6 +3,7 @@ package com.howcode.aqchat.handler.impl;
 
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
+import com.howcode.aqchat.common.enums.RoomType;
 import com.howcode.aqchat.common.enums.SwitchStatusEnum;
 import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.common.utils.IdProvider;
@@ -80,6 +81,7 @@ public class CreateRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtoc
         roomInfoDto.setRoomId(roomId);
         roomInfoDto.setRoomNo(roomNo);
         roomInfoDto.setRoomName(roomName);
+        roomInfoDto.setRoomType(RoomType.NORMAL.getCode());
         roomInfoDto.setHistory(cmd.getHistory());
         roomInfoDto.setAi(cmd.getAi());
         ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.ROOM_ID)).set(roomId);

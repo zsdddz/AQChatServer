@@ -12,5 +12,6 @@ public class AIMessageDto {
     private String messageId;
     private String roomId;
     private String content;
+    private int msgType;
     private int status;
 }

@@ -69,4 +69,43 @@ public interface AQBusinessConstant {
      * 机器人助手头像
      */
     String AI_HELPER_AVATAR = "https://aqchat.oss-cn-shenzhen.aliyuncs.com/avatar/AQChatAI.png";
+
+    /**
+     * 小T
+     */
+    String XT_ID = "xt";
+    /**
+     * 小T名称
+     */
+    String XT_NAME = "小T";
+    /**
+     * 小T头像
+     */
+    String XT_AVATAR = "https://aqchat.oss-cn-shenzhen.aliyuncs.com/avatar/xt.png";
+
+    /**
+     * 小V
+     */
+    String XV_ID = "xv";
+    /**
+     * 小V名称
+     */
+    String XV_NAME = "小V";
+    /**
+     * 小V头像
+     */
+    String XV_AVATAR = "https://aqchat.oss-cn-shenzhen.aliyuncs.com/avatar/xv.png";
+
+    /**
+     * 小M
+     */
+    String XM_ID = "xm";
+    /**
+     * 小M名称
+     */
+    String XM_NAME = "小M";
+    /**
+     * 小M头像
+     */
+    String XM_AVATAR = "https://aqchat.oss-cn-shenzhen.aliyuncs.com/avatar/xm.png";
 }

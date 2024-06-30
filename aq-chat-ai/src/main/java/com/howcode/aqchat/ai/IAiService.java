@@ -1,5 +1,8 @@
 package com.howcode.aqchat.ai;
 
+import com.howcode.aqchat.ai.parameter.MessageRecord;
+
+import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -21,4 +24,19 @@ public interface IAiService {
      * @param consumer consumer
      */
     void streamCallWithMessage(String userMsg, Consumer<AIResult> consumer);
+
+    //多轮对话
+    default void chat(String message, List<MessageRecord> messages,Consumer<AIResult> consumer){
+    }
+
+    //文字转图片
+    default AIResult textToImage(String text){
+        return null;
+    }
+
+    //文字转语音
+    default AIResult textToVoice(String text){
+        return null;
+    }
+
 }

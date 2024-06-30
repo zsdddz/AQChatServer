@@ -1,5 +1,6 @@
 package com.howcode.aqchat.holder;
 
+import com.howcode.aqchat.ai.parameter.MessageRecord;
 import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 
@@ -45,6 +46,7 @@ public interface IRoomHolder {
      * @param roomNo 房间号
      */
     void removeRoomInfo(Integer roomNo);
+    void removeRoomInfo(String roomId);
 
     /**
      * 保存房间成员
@@ -66,4 +68,8 @@ public interface IRoomHolder {
      * @param userId 用户id
      */
     void removeRoomMember(String roomId, String userId);
+
+    List<MessageRecord> getRoomConversationRecords(String roomId);
+
+    void addRoomConversationRecord(String roomId, MessageRecord userRecord);
 }

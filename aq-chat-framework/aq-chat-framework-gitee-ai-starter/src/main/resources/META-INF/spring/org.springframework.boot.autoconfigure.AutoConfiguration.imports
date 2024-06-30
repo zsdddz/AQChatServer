@@ -1,3 +1,2 @@
-com.howcode.config.GiteeAIConfiguration
-com.howcode.GiteeAIClient
-com.howcode.DefaultGiteeAIClient
+com.howcode.aqchat.framework.giteeai.starter.DefaultGiteeAIClient
+com.howcode.aqchat.framework.giteeai.starter.config.GiteeAIConfiguration

@@ -6,6 +6,7 @@ import com.howcode.aqchat.common.model.MessageDto;
 import com.howcode.aqchat.common.utils.IdProvider;
 import com.howcode.aqchat.common.utils.SafeUtil;
 import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
+import com.howcode.aqchat.handler.at.HandlerFactory;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IMessageHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
@@ -39,6 +40,9 @@ public class SendMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.
     @Resource
     @Lazy
     private IMessageHolder messageHolder;
+    @Resource
+    @Lazy
+    private HandlerFactory handlerFactory;
 
     @Override
     public void handle(ChannelHandlerContext ctx, AQChatMsgProtocol.SendMsgCmd cmd) {
@@ -94,18 +98,8 @@ public class SendMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.
         messageDto.setMessageExt(cmd.getExt());
         messageDto.setCreateTime(new Date());
         mqSendingAgent.sendMessageToRoom(messageDto);
-        //判断是否@了AI
-        String messageExt = messageDto.getMessageExt();
-        if ((AQBusinessConstant.AT + AQBusinessConstant.AI_HELPER_ID).equals(messageExt)) {
-            //拷贝一份消息
-            MessageDto aiMessageDto = new MessageDto();
-            BeanUtils.copyProperties(messageDto, aiMessageDto);
-            //覆盖消息Id
-            aiMessageDto.setMessageId(IdProvider.nextId()+"");
-            //修改消息内容 去掉@AI
-            aiMessageDto.setMessageContent(messageDto.getMessageContent().replace((AQBusinessConstant.AT + AQBusinessConstant.AI_HELPER_NAME), ""));
-            mqSendingAgent.aiHelper(aiMessageDto);
-        }
+        //处理AI消息
+        handlerFactory.handleMessage(messageDto);
         mqSendingAgent.storeMessages(messageDto);
         messageHolder.putMessageId(roomId, msgId);
         //返回消息发送成功

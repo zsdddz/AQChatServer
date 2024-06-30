@@ -3,6 +3,8 @@ syntax = "proto3";
 package ai_msg;
 option java_package = "com.howcode.aqchat.message";
 
+//仅做标记 暂未使用
+
 enum MsgCommand {
   //开启AI空间类型房间
   OPEN_AI_ROOM_CMD = 0;

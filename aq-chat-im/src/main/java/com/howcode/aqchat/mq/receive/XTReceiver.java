@@ -5,18 +5,12 @@ import com.howcode.aqchat.ai.IAiService;
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.constant.AQChatMQConstant;
 import com.howcode.aqchat.common.enums.AIMessageStatusEnum;
-import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
-import com.howcode.aqchat.common.enums.MessageStatusEnum;
 import com.howcode.aqchat.common.enums.MsgTypeEnum;
 import com.howcode.aqchat.common.model.AIMessageDto;
 import com.howcode.aqchat.common.model.MessageDto;
-import com.howcode.aqchat.common.model.RoomNotifyDto;
 import com.howcode.aqchat.common.utils.ThreadPoolUtil;
 import com.howcode.aqchat.framework.mq.starter.config.RocketMQConfig;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
-import com.howcode.aqchat.holder.IRoomHolder;
-import com.howcode.aqchat.message.AQChatMsgProtocol;
-import com.howcode.aqchat.message.MessageConstructor;
 import com.howcode.aqchat.service.service.IAQMessageService;
 import jakarta.annotation.Resource;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
@@ -25,7 +19,6 @@ import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -34,12 +27,12 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 /**
- * @Author: ZhangWeinan
- * @Description:
- * @date 2024-06-10 18:27
+ * @Description
+ * @Author ZhangWeinan
+ * @Date 2024/6/30 16:30
  */
 @Component
-public class AIHelperReceiver implements InitializingBean {
+public class XTReceiver implements InitializingBean {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JoinRoomReceiver.class);
 
@@ -47,7 +40,7 @@ public class AIHelperReceiver implements InitializingBean {
     private RocketMQConfig rocketMQConfig;
     @Resource
     private GlobalChannelHolder globalChannelHolder;
-    @Resource
+    @Resource(name = "giteeAIService")
     private IAiService aiService;
     @Resource
     private IAQMessageService messageService;
@@ -61,14 +54,14 @@ public class AIHelperReceiver implements InitializingBean {
         try {
             DefaultMQPushConsumer defaultMQPushConsumer = new DefaultMQPushConsumer();
             defaultMQPushConsumer.setNamesrvAddr(rocketMQConfig.getConsumer().getNameSever());
-            defaultMQPushConsumer.setConsumerGroup(AQChatMQConstant.ConsumerGroup.AI_HELPER_CONSUMER_GROUP);
+            defaultMQPushConsumer.setConsumerGroup(AQChatMQConstant.ConsumerGroup.XT_CONSUMER_GROUP);
             defaultMQPushConsumer.setConsumeMessageBatchMaxSize(1);
             defaultMQPushConsumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
-            defaultMQPushConsumer.subscribe(AQChatMQConstant.MQTopic.AI_HELPER_TOPIC, "*");
+            defaultMQPushConsumer.subscribe(AQChatMQConstant.MQTopic.XT_TOPIC, "*");
             defaultMQPushConsumer.setMessageListener((MessageListenerConcurrently) (messageExtList, consumeConcurrentlyContext) -> {
                 for (MessageExt messageExt : messageExtList) {
                     String msgStr = new String(messageExt.getBody());
-                    LOGGER.info("mq收到消息[AI助手]:{}", msgStr);
+                    LOGGER.info("mq收到消息[XT 文本模型]:{}", msgStr);
                     threadPoolUtil.submitTask(() -> {
                         // AI助手处理消息
                         if (!msgStr.isEmpty()) {
@@ -81,22 +74,22 @@ public class AIHelperReceiver implements InitializingBean {
                                     aiMessageDto.setRoomId(messageDto.getRoomId());
                                     aiMessageDto.setContent(aiResult.getContent());
                                     aiMessageDto.setStatus(aiResult.getStatus());
-                                    globalChannelHolder.sendBroadcastAIMessage(aiMessageDto, AQBusinessConstant.AI_HELPER_ID);
+                                    globalChannelHolder.sendAIMessage(aiMessageDto, AQBusinessConstant.XT_ID, MsgTypeEnum.TEXT.getCode());
                                     fullContent.append(aiResult.getContent());
                                 });
                             } catch (Exception e) {
-                                LOGGER.error("AI助手处理消息失败", e);
+                                LOGGER.error(" 文本模型 处理消息失败", e);
                                 //发送失败消息
                                 AIMessageDto aiMessageDto = new AIMessageDto();
                                 aiMessageDto.setMessageId(messageDto.getMessageId());
                                 aiMessageDto.setRoomId(messageDto.getRoomId());
                                 aiMessageDto.setStatus(AIMessageStatusEnum.FAIL.getCode());
-                                globalChannelHolder.sendBroadcastAIMessage(aiMessageDto, AQBusinessConstant.AI_HELPER_ID);
+                                globalChannelHolder.sendAIMessage(aiMessageDto, AQBusinessConstant.XT_ID, MsgTypeEnum.TEXT.getCode());
                             } finally {
-                                LOGGER.info("开始存储AI回复消息");
+                                LOGGER.info("开始存储 文本模型AI 回复消息");
                                 MessageDto storeMessage = buildStoreMessage(messageDto, fullContent);
                                 messageService.saveMessage(storeMessage);
-                                LOGGER.info("AI回复消息存储成功");
+                                LOGGER.info("文本模型AI 回复消息存储成功");
                             }
                         }
                     });
@@ -104,9 +97,9 @@ public class AIHelperReceiver implements InitializingBean {
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             });
             defaultMQPushConsumer.start();
-            LOGGER.info("[AI助手]订阅消息成功");
+            LOGGER.info("[文本模型AI]订阅消息成功");
         } catch (MQClientException e) {
-            LOGGER.error("AI助手 订阅失败", e);
+            LOGGER.error("文本模型AI 订阅失败", e);
         }
     }
 
@@ -114,7 +107,7 @@ public class AIHelperReceiver implements InitializingBean {
         MessageDto storeMessage = new MessageDto();
         storeMessage.setMessageId(messageDto.getMessageId());
         storeMessage.setMessageType(MsgTypeEnum.TEXT.getCode());
-        storeMessage.setSenderId(AQBusinessConstant.AI_HELPER_ID);
+        storeMessage.setSenderId(AQBusinessConstant.XT_ID);
         storeMessage.setRoomId(messageDto.getRoomId());
         storeMessage.setCreateTime(new Date());
         storeMessage.setMessageExt(AQBusinessConstant.AT + messageDto.getSenderId());

@@ -37,4 +37,5 @@ public interface AQRedisKeyPrefix {
      * 阿里云临时凭证缓存
      */
     String ALI_OSS_STS = SYS_NAME + ":aliOssSts";
+    String AQ_ROOM_CONVERSATION_PREFIX = "conversation";
 }

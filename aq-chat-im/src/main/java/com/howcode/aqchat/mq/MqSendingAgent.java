@@ -156,4 +156,64 @@ public class MqSendingAgent {
             LOGGER.error("发送AI消息失败", e);
         }
     }
+
+    public void xm(MessageDto aiMessageDto) {
+        if (null == aiMessageDto) {
+            LOGGER.error("消息为空");
+            return;
+        }
+        Message message = new Message();
+        message.setTopic(AQChatMQConstant.MQTopic.XM_TOPIC);
+        message.setBody(JSONObject.toJSONString(aiMessageDto).getBytes());
+        try {
+            mqProducer.send(message);
+        } catch (Exception e) {
+            LOGGER.error("发送XM消息失败", e);
+        }
+    }
+
+    public void xt(MessageDto aiMessageDto) {
+        if (null == aiMessageDto) {
+            LOGGER.error("消息为空");
+            return;
+        }
+        Message message = new Message();
+        message.setTopic(AQChatMQConstant.MQTopic.XT_TOPIC);
+        message.setBody(JSONObject.toJSONString(aiMessageDto).getBytes());
+        try {
+            mqProducer.send(message);
+        } catch (Exception e) {
+            LOGGER.error("发送XT消息失败", e);
+        }
+    }
+
+    public void xv(MessageDto aiMessageDto) {
+        if (null == aiMessageDto) {
+            LOGGER.error("消息为空");
+            return;
+        }
+        Message message = new Message();
+        message.setTopic(AQChatMQConstant.MQTopic.XV_TOPIC);
+        message.setBody(JSONObject.toJSONString(aiMessageDto).getBytes());
+        try {
+            mqProducer.send(message);
+        } catch (Exception e) {
+            LOGGER.error("发送XV消息失败", e);
+        }
+    }
+
+    public void multiple(MessageDto aiMessageDto) {
+        if (null == aiMessageDto) {
+            LOGGER.error("消息为空");
+            return;
+        }
+        Message message = new Message();
+        message.setTopic(AQChatMQConstant.MQTopic.MULTIPLE_TOPIC);
+        message.setBody(JSONObject.toJSONString(aiMessageDto).getBytes());
+        try {
+            mqProducer.send(message);
+        } catch (Exception e) {
+            LOGGER.error("发送多模型消息失败", e);
+        }
+    }
 }
