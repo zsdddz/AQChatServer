@@ -1,7 +1,9 @@
 package com.howcode.aqchat.message;
 
 
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatEnum;
+import com.howcode.aqchat.common.enums.RoomType;
 import com.howcode.aqchat.common.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,8 +48,8 @@ public class MessageConstructor {
             List<AQChatMsgProtocol.User> users = buildUsers(roomInfo);
             users.forEach(room::addMembers);
             room.setRoomId(roomInfo.getRoomId())
-                    .setRoomNo(roomInfo.getRoomNo())
-                    .setRoomName(roomInfo.getRoomName())
+                    .setRoomNo(roomInfo.getRoomType() == RoomType.NORMAL.getCode() ? roomInfo.getRoomNo() : AQBusinessConstant.DEFAULT_AI_SPACE_NO)
+                    .setRoomName(roomInfo.getRoomType() == RoomType.NORMAL.getCode() ? roomInfo.getRoomName() : AQBusinessConstant.DEFAULT_AI_SPACE_NAME)
                     .setAi(roomInfo.getAi());
             builder.setRoom(room);
         }

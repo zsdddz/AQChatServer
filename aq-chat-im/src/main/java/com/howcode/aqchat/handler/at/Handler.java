@@ -6,7 +6,11 @@ public abstract class Handler {
     protected Handler handler;
 
     public void setHandler(Handler handler) {
-        this.handler = handler;
+        if (this.handler == null) {
+            this.handler = handler;
+        }else {
+            this.handler.setHandler(handler);
+        }
     }
 
     public abstract void handleMessage(MessageDto messageDto);
