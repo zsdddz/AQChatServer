@@ -2,7 +2,7 @@
 <p align="center">
 	<img alt="logo" height="50" src="https://docs.aqchat.run/aqchat.svg">
 </p>
-<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">AQChat v2.0</h1>
+<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">AQChat v2.0 </h1>
 <h4 align="center">一个已接入AI✨的极速、便捷的匿名在线即时AI聊天室。</h4>
 <p align="center">
 	<a href="https://gitee.com/howcode/aq-chat-server"><img src="https://gitee.com/howcode/aq-chat-server/badge/star.svg"></a>
@@ -99,7 +99,7 @@ WEB端: <a href="https://gitee.com/howcode/aq-chat">AQChat</a><br/>
 
 ### 2024.06.30
 
-- ✨ 接入Gitee AI 文本、文字转语音、文字转图片大模型
+- ✨ 接入Gitee AI 文本大模型、文字转语音大模型、文字转图片大模型
 - ✨ 封装Gitee AI SDK
 
 
