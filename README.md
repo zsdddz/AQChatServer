@@ -97,6 +97,10 @@ WEB端: <a href="https://gitee.com/howcode/aq-chat">AQChat</a><br/>
 
 # 更新日志
 
+### 2024.07.01
+
+- ✨ 接入Gitee AI 第一版测试完成
+
 ### 2024.06.30
 
 - ✨ 接入Gitee AI 文本大模型、文字转语音大模型、文字转图片大模型
