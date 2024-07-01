@@ -252,6 +252,7 @@ public class GlobalChannelHolder {
         AQChatMsgProtocol.User.Builder userBuilder = getUserBuilder(userInfo);
         AQChatMsgProtocol.AiReplyMsgAck imageMsgNotify = AQChatMsgProtocol.AiReplyMsgAck.newBuilder()
                 .setUser(userBuilder)
+                .setMsg(aiMessageDto.getContent())
                 .setMsgId(aiMessageDto.getMessageId())
                 .setRoomId(aiMessageDto.getRoomId())
                 .setMsgType(AQChatMsgProtocol.MsgType.forNumber(msgType))
