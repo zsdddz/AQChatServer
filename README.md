@@ -37,7 +37,7 @@ WEB端: <a href="https://gitee.com/howcode/aq-chat">AQChat</a><br/>
 
 ### 项目预览
 项目演示地址：https://www.aqchat.run 
->pc端访问默认访问WEB端地址,移动端访问跳转移动端地址
+>pc端访问默认访问WEB端地址  移动端访问跳转移动端地址
 
 ## 免责声明
 
