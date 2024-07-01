@@ -53,6 +53,15 @@ public interface AQBusinessConstant {
     String LIMIT = "limit 100";
 
     /**
+     * 默认AI空间名称
+     */
+    String DEFAULT_AI_SPACE_NAME = "AI空间";
+    /**
+     * 默认AI空间房间号
+     */
+    int DEFAULT_AI_SPACE_NO = 0;
+
+    /**
      * 艾特
      */
     String AT = "@";

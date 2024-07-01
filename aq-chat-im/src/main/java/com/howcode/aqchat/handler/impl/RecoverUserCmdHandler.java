@@ -2,10 +2,12 @@ package com.howcode.aqchat.handler.impl;
 
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
+import com.howcode.aqchat.common.enums.RoomType;
 import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
+import com.howcode.aqchat.holder.IRoomHolder;
 import com.howcode.aqchat.holder.IUserHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
@@ -30,9 +32,12 @@ public class RecoverUserCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProto
     @Resource
     private IUserHolder aqUserHolder;
     @Resource
+    private IRoomHolder roomHolder;
+    @Resource
     private GlobalChannelHolder globalChannelHolder;
     @Resource
     private MqSendingAgent mqSendingAgent;
+
 
     @Override
     public void handle(ChannelHandlerContext ctx, AQChatMsgProtocol.RecoverUserCmd cmd) {
@@ -57,9 +62,15 @@ public class RecoverUserCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProto
         if (null != userInfo.getRoomId()) {
             //加入房间
             globalChannelHolder.joinRoom(userInfo.getRoomId(), userId, ctx.channel());
+        }
+        //判断房间类型是否是AI空间
+        RoomInfoDto roomInfo = roomHolder.getRoomInfoById(userInfo.getRoomId());
+
+        if (null != roomInfo && roomInfo.getRoomType() == RoomType.NORMAL.getCode()) {
             mqSendingAgent.sendJoinRoomMsg(userId, userInfo.getRoomId());
         }
-        RoomInfoDto roomInfo = globalChannelHolder.getRoomAllInfo(userInfo.getRoomId());
+        //返回用户信息
+        roomInfo = globalChannelHolder.getRoomAllInfo(userInfo.getRoomId());
         AQChatMsgProtocol.RecoverUserAck recoverUserAck = MessageConstructor.buildRecoverUserAck(userInfo, roomInfo);
         ctx.writeAndFlush(recoverUserAck);
     }
