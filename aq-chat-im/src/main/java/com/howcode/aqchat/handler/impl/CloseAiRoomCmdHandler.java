@@ -42,7 +42,7 @@ public class CloseAiRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProto
         roomHolder.removeRoomInfo(roomId);
         ctx.channel().attr(AttributeKey.valueOf(AQBusinessConstant.ROOM_ID)).set(null);
         //返回关闭房间成功
-        AQChatMsgProtocol.CloseAiRoomCmdAck result = AQChatMsgProtocol.CloseAiRoomCmdAck.newBuilder()
+        AQChatMsgProtocol.CloseAiRoomAck result = AQChatMsgProtocol.CloseAiRoomAck.newBuilder()
                 .setRoomId(roomId)
                 .build();
         ctx.writeAndFlush(result);

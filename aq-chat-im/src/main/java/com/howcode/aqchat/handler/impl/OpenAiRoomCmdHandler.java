@@ -79,7 +79,7 @@ public class OpenAiRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtoc
         LOGGER.info("用户{}创建AI房间{}成功", userId, roomInfoDto.getRoomId());
         //返回创建房间成功消息
         List<UserGlobalInfoDto> aiList = aiConfiguration.getAiList();
-        AQChatMsgProtocol.OpenAiRoomCmdAck openAiRoomCmdAck = MessageConstructor.buildOpenAiRoomCmdAck(roomId,aiList);
-        ctx.writeAndFlush(openAiRoomCmdAck);
+        AQChatMsgProtocol.OpenAiRoomAck openAiRoomAck = MessageConstructor.buildOpenAiRoomAck(roomId,aiList);
+        ctx.writeAndFlush(openAiRoomAck);
     }
 }

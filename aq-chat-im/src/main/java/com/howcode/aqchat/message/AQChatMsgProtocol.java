@@ -257,9 +257,9 @@ public final class AQChatMsgProtocol {
      */
     OPEN_AI_ROOM_CMD(100),
     /**
-     * <code>OPEN_AI_ROOM_CMD_ACK = 101;</code>
+     * <code>OPEN_AI_ROOM_ACK = 101;</code>
      */
-    OPEN_AI_ROOM_CMD_ACK(101),
+    OPEN_AI_ROOM_ACK(101),
     /**
      * <pre>
      *关闭AI空间类型房间
@@ -269,9 +269,9 @@ public final class AQChatMsgProtocol {
      */
     CLOSE_AI_ROOM_CMD(102),
     /**
-     * <code>CLOSE_AI_ROOM_CMD_ACK = 103;</code>
+     * <code>CLOSE_AI_ROOM_ACK = 103;</code>
      */
-    CLOSE_AI_ROOM_CMD_ACK(103),
+    CLOSE_AI_ROOM_ACK(103),
     /**
      * <pre>
      *AI回复消息
@@ -529,9 +529,9 @@ public final class AQChatMsgProtocol {
      */
     public static final int OPEN_AI_ROOM_CMD_VALUE = 100;
     /**
-     * <code>OPEN_AI_ROOM_CMD_ACK = 101;</code>
+     * <code>OPEN_AI_ROOM_ACK = 101;</code>
      */
-    public static final int OPEN_AI_ROOM_CMD_ACK_VALUE = 101;
+    public static final int OPEN_AI_ROOM_ACK_VALUE = 101;
     /**
      * <pre>
      *关闭AI空间类型房间
@@ -541,9 +541,9 @@ public final class AQChatMsgProtocol {
      */
     public static final int CLOSE_AI_ROOM_CMD_VALUE = 102;
     /**
-     * <code>CLOSE_AI_ROOM_CMD_ACK = 103;</code>
+     * <code>CLOSE_AI_ROOM_ACK = 103;</code>
      */
-    public static final int CLOSE_AI_ROOM_CMD_ACK_VALUE = 103;
+    public static final int CLOSE_AI_ROOM_ACK_VALUE = 103;
     /**
      * <pre>
      *AI回复消息
@@ -622,9 +622,9 @@ public final class AQChatMsgProtocol {
         case 33: return INVITE_JOIN_ROOM_CMD;
         case 34: return INVITE_JOIN_ROOM_ACK;
         case 100: return OPEN_AI_ROOM_CMD;
-        case 101: return OPEN_AI_ROOM_CMD_ACK;
+        case 101: return OPEN_AI_ROOM_ACK;
         case 102: return CLOSE_AI_ROOM_CMD;
-        case 103: return CLOSE_AI_ROOM_CMD_ACK;
+        case 103: return CLOSE_AI_ROOM_ACK;
         case 106: return AI_REPLY_MSG_ACK;
         case 107: return AI_REPLY_MSG_STREAM_ACK;
         default: return null;
@@ -33569,8 +33569,8 @@ public final class AQChatMsgProtocol {
 
   }
 
-  public interface OpenAiRoomCmdAckOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:chat_msg.OpenAiRoomCmdAck)
+  public interface OpenAiRoomAckOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:chat_msg.OpenAiRoomAck)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -33610,18 +33610,18 @@ public final class AQChatMsgProtocol {
         int index);
   }
   /**
-   * Protobuf type {@code chat_msg.OpenAiRoomCmdAck}
+   * Protobuf type {@code chat_msg.OpenAiRoomAck}
    */
-  public static final class OpenAiRoomCmdAck extends
+  public static final class OpenAiRoomAck extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:chat_msg.OpenAiRoomCmdAck)
-      OpenAiRoomCmdAckOrBuilder {
+      // @@protoc_insertion_point(message_implements:chat_msg.OpenAiRoomAck)
+      OpenAiRoomAckOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use OpenAiRoomCmdAck.newBuilder() to construct.
-    private OpenAiRoomCmdAck(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use OpenAiRoomAck.newBuilder() to construct.
+    private OpenAiRoomAck(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private OpenAiRoomCmdAck() {
+    private OpenAiRoomAck() {
       roomId_ = "";
       assistants_ = java.util.Collections.emptyList();
     }
@@ -33630,7 +33630,7 @@ public final class AQChatMsgProtocol {
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new OpenAiRoomCmdAck();
+      return new OpenAiRoomAck();
     }
 
     @java.lang.Override
@@ -33638,7 +33638,7 @@ public final class AQChatMsgProtocol {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private OpenAiRoomCmdAck(
+    private OpenAiRoomAck(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -33696,15 +33696,15 @@ public final class AQChatMsgProtocol {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_OpenAiRoomCmdAck_descriptor;
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_OpenAiRoomAck_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_OpenAiRoomCmdAck_fieldAccessorTable
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_OpenAiRoomAck_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck.Builder.class);
+              com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck.Builder.class);
     }
 
     public static final int ROOMID_FIELD_NUMBER = 1;
@@ -33831,10 +33831,10 @@ public final class AQChatMsgProtocol {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck)) {
+      if (!(obj instanceof com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck)) {
         return super.equals(obj);
       }
-      com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck other = (com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck) obj;
+      com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck other = (com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck) obj;
 
       if (!getRoomId()
           .equals(other.getRoomId())) return false;
@@ -33862,69 +33862,69 @@ public final class AQChatMsgProtocol {
       return hash;
     }
 
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck parseFrom(byte[] data)
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck parseFrom(java.io.InputStream input)
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck parseDelimitedFrom(java.io.InputStream input)
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck parseDelimitedFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -33937,7 +33937,7 @@ public final class AQChatMsgProtocol {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck prototype) {
+    public static Builder newBuilder(com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -33953,26 +33953,26 @@ public final class AQChatMsgProtocol {
       return builder;
     }
     /**
-     * Protobuf type {@code chat_msg.OpenAiRoomCmdAck}
+     * Protobuf type {@code chat_msg.OpenAiRoomAck}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:chat_msg.OpenAiRoomCmdAck)
-        com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAckOrBuilder {
+        // @@protoc_insertion_point(builder_implements:chat_msg.OpenAiRoomAck)
+        com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAckOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_OpenAiRoomCmdAck_descriptor;
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_OpenAiRoomAck_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_OpenAiRoomCmdAck_fieldAccessorTable
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_OpenAiRoomAck_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck.Builder.class);
+                com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck.Builder.class);
       }
 
-      // Construct using com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck.newBuilder()
+      // Construct using com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -34005,17 +34005,17 @@ public final class AQChatMsgProtocol {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_OpenAiRoomCmdAck_descriptor;
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_OpenAiRoomAck_descriptor;
       }
 
       @java.lang.Override
-      public com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck getDefaultInstanceForType() {
-        return com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck.getDefaultInstance();
+      public com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck getDefaultInstanceForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck.getDefaultInstance();
       }
 
       @java.lang.Override
-      public com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck build() {
-        com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck result = buildPartial();
+      public com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck build() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -34023,8 +34023,8 @@ public final class AQChatMsgProtocol {
       }
 
       @java.lang.Override
-      public com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck buildPartial() {
-        com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck result = new com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck(this);
+      public com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck buildPartial() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck result = new com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck(this);
         int from_bitField0_ = bitField0_;
         result.roomId_ = roomId_;
         if (assistantsBuilder_ == null) {
@@ -34074,16 +34074,16 @@ public final class AQChatMsgProtocol {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck) {
-          return mergeFrom((com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck)other);
+        if (other instanceof com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck) {
+          return mergeFrom((com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck other) {
-        if (other == com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck other) {
+        if (other == com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck.getDefaultInstance()) return this;
         if (!other.getRoomId().isEmpty()) {
           roomId_ = other.roomId_;
           onChanged();
@@ -34129,11 +34129,11 @@ public final class AQChatMsgProtocol {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck parsedMessage = null;
+        com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck) e.getUnfinishedMessage();
+          parsedMessage = (com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -34472,41 +34472,41 @@ public final class AQChatMsgProtocol {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:chat_msg.OpenAiRoomCmdAck)
+      // @@protoc_insertion_point(builder_scope:chat_msg.OpenAiRoomAck)
     }
 
-    // @@protoc_insertion_point(class_scope:chat_msg.OpenAiRoomCmdAck)
-    private static final com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:chat_msg.OpenAiRoomAck)
+    private static final com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck();
+      DEFAULT_INSTANCE = new com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck();
     }
 
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck getDefaultInstance() {
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<OpenAiRoomCmdAck>
-        PARSER = new com.google.protobuf.AbstractParser<OpenAiRoomCmdAck>() {
+    private static final com.google.protobuf.Parser<OpenAiRoomAck>
+        PARSER = new com.google.protobuf.AbstractParser<OpenAiRoomAck>() {
       @java.lang.Override
-      public OpenAiRoomCmdAck parsePartialFrom(
+      public OpenAiRoomAck parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new OpenAiRoomCmdAck(input, extensionRegistry);
+        return new OpenAiRoomAck(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<OpenAiRoomCmdAck> parser() {
+    public static com.google.protobuf.Parser<OpenAiRoomAck> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<OpenAiRoomCmdAck> getParserForType() {
+    public com.google.protobuf.Parser<OpenAiRoomAck> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomCmdAck getDefaultInstanceForType() {
+    public com.howcode.aqchat.message.AQChatMsgProtocol.OpenAiRoomAck getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -35956,8 +35956,8 @@ public final class AQChatMsgProtocol {
 
   }
 
-  public interface CloseAiRoomCmdAckOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:chat_msg.CloseAiRoomCmdAck)
+  public interface CloseAiRoomAckOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:chat_msg.CloseAiRoomAck)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -35973,18 +35973,18 @@ public final class AQChatMsgProtocol {
         getRoomIdBytes();
   }
   /**
-   * Protobuf type {@code chat_msg.CloseAiRoomCmdAck}
+   * Protobuf type {@code chat_msg.CloseAiRoomAck}
    */
-  public static final class CloseAiRoomCmdAck extends
+  public static final class CloseAiRoomAck extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:chat_msg.CloseAiRoomCmdAck)
-      CloseAiRoomCmdAckOrBuilder {
+      // @@protoc_insertion_point(message_implements:chat_msg.CloseAiRoomAck)
+      CloseAiRoomAckOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use CloseAiRoomCmdAck.newBuilder() to construct.
-    private CloseAiRoomCmdAck(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use CloseAiRoomAck.newBuilder() to construct.
+    private CloseAiRoomAck(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private CloseAiRoomCmdAck() {
+    private CloseAiRoomAck() {
       roomId_ = "";
     }
 
@@ -35992,7 +35992,7 @@ public final class AQChatMsgProtocol {
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new CloseAiRoomCmdAck();
+      return new CloseAiRoomAck();
     }
 
     @java.lang.Override
@@ -36000,7 +36000,7 @@ public final class AQChatMsgProtocol {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private CloseAiRoomCmdAck(
+    private CloseAiRoomAck(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -36045,15 +36045,15 @@ public final class AQChatMsgProtocol {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_CloseAiRoomCmdAck_descriptor;
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_CloseAiRoomAck_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_CloseAiRoomCmdAck_fieldAccessorTable
+      return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_CloseAiRoomAck_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck.Builder.class);
+              com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck.Builder.class);
     }
 
     public static final int ROOMID_FIELD_NUMBER = 1;
@@ -36133,10 +36133,10 @@ public final class AQChatMsgProtocol {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck)) {
+      if (!(obj instanceof com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck)) {
         return super.equals(obj);
       }
-      com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck other = (com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck) obj;
+      com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck other = (com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck) obj;
 
       if (!getRoomId()
           .equals(other.getRoomId())) return false;
@@ -36158,69 +36158,69 @@ public final class AQChatMsgProtocol {
       return hash;
     }
 
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck parseFrom(byte[] data)
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck parseFrom(java.io.InputStream input)
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck parseDelimitedFrom(java.io.InputStream input)
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck parseDelimitedFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck parseFrom(
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -36233,7 +36233,7 @@ public final class AQChatMsgProtocol {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck prototype) {
+    public static Builder newBuilder(com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -36249,26 +36249,26 @@ public final class AQChatMsgProtocol {
       return builder;
     }
     /**
-     * Protobuf type {@code chat_msg.CloseAiRoomCmdAck}
+     * Protobuf type {@code chat_msg.CloseAiRoomAck}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:chat_msg.CloseAiRoomCmdAck)
-        com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAckOrBuilder {
+        // @@protoc_insertion_point(builder_implements:chat_msg.CloseAiRoomAck)
+        com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAckOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_CloseAiRoomCmdAck_descriptor;
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_CloseAiRoomAck_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_CloseAiRoomCmdAck_fieldAccessorTable
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_CloseAiRoomAck_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck.Builder.class);
+                com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck.class, com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck.Builder.class);
       }
 
-      // Construct using com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck.newBuilder()
+      // Construct using com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -36294,17 +36294,17 @@ public final class AQChatMsgProtocol {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_CloseAiRoomCmdAck_descriptor;
+        return com.howcode.aqchat.message.AQChatMsgProtocol.internal_static_chat_msg_CloseAiRoomAck_descriptor;
       }
 
       @java.lang.Override
-      public com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck getDefaultInstanceForType() {
-        return com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck.getDefaultInstance();
+      public com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck getDefaultInstanceForType() {
+        return com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck.getDefaultInstance();
       }
 
       @java.lang.Override
-      public com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck build() {
-        com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck result = buildPartial();
+      public com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck build() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -36312,8 +36312,8 @@ public final class AQChatMsgProtocol {
       }
 
       @java.lang.Override
-      public com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck buildPartial() {
-        com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck result = new com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck(this);
+      public com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck buildPartial() {
+        com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck result = new com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck(this);
         result.roomId_ = roomId_;
         onBuilt();
         return result;
@@ -36353,16 +36353,16 @@ public final class AQChatMsgProtocol {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck) {
-          return mergeFrom((com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck)other);
+        if (other instanceof com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck) {
+          return mergeFrom((com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck other) {
-        if (other == com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck other) {
+        if (other == com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck.getDefaultInstance()) return this;
         if (!other.getRoomId().isEmpty()) {
           roomId_ = other.roomId_;
           onChanged();
@@ -36382,11 +36382,11 @@ public final class AQChatMsgProtocol {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck parsedMessage = null;
+        com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck) e.getUnfinishedMessage();
+          parsedMessage = (com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -36484,41 +36484,41 @@ public final class AQChatMsgProtocol {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:chat_msg.CloseAiRoomCmdAck)
+      // @@protoc_insertion_point(builder_scope:chat_msg.CloseAiRoomAck)
     }
 
-    // @@protoc_insertion_point(class_scope:chat_msg.CloseAiRoomCmdAck)
-    private static final com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:chat_msg.CloseAiRoomAck)
+    private static final com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck();
+      DEFAULT_INSTANCE = new com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck();
     }
 
-    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck getDefaultInstance() {
+    public static com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<CloseAiRoomCmdAck>
-        PARSER = new com.google.protobuf.AbstractParser<CloseAiRoomCmdAck>() {
+    private static final com.google.protobuf.Parser<CloseAiRoomAck>
+        PARSER = new com.google.protobuf.AbstractParser<CloseAiRoomAck>() {
       @java.lang.Override
-      public CloseAiRoomCmdAck parsePartialFrom(
+      public CloseAiRoomAck parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new CloseAiRoomCmdAck(input, extensionRegistry);
+        return new CloseAiRoomAck(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<CloseAiRoomCmdAck> parser() {
+    public static com.google.protobuf.Parser<CloseAiRoomAck> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<CloseAiRoomCmdAck> getParserForType() {
+    public com.google.protobuf.Parser<CloseAiRoomAck> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomCmdAck getDefaultInstanceForType() {
+    public com.howcode.aqchat.message.AQChatMsgProtocol.CloseAiRoomAck getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -36604,7 +36604,7 @@ public final class AQChatMsgProtocol {
 
     /**
      * <pre>
-     *0-成功 1-失败
+     *1-成功
      * </pre>
      *
      * <code>int32 status = 7;</code>
@@ -36947,7 +36947,7 @@ public final class AQChatMsgProtocol {
     private int status_;
     /**
      * <pre>
-     *0-成功 1-失败
+     *1-成功
      * </pre>
      *
      * <code>int32 status = 7;</code>
@@ -37858,7 +37858,7 @@ public final class AQChatMsgProtocol {
       private int status_ ;
       /**
        * <pre>
-       *0-成功 1-失败
+       *1-成功
        * </pre>
        *
        * <code>int32 status = 7;</code>
@@ -37870,7 +37870,7 @@ public final class AQChatMsgProtocol {
       }
       /**
        * <pre>
-       *0-成功 1-失败
+       *1-成功
        * </pre>
        *
        * <code>int32 status = 7;</code>
@@ -37885,7 +37885,7 @@ public final class AQChatMsgProtocol {
       }
       /**
        * <pre>
-       *0-成功 1-失败
+       *1-成功
        * </pre>
        *
        * <code>int32 status = 7;</code>
@@ -38146,10 +38146,10 @@ public final class AQChatMsgProtocol {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chat_msg_OpenAiRoomCmd_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_chat_msg_OpenAiRoomCmdAck_descriptor;
+    internal_static_chat_msg_OpenAiRoomAck_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_chat_msg_OpenAiRoomCmdAck_fieldAccessorTable;
+      internal_static_chat_msg_OpenAiRoomAck_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chat_msg_Assistant_descriptor;
   private static final 
@@ -38161,10 +38161,10 @@ public final class AQChatMsgProtocol {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_chat_msg_CloseAiRoomCmd_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_chat_msg_CloseAiRoomCmdAck_descriptor;
+    internal_static_chat_msg_CloseAiRoomAck_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_chat_msg_CloseAiRoomCmdAck_fieldAccessorTable;
+      internal_static_chat_msg_CloseAiRoomAck_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_chat_msg_AiReplyMsgAck_descriptor;
   private static final 
@@ -38246,41 +38246,41 @@ public final class AQChatMsgProtocol {
       "Id\030\002 \001(\t\"_\n\021InviteJoinRoomAck\022\016\n\006roomId\030" +
       "\001 \001(\t\022\034\n\004user\030\002 \001(\0132\016.chat_msg.User\022\034\n\004r" +
       "oom\030\003 \001(\0132\016.chat_msg.Room\"\037\n\rOpenAiRoomC" +
-      "md\022\016\n\006userId\030\001 \001(\t\"K\n\020OpenAiRoomCmdAck\022\016" +
-      "\n\006roomId\030\001 \001(\t\022\'\n\nassistants\030\002 \003(\0132\023.cha" +
-      "t_msg.Assistant\"9\n\tAssistant\022\016\n\006userId\030\001" +
-      " \001(\t\022\014\n\004name\030\002 \001(\t\022\016\n\006avatar\030\003 \001(\t\" \n\016Cl" +
-      "oseAiRoomCmd\022\016\n\006roomId\030\001 \001(\t\"#\n\021CloseAiR" +
-      "oomCmdAck\022\016\n\006roomId\030\001 \001(\t\"\232\001\n\rAiReplyMsg" +
-      "Ack\022\016\n\006roomId\030\001 \001(\t\022\034\n\004user\030\002 \001(\0132\016.chat" +
-      "_msg.User\022\r\n\005msgId\030\003 \001(\t\022\013\n\003msg\030\004 \001(\t\022\013\n" +
-      "\003ext\030\005 \001(\t\022\"\n\007msgType\030\006 \001(\0162\021.chat_msg.M" +
-      "sgType\022\016\n\006status\030\007 \001(\005*\210\007\n\nMsgCommand\022\022\n" +
-      "\016USER_LOGIN_CMD\020\000\022\022\n\016USER_LOGIN_ACK\020\001\022\022\n" +
-      "\016HEART_BEAT_CMD\020\002\022\022\n\016HEART_BEAT_ACK\020\003\022\021\n" +
-      "\rJOIN_ROOM_CMD\020\004\022\021\n\rJOIN_ROOM_ACK\020\005\022\023\n\017C" +
-      "REATE_ROOM_CMD\020\006\022\023\n\017CREATE_ROOM_ACK\020\007\022\022\n" +
-      "\016LEAVE_ROOM_CMD\020\010\022\022\n\016LEAVE_ROOM_ACK\020\t\022\020\n" +
-      "\014SEND_MSG_CMD\020\n\022\020\n\014SEND_MSG_ACK\020\013\022\025\n\021BRO" +
-      "ADCAST_MSG_ACK\020\014\022\021\n\rEXCEPTION_MSG\020\r\022\017\n\013O" +
-      "FFLINE_MSG\020\016\022\017\n\013GET_STS_CMD\020\017\022\017\n\013GET_STS" +
-      "_ACK\020\020\022\023\n\017USER_LOGOUT_CMD\020\021\022\023\n\017USER_LOGO" +
-      "UT_ACK\020\022\022\022\n\016OFFLINE_NOTIFY\020\023\022\030\n\024SYNC_CHA" +
-      "T_RECORD_CMD\020\024\022\030\n\024SYNC_CHAT_RECORD_ACK\020\025" +
-      "\022\024\n\020RECOVER_USER_CMD\020\026\022\024\n\020RECOVER_USER_A" +
-      "CK\020\027\022\024\n\020JOIN_ROOM_NOTIFY\020\030\022\025\n\021LEAVE_ROOM" +
-      "_NOTIFY\020\031\022\031\n\025SYNC_ROOM_MEMBERS_CMD\020\032\022\031\n\025" +
-      "SYNC_ROOM_MEMBERS_ACK\020\033\022\022\n\016RECALL_MSG_CM" +
-      "D\020\034\022\022\n\016RECALL_MSG_ACK\020\035\022\025\n\021RECALL_MSG_NO" +
-      "TIFY\020\036\022\021\n\rAT_MSG_NOTIFY\020\037\022\025\n\021STREAM_MSG_" +
-      "NOTIFY\020 \022\030\n\024INVITE_JOIN_ROOM_CMD\020!\022\030\n\024IN" +
-      "VITE_JOIN_ROOM_ACK\020\"\022\024\n\020OPEN_AI_ROOM_CMD" +
-      "\020d\022\030\n\024OPEN_AI_ROOM_CMD_ACK\020e\022\025\n\021CLOSE_AI" +
-      "_ROOM_CMD\020f\022\031\n\025CLOSE_AI_ROOM_CMD_ACK\020g\022\024" +
-      "\n\020AI_REPLY_MSG_ACK\020j\022\033\n\027AI_REPLY_MSG_STR" +
-      "EAM_ACK\020k*>\n\007MsgType\022\010\n\004TEXT\020\000\022\t\n\005IMAGE\020" +
-      "\001\022\t\n\005VOICE\020\002\022\t\n\005VIDEO\020\003\022\010\n\004FILE\020\004B\034\n\032com" +
-      ".howcode.aqchat.messageb\006proto3"
+      "md\022\016\n\006userId\030\001 \001(\t\"H\n\rOpenAiRoomAck\022\016\n\006r" +
+      "oomId\030\001 \001(\t\022\'\n\nassistants\030\002 \003(\0132\023.chat_m" +
+      "sg.Assistant\"9\n\tAssistant\022\016\n\006userId\030\001 \001(" +
+      "\t\022\014\n\004name\030\002 \001(\t\022\016\n\006avatar\030\003 \001(\t\" \n\016Close" +
+      "AiRoomCmd\022\016\n\006roomId\030\001 \001(\t\" \n\016CloseAiRoom" +
+      "Ack\022\016\n\006roomId\030\001 \001(\t\"\232\001\n\rAiReplyMsgAck\022\016\n" +
+      "\006roomId\030\001 \001(\t\022\034\n\004user\030\002 \001(\0132\016.chat_msg.U" +
+      "ser\022\r\n\005msgId\030\003 \001(\t\022\013\n\003msg\030\004 \001(\t\022\013\n\003ext\030\005" +
+      " \001(\t\022\"\n\007msgType\030\006 \001(\0162\021.chat_msg.MsgType" +
+      "\022\016\n\006status\030\007 \001(\005*\200\007\n\nMsgCommand\022\022\n\016USER_" +
+      "LOGIN_CMD\020\000\022\022\n\016USER_LOGIN_ACK\020\001\022\022\n\016HEART" +
+      "_BEAT_CMD\020\002\022\022\n\016HEART_BEAT_ACK\020\003\022\021\n\rJOIN_" +
+      "ROOM_CMD\020\004\022\021\n\rJOIN_ROOM_ACK\020\005\022\023\n\017CREATE_" +
+      "ROOM_CMD\020\006\022\023\n\017CREATE_ROOM_ACK\020\007\022\022\n\016LEAVE" +
+      "_ROOM_CMD\020\010\022\022\n\016LEAVE_ROOM_ACK\020\t\022\020\n\014SEND_" +
+      "MSG_CMD\020\n\022\020\n\014SEND_MSG_ACK\020\013\022\025\n\021BROADCAST" +
+      "_MSG_ACK\020\014\022\021\n\rEXCEPTION_MSG\020\r\022\017\n\013OFFLINE" +
+      "_MSG\020\016\022\017\n\013GET_STS_CMD\020\017\022\017\n\013GET_STS_ACK\020\020" +
+      "\022\023\n\017USER_LOGOUT_CMD\020\021\022\023\n\017USER_LOGOUT_ACK" +
+      "\020\022\022\022\n\016OFFLINE_NOTIFY\020\023\022\030\n\024SYNC_CHAT_RECO" +
+      "RD_CMD\020\024\022\030\n\024SYNC_CHAT_RECORD_ACK\020\025\022\024\n\020RE" +
+      "COVER_USER_CMD\020\026\022\024\n\020RECOVER_USER_ACK\020\027\022\024" +
+      "\n\020JOIN_ROOM_NOTIFY\020\030\022\025\n\021LEAVE_ROOM_NOTIF" +
+      "Y\020\031\022\031\n\025SYNC_ROOM_MEMBERS_CMD\020\032\022\031\n\025SYNC_R" +
+      "OOM_MEMBERS_ACK\020\033\022\022\n\016RECALL_MSG_CMD\020\034\022\022\n" +
+      "\016RECALL_MSG_ACK\020\035\022\025\n\021RECALL_MSG_NOTIFY\020\036" +
+      "\022\021\n\rAT_MSG_NOTIFY\020\037\022\025\n\021STREAM_MSG_NOTIFY" +
+      "\020 \022\030\n\024INVITE_JOIN_ROOM_CMD\020!\022\030\n\024INVITE_J" +
+      "OIN_ROOM_ACK\020\"\022\024\n\020OPEN_AI_ROOM_CMD\020d\022\024\n\020" +
+      "OPEN_AI_ROOM_ACK\020e\022\025\n\021CLOSE_AI_ROOM_CMD\020" +
+      "f\022\025\n\021CLOSE_AI_ROOM_ACK\020g\022\024\n\020AI_REPLY_MSG" +
+      "_ACK\020j\022\033\n\027AI_REPLY_MSG_STREAM_ACK\020k*>\n\007M" +
+      "sgType\022\010\n\004TEXT\020\000\022\t\n\005IMAGE\020\001\022\t\n\005VOICE\020\002\022\t" +
+      "\n\005VIDEO\020\003\022\010\n\004FILE\020\004B\034\n\032com.howcode.aqcha" +
+      "t.messageb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -38520,11 +38520,11 @@ public final class AQChatMsgProtocol {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chat_msg_OpenAiRoomCmd_descriptor,
         new java.lang.String[] { "UserId", });
-    internal_static_chat_msg_OpenAiRoomCmdAck_descriptor =
+    internal_static_chat_msg_OpenAiRoomAck_descriptor =
       getDescriptor().getMessageTypes().get(39);
-    internal_static_chat_msg_OpenAiRoomCmdAck_fieldAccessorTable = new
+    internal_static_chat_msg_OpenAiRoomAck_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_chat_msg_OpenAiRoomCmdAck_descriptor,
+        internal_static_chat_msg_OpenAiRoomAck_descriptor,
         new java.lang.String[] { "RoomId", "Assistants", });
     internal_static_chat_msg_Assistant_descriptor =
       getDescriptor().getMessageTypes().get(40);
@@ -38538,11 +38538,11 @@ public final class AQChatMsgProtocol {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_chat_msg_CloseAiRoomCmd_descriptor,
         new java.lang.String[] { "RoomId", });
-    internal_static_chat_msg_CloseAiRoomCmdAck_descriptor =
+    internal_static_chat_msg_CloseAiRoomAck_descriptor =
       getDescriptor().getMessageTypes().get(42);
-    internal_static_chat_msg_CloseAiRoomCmdAck_fieldAccessorTable = new
+    internal_static_chat_msg_CloseAiRoomAck_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_chat_msg_CloseAiRoomCmdAck_descriptor,
+        internal_static_chat_msg_CloseAiRoomAck_descriptor,
         new java.lang.String[] { "RoomId", });
     internal_static_chat_msg_AiReplyMsgAck_descriptor =
       getDescriptor().getMessageTypes().get(43);

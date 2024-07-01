@@ -74,11 +74,11 @@ enum MsgCommand{
   //=====AI空间=========
   //开启AI空间类型房间
   OPEN_AI_ROOM_CMD = 100;
-  OPEN_AI_ROOM_CMD_ACK = 101;
+  OPEN_AI_ROOM_ACK = 101;
 
   //关闭AI空间类型房间
   CLOSE_AI_ROOM_CMD = 102;
-  CLOSE_AI_ROOM_CMD_ACK = 103;
+  CLOSE_AI_ROOM_ACK = 103;
 
   //发送消息
 //  SEND_MSG_CMD = 104;
@@ -343,7 +343,7 @@ message InviteJoinRoomAck{
 message OpenAiRoomCmd {
   string userId = 1;
 }
-message OpenAiRoomCmdAck {
+message OpenAiRoomAck {
   string roomId = 1;
   repeated Assistant assistants = 2;
 }
@@ -358,7 +358,7 @@ message Assistant{
 message CloseAiRoomCmd {
   string roomId = 1;
 }
-message CloseAiRoomCmdAck {
+message CloseAiRoomAck {
   string roomId = 1;
 }
 
