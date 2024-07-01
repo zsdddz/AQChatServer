@@ -99,7 +99,7 @@ WEB端: <a href="https://gitee.com/howcode/aq-chat">AQChat</a><br/>
 
 ### 2024.06.30
 
-- ✨ 接入Gitee AI 文本审核、文字转语音、文字转图片大模型
+- ✨ 接入Gitee AI 文本、文字转语音、文字转图片大模型
 - ✨ 封装Gitee AI SDK
 
 
