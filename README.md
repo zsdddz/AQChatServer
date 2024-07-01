@@ -89,7 +89,7 @@ WEB端: <a href="https://gitee.com/howcode/aq-chat">AQChat</a><br/>
 
 - 项目启动类位于`aq-chat-im`模块下 `com.howcode.aqchat.AQChatApplication`类
   - 启动前保证配置文件（aq-chat-im/src/main/resources/application.yml）中必填的配置补充完整
-- 查看顶部官网文档
+- 查看顶部官网文档 
 
 ## 部署可能会用到的平台文档
 <a href="https://help.aliyun.com/zh/oss/developer-reference/use-temporary-access-credentials-provided-by-sts-to-access-oss">使用STS临时访问凭证访问OSS</a><br/>
