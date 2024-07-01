@@ -1,6 +1,7 @@
 package com.howcode.aqchat.holder;
 
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
+import com.howcode.aqchat.common.enums.RoomType;
 import com.howcode.aqchat.common.model.*;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageBroadcaster;
@@ -35,7 +36,7 @@ public class GlobalChannelHolder {
 
     @Resource
     private IUserHolder userHolder;
-    
+
     @Resource
     private IRoomHolder roomHolder;
 
@@ -110,10 +111,15 @@ public class GlobalChannelHolder {
         userHolder.saveUserInfo(userInfo);
     }
 
-    public void isOrNoDissolveTheRoom(String roomId, Integer roomNo) {
+    public void isOrNoDissolveTheRoom(RoomInfoDto roomInfoDto) {
+        String roomId = roomInfoDto.getRoomId();
         ChannelGroup channelGroup = messageBroadcaster.getChannelGroup(roomId);
         if (!messageBroadcaster.isTheRoomEmpty(roomId) && (null == channelGroup || channelGroup.isEmpty())) {
-            roomHolder.removeRoomInfo(roomNo);
+            if (RoomType.NORMAL.getCode() == roomInfoDto.getRoomType()) {
+                roomHolder.removeRoomInfo(roomInfoDto.getRoomNo());
+            } else if (RoomType.AI.getCode() == roomInfoDto.getRoomType()) {
+                roomHolder.removeRoomInfo(roomId);
+            }
             //解散房间
             messageBroadcaster.removeChannelGroup(roomId);
         }
@@ -125,7 +131,7 @@ public class GlobalChannelHolder {
         if (null == roomInfoDto) {
             return;
         }
-        isOrNoDissolveTheRoom(roomId, roomInfoDto.getRoomNo());
+        isOrNoDissolveTheRoom(roomInfoDto);
     }
 
     /**
@@ -201,7 +207,7 @@ public class GlobalChannelHolder {
             return;
         }
         UserGlobalInfoDto userInfo = userHolder.getUserInfo(userId);
-        if (null == userInfo || null == userInfo.getRoomId() ){
+        if (null == userInfo || null == userInfo.getRoomId()) {
             LOGGER.info("[离线消息] 用户信息或者房间信息为空");
             return;
         }
@@ -226,7 +232,7 @@ public class GlobalChannelHolder {
         messageBroadcaster.broadcast(recallMessageDto.getRoomId(), recallMsgNotify);
     }
 
-    public void sendBroadcastAIMessage(AIMessageDto aiMessageDto,String aiId){
+    public void sendBroadcastAIMessage(AIMessageDto aiMessageDto, String aiId) {
         if (null == aiMessageDto) {
             return;
         }
@@ -240,10 +246,10 @@ public class GlobalChannelHolder {
                 .setContent(aiMessageDto.getContent())
                 .setStreamType(aiMessageDto.getStatus())
                 .build();
-        messageBroadcaster.broadcast(aiMessageDto.getRoomId(),streamMsgNotify);
+        messageBroadcaster.broadcast(aiMessageDto.getRoomId(), streamMsgNotify);
     }
 
-    public void sendAIMessage(AIMessageDto aiMessageDto,String aiId,int msgType) {
+    public void sendAIMessage(AIMessageDto aiMessageDto, String aiId, int msgType) {
         if (null == aiMessageDto) {
             return;
         }
@@ -258,6 +264,6 @@ public class GlobalChannelHolder {
                 .setMsgType(AQChatMsgProtocol.MsgType.forNumber(msgType))
                 .setStatus(aiMessageDto.getStatus())
                 .build();
-        messageBroadcaster.broadcast(aiMessageDto.getRoomId(),imageMsgNotify);
+        messageBroadcaster.broadcast(aiMessageDto.getRoomId(), imageMsgNotify);
     }
 }
