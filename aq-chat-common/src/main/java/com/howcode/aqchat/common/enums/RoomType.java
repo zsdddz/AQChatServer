@@ -6,8 +6,8 @@ package com.howcode.aqchat.common.enums;
  * @Date 2024/6/30 15:20
  */
 public enum RoomType {
-    NORMAL(0, "普通房间"),
-    AI(1, "AI房间");
+    NORMAL(1, "普通房间"),
+    AI(2, "AI房间");
 
     private final int code;
     private final String desc;

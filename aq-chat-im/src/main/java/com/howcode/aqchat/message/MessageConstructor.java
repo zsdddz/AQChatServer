@@ -50,7 +50,7 @@ public class MessageConstructor {
             room.setRoomId(roomInfo.getRoomId())
                     .setRoomNo(roomInfo.getRoomType() == RoomType.NORMAL.getCode() ? roomInfo.getRoomNo() : AQBusinessConstant.DEFAULT_AI_SPACE_NO)
                     .setRoomName(roomInfo.getRoomType() == RoomType.NORMAL.getCode() ? roomInfo.getRoomName() : AQBusinessConstant.DEFAULT_AI_SPACE_NAME)
-                    .setAi(roomInfo.getAi());
+                    .setAi(roomInfo.getRoomType() == RoomType.NORMAL.getCode() ? roomInfo.getAi():RoomType.AI.getCode());
             builder.setRoom(room);
         }
         builder.setUserAvatar(userGlobalInfoDto.getUserAvatar());

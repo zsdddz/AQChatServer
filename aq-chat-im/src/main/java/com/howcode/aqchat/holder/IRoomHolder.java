@@ -42,6 +42,11 @@ public interface IRoomHolder {
     RoomInfoDto getRoomAllInfoById(String roomId);
 
     /**
+     * 兼容接口 判断是否过滤用户
+     */
+    RoomInfoDto getRoomAllInfoById(String roomId,String userId);
+
+    /**
      * 删除房间信息
      * @param roomNo 房间号
      */

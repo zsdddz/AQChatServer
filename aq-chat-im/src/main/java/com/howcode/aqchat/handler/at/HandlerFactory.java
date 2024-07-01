@@ -1,5 +1,6 @@
 package com.howcode.aqchat.handler.at;
 
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.model.MessageDto;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
@@ -23,6 +24,13 @@ public class HandlerFactory implements ApplicationContextAware,InitializingBean 
     private ApplicationContext applicationContext;
 
     public void handleMessage(MessageDto messageDto) {
+        //处理消息内容
+        String messageExt = messageDto.getMessageExt();
+        String[] extArgs = messageExt.split(AQBusinessConstant.AI_SPACE_CONTENT_TAG);
+        if (extArgs.length > 1) {
+            messageDto.setMessageExt(extArgs[0]);
+            messageDto.setMessageContent(extArgs[1]);
+        }
         handler.handleMessage(messageDto);
     }
 

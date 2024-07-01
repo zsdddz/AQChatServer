@@ -62,15 +62,10 @@ public class RecoverUserCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProto
         if (null != userInfo.getRoomId()) {
             //加入房间
             globalChannelHolder.joinRoom(userInfo.getRoomId(), userId, ctx.channel());
-        }
-        //判断房间类型是否是AI空间
-        RoomInfoDto roomInfo = roomHolder.getRoomInfoById(userInfo.getRoomId());
-
-        if (null != roomInfo && roomInfo.getRoomType() == RoomType.NORMAL.getCode()) {
             mqSendingAgent.sendJoinRoomMsg(userId, userInfo.getRoomId());
         }
         //返回用户信息
-        roomInfo = globalChannelHolder.getRoomAllInfo(userInfo.getRoomId());
+        RoomInfoDto roomInfo = globalChannelHolder.getRoomAllInfo(userInfo.getRoomId());
         AQChatMsgProtocol.RecoverUserAck recoverUserAck = MessageConstructor.buildRecoverUserAck(userInfo, roomInfo);
         ctx.writeAndFlush(recoverUserAck);
     }

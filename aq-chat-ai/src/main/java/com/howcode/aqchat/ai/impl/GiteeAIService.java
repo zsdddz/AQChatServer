@@ -14,6 +14,8 @@ import com.howcode.aqchat.framework.giteeai.starter.session.Message;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -41,8 +43,9 @@ public class GiteeAIService implements IAiService {
     public void streamCallWithMessage(String userMsg, Consumer<AIResult> consumer) {
         chat(userMsg, null, consumer);
     }
+
     @Override
-    public void chat(String message, List<MessageRecord> messages,Consumer<AIResult> consumer){
+    public void chat(String message, List<MessageRecord> messages, Consumer<AIResult> consumer) {
         List<Message> messageList = convertMessageRecordToMessage(messages);
         giteeAIClient.streamChat(message, messageList, data -> {
             JSONObject parse = JSONObject.parseObject(data);
@@ -50,7 +53,7 @@ public class GiteeAIService implements IAiService {
             JSONObject choicesIn = choices.getJSONObject(0);
             JSONObject delta = choicesIn.getJSONObject("delta");
             String content = delta.getString("content");
-            if (content != null && !content.isEmpty()){
+            if (content != null && !content.isEmpty()) {
                 GiteeResult giteeResult = new GiteeResult();
                 giteeResult.setContent(content);
                 consumer.accept(giteeResult);
@@ -59,8 +62,8 @@ public class GiteeAIService implements IAiService {
     }
 
     //将List<MessageRecord> 转换为List<Message>
-    private List<Message> convertMessageRecordToMessage(List<MessageRecord> messages){
-        if (messages == null || messages.isEmpty()){
+    private List<Message> convertMessageRecordToMessage(List<MessageRecord> messages) {
+        if (messages == null || messages.isEmpty()) {
             return new ArrayList<>();
         }
         List<Message> messageList = new ArrayList<>();
@@ -73,11 +76,18 @@ public class GiteeAIService implements IAiService {
         return messageList;
     }
 
+    //生成当前时间 年份-月份-日期
+    private String generateCurrentTime() {
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return date.format(formatter);
+    }
+
 
     @Override
     public AIResult textToImage(String text) {
         byte[] bytes = giteeAIClient.textToImage(text);
-        String fileName = "image/"+ UUID.randomUUID() + ".png";
+        String fileName = "image/" + generateCurrentTime() + "/" + UUID.randomUUID() + ".png";
         String upload = aliossHelper.upload(fileName, bytes);
         GiteeResult giteeResult = new GiteeResult();
         giteeResult.setContent(upload);
@@ -89,7 +99,7 @@ public class GiteeAIService implements IAiService {
     @Override
     public AIResult textToVoice(String text) {
         byte[] bytes = giteeAIClient.textToVoice(text);
-        String fileName = "voice/"+ UUID.randomUUID() + ".png";
+        String fileName = "voice/" + generateCurrentTime() + "/" + UUID.randomUUID() + ".mp3";
         String upload = aliossHelper.upload(fileName, bytes);
         GiteeResult giteeResult = new GiteeResult();
         giteeResult.setContent(upload);

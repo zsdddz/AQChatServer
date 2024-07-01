@@ -29,15 +29,15 @@ public class MultipleRoundsHandler extends Handler {
         //判断房间类型是否是AI空间
         String roomId = messageDto.getRoomId();
         RoomInfoDto roomInfo = roomHolder.getRoomInfoById(roomId);
-        if (RoomType.AI.getCode() ==roomInfo.getRoomType()){
+        if (RoomType.AI.getCode() == roomInfo.getRoomType() && messageDto.getMessageExt().isEmpty()) {
             //拷贝一份消息
             MessageDto aiMessageDto = new MessageDto();
             BeanUtils.copyProperties(messageDto, aiMessageDto);
             //覆盖消息Id
-            aiMessageDto.setMessageId(IdProvider.nextId()+"");
+            aiMessageDto.setMessageId(IdProvider.nextId() + "");
 
             mqSendingAgent.multiple(aiMessageDto);
-        }else {
+        } else {
             //继续传递
             if (handler != null) {
                 handler.handleMessage(messageDto);

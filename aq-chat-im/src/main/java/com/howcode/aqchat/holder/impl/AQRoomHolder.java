@@ -2,6 +2,7 @@ package com.howcode.aqchat.holder.impl;
 
 import com.howcode.aqchat.ai.parameter.MessageRecord;
 import com.howcode.aqchat.common.constant.AQRedisKeyPrefix;
+import com.howcode.aqchat.common.enums.RoomType;
 import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.framework.redis.starter.RedisCacheHelper;
@@ -68,6 +69,22 @@ public class AQRoomHolder implements IRoomHolder {
         //获取房间成员
         List<UserGlobalInfoDto> roomMembers = getRoomMembers(roomId);
         roomInfo.setRoomMembers(roomMembers);
+        return roomInfo;
+    }
+
+    @Override
+    public RoomInfoDto getRoomAllInfoById(String roomId, String userId) {
+        RoomInfoDto roomInfo = getRoomAllInfoById(roomId);
+        if (null == roomInfo) {
+            return null;
+        }
+        if (RoomType.AI.getCode() == roomInfo.getRoomType()){
+            //获取房间成员
+            List<UserGlobalInfoDto> roomMembers = roomInfo.getRoomMembers();
+            //过滤自己
+            roomMembers.removeIf(userGlobalInfoDto -> userGlobalInfoDto.getUserId().equals(userId));
+            roomInfo.setRoomMembers(roomMembers);
+        }
         return roomInfo;
     }
 

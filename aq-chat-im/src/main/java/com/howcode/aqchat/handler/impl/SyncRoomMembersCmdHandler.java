@@ -41,7 +41,7 @@ public class SyncRoomMembersCmdHandler extends AbstractCmdBaseHandler<AQChatMsgP
             // 用户未加入房间
             return;
         }
-        RoomInfoDto roomInfoDto = roomHolder.getRoomAllInfoById(roomId);
+        RoomInfoDto roomInfoDto = roomHolder.getRoomAllInfoById(roomId,userId);
         AQChatMsgProtocol.SyncRoomMembersAck syncRoomMembersAck = MessageConstructor.buildSyncRoomMembersAck(roomInfoDto);
         ctx.writeAndFlush(syncRoomMembersAck);
     }

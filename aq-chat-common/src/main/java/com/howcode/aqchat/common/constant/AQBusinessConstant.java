@@ -65,6 +65,12 @@ public interface AQBusinessConstant {
      * 艾特
      */
     String AT = "@";
+
+    /**
+     * AI空间 内容标志符
+     */
+    String AI_SPACE_CONTENT_TAG = "&";
+
     /**
      * 机器人助手Id
      */
