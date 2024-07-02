@@ -51,11 +51,19 @@ public class GiteeAIService implements IAiService {
             JSONObject parse = JSONObject.parseObject(data);
             JSONArray choices = parse.getJSONArray("choices");
             JSONObject choicesIn = choices.getJSONObject(0);
+            String finishReason = choicesIn.getString("finish_reason");
+            if (finishReason != null && finishReason.equals("stop")) {
+                GiteeResult giteeResult = new GiteeResult();
+                giteeResult.setStatus(AIMessageStatusEnum.END.getCode());
+                consumer.accept(giteeResult);
+                return;
+            }
             JSONObject delta = choicesIn.getJSONObject("delta");
             String content = delta.getString("content");
             if (content != null && !content.isEmpty()) {
                 GiteeResult giteeResult = new GiteeResult();
                 giteeResult.setContent(content);
+                giteeResult.setStatus(AIMessageStatusEnum.WAIT.getCode());
                 consumer.accept(giteeResult);
             }
         });
