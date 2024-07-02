@@ -25,7 +25,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
 
 /**
  * @Description
@@ -33,7 +32,7 @@ import java.util.Date;
  * @Date 2024/6/30 16:55
  */
 @Component
-public class XVReceiver implements InitializingBean {
+public class XVReceiver extends AbstractAISpaceReceiver implements InitializingBean {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JoinRoomReceiver.class);
 
@@ -89,9 +88,11 @@ public class XVReceiver implements InitializingBean {
                                 globalChannelHolder.sendAIMessage(aiMessageDto, AQBusinessConstant.XV_ID, MsgTypeEnum.VOICE.getCode());
                             } finally {
                                 LOGGER.info("开始存储 文本转语音模型 AI 回复消息");
-                                MessageDto storeMessage = buildStoreMessage(messageDto, fullContent);
+                                MessageDto storeMessage = buildStoreMessageByFile(messageDto, fullContent, MsgTypeEnum.VOICE.getCode(),AQBusinessConstant.XV_ID);
                                 messageService.saveMessage(storeMessage);
                                 LOGGER.info("文本转语音模型 AI 回复消息存储成功");
+                                afterAISpaceMessage(messageDto.getRoomId());
+                                LOGGER.info("释放AI空间-文本转语音模型");
                             }
                         }
                     });
@@ -105,24 +106,9 @@ public class XVReceiver implements InitializingBean {
         }
     }
 
-    private static MessageDto buildStoreMessage(MessageDto messageDto, StringBuilder fullContent) {
-        MessageDto storeMessage = new MessageDto();
-        storeMessage.setMessageId(messageDto.getMessageId());
-        storeMessage.setMessageType(MsgTypeEnum.VOICE.getCode());
-        storeMessage.setSenderId(AQBusinessConstant.XV_ID);
-        storeMessage.setRoomId(messageDto.getRoomId());
-        storeMessage.setCreateTime(new Date());
-        int lastIndex = fullContent.toString().lastIndexOf('/');
-        if (lastIndex != -1) {
-            String fileName = fullContent.substring(lastIndex + 1);
-            storeMessage.setMessageExt(fileName);
-        }
-        storeMessage.setMessageContent(fullContent.toString());
-        return storeMessage;
-    }
-
     @Override
     public void afterPropertiesSet() throws Exception {
         initConsumer();
     }
+
 }

@@ -38,4 +38,5 @@ public interface AQRedisKeyPrefix {
      */
     String ALI_OSS_STS = SYS_NAME + ":aliOssSts";
     String AQ_ROOM_CONVERSATION_PREFIX = "conversation";
+    String AQ_ROOM_AI_SPACE_STATUS_PREFIX = "aiSpaceStatus";
 }

@@ -77,4 +77,8 @@ public interface IRoomHolder {
     List<MessageRecord> getRoomConversationRecords(String roomId);
 
     void addRoomConversationRecord(String roomId, MessageRecord userRecord);
+
+    int getAISpaceStatus(String roomId);
+
+    void setAISpaceStatus(String roomId, int code);
 }

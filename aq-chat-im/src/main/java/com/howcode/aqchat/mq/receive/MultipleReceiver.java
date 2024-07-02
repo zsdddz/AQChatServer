@@ -12,7 +12,6 @@ import com.howcode.aqchat.common.model.MessageDto;
 import com.howcode.aqchat.common.utils.ThreadPoolUtil;
 import com.howcode.aqchat.framework.giteeai.starter.enums.RoleEnum;
 import com.howcode.aqchat.framework.mq.starter.config.RocketMQConfig;
-import com.howcode.aqchat.framework.redis.starter.RedisCacheHelper;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IRoomHolder;
 import com.howcode.aqchat.service.service.IAQMessageService;
@@ -28,7 +27,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,7 +35,7 @@ import java.util.List;
  * @Date 2024/6/30 17:20
  */
 @Component
-public class MultipleReceiver implements InitializingBean {
+public class MultipleReceiver extends AbstractAISpaceReceiver implements InitializingBean {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JoinRoomReceiver.class);
 
@@ -95,7 +93,7 @@ public class MultipleReceiver implements InitializingBean {
                                 globalChannelHolder.sendBroadcastAIMessage(aiMessageDto, AQBusinessConstant.XT_ID);
                             } finally {
                                 LOGGER.info("开始存储 多轮对话 回复消息");
-                                MessageDto storeMessage = buildStoreMessage(messageDto, fullContent);
+                                MessageDto storeMessage = buildStoreMessage(messageDto, fullContent,MsgTypeEnum.TEXT.getCode(), AQBusinessConstant.XT_ID);
                                 //添加对话记录到房间
                                 MessageRecord userRecord = new MessageRecord();
                                 userRecord.setRole(RoleEnum.USER.getRole());
@@ -120,18 +118,6 @@ public class MultipleReceiver implements InitializingBean {
         } catch (MQClientException e) {
             LOGGER.error("多轮对话 订阅失败", e);
         }
-    }
-
-    private static MessageDto buildStoreMessage(MessageDto messageDto, StringBuilder fullContent) {
-        MessageDto storeMessage = new MessageDto();
-        storeMessage.setMessageId(messageDto.getMessageId());
-        storeMessage.setMessageType(MsgTypeEnum.TEXT.getCode());
-        storeMessage.setSenderId(AQBusinessConstant.XT_ID);
-        storeMessage.setRoomId(messageDto.getRoomId());
-        storeMessage.setCreateTime(new Date());
-        storeMessage.setMessageExt(AQBusinessConstant.AT + messageDto.getSenderId());
-        storeMessage.setMessageContent(fullContent.toString());
-        return storeMessage;
     }
 
     @Override

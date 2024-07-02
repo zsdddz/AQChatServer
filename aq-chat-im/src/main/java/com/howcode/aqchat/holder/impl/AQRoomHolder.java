@@ -170,4 +170,18 @@ public class AQRoomHolder implements IRoomHolder {
         }
         LOGGER.error("[添加房间消息记录]消息为空");
     }
+
+    @Override
+    public int getAISpaceStatus(String roomId) {
+        Object status = redisCacheHelper.getCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_AI_SPACE_STATUS_PREFIX);
+        if (null == status) {
+            return 0;
+        }
+        return (int) status;
+    }
+
+    @Override
+    public void setAISpaceStatus(String roomId, int code) {
+        redisCacheHelper.setCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_AI_SPACE_STATUS_PREFIX, code);
+    }
 }

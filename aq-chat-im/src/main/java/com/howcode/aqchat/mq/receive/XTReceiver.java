@@ -24,7 +24,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
 
 /**
  * @Description
@@ -32,7 +31,7 @@ import java.util.Date;
  * @Date 2024/6/30 16:30
  */
 @Component
-public class XTReceiver implements InitializingBean {
+public class XTReceiver extends AbstractAISpaceReceiver implements InitializingBean {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JoinRoomReceiver.class);
 
@@ -87,9 +86,11 @@ public class XTReceiver implements InitializingBean {
                                 globalChannelHolder.sendAIMessage(aiMessageDto, AQBusinessConstant.XT_ID, MsgTypeEnum.TEXT.getCode());
                             } finally {
                                 LOGGER.info("开始存储 文本模型AI 回复消息");
-                                MessageDto storeMessage = buildStoreMessage(messageDto, fullContent);
+                                MessageDto storeMessage = buildStoreMessage(messageDto, fullContent,MsgTypeEnum.TEXT.getCode(),AQBusinessConstant.XT_ID);
                                 messageService.saveMessage(storeMessage);
                                 LOGGER.info("文本模型AI 回复消息存储成功");
+                                afterAISpaceMessage(messageDto.getRoomId());
+                                LOGGER.info("释放AI空间-文本模型AI");
                             }
                         }
                     });
@@ -103,17 +104,6 @@ public class XTReceiver implements InitializingBean {
         }
     }
 
-    private static MessageDto buildStoreMessage(MessageDto messageDto, StringBuilder fullContent) {
-        MessageDto storeMessage = new MessageDto();
-        storeMessage.setMessageId(messageDto.getMessageId());
-        storeMessage.setMessageType(MsgTypeEnum.TEXT.getCode());
-        storeMessage.setSenderId(AQBusinessConstant.XT_ID);
-        storeMessage.setRoomId(messageDto.getRoomId());
-        storeMessage.setCreateTime(new Date());
-        storeMessage.setMessageExt(AQBusinessConstant.AT + messageDto.getSenderId());
-        storeMessage.setMessageContent(fullContent.toString());
-        return storeMessage;
-    }
 
     @Override
     public void afterPropertiesSet() throws Exception {

@@ -17,6 +17,10 @@ public enum RoomType {
         this.desc = desc;
     }
 
+    public static boolean isAI(int roomType) {
+        return AI.getCode() == roomType;
+    }
+
     public int getCode() {
         return code;
     }
