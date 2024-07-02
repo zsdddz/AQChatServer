@@ -34,10 +34,10 @@ public class ModelFactory implements ApplicationContextAware {
         return applicationContext.getBean(modelMap.get(giteeAIConfiguration.getChatModel()), ChatModel.class);
     }
     public TTIModel getTTIModel() {
-        return  applicationContext.getBean(modelMap.get(giteeAIConfiguration.getTTIModel()), TTIModel.class);
+        return  applicationContext.getBean(modelMap.get(giteeAIConfiguration.getTtiModel()), TTIModel.class);
     }
     public TTVModel getTTVModel() {
-        return applicationContext.getBean(modelMap.get(giteeAIConfiguration.getTTVModel()), TTVModel.class);
+        return applicationContext.getBean(modelMap.get(giteeAIConfiguration.getTtvModel()), TTVModel.class);
     }
 
     @Override

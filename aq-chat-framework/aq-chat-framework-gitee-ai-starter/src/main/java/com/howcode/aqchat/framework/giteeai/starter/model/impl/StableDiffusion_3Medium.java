@@ -24,7 +24,7 @@ public class StableDiffusion_3Medium implements TTIModel {
     public byte[] textToImage(String message) {
         GeneralParameters generalParameters = new GeneralParametersBuilder().inputs(message).build();
         try {
-            return GiteeAIHttpDelegate.sendPostRequestTB(giteeAIConfiguration.gettTIModelUrl(), JSONObject.toJSONString(generalParameters), giteeAIConfiguration.getBearer());
+            return GiteeAIHttpDelegate.sendPostRequestTB(giteeAIConfiguration.getTtiModelUrl(), JSONObject.toJSONString(generalParameters), giteeAIConfiguration.getBearer());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

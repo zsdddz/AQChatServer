@@ -1,9 +1,11 @@
 package com.howcode.aqchat.framework.giteeai.starter;
 
+import com.howcode.aqchat.framework.giteeai.starter.config.GiteeAIConfiguration;
 import com.howcode.aqchat.framework.giteeai.starter.factory.ModelFactory;
 import com.howcode.aqchat.framework.giteeai.starter.handler.MessageHandler;
 import com.howcode.aqchat.framework.giteeai.starter.session.Message;
 import jakarta.annotation.Resource;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
  * @Date 2024/6/30 12:02
  */
 @Component
+@ConditionalOnBean(GiteeAIConfiguration.class)
 public class DefaultGiteeAIClient implements GiteeAIClient{
 
     @Resource

@@ -24,7 +24,7 @@ public class ChatTTS implements TTVModel {
     public byte[] textToVoice(String message) {
         GeneralParameters generalParameters = new GeneralParametersBuilder().inputs(message).build();
         try {
-            return GiteeAIHttpDelegate.sendPostRequestTB(giteeAIConfiguration.gettTVModelUrl(), JSONObject.toJSONString(generalParameters), giteeAIConfiguration.getBearer());
+            return GiteeAIHttpDelegate.sendPostRequestTB(giteeAIConfiguration.getTtvModelUrl(), JSONObject.toJSONString(generalParameters), giteeAIConfiguration.getBearer());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

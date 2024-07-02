@@ -2,92 +2,130 @@ package com.howcode.aqchat.framework.giteeai.starter.config;
 
 
 import com.howcode.aqchat.framework.giteeai.starter.constants.AIModel;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @Description
  * @Author ZhangWeinan
  * @Date 2024/6/30 11:41
  */
-@Configuration
 public class GiteeAIConfiguration {
-    private String bearer;
-    private String ChatModel;
-    private String chatModelUrl;
-    private String TTIModel;
-    private String tTIModelUrl;
-    private String TTVModel;
-    private String tTVModelUrl;
-
-    @Override
-    public String toString() {
-        return "GiteeAIConfiguration{" +
-                "bearer='" + bearer + '\'' +
-                ", ChatModel='" + ChatModel + '\'' +
-                ", chatModelUrl='" + chatModelUrl + '\'' +
-                ", TTIModel='" + TTIModel + '\'' +
-                ", tTIModelUrl='" + tTIModelUrl + '\'' +
-                ", TTVModel='" + TTVModel + '\'' +
-                ", tTVModelUrl='" + tTVModelUrl + '\'' +
-                '}';
-    }
+    private final String bearer;
+    private final String chatModel;
+    private final String chatModelUrl;
+    private final String ttiModel;
+    private final String ttiModelUrl;
+    private final String ttvModel;
+    private final String ttvModelUrl;
 
     public String getBearer() {
         return bearer;
     }
 
-    public void setBearer(String bearer) {
-        this.bearer = bearer;
-    }
-
     public String getChatModel() {
-        return ChatModel;
+        return chatModel;
     }
 
-    public void setChatModel(String chatModel) {
-        ChatModel = chatModel;
-        setChatModelUrl(AIModel.AI_MODEL_MAP.get(chatModel));
-    }
 
     public String getChatModelUrl() {
         return chatModelUrl;
     }
 
-    private void setChatModelUrl(String chatModelUrl) {
-        this.chatModelUrl = chatModelUrl;
+    public String getTtiModel() {
+        return ttiModel;
     }
 
-    public String getTTIModel() {
-        return TTIModel;
+    public String getTtiModelUrl() {
+        return ttiModelUrl;
     }
 
-    public void setTTIModel(String TTIModel) {
-        this.TTIModel = TTIModel;
-        settTIModelUrl(AIModel.AI_MODEL_MAP.get(TTIModel));
+    public String getTtvModel() {
+        return ttvModel;
     }
 
-    public String gettTIModelUrl() {
-        return tTIModelUrl;
+    public String getTtvModelUrl() {
+        return ttvModelUrl;
     }
 
-    private void settTIModelUrl(String tTIModelUrl) {
-        this.tTIModelUrl = tTIModelUrl;
+    private GiteeAIConfiguration(Builder builder) {
+        this.bearer = builder.bearer;
+        this.chatModel = builder.chatModel;
+        this.chatModelUrl = builder.chatModelUrl;
+        this.ttiModel = builder.ttiModel;
+        this.ttiModelUrl = builder.ttiModelUrl;
+        this.ttvModel = builder.ttvModel;
+        this.ttvModelUrl = builder.ttvModelUrl;
     }
 
-    public String getTTVModel() {
-        return TTVModel;
+    public static class Builder {
+        private String bearer;
+        private String chatModel;
+        private String chatModelCode;
+        private String chatModelUrl;
+        private String ttiModel;
+        private String ttiModelCode;
+        private String ttiModelUrl;
+        private String ttvModel;
+        private String ttvModelCode;
+        private String ttvModelUrl;
+
+        public Builder setBearer(String bearer) {
+            this.bearer = bearer;
+            return this;
+        }
+
+        public Builder setChatModel(String chatModel) {
+            this.chatModel = chatModel;
+            return this;
+        }
+
+        public Builder setChatModelCode(String chatModelCode) {
+            this.chatModelCode = chatModelCode;
+            return this;
+        }
+
+        public Builder setTtiModel(String ttiModel) {
+            this.ttiModel = ttiModel;
+            return this;
+        }
+
+        public Builder setTtiModelCode(String ttiModelCode) {
+            this.ttiModelCode = ttiModelCode;
+            return this;
+        }
+
+
+        public Builder setTtvModel(String ttvModel) {
+            this.ttvModel = ttvModel;
+            return this;
+        }
+
+        public Builder setTtvModelCode(String ttvModelCode) {
+            this.ttvModelCode = ttvModelCode;
+            return this;
+        }
+
+
+        public GiteeAIConfiguration build() {
+            String chatModelUrl = AIModel.AI_MODEL_MAP.get(this.chatModel).replace(AIModel.CHAT_MODEL_CODE, this.chatModelCode);
+            String ttiModelUrl = AIModel.AI_MODEL_MAP.get(this.ttiModel).replace(AIModel.TTI_MODEL_CODE, this.ttiModelCode);
+            String ttvModelUrl = AIModel.AI_MODEL_MAP.get(this.ttvModel).replace(AIModel.TTV_MODEL_CODE, this.ttvModelCode);
+            this.chatModelUrl = chatModelUrl;
+            this.ttiModelUrl = ttiModelUrl;
+            this.ttvModelUrl = ttvModelUrl;
+            return new GiteeAIConfiguration(this);
+        }
     }
 
-    public void setTTVModel(String TTVModel) {
-        this.TTVModel = TTVModel;
-        settTVModelUrl(AIModel.AI_MODEL_MAP.get(TTVModel));
-    }
-
-    public String gettTVModelUrl() {
-        return tTVModelUrl;
-    }
-
-    private void settTVModelUrl(String tTVModelUrl) {
-        this.tTVModelUrl = tTVModelUrl;
+    @Override
+    public String toString() {
+        return "GiteeAIConfiguration{" +
+                "bearer='" + bearer + '\'' +
+                ", chatModel='" + this.chatModel + '\'' +
+                ", chatModelUrl='" + chatModelUrl + '\'' +
+                ", ttiModel='" + ttiModel + '\'' +
+                ", ttiModelUrl='" + ttiModelUrl + '\'' +
+                ", ttvModel='" + ttvModel + '\'' +
+                ", ttvModelUrl='" + ttvModelUrl + '\'' +
+                '}';
     }
 }

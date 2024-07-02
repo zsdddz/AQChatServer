@@ -23,13 +23,18 @@ public class AIModel {
     public static final String STABLE_DIFFUSION_3_MEDIUM = "stable-diffusion-3-medium";
     //ChatTTS
     public static final String CHAT_TTS = "ChatTTS";
+
+    public static final String CHAT_MODEL_CODE = "#{chatModelCode}";
+    public static final String TTI_MODEL_CODE = "#{ttiModelCode}";
+    public static final String TTV_MODEL_CODE = "#{ttvModelCode}";
+
     static {
-        AI_MODEL_MAP.put(LLAMA3_70B_CHINESE_CHAT,"https://ai.gitee.com/api/inference/serverless/OETU5VQQ6WOG/chat/completions");
-        AI_MODEL_MAP.put(BGE_LARGE_ZH_V1_5,"https://ai.gitee.com/api/inference/serverless/IOWKIHEKQ116/embeddings");
-        AI_MODEL_MAP.put(BGE_SMALL_ZH_V1_5,"https://ai.gitee.com/api/inference/serverless/USL074HTOF1L/embeddings");
-        AI_MODEL_MAP.put(QWEN2_7B_INSTRUCT,"https://ai.gitee.com/api/inference/serverless/1RFPGCZNZLXL/chat/completions");
-        AI_MODEL_MAP.put(STABLE_DIFFUSION_XL_BASE_1_0,"https://ai.gitee.com/api/inference/serverless/PWTBFPLSR7IA/text-to-image");
-        AI_MODEL_MAP.put(STABLE_DIFFUSION_3_MEDIUM,"https://ai.gitee.com/api/inference/serverless/2UKNXT88IX1H/text-to-image");
-        AI_MODEL_MAP.put(CHAT_TTS,"https://ai.gitee.com/api/inference/serverless/JIGDDN6E9B1B/text-to-speech");
+        AI_MODEL_MAP.put(LLAMA3_70B_CHINESE_CHAT,"https://ai.gitee.com/api/inference/serverless/"+CHAT_MODEL_CODE+"/chat/completions");
+        AI_MODEL_MAP.put(BGE_LARGE_ZH_V1_5,"https://ai.gitee.com/api/inference/serverless/"+CHAT_MODEL_CODE+"/embeddings");
+        AI_MODEL_MAP.put(BGE_SMALL_ZH_V1_5,"https://ai.gitee.com/api/inference/serverless/"+CHAT_MODEL_CODE+"/embeddings");
+        AI_MODEL_MAP.put(QWEN2_7B_INSTRUCT,"https://ai.gitee.com/api/inference/serverless/"+CHAT_MODEL_CODE+"/chat/completions");
+        AI_MODEL_MAP.put(STABLE_DIFFUSION_XL_BASE_1_0,"https://ai.gitee.com/api/inference/serverless/"+TTI_MODEL_CODE+"/text-to-image");
+        AI_MODEL_MAP.put(STABLE_DIFFUSION_3_MEDIUM,"https://ai.gitee.com/api/inference/serverless/"+TTI_MODEL_CODE+"/text-to-image");
+        AI_MODEL_MAP.put(CHAT_TTS,"https://ai.gitee.com/api/inference/serverless/"+TTV_MODEL_CODE+"/text-to-speech");
     }
 }
