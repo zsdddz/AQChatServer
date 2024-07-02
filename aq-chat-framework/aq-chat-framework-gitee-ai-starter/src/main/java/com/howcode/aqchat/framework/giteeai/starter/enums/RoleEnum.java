@@ -7,7 +7,7 @@ package com.howcode.aqchat.framework.giteeai.starter.enums;
  */
 public enum RoleEnum {
     USER("user"),
-    SYSTEM("system");
+    SYSTEM("assistant");
 
     private final String role;
 

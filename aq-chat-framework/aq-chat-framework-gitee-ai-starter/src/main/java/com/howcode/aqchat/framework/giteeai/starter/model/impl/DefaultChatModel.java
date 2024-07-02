@@ -23,7 +23,7 @@ import java.util.List;
  * @Date 2024/6/30 11:59
  */
 @Component
-public class Llama3_70bChineseChat implements ChatModel {
+public class DefaultChatModel implements ChatModel {
     @Resource
     private GiteeAIConfiguration giteeAIConfiguration;
     @Override

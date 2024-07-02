@@ -17,7 +17,7 @@ import java.io.IOException;
  * @Date 2024/6/30 11:59
  */
 @Component
-public class StableDiffusion_3Medium implements TTIModel {
+public class DefaultTTIModel implements TTIModel {
     @Resource
     private GiteeAIConfiguration giteeAIConfiguration;
     @Override

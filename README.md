@@ -51,6 +51,8 @@ WEB端: <a href="https://gitee.com/howcode/aq-chat">AQChat</a><br/>
 | llama3-70b-chinese-chat | 文本大模型  | Gitee AI | 通用对话模型，适用于多轮对话 |
 | stable-diffusion-3-medium | 文生图大模型 | Gitee AI | 可通过文本描述生成图片 |
 | ChatTTS | 文本转语音大模型 | Gitee AI | 可通过文本转换成语音  |
+| Qwen2-72B-Instruct | 文本大模型 | Gitee AI | 通用对话模型，适用于多轮对话  |
+
 
 ## 项目架构说明
 | 模块               | 说明                        |

@@ -24,20 +24,15 @@ public class ModelFactory implements ApplicationContextAware {
     @Resource
     private GiteeAIConfiguration giteeAIConfiguration;
 
-    private static final Map<String,String> modelMap = Map.of(
-            AIModel.LLAMA3_70B_CHINESE_CHAT, "llama3_70bChineseChat",
-            AIModel.CHAT_TTS, "chatTTS",
-            AIModel.STABLE_DIFFUSION_3_MEDIUM, "stableDiffusion_3Medium"
-    );
 
     public ChatModel getChatModel() {
-        return applicationContext.getBean(modelMap.get(giteeAIConfiguration.getChatModel()), ChatModel.class);
+        return applicationContext.getBean(ChatModel.class);
     }
     public TTIModel getTTIModel() {
-        return  applicationContext.getBean(modelMap.get(giteeAIConfiguration.getTtiModel()), TTIModel.class);
+        return  applicationContext.getBean(TTIModel.class);
     }
     public TTVModel getTTVModel() {
-        return applicationContext.getBean(modelMap.get(giteeAIConfiguration.getTtvModel()), TTVModel.class);
+        return applicationContext.getBean(TTVModel.class);
     }
 
     @Override

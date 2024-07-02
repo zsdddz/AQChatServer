@@ -17,7 +17,7 @@ import java.io.IOException;
  * @Date 2024/6/30 12:00
  */
 @Component
-public class ChatTTS implements TTVModel {
+public class DefaultTTVModel implements TTVModel {
     @Resource
     private GiteeAIConfiguration giteeAIConfiguration;
     @Override

@@ -1,6 +1,10 @@
 package com.howcode.aqchat.framework.giteeai.starter;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.howcode.aqchat.framework.giteeai.starter.config.GiteeAIConfiguration;
+import com.howcode.aqchat.framework.giteeai.starter.constants.AIModel;
 import com.howcode.aqchat.framework.giteeai.starter.factory.ModelFactory;
 import com.howcode.aqchat.framework.giteeai.starter.handler.MessageHandler;
 import com.howcode.aqchat.framework.giteeai.starter.session.Message;
@@ -17,7 +21,7 @@ import java.util.List;
  */
 @Component
 @ConditionalOnBean(GiteeAIConfiguration.class)
-public class DefaultGiteeAIClient implements GiteeAIClient{
+public class DefaultGiteeAIClient implements GiteeAIClient {
 
     @Resource
     private ModelFactory modelFactory;
@@ -33,13 +37,18 @@ public class DefaultGiteeAIClient implements GiteeAIClient{
     }
 
     @Override
-    public void streamChat(String message, List<Message> messages,  MessageHandler<String> handler) {
+    public void streamChat(String message, List<Message> messages, MessageHandler<String> handler) {
         modelFactory.getChatModel().streamChat(message, messages, handler);
     }
 
     @Override
     public byte[] textToImage(String message) {
-        return modelFactory.getTTIModel().textToImage(message);
+        String finalContext = chat(AIModel.AI_TRANSLATE_GUIDE_WORD + message);
+        String contentFromJson = getContentFromJson(finalContext);
+        if (contentFromJson == null) {
+            contentFromJson = message;
+        }
+        return modelFactory.getTTIModel().textToImage(contentFromJson);
     }
 
     @Override
@@ -47,4 +56,14 @@ public class DefaultGiteeAIClient implements GiteeAIClient{
         return modelFactory.getTTVModel().textToVoice(message);
     }
 
+    private static String getContentFromJson(String jsonString) {
+        // 解析JSON字符串
+        JSONObject jsonObject = JSON.parseObject(jsonString);
+        // 获取choices数组
+        JSONArray choices = jsonObject.getJSONArray("choices");
+        // 获取第一个对象中的message对象
+        JSONObject message = choices.getJSONObject(0).getJSONObject("message");
+        // 获取content字段
+        return message.getString("content");
+    }
 }
