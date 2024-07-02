@@ -78,7 +78,7 @@ public class AQRoomHolder implements IRoomHolder {
         if (null == roomInfo) {
             return null;
         }
-        if (RoomType.AI.getCode() == roomInfo.getRoomType()){
+        if (RoomType.AI.getCode() == roomInfo.getRoomType()) {
             //获取房间成员
             List<UserGlobalInfoDto> roomMembers = roomInfo.getRoomMembers();
             //过滤自己
@@ -114,7 +114,7 @@ public class AQRoomHolder implements IRoomHolder {
             //存在则添加
             roomMembers.put(userId, userInfo);
             redisCacheHelper.setCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_MEMBER_PREFIX, roomMembers);
-        }else {
+        } else {
             LOGGER.error("[保存房间成员]用户信息不存在");
         }
     }
@@ -164,11 +164,12 @@ public class AQRoomHolder implements IRoomHolder {
             messageRecords = new ArrayList<>();
             messageRecords.add(userRecord);
             redisCacheHelper.setCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_CONVERSATION_PREFIX, messageRecords);
-        }else if (null != userRecord){
+        } else if (null != messageRecords && null != userRecord) {
             messageRecords.add(userRecord);
             redisCacheHelper.setCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_CONVERSATION_PREFIX, messageRecords);
+        }else {
+            LOGGER.error("[添加房间消息记录]消息为空");
         }
-        LOGGER.error("[添加房间消息记录]消息为空");
     }
 
     @Override

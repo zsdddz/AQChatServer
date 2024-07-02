@@ -74,14 +74,16 @@ public class MultipleReceiver extends AbstractAISpaceReceiver implements Initial
                             StringBuilder fullContent = new StringBuilder();
                             try {
                                 List<MessageRecord> roomConversationRecords = roomHolder.getRoomConversationRecords(messageDto.getRoomId());
-                                aiService.chat(messageDto.getMessageContent(),roomConversationRecords, aiResult -> {
+                                aiService.chat(messageDto.getMessageContent(), roomConversationRecords, aiResult -> {
                                     AIMessageDto aiMessageDto = new AIMessageDto();
                                     aiMessageDto.setMessageId(messageDto.getMessageId());
                                     aiMessageDto.setRoomId(messageDto.getRoomId());
                                     aiMessageDto.setContent(aiResult.getContent());
                                     aiMessageDto.setStatus(aiResult.getStatus());
                                     globalChannelHolder.sendBroadcastAIMessage(aiMessageDto, AQBusinessConstant.XT_ID);
-                                    fullContent.append(aiResult.getContent());
+                                    if (aiResult.getStatus() != AIMessageStatusEnum.END.getCode()) {
+                                        fullContent.append(aiResult.getContent());
+                                    }
                                 });
                             } catch (Exception e) {
                                 LOGGER.error(" 多轮对话 处理消息失败", e);
@@ -92,18 +94,20 @@ public class MultipleReceiver extends AbstractAISpaceReceiver implements Initial
                                 aiMessageDto.setStatus(AIMessageStatusEnum.FAIL.getCode());
                                 globalChannelHolder.sendBroadcastAIMessage(aiMessageDto, AQBusinessConstant.XT_ID);
                             } finally {
+                                // AI空间消息完成后置处理
+                                afterAISpaceMessage(messageDto.getRoomId());
                                 LOGGER.info("开始存储 多轮对话 回复消息");
-                                MessageDto storeMessage = buildStoreMessage(messageDto, fullContent,MsgTypeEnum.TEXT.getCode(), AQBusinessConstant.XT_ID);
+                                MessageDto storeMessage = buildStoreMessage(messageDto, fullContent, MsgTypeEnum.TEXT.getCode(), AQBusinessConstant.XT_ID);
                                 //添加对话记录到房间
                                 MessageRecord userRecord = new MessageRecord();
                                 userRecord.setRole(RoleEnum.USER.getRole());
                                 userRecord.setContent(messageDto.getMessageContent());
-                                roomHolder.addRoomConversationRecord(messageDto.getRoomId(),userRecord);
+                                roomHolder.addRoomConversationRecord(messageDto.getRoomId(), userRecord);
 
                                 MessageRecord systemRecord = new MessageRecord();
                                 systemRecord.setRole(RoleEnum.SYSTEM.getRole());
                                 systemRecord.setContent(fullContent.toString());
-                                roomHolder.addRoomConversationRecord(messageDto.getRoomId(),systemRecord);
+                                roomHolder.addRoomConversationRecord(messageDto.getRoomId(), systemRecord);
 
                                 messageService.saveMessage(storeMessage);
                                 LOGGER.info("多轮对话 回复消息存储成功");

@@ -243,7 +243,7 @@ public class GlobalChannelHolder {
                 .setUser(userBuilder)
                 .setMsgId(aiMessageDto.getMessageId())
                 .setRoomId(aiMessageDto.getRoomId())
-                .setContent(aiMessageDto.getContent())
+                .setContent(aiMessageDto.getContent() == null ? "" : aiMessageDto.getContent())
                 .setStreamType(aiMessageDto.getStatus())
                 .build();
         messageBroadcaster.broadcast(aiMessageDto.getRoomId(), streamMsgNotify);
