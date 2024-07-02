@@ -53,7 +53,10 @@ public class AQChatConfig {
     public static class GiteeConfig {
         private String bearer;
         private String chatModel;
+        private String chatModelCode;
         private String ttiModel;
+        private String ttiModelCode;
         private String ttvModel;
+        private String ttvModelCode;
     }
 }

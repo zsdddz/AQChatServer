@@ -10,11 +10,13 @@ import com.howcode.aqchat.framework.giteeai.starter.GiteeAIClient;
 import com.howcode.aqchat.framework.giteeai.starter.config.GiteeAIConfiguration;
 import com.howcode.aqchat.framework.redis.starter.RedisCacheHelper;
 import jakarta.annotation.Resource;
+import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +36,8 @@ public class AIConfiguration implements InitializingBean {
     @Resource
     private AQChatConfig aqChatConfig;
 
-    private List<UserGlobalInfoDto> aiList = new ArrayList<>();
-
-    public List<UserGlobalInfoDto> getAiList() {
-        return aiList;
-    }
+    @Getter
+    private final List<UserGlobalInfoDto> aiList = new ArrayList<>();
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -98,16 +97,20 @@ public class AIConfiguration implements InitializingBean {
     }
     @Bean
     public GiteeAIConfiguration giteeAIConfiguration(){
-        GiteeAIConfiguration giteeAIConfiguration = new GiteeAIConfiguration();
-        giteeAIConfiguration.setBearer(aqChatConfig.getAiConfig().getGiteeConfig().getBearer());
-        giteeAIConfiguration.setChatModel(aqChatConfig.getAiConfig().getGiteeConfig().getChatModel());
-        giteeAIConfiguration.setTTIModel(aqChatConfig.getAiConfig().getGiteeConfig().getTtiModel());
-        giteeAIConfiguration.setTTVModel(aqChatConfig.getAiConfig().getGiteeConfig().getTtvModel());
-        return giteeAIConfiguration;
+        AQChatConfig.GiteeConfig giteeConfig = aqChatConfig.getAiConfig().getGiteeConfig();
+        if (giteeConfig.getBearer() == null) {
+            LOGGER.info("Gitee AI未配置，不启用AI空间功能");
+            new GiteeAIConfiguration.Builder().build();
+        }
+        return new GiteeAIConfiguration.Builder()
+                .setBearer(giteeConfig.getBearer())
+                .setChatModel(giteeConfig.getChatModel())
+                .setChatModelCode(giteeConfig.getChatModelCode())
+                .setTtiModel(giteeConfig.getTtiModel())
+                .setTtiModelCode(giteeConfig.getTtiModelCode())
+                .setTtvModel(giteeConfig.getTtvModel())
+                .setTtvModelCode(giteeConfig.getTtvModelCode())
+                .build();
     }
 
-    @Bean
-    public GiteeAIClient giteeAIClient() {
-        return new DefaultGiteeAIClient();
-    }
 }
