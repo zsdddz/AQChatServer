@@ -73,7 +73,7 @@ public class XTReceiver extends AbstractAISpaceReceiver implements InitializingB
                                     aiMessageDto.setRoomId(messageDto.getRoomId());
                                     aiMessageDto.setContent(aiResult.getContent());
                                     aiMessageDto.setStatus(aiResult.getStatus());
-                                    globalChannelHolder.sendAIMessage(aiMessageDto, AQBusinessConstant.XT_ID, MsgTypeEnum.TEXT.getCode());
+                                    globalChannelHolder.sendBroadcastAIMessage(aiMessageDto, AQBusinessConstant.XT_ID);
                                     fullContent.append(aiResult.getContent());
                                 });
                             } catch (Exception e) {
@@ -83,7 +83,7 @@ public class XTReceiver extends AbstractAISpaceReceiver implements InitializingB
                                 aiMessageDto.setMessageId(messageDto.getMessageId());
                                 aiMessageDto.setRoomId(messageDto.getRoomId());
                                 aiMessageDto.setStatus(AIMessageStatusEnum.FAIL.getCode());
-                                globalChannelHolder.sendAIMessage(aiMessageDto, AQBusinessConstant.XT_ID, MsgTypeEnum.TEXT.getCode());
+                                globalChannelHolder.sendBroadcastAIMessage(aiMessageDto, AQBusinessConstant.XT_ID);
                             } finally {
                                 LOGGER.info("开始存储 文本模型AI 回复消息");
                                 MessageDto storeMessage = buildStoreMessage(messageDto, fullContent,MsgTypeEnum.TEXT.getCode(),AQBusinessConstant.XT_ID);
