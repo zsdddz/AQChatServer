@@ -65,6 +65,30 @@ enum MsgCommand{
 
   //流式消息通知
   STREAM_MSG_NOTIFY = 32;
+
+  //邀请加入
+  INVITE_JOIN_ROOM_CMD = 33;
+  INVITE_JOIN_ROOM_ACK = 34;
+
+
+  //=====AI空间=========
+  //开启AI空间类型房间
+  OPEN_AI_ROOM_CMD = 100;
+  OPEN_AI_ROOM_ACK = 101;
+
+  //关闭AI空间类型房间
+  CLOSE_AI_ROOM_CMD = 102;
+  CLOSE_AI_ROOM_ACK = 103;
+
+  //发送消息
+//  SEND_MSG_CMD = 104;
+//  SEND_MSG_CMD_ACK = 105;
+
+  //AI回复消息
+  AI_REPLY_MSG_ACK = 106;
+
+  //AI回复消息（流式）
+  AI_REPLY_MSG_STREAM_ACK = 107;
 }
 
 //用户登录
@@ -143,7 +167,7 @@ message SendMsgAck{
 enum MsgType{
   TEXT = 0;
   IMAGE = 1;
-  //录音
+  //音频
   VOICE = 2;
   //视频
   VIDEO = 3;
@@ -298,4 +322,53 @@ message StreamMsgNotify{
   User user = 3;
   int32 streamType = 4; //流类型 0-开始 1--结束
   string content = 5;
+}
+
+//邀请加入
+message InviteJoinRoomCmd{
+  string roomNo = 1;
+  string userId = 2;
+}
+
+message InviteJoinRoomAck{
+  string roomId = 1;
+  User user = 2;
+  Room room = 3;
+}
+
+
+//=========AI空间=========
+
+//开启AI空间类型房间
+message OpenAiRoomCmd {
+  string userId = 1;
+}
+message OpenAiRoomAck {
+  string roomId = 1;
+  repeated Assistant assistants = 2;
+}
+
+message Assistant{
+  string userId = 1;
+  string name = 2;
+  string avatar = 3;
+}
+
+//关闭AI空间类型房间
+message CloseAiRoomCmd {
+  string roomId = 1;
+}
+message CloseAiRoomAck {
+  string roomId = 1;
+}
+
+//AI回复消息
+message AiReplyMsgAck {
+  string roomId = 1;
+  User user = 2;
+  string msgId = 3;
+  string msg = 4;
+  string ext = 5;
+  MsgType msgType = 6;
+  int32 status = 7; //1-成功
 }

@@ -11,7 +11,6 @@ import com.howcode.aqchat.mq.MqSendingAgent;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
@@ -22,10 +21,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class LeaveRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.LeaveRoomCmd> {
     @Resource
-    @Lazy
     private GlobalChannelHolder globalChannelHolder;
     @Resource
-    @Lazy
     private MqSendingAgent mqSendingAgent;
     @Override
     public void handle(ChannelHandlerContext ctx, AQChatMsgProtocol.LeaveRoomCmd cmd) {

@@ -40,7 +40,23 @@ public class AQChatConfig {
 
     @Data
     public static class AiConfig {
+        private BaiLianConfig baiLianConfig;
+        private GiteeConfig giteeConfig;
+    }
+
+    @Data
+    public static class BaiLianConfig {
         private String apiKey;
         private String model;
+    }
+    @Data
+    public static class GiteeConfig {
+        private String bearer;
+        private String chatModel;
+        private String chatModelCode;
+        private String ttiModel;
+        private String ttiModelCode;
+        private String ttvModel;
+        private String ttvModelCode;
     }
 }

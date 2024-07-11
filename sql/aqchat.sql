@@ -37,5 +37,8 @@ CREATE TABLE `aq_user`  (
 -- Records of aq_user
 -- ----------------------------
 INSERT INTO `aq_user` VALUES ('AQChatHelper', 'AQChat助手', 'https://aqchat.oss-cn-shenzhen.aliyuncs.com/avatar/AQChatAI.png');
+INSERT INTO `aq_user` VALUES ('xm', '小M', 'shenzhen.aliyuncs.com/avatar/xm.png');
+INSERT INTO `aq_user` VALUES ('xt', '小T', 'shenzhen.aliyuncs.com/avatar/xt.png');
+INSERT INTO `aq_user` VALUES ('xv', '小V', 'shenzhen.aliyuncs.com/avatar/xv.png');
 
 SET FOREIGN_KEY_CHECKS = 1;

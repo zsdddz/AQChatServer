@@ -36,7 +36,7 @@ public class AQChatHandlerFactory implements InitializingBean {
         // 获取包名称
         String packageName = AQChatHandlerFactory.class.getPackage().getName();
         // 获取所有的 ICmdHandler 子类
-        Set<Class<?>> clazzSet = listSubClazz(packageName + AQMessageHandlerConstant.HANDLER_IMPLEMENTATION_PACKAGE_NAME);
+        Set<Class<?>> clazzSet = listSubClazz();
         for (Class<?> cmdHandlerClazz : clazzSet) {
             if (null == cmdHandlerClazz || 0 != (cmdHandlerClazz.getModifiers() & Modifier.ABSTRACT)) {
                 // 如果是抽象类,
@@ -95,9 +95,8 @@ public class AQChatHandlerFactory implements InitializingBean {
         init();
     }
 
-    private Set<Class<?>> listSubClazz(String packageName) {
-        ApplicationContext context = new AnnotationConfigApplicationContext(packageName);
-        Map<String, Object> beans = context.getBeansWithAnnotation(Component.class);
+    private Set<Class<?>> listSubClazz() {
+        Map<String, ICmdHandler> beans = applicationContext.getBeansOfType(ICmdHandler.class);
         Set<Class<?>> resultSet = new HashSet<>();
         beans.forEach((beanName, bean) -> {
             Class<?> clazz = bean.getClass();

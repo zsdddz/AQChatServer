@@ -13,7 +13,6 @@ import com.howcode.aqchat.mq.MqSendingAgent;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,17 +24,13 @@ import org.springframework.stereotype.Component;
 public class JoinRoomCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.JoinRoomCmd> {
 
     @Resource
-    @Lazy
     private GlobalChannelHolder globalChannelHolder;
     @Resource
-    @Lazy
     private IRoomHolder roomHolder;
 
     @Resource
-    @Lazy
     private MqSendingAgent mqSendingAgent;
     @Resource
-    @Lazy
     private IUserHolder userHolder;
 
 

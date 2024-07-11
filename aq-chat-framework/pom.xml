@@ -16,6 +16,7 @@
     <modules>
         <module>aq-chat-framework-mq-starter</module>
         <module>aq-chat-framework-redis-starter</module>
+        <module>aq-chat-framework-gitee-ai-starter</module>
     </modules>
 
     <properties>

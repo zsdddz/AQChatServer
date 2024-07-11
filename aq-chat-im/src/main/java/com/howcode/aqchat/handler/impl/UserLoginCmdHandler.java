@@ -17,7 +17,6 @@ import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
@@ -30,15 +29,12 @@ public class UserLoginCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtoco
     private static final Logger LOGGER = LoggerFactory.getLogger(UserLoginCmdHandler.class);
 
     @Resource
-    @Lazy
     private IUserHolder userHolder;
 
     @Resource
-    @Lazy
     private GlobalChannelHolder globalChannelHolder;
 
     @Resource
-    @Lazy
     private IAQUserService userService;
 
 

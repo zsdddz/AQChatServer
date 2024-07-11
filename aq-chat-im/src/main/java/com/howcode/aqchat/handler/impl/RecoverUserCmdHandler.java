@@ -2,10 +2,12 @@ package com.howcode.aqchat.handler.impl;
 
 import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
+import com.howcode.aqchat.common.enums.RoomType;
 import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
+import com.howcode.aqchat.holder.IRoomHolder;
 import com.howcode.aqchat.holder.IUserHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
@@ -16,7 +18,6 @@ import io.netty.util.AttributeKey;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
@@ -29,14 +30,14 @@ public class RecoverUserCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProto
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RecoverUserCmdHandler.class);
     @Resource
-    @Lazy
     private IUserHolder aqUserHolder;
     @Resource
-    @Lazy
+    private IRoomHolder roomHolder;
+    @Resource
     private GlobalChannelHolder globalChannelHolder;
     @Resource
-    @Lazy
     private MqSendingAgent mqSendingAgent;
+
 
     @Override
     public void handle(ChannelHandlerContext ctx, AQChatMsgProtocol.RecoverUserCmd cmd) {
@@ -63,6 +64,7 @@ public class RecoverUserCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProto
             globalChannelHolder.joinRoom(userInfo.getRoomId(), userId, ctx.channel());
             mqSendingAgent.sendJoinRoomMsg(userId, userInfo.getRoomId());
         }
+        //返回用户信息
         RoomInfoDto roomInfo = globalChannelHolder.getRoomAllInfo(userInfo.getRoomId());
         AQChatMsgProtocol.RecoverUserAck recoverUserAck = MessageConstructor.buildRecoverUserAck(userInfo, roomInfo);
         ctx.writeAndFlush(recoverUserAck);

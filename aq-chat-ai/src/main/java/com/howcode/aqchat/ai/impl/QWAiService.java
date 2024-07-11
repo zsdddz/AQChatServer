@@ -17,6 +17,7 @@ import io.reactivex.Flowable;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -28,6 +29,7 @@ import java.util.function.Consumer;
  * @date 2024-06-10 17:24
  */
 @Service
+@Primary
 public class QWAiService implements IAiService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(QWAiService.class);

@@ -29,7 +29,8 @@ public enum AQChatExceptionEnum implements AQChatEnum{
     //用户不在房间中
     USER_NOT_IN_ROOM(10010, "用户不在房间中"),
     MESSAGE_ID_ERROR(10011, "消息Id错误"),
-    AI_HELPER_ERROR(10012,"AI助手错误"),;
+    AI_HELPER_ERROR(10012,"AI助手错误"),
+    AI_SPACE_WORKING(10013, "AI空间正在工作中"),;
 
     private final int code;
     private final String message;

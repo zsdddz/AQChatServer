@@ -1,6 +1,9 @@
 package com.howcode.aqchat.message;
 
+
+import com.howcode.aqchat.common.constant.AQBusinessConstant;
 import com.howcode.aqchat.common.enums.AQChatEnum;
+import com.howcode.aqchat.common.enums.RoomType;
 import com.howcode.aqchat.common.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,9 +48,9 @@ public class MessageConstructor {
             List<AQChatMsgProtocol.User> users = buildUsers(roomInfo);
             users.forEach(room::addMembers);
             room.setRoomId(roomInfo.getRoomId())
-                    .setRoomNo(roomInfo.getRoomNo())
-                    .setRoomName(roomInfo.getRoomName())
-                    .setAi(roomInfo.getAi());
+                    .setRoomNo(roomInfo.getRoomType() == RoomType.NORMAL.getCode() ? roomInfo.getRoomNo() : AQBusinessConstant.DEFAULT_AI_SPACE_NO)
+                    .setRoomName(roomInfo.getRoomType() == RoomType.NORMAL.getCode() ? roomInfo.getRoomName() : AQBusinessConstant.DEFAULT_AI_SPACE_NAME)
+                    .setAi(roomInfo.getRoomType() == RoomType.NORMAL.getCode() ? roomInfo.getAi():RoomType.AI.getCode());
             builder.setRoom(room);
         }
         builder.setUserAvatar(userGlobalInfoDto.getUserAvatar());
@@ -128,6 +131,22 @@ public class MessageConstructor {
                 .setUserId(recallMessageDto.getUserId())
                 .setRoomId(recallMessageDto.getRoomId())
                 .setMsgId(recallMessageDto.getMsgId())
+                .build();
+    }
+
+    public static AQChatMsgProtocol.OpenAiRoomAck buildOpenAiRoomAck(String roomId, List<UserGlobalInfoDto> aiList) {
+        List<AQChatMsgProtocol.Assistant> assistants = new ArrayList<>();
+        aiList.forEach(ai -> {
+            AQChatMsgProtocol.Assistant assistant = AQChatMsgProtocol.Assistant.newBuilder()
+                    .setUserId(ai.getUserId())
+                    .setName(ai.getUserName())
+                    .setAvatar(ai.getUserAvatar())
+                    .build();
+            assistants.add(assistant);
+        });
+        return AQChatMsgProtocol.OpenAiRoomAck.newBuilder()
+                .setRoomId(roomId)
+                .addAllAssistants(assistants)
                 .build();
     }
 }

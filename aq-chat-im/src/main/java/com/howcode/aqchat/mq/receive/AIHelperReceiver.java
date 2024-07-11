@@ -39,7 +39,7 @@ import java.util.Date;
  * @date 2024-06-10 18:27
  */
 @Component
-public class AIHelperReceiver implements InitializingBean {
+public class AIHelperReceiver extends AbstractAISpaceReceiver implements InitializingBean {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JoinRoomReceiver.class);
 
@@ -69,7 +69,7 @@ public class AIHelperReceiver implements InitializingBean {
                 for (MessageExt messageExt : messageExtList) {
                     String msgStr = new String(messageExt.getBody());
                     LOGGER.info("mq收到消息[AI助手]:{}", msgStr);
-                    threadPoolUtil.submitTask(()->{
+                    threadPoolUtil.submitTask(() -> {
                         // AI助手处理消息
                         if (!msgStr.isEmpty()) {
                             MessageDto messageDto = JSONObject.parseObject(msgStr, MessageDto.class);
@@ -81,7 +81,7 @@ public class AIHelperReceiver implements InitializingBean {
                                     aiMessageDto.setRoomId(messageDto.getRoomId());
                                     aiMessageDto.setContent(aiResult.getContent());
                                     aiMessageDto.setStatus(aiResult.getStatus());
-                                    globalChannelHolder.sendBroadcastAIMessage(aiMessageDto);
+                                    globalChannelHolder.sendBroadcastAIMessage(aiMessageDto, AQBusinessConstant.AI_HELPER_ID);
                                     fullContent.append(aiResult.getContent());
                                 });
                             } catch (Exception e) {
@@ -91,10 +91,10 @@ public class AIHelperReceiver implements InitializingBean {
                                 aiMessageDto.setMessageId(messageDto.getMessageId());
                                 aiMessageDto.setRoomId(messageDto.getRoomId());
                                 aiMessageDto.setStatus(AIMessageStatusEnum.FAIL.getCode());
-                                globalChannelHolder.sendBroadcastAIMessage(aiMessageDto);
+                                globalChannelHolder.sendBroadcastAIMessage(aiMessageDto, AQBusinessConstant.AI_HELPER_ID);
                             } finally {
                                 LOGGER.info("开始存储AI回复消息");
-                                MessageDto storeMessage = buildStoreMessage(messageDto, fullContent);
+                                MessageDto storeMessage = buildStoreMessage(messageDto, fullContent,MsgTypeEnum.TEXT.getCode(), AQBusinessConstant.AI_HELPER_ID);
                                 messageService.saveMessage(storeMessage);
                                 LOGGER.info("AI回复消息存储成功");
                             }
@@ -108,18 +108,6 @@ public class AIHelperReceiver implements InitializingBean {
         } catch (MQClientException e) {
             LOGGER.error("AI助手 订阅失败", e);
         }
-    }
-
-    private static MessageDto buildStoreMessage(MessageDto messageDto, StringBuilder fullContent) {
-        MessageDto storeMessage = new MessageDto();
-        storeMessage.setMessageId(messageDto.getMessageId());
-        storeMessage.setMessageType(MsgTypeEnum.TEXT.getCode());
-        storeMessage.setSenderId(AQBusinessConstant.AI_HELPER_ID);
-        storeMessage.setRoomId(messageDto.getRoomId());
-        storeMessage.setCreateTime(new Date());
-        storeMessage.setMessageExt(AQBusinessConstant.AT + messageDto.getSenderId());
-        storeMessage.setMessageContent(fullContent.toString());
-        return storeMessage;
     }
 
     @Override

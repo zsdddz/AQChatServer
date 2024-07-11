@@ -1,6 +1,8 @@
 package com.howcode.aqchat.holder.impl;
 
+import com.howcode.aqchat.ai.parameter.MessageRecord;
 import com.howcode.aqchat.common.constant.AQRedisKeyPrefix;
+import com.howcode.aqchat.common.enums.RoomType;
 import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.common.model.UserGlobalInfoDto;
 import com.howcode.aqchat.framework.redis.starter.RedisCacheHelper;
@@ -71,10 +73,31 @@ public class AQRoomHolder implements IRoomHolder {
     }
 
     @Override
+    public RoomInfoDto getRoomAllInfoById(String roomId, String userId) {
+        RoomInfoDto roomInfo = getRoomAllInfoById(roomId);
+        if (null == roomInfo) {
+            return null;
+        }
+        if (RoomType.AI.getCode() == roomInfo.getRoomType()) {
+            //获取房间成员
+            List<UserGlobalInfoDto> roomMembers = roomInfo.getRoomMembers();
+            //过滤自己
+            roomMembers.removeIf(userGlobalInfoDto -> userGlobalInfoDto.getUserId().equals(userId));
+            roomInfo.setRoomMembers(roomMembers);
+        }
+        return roomInfo;
+    }
+
+    @Override
     public void removeRoomInfo(Integer roomNo) {
         String roomId = getRoomId(roomNo);
         redisCacheHelper.deleteObject(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId);
         redisCacheHelper.deleteObject(AQRedisKeyPrefix.AQ_ROOM_NO_PREFIX + roomNo);
+    }
+
+    @Override
+    public void removeRoomInfo(String roomId) {
+        redisCacheHelper.deleteObject(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId);
     }
 
     @Override
@@ -91,7 +114,7 @@ public class AQRoomHolder implements IRoomHolder {
             //存在则添加
             roomMembers.put(userId, userInfo);
             redisCacheHelper.setCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_MEMBER_PREFIX, roomMembers);
-        }else {
+        } else {
             LOGGER.error("[保存房间成员]用户信息不存在");
         }
     }
@@ -126,5 +149,40 @@ public class AQRoomHolder implements IRoomHolder {
         //移除成员
         roomMembers.remove(userId);
         redisCacheHelper.setCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_MEMBER_PREFIX, roomMembers);
+    }
+
+    @Override
+    public List<MessageRecord> getRoomConversationRecords(String roomId) {
+        return redisCacheHelper.getCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_CONVERSATION_PREFIX);
+
+    }
+
+    @Override
+    public void addRoomConversationRecord(String roomId, MessageRecord userRecord) {
+        List<MessageRecord> messageRecords = redisCacheHelper.getCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_CONVERSATION_PREFIX);
+        if (null == messageRecords && null != userRecord) {
+            messageRecords = new ArrayList<>();
+            messageRecords.add(userRecord);
+            redisCacheHelper.setCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_CONVERSATION_PREFIX, messageRecords);
+        } else if (null != messageRecords && null != userRecord) {
+            messageRecords.add(userRecord);
+            redisCacheHelper.setCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_CONVERSATION_PREFIX, messageRecords);
+        }else {
+            LOGGER.error("[添加房间消息记录]消息为空");
+        }
+    }
+
+    @Override
+    public int getAISpaceStatus(String roomId) {
+        Object status = redisCacheHelper.getCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_AI_SPACE_STATUS_PREFIX);
+        if (null == status) {
+            return 0;
+        }
+        return (int) status;
+    }
+
+    @Override
+    public void setAISpaceStatus(String roomId, int code) {
+        redisCacheHelper.setCacheMapValue(AQRedisKeyPrefix.AQ_ROOM_PREFIX + roomId, AQRedisKeyPrefix.AQ_ROOM_AI_SPACE_STATUS_PREFIX, code);
     }
 }

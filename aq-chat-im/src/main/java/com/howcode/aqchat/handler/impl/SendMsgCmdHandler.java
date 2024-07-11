@@ -1,13 +1,16 @@
 package com.howcode.aqchat.handler.impl;
 
-import com.howcode.aqchat.common.constant.AQBusinessConstant;
+import com.howcode.aqchat.common.enums.AISpaceStatusEnum;
 import com.howcode.aqchat.common.enums.AQChatExceptionEnum;
+import com.howcode.aqchat.common.enums.RoomType;
+import com.howcode.aqchat.common.enums.SwitchStatusEnum;
 import com.howcode.aqchat.common.model.MessageDto;
-import com.howcode.aqchat.common.utils.IdProvider;
-import com.howcode.aqchat.common.utils.SafeUtil;
+import com.howcode.aqchat.common.model.RoomInfoDto;
 import com.howcode.aqchat.handler.AbstractCmdBaseHandler;
+import com.howcode.aqchat.handler.at.HandlerFactory;
 import com.howcode.aqchat.holder.GlobalChannelHolder;
 import com.howcode.aqchat.holder.IMessageHolder;
+import com.howcode.aqchat.holder.IRoomHolder;
 import com.howcode.aqchat.message.AQChatMsgProtocol;
 import com.howcode.aqchat.message.MessageConstructor;
 import com.howcode.aqchat.mq.MqSendingAgent;
@@ -15,8 +18,6 @@ import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -31,14 +32,15 @@ public class SendMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SendMsgCmdHandler.class);
     @Resource
-    @Lazy
     private GlobalChannelHolder globalChannelHolder;
     @Resource
-    @Lazy
     private MqSendingAgent mqSendingAgent;
     @Resource
-    @Lazy
     private IMessageHolder messageHolder;
+    @Resource
+    private HandlerFactory handlerFactory;
+    @Resource
+    private IRoomHolder roomHolder;
 
     @Override
     public void handle(ChannelHandlerContext ctx, AQChatMsgProtocol.SendMsgCmd cmd) {
@@ -82,8 +84,19 @@ public class SendMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.
             ctx.writeAndFlush(msgAck);
             return;
         }
-        //xss过滤
-//        String clean = SafeUtil.clean(cmd.getMsg());
+        RoomInfoDto roomInfoDto = roomHolder.getRoomInfoById(roomId);
+        boolean roomType = RoomType.isAI(roomInfoDto.getRoomType());
+        if (roomType) {
+            int aiSpaceStatus = roomHolder.getAISpaceStatus(roomId);
+            if (AISpaceStatusEnum.WORKING.getCode() == aiSpaceStatus) {
+                //AI空间工作中
+                AQChatMsgProtocol.ExceptionMsg exceptionMsg = MessageConstructor.buildExceptionMsg(AQChatExceptionEnum.AI_SPACE_WORKING);
+                ctx.writeAndFlush(exceptionMsg);
+                return;
+            }
+            roomHolder.setAISpaceStatus(roomId, AISpaceStatusEnum.WORKING.getCode());
+        }
+
         // 发送消息
         MessageDto messageDto = new MessageDto();
         messageDto.setMessageId(msgId);
@@ -94,18 +107,9 @@ public class SendMsgCmdHandler extends AbstractCmdBaseHandler<AQChatMsgProtocol.
         messageDto.setMessageExt(cmd.getExt());
         messageDto.setCreateTime(new Date());
         mqSendingAgent.sendMessageToRoom(messageDto);
-        //判断是否@了AI
-        String messageExt = messageDto.getMessageExt();
-        if ((AQBusinessConstant.AT + AQBusinessConstant.AI_HELPER_ID).equals(messageExt)) {
-            //拷贝一份消息
-            MessageDto aiMessageDto = new MessageDto();
-            BeanUtils.copyProperties(messageDto, aiMessageDto);
-            //覆盖消息Id
-            aiMessageDto.setMessageId(IdProvider.nextId()+"");
-            //修改消息内容 去掉@AI
-            aiMessageDto.setMessageContent(messageDto.getMessageContent().replace((AQBusinessConstant.AT + AQBusinessConstant.AI_HELPER_NAME), ""));
-            mqSendingAgent.aiHelper(aiMessageDto);
-        }
+        //处理AI消息
+        if (roomType || SwitchStatusEnum.OPEN.getCode() == roomInfoDto.getAi())
+            handlerFactory.handleMessage(messageDto);
         mqSendingAgent.storeMessages(messageDto);
         messageHolder.putMessageId(roomId, msgId);
         //返回消息发送成功

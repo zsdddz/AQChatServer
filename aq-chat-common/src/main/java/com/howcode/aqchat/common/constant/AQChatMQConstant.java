@@ -39,6 +39,10 @@ public class AQChatMQConstant {
         String LEAVE_ROOM_CONSUMER_GROUP = "leave_room_consumer_group";
         String RECALL_MESSAGE_CONSUMER_GROUP = "recall_message_consumer_group";
         String AI_HELPER_CONSUMER_GROUP = "ai_helper_consumer_group";
+        String XT_CONSUMER_GROUP = "xt_consumer_group";
+        String XM_CONSUMER_GROUP = "xm_consumer_group";
+        String XV_CONSUMER_GROUP = "xv_consumer_group";
+        String Multiple_CONSUMER_GROUP = "multiple_consumer_group";
     }
     /**
      * MQ的topic
@@ -81,5 +85,9 @@ public class AQChatMQConstant {
          * 机器人助手的topic
          */
         String AI_HELPER_TOPIC = "ai_helper_topic";
+        String XM_TOPIC = "xm_topic";
+        String XT_TOPIC = "xt_topic";
+        String XV_TOPIC = "xv_topic";
+        String MULTIPLE_TOPIC = "multiple_topic";
     }
 }
